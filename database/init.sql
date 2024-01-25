@@ -10,15 +10,6 @@
         User_Image BLOB
     );
 
-    CREATE TABLE Threads (
-        Thread_ID INT AUTO_INCREMENT PRIMARY KEY,
-        Thread_Str VARCHAR(255),
-        Tag VARCHAR(50),
-        Date_Created DATETIME,
-        upvotes INT DEFAULT 0,
-        User_ID INT,
-        FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
-    );
     CREATE TABLE Admins (
         Admin_ID INT AUTO_INCREMENT PRIMARY KEY,
         First_Name VARCHAR(50) NOT NULL,
