@@ -8,3 +8,4 @@ COSC 360 Project
 	- If not , re run the above command again.
 3. Viewing the tables on ```localhost:5055``` , under databases select market_database.
 	- You should be able to see all the tables here, and also execute additional SQL scripts.
+4. Navigate to ```http://localhost:8080/client/home.php``` to access the home page.
