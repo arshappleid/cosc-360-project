@@ -1,0 +1,10 @@
+# PHP
+/vendor/
+/node_modules/
+/composer.lock
+/composer.phar
+/composer.json
+*.php~
+
+# macOS
+.DS_Store
