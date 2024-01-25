@@ -21,8 +21,6 @@ services:
             MYSQL_ROOT_PASSWORD: secret
         volumes:
             - ./database:/docker-entrypoint-initdb.d
-        ports:
-            - "3306:3306"
         healthcheck:
             test:
                 [
@@ -34,8 +32,8 @@ services:
                     "-uroot",
                     "-psecret",
                 ]
-            interval: 5s
-            timeout: 5s
+            interval: 7s
+            timeout: 7s
             retries: 20
 
     phpmyadmin:
