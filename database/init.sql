@@ -11,7 +11,7 @@ CREATE TABLE Admins (
 );
 
 CREATE TABLE Comments{ 
-    COMMENT_ID INT AUTO_INCREMENT PRIMARY KEY,  
+    COMMENT_ID INT AUTO_INCREMENT PRIMARY KEY,
     COMMENT_TEXT TEXT NOT NULL, 
     ITEM_ID INT NOT NULL,
     USER_ID INT NOT NULL , 
@@ -43,3 +43,86 @@ CREATE TABLE Item_Price_Entry (
     Foreign Key (STORE_ID) REFERENCES STORE (STORE_ID),
     FOREIGN KEY (ITEM_ID) REFERENCES ITEMS (ITEM_ID),
 );
+
+------------------------ Test Data -----------------------
+-- Insert data into STORE
+INSERT INTO STORE (STORE_NAME) VALUES ('Electronics World');
+
+INSERT INTO STORE (STORE_NAME) VALUES ('Gadget Galaxy');
+
+INSERT INTO STORE (STORE_NAME) VALUES ('Tech Hub');
+
+-- Insert data into ITEMS
+INSERT INTO
+    ITEMS (
+        ITEM_NAME, ITEM_DESCRIPTION, EXTERNAL_LINK, ITEM_IMAGE
+    )
+VALUES (
+        'Smartphone', 'Latest model smartphone with advanced features', 'http://example.com/smartphone', NULL
+    );
+
+INSERT INTO
+    ITEMS (
+        ITEM_NAME, ITEM_DESCRIPTION, EXTERNAL_LINK, ITEM_IMAGE
+    )
+VALUES (
+        'Laptop', 'High-performance laptop suitable for gaming and professional work', 'http://example.com/laptop', NULL
+    );
+
+INSERT INTO
+    ITEMS (
+        ITEM_NAME, ITEM_DESCRIPTION, EXTERNAL_LINK, ITEM_IMAGE
+    )
+VALUES (
+        'Smartwatch', 'Water-resistant smartwatch with health tracking', 'http://example.com/smartwatch', NULL
+    );
+
+-- Insert data into Comments
+INSERT INTO
+    Comments (
+        COMMENT_TEXT, ITEM_ID, USER_ID, DATE_TIME_ADDED
+    )
+VALUES (
+        'Great product!', 1, 1, '2024-01-01 10:00:00'
+    );
+
+INSERT INTO
+    Comments (
+        COMMENT_TEXT, ITEM_ID, USER_ID, DATE_TIME_ADDED
+    )
+VALUES (
+        'Had some issues with the battery.', 1, 2, '2024-01-02 11:00:00'
+    );
+
+INSERT INTO
+    Comments (
+        COMMENT_TEXT, ITEM_ID, USER_ID, DATE_TIME_ADDED
+    )
+VALUES (
+        'Excellent performance.', 2, 3, '2024-01-03 09:30:00'
+    );
+
+-- Insert data into Item_Price_Entry
+INSERT INTO
+    Item_Price_Entry (
+        STORE_ID, ITEM_ID, Item_Price, Time_Updated
+    )
+VALUES (
+        1, 1, 999.99, '2024-01-01 00:00:00'
+    );
+
+INSERT INTO
+    Item_Price_Entry (
+        STORE_ID, ITEM_ID, Item_Price, Time_Updated
+    )
+VALUES (
+        2, 1, 1020.50, '2024-01-02 00:00:00'
+    );
+
+INSERT INTO
+    Item_Price_Entry (
+        STORE_ID, ITEM_ID, Item_Price, Time_Updated
+    )
+VALUES (
+        1, 2, 1500.00, '2024-01-03 00:00:00'
+    );
