@@ -6,6 +6,7 @@ $email = $_POST['email'];
 $hashedPassword = $_POST['password'];
 
 if(isset($username) && isset($email) && $isset($hashedPassword)){
+	
 	if(createUser($username, $email , $hashedPassword){
 		$_SESSION['admin_user_id'] = $username;
 		header('Location: ../client/home.php');

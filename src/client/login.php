@@ -22,7 +22,7 @@
 	</nav>
 
 	<form method="POST"
-		action="./../server/verify_user_login.php">
+		action="./../server/create_user.php">
 
 		<label for="username">Username</label>
 		<input type="text"
