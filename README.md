@@ -9,3 +9,19 @@ COSC 360 Project
 3. Viewing the tables on ```localhost:5055``` , under databases select market_database.
 	- You should be able to see all the tables here, and also execute additional SQL scripts.
 4. Navigate to ```http://localhost:8080/client/login.php``` to access the home page.
+
+
+
+## Coding Standard
+
+### Declaring Functions
+```javascript
+function functionName(variable1 : int , variable2: string){
+	return something;
+}
+```
+### Declaring variables
+```thisIsMyName ## Camel Cased only```
+
+
+
