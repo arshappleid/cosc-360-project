@@ -20,6 +20,10 @@
 		<a href="#home">Home</a>
 		<a href="#news">News</a>
 	</nav>
+	<?php 
+	// Add php code here
+	
+	?>
 
 	<form method="POST"
 		action="./../server/create_user.php">
