@@ -23,5 +23,17 @@ function functionName(variable1 : int , variable2: string){
 ### Declaring variables
 ```thisIsMyName ## Camel Cased only```
 
+### Connecting to Database
+$db_server = "mysql-server";
+$db_user = "root";
+$db_pass = "secret";
+$db_name = "market_database";
+
+try{
+    $con = mysqli_connect($db_server,$db_user,$db_pass,$db_name);
+}catch (mysqli_sql_exception $e){
+    echo "error" . $e->getMessage();
+}
+
 
 
