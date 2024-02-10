@@ -82,9 +82,18 @@ function executePreparedQuery($query, $params)
         // Read statements need to pass the results to the client
         $result = $stmt->get_result();
         $data = array();
+        $row = array();
         while ($row = $result->fetch_assoc()) {
           $data[] = $row;
         }
+        if (count($data) == 0) {
+          return array(true, $row);
+        }
+
+        if (count($data) == 1) {
+          return array(true, $data[0]);
+        }
+
         return array(true, $data);
       } else {
         // Possible scenarios are insert, update, delete
