@@ -30,15 +30,12 @@
       </div>
       <div class="triangleextendblack"> 
         <form id = "loginForm" method="POST" action="./../../server/verify_user_login.php">
-
-          <input type="email" id="email" name="email" placeholder="E-mail" required>
-
-          <input type="password" id="password" name="password" placeholder="Password" required>
-
+          <input type="email" id="email" name="email" placeholder="E-mail">
+          <input type="password" id="password" name="password" placeholder="Password">
           <div class="button-container">
             <button type="submit">Login</button>
           </div>
-          <a class="accounttext" href="./../createaccountpage/createaccount.php">Need an account?</a>
+          <a class="accounttext" href="#">Need an account?</a>
         </form> 
       </div>
       <div class="triangle-element"></div>     
@@ -51,6 +48,12 @@
         var email = document.getElementById("email").value;
         var password = document.getElementById("password").value;
 
+        if (!email || !password) {
+            alert('Please enter both email and password.');
+            return;
+        }
+
+        var password = document.getElementById("password").value;
         var hashedPassword = CryptoJS.MD5(password).toString();
         document.getElementById("password").value = hashedPassword;
         this.submit();
