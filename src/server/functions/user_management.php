@@ -5,7 +5,7 @@ include_once 'db_connection.php';
  * Summary of validateUserLogin
  * @param mixed $email
  * @param mixed $hashed_password
- * @return bool if the given hashed password , matches the hashed password in the database
+ * @return string if the given hashed password , matches the hashed password in the database
  */
 function validateUserLogin($email, $hashed_password)
 {
@@ -15,10 +15,13 @@ function validateUserLogin($email, $hashed_password)
 		$response = executePreparedQuery($query, array('s', $email));
 		if ($response[0] === true) {
 			if (is_array($response[1])) {
-				return $response[1]['MD5_Password'] === $hashed_password;
+
+				if ($response[1]['MD5_Password'] === $hashed_password)
+					return "VALID_LOGIN";
+				else
+					return "INVALID_LOGIN";
 			} else {
-				// Handle the case where $response[1] is not an array
-				// For example, log an error or throw an exception
+				return "USER_NOT_FOUND";
 			}
 		}
 	} catch (Exception $e) {
@@ -35,7 +38,7 @@ function validateUserLogin($email, $hashed_password)
  * @param mixed $FIRST_NAME
  * @param mixed $LAST_NAME
  * @param mixed $MD5_PASSWORD
- * @return boolean , True if the User is created , and False if it is was not created.
+ * @return string , True if the User is created , and False if it is was not created.
  * If returns false, user prob already exists.
  */
 function createUser($EMAIL, $FIRST_NAME, $LAST_NAME, $MD5_PASSWORD)
