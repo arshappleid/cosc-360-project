@@ -13,7 +13,8 @@ if(isset($username) && isset($email) && $isset($hashedPassword)){
 		exit();
 	}else{
 		$_SESSION['message'] = 'User already exists';
-		header('Location: ../client/createaccountpage/create_account.php');		
+		header('Location: ../client/createaccountpage/create_account.php');
+		
 	}
 	$_SESSION['admin_user_id'] = $username;
 	header('Location: ../client/home.php');
