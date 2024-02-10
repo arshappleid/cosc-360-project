@@ -1,3 +1,3 @@
 <?php
 include_once './../server/functions/user_management.php';
-echo "<h3>" . userExists('test@gmail.com') . "</h3>";
+echo "<h3>" . validateUserLogin("test@gmail.com", MD5("password")) . "</h3>";
