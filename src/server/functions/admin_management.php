@@ -33,3 +33,28 @@ function validateAdminLogin($email, $hashed_password)
 
 	return !empty($data);
 }
+
+/**
+ * Summary of toggleBanUserAccount
+ * @param mixed $userEmail
+ * @return bool|string - Account Updated or not
+ * 
+ * Toggles between the banned status for a UserEmail provided.
+ */
+function toggleBanUserAccount($userEmail)
+{
+	$query = "UPDATE USERS SET BANNED_STATUS = NOT BANNED_STATUS WHERE Email = ?;";
+	try {
+		$response = executePreparedQuery($query, array('s', $userEmail));
+		if ($response[0] === true) {
+			return "STATUS_UPDATED";
+		} else {
+			return "STATUS_NOT_UPDATED";
+		}
+	} catch (Exception $e) {
+		echo "Error occured , when using Database function to try to validate User.<br>";
+		echo $e->getMessage();
+	}
+
+	return !empty($data);
+}
