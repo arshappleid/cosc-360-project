@@ -87,7 +87,7 @@ function executePreparedQuery($query, $params)
           $data[] = $row;
         }
         if (count($data) == 0) {
-          return array(true, $row);
+          return array(true, "NO_DATA_RETURNED");
         }
 
         if (count($data) == 1) {
@@ -98,10 +98,10 @@ function executePreparedQuery($query, $params)
       } else {
         // Possible scenarios are insert, update, delete
         // Return True that the statement go executed.
-        return array(true);
+        return array(true, "STATMENT_EXECUTED");
       }
     } else {
-      return array(false);
+      return array(false, "STATEMENT_DID_NOT_EXECUTE , Message : " . $stmt->error);
     }
   } catch (Exception $e) {
     echo "Error occured , when using executePreparedQuery function.<br>";
