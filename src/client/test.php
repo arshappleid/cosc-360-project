@@ -8,3 +8,9 @@ echo "validateAdmin function :" . validateAdminLogin("test@gmail.com", MD5("pass
 
 echo "userUpdatePassword function :" . userUpdatePassword("test@gmail.com", MD5("password"), MD5("newpassword")) . "<br>";
 echo "userUpdatePassword  reset it back function :" . userUpdatePassword("test@gmail.com", MD5("newpassword"), MD5("password")) . "<br>";
+
+echo "editUserFirstName function :" . editUserFirstName("test@gmail.com", "New Name") . "<br>";
+
+echo "editUserLastName function :" . editUserLastName("test@gmail.com", "New LastName") . "<br>";
+
+echo "toggleBanUserAccount function :" . toggleBanUserAccount("test@gmail.com") . "<br>";

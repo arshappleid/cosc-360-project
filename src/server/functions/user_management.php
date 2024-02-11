@@ -153,3 +153,59 @@ function userUpdatePassword($EMAIL, $OLD_PASSWORD_HASH, $NEW_PASSWORD_HASH)
 		echo $e->getMessage();
 	}
 }
+
+/**
+ * Summary of editUserFirstName
+ * @param mixed $EMAIL
+ * @param mixed $NEW_NAME
+ * @return string - Returns if the name was updated or not
+ * 
+ * Updates the First Name , for the provided Email
+ */
+function editUserFirstName($EMAIL, $NEW_NAME)
+{
+	if (userExists($EMAIL) == "USER_NOT_EXISTS") {
+		return "USER_NOT_EXISTS";
+	}
+
+	$query = "UPDATE USERS SET First_Name = ? WHERE Email = ?;";
+
+	try {
+		$response = executePreparedQuery($query, array('ss', $NEW_NAME, $EMAIL));
+		if ($response[0]) { // Query executed properly
+			return "NAME_UPDATED";
+		}
+		return "NAME_NOT_UPDATED_ERROR";
+	} catch (Exception $e) {
+		echo "Error occurred, when using Database function to try to validate User.<br>";
+		echo $e->getMessage();
+	}
+}
+
+/**
+ * Summary of editUserFirstName
+ * @param mixed $EMAIL
+ * @param mixed $NEW_NAME
+ * @return string - Returns if the name was updated or not
+ * 
+ * Updates the Last Name , for the provided Email
+ */
+function editUserLastName($EMAIL, $NEW_NAME)
+{
+	if (userExists($EMAIL) == "USER_NOT_EXISTS") {
+		return "USER_NOT_EXISTS";
+	}
+
+	$query = "UPDATE USERS SET Last_Name = ? WHERE Email = ?;";
+
+	try {
+		$response = executePreparedQuery($query, array('ss', $NEW_NAME, $EMAIL));
+		if ($response[0]) { // Query executed properly
+			return "NAME_UPDATED";
+		}
+		return "NAME_NOT_UPDATED_ERROR";
+	} catch (Exception $e) {
+		echo "Error occurred, when using Database function to try to validate User.<br>";
+		echo $e->getMessage();
+	}
+}
