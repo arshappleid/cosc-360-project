@@ -245,3 +245,32 @@ function getBanStatus($USER_EMAIL)
 
 	return !empty($data);
 }
+
+/**
+ * Summary of deleteUser
+ * @param mixed $USER_EMAIL
+ * @return string
+ * 
+ * Deletes The Associated Comments , and the User
+ * 
+ *Return Values:
+ * 	 	- USER_NOT_EXISTS
+ * 		- USER_DELETED
+ * 		- USER_NOT_DELETED
+ */
+function deleteUser($USER_EMAIL)
+{
+	if (userExists($USER_EMAIL) == "USER_NOT_EXISTS")
+		return "USER_NOT_EXISTS";
+
+	$query1 = "DELETE  FROM USERS WHERE Email = ?";
+	$user_id = intval(getUserID($USER_EMAIL));
+	$query2 = "DELETE  FROM Comments WHERE  USER_ID = ?";
+
+	$response = executePreparedQuery($query1, array('s', $USER_EMAIL));
+	$response = executePreparedQuery($query2, array('i', $user_id));
+	if ($response[0] === true) {
+		return "USER_DELETED";
+	}
+	return "USER_NOT_DELETED";
+}
