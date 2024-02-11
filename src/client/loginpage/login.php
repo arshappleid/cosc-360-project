@@ -9,7 +9,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet"
+    <link rel="stylesheet"
 		href="loginstyles.css" />
 	<link href="bootstrap3_defaultTheme/dist/css/bootstrap.css"
 		rel="stylesheet">
@@ -48,14 +48,8 @@
 				<div class="button-container">
 					<button type="submit">Login</button>
 				</div>
-				<<<<<<< HEAD
-					<a
-					class="accounttext"
-					href="#">Need an account?</a>
-					=======
 					<a class="accounttext"
 						href="./../createaccountpage/create_account.php">Need an account?</a>
-					>>>>>>> c08fc60 (testing upload to specified branch)
 			</form>
 		</div>
 		<div class="triangle-element"></div>
