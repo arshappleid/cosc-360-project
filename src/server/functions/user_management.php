@@ -113,7 +113,22 @@ function userExists($EMAIL)
 	}
 	return "USER_NOT_EXISTS"; // Default return if no condition is met
 }
-
+/**
+ * Summary of userUpdatePassword
+ * @param mixed $EMAIL
+ * @param mixed $OLD_PASSWORD_HASH
+ * @param mixed $NEW_PASSWORD_HASH
+ * @return string
+ * 
+ * Updates the password for a user, after verifying 
+ * 	1. If the user exists or not exists.
+ *  2. If the old provided provided , matches the current provided password or not *  * Return Values:
+ * 	 	- USER_NOT_EXISTS
+ * 		- INVALID_OLD_PASSWORD
+ * 		- PASSWORD_UPDATED
+ * 		- PASSWORD_NOT_UPDATED_ERROR
+ * Then Updates the password
+ */
 function userUpdatePassword($EMAIL, $OLD_PASSWORD_HASH, $NEW_PASSWORD_HASH)
 {
 	if (userExists($EMAIL) == "USER_NOT_EXISTS") {
@@ -141,7 +156,10 @@ function userUpdatePassword($EMAIL, $OLD_PASSWORD_HASH, $NEW_PASSWORD_HASH)
  * @param mixed $EMAIL
  * @param mixed $NEW_NAME
  * @return string - Returns if the name was updated or not
- * 
+ *  Return Values:
+ * 	 	- USER_NOT_EXISTS
+ * 		- NAME_UPDATED
+ * 		- NAME_NOT_UPDATED_ERROR
  * Updates the First Name , for the provided Email
  */
 function editUserFirstName($EMAIL, $NEW_NAME)
@@ -169,6 +187,10 @@ function editUserFirstName($EMAIL, $NEW_NAME)
  * @param mixed $EMAIL
  * @param mixed $NEW_NAME
  * @return string - Returns if the name was updated or not
+ *  Return Values:
+ * 	 	- USER_NOT_EXISTS
+ * 		- NAME_UPDATED
+ * 		- NAME_NOT_UPDATED_ERROR
  * 
  * Updates the Last Name , for the provided Email
  */
