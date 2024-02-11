@@ -15,7 +15,6 @@ function validateUserLogin($email, $hashed_password)
 		$response = executePreparedQuery($query, array('s', $email));
 		if ($response[0] === true) {
 			if (is_array($response[1])) {
-
 				if ($response[1]['MD5_Password'] === $hashed_password)
 					return "VALID_LOGIN";
 				else
@@ -113,4 +112,26 @@ function userExists($EMAIL)
 		echo $e->getMessage();
 	}
 	return "USER_NOT_EXISTS"; // Default return if no condition is met
+}
+
+function userUpdatePassword($EMAIL, $OLD_PASSWORD_HASH, $NEW_PASSWORD_HASH)
+{
+	if (userExists($EMAIL) == "USER_NOT_EXISTS") {
+		return "USER_NOT_EXISTS";
+	}
+	if (validateUserLogin($EMAIL, $OLD_PASSWORD_HASH) != "VALID_LOGIN") {
+		return "INVALID_OLD_PASSWORD";
+	}
+	$query = "UPDATE USERS SET MD5_PASSWORD = ? WHERE Email = ?;";
+
+	try {
+		$response = executePreparedQuery($query, array('ss', $NEW_PASSWORD_HASH, $EMAIL));
+		if ($response[0]) { // Query executed properly
+			return "PASSWORD_UPDATED";
+		}
+		return "PASSWORD_NOT_UPDATED_ERROR";
+	} catch (Exception $e) {
+		echo "Error occurred, when using Database function to try to validate User.<br>";
+		echo $e->getMessage();
+	}
 }
