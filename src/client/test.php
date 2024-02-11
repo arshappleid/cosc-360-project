@@ -26,3 +26,4 @@ echo "commentExists function :" . commentExists(1) . "<br>";
 echo "getUserID function :" . getUserID("test@gmail.com") . "<br>";
 echo "getAllCommentsForItem - should have no comments - function :" . getAllCommentsForItem(99) . "<br>";
 echo "getAllCommentsForItem - should have comments -  function :" . implode("<br>", getAllCommentsForItem(1)) . "<br>";
+echo "getBanStatus function :" . getBanStatus("test@gmail.com") . "<br>";

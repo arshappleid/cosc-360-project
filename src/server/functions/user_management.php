@@ -213,3 +213,35 @@ function editUserLastName($EMAIL, $NEW_NAME)
 		echo $e->getMessage();
 	}
 }
+/**
+ * Summary of getBanStatus
+ * @param mixed $USER_EMAIL
+ * @return bool|string
+ * 
+ * Returns BANNED or NOT_BANNED
+ */
+function getBanStatus($USER_EMAIL)
+{
+	if (userExists($USER_EMAIL) == "USER_NOT_EXISTS")
+		return "USER_NOT_EXISTS";
+
+	$query = "SELECT * FROM USERS WHERE Email = ?";
+	try {
+		$response = executePreparedQuery($query, array('s', $USER_EMAIL));
+		if ($response[0] === true) {
+			if (is_array($response[1])) {
+				if ($response[1]['BANNED_STATUS'] != "0")
+					return "BANNED";
+				else
+					return "NOT_BANNED";
+			} else {
+				return "USER_NOT_FOUND";
+			}
+		}
+	} catch (Exception $e) {
+		echo "Error occured , when using Database function to try to validate User.<br>";
+		echo $e->getMessage();
+	}
+
+	return !empty($data);
+}
