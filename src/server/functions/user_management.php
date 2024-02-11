@@ -111,7 +111,7 @@ function userExists($EMAIL)
 		echo "Error occurred, when using Database function to try to validate User.<br>";
 		echo $e->getMessage();
 	}
-	return "USER_NOT_EXISTS"; // Default return if no condition is met
+	return "COULD_NOT_PROCESS"; // Default return if no condition is met
 }
 /**
  * Summary of userUpdatePassword

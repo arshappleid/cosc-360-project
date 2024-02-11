@@ -58,3 +58,31 @@ function toggleBanUserAccount($userEmail)
 
 	return !empty($data);
 }
+/**
+ * Summary of getAllUsers
+ * @return mixed
+ * 
+ * Returns NO_USERS_FOUND , if no users found.
+ * Else Returns an Asssociative Array of all the users.
+ */
+function getAllUsers()
+{
+	$query = "SELECT * FROM USERS;";
+	try {
+		$response = executePreparedQuery($query, array());
+		if ($response[0] === true) {
+			if (count($response[1]) >= 1) {
+				return $response[1];
+			} else {
+				return "NO_USERS_FOUND";
+			}
+		} else {
+			return "DID_NOT_EXECUTE";
+		}
+	} catch (Exception $e) {
+		echo "Error occured , when using Database function to try to validate User.<br>";
+		echo $e->getMessage();
+	}
+
+	return !empty($data);
+}

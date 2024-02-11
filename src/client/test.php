@@ -6,7 +6,9 @@ include_once './../server/functions/item_info.php';
 
 
 echo "createUser function :" . createUser("test2@gmail.com", "TEST", "USER", MD5("password")) . "<br>";
-echo "userExists function :" . userExists("tet2@gmail.com") . "<br>";
+echo "createUser function :" . createUser("test1@gmail.com", "test", "user", MD5("password")) . "<br>";
+echo "userExists -Should Exist-function :" . userExists("test@gmail.com") . "<br>";
+echo "userExists - Should Not Exist -function :" . userExists("tet2@gmail.com") . "<br>";
 echo "validateUser function :" . validateUserLogin("test@gmail.com", MD5("password")) . "<br>";
 echo "validateAdmin function :" . validateAdminLogin("test@gmail.com", MD5("password")) . "<br>";
 
@@ -28,3 +30,5 @@ echo "getAllCommentsForItem - should have no comments - function :" . getAllComm
 echo "getAllCommentsForItem - should have comments -  function :" . implode("<br>", getAllCommentsForItem(1)) . "<br>";
 echo "getBanStatus function :" . getBanStatus("test@gmail.com") . "<br>";
 echo "deleteUser function :" . deleteUser("test@gmail.com") . "<br>";
+echo "createUser function :" . createUser("test77@gmail.com", "test", "user", MD5("password")) . "<br>";
+echo "getAllUsers function :" . implode(",", getAllUsers()) . "<br>";
