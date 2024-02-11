@@ -93,7 +93,13 @@ function createUser_WithImage($EMAIL, $FIRST_NAME, $LAST_NAME, $MD5_PASSWORD, $U
 		echo $e->getMessage();
 	}
 }
-
+/**
+ * Summary of userExists
+ * @param mixed $EMAIL
+ * @return string 
+ * 
+ * Returns if USER_EXISTS or USER_NOT_EXISTS
+ */
 function userExists($EMAIL)
 {
 	// Corrected the SQL query to use the proper placeholder syntax
@@ -113,7 +119,19 @@ function userExists($EMAIL)
 	}
 	return "USER_NOT_EXISTS"; // Default return if no condition is met
 }
-
+/**
+ * Summary of userUpdatePassword
+ * @param mixed $EMAIL
+ * @param mixed $OLD_PASSWORD_HASH
+ * @param mixed $NEW_PASSWORD_HASH
+ * @return string
+ * 
+ * Updates the password for a user, after verifying 
+ * 	1. If the user exists or not exists.
+ *  2. If the old provided provided , matches the current provided password or not
+ * 
+ * Then Updates the password
+ */
 function userUpdatePassword($EMAIL, $OLD_PASSWORD_HASH, $NEW_PASSWORD_HASH)
 {
 	if (userExists($EMAIL) == "USER_NOT_EXISTS") {
