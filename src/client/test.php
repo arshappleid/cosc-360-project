@@ -18,3 +18,11 @@ echo "editUserFirstName function :" . editUserFirstName("test@gmail.com", "New N
 echo "editUserLastName function :" . editUserLastName("test@gmail.com", "New LastName") . "<br>";
 
 echo "toggleBanUserAccount function :" . toggleBanUserAccount("test@gmail.com") . "<br>";
+echo "deleteComment function :" . deleteComment(1) . "<br>";
+echo "addComment function :" . addComment("MY New comment", 1, "test@gmail.com") . "<br>";
+echo "itemExists should exist function :" . itemExists(1) . "<br>";
+echo "itemExists shot not function :" . itemExists(99) . "<br>";
+echo "commentExists function :" . commentExists(1) . "<br>";
+echo "getUserID function :" . getUserID("test@gmail.com") . "<br>";
+echo "getAllCommentsForItem - should have no comments - function :" . getAllCommentsForItem(99) . "<br>";
+echo "getAllCommentsForItem - should have comments -  function :" . implode("<br>", getAllCommentsForItem(1)) . "<br>";
