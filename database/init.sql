@@ -79,8 +79,14 @@ INSERT INTO
     Comments (
         COMMENT_TEXT, ITEM_ID, USER_ID, DATE_TIME_ADDED
     )
+VALUES ('Great product!', 1, 1, NOW());
+
+INSERT INTO
+    Comments (
+        COMMENT_TEXT, ITEM_ID, USER_ID, DATE_TIME_ADDED
+    )
 VALUES (
-        'Great product!', 1, 1, '2024-01-01 10:00:00'
+        'Had some issues with the battery.', 1, 1, NOW()
     );
 
 INSERT INTO
@@ -88,15 +94,7 @@ INSERT INTO
         COMMENT_TEXT, ITEM_ID, USER_ID, DATE_TIME_ADDED
     )
 VALUES (
-        'Had some issues with the battery.', 1, 2, '2024-01-02 11:00:00'
-    );
-
-INSERT INTO
-    Comments (
-        COMMENT_TEXT, ITEM_ID, USER_ID, DATE_TIME_ADDED
-    )
-VALUES (
-        'Excellent performance.', 2, 3, '2024-01-03 09:30:00'
+        'Excellent performance.', 2, 1, NOW()
     );
 
 -- Insert data into Item_Price_Entry
@@ -104,22 +102,16 @@ INSERT INTO
     Item_Price_Entry (
         STORE_ID, ITEM_ID, Item_Price, Time_Updated
     )
-VALUES (
-        1, 1, 999.99, '2024-01-01 00:00:00'
-    );
+VALUES (1, 1, 999.99, NOW());
 
 INSERT INTO
     Item_Price_Entry (
         STORE_ID, ITEM_ID, Item_Price, Time_Updated
     )
-VALUES (
-        2, 1, 1020.50, '2024-01-02 00:00:00'
-    );
+VALUES (2, 1, 102.50, NOW());
 
 INSERT INTO
     Item_Price_Entry (
         STORE_ID, ITEM_ID, Item_Price, Time_Updated
     )
-VALUES (
-        1, 2, 1500.00, '2024-01-03 00:00:00'
-    );
+VALUES (1, 2, 150.00, NOW());

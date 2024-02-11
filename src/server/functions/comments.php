@@ -34,6 +34,16 @@ function addComment($COMMENT_TEXT, $ITEM_ID, $USER_EMAIL)
 		echo $e->getMessage();
 	}
 }
+/**
+ * Summary of getUserID
+ * @param mixed $USER_EMAIL
+ * @return string
+ * 
+ * If User_Email does not exists returns USER_NOT_EXISTS
+ * 
+ * Return the User_Id of the given User Email
+ * 
+ */
 function getUserID($USER_EMAIL)
 {
 	try {
@@ -94,4 +104,40 @@ function deleteComment($Comment_Id)
 		echo "Error occurred, when using Database function to try to validate User.<br>";
 		echo $e->getMessage();
 	}
+}
+/**
+ * Summary of getAllCommentsForItem
+ * @param int $Item_Id
+ * @return mixed - Return an associate array of all the comments , associated with an ID.
+ * 
+ * Return Values:
+ * - Array - of all the comments
+ * - NO_COMMENTS_ADDED_YET
+ * - COMMENT_NOT_DELETED
+ */
+function getAllCommentsForItem($Item_Id)
+{
+	if (itemExists($Item_Id) == "ITEM_NOT_EXISTS")
+		return "ITEM_NOT_EXISTS";
+
+	$query = "SELECT * FROM Comments WHERE ITEM_ID = ?";
+	try {
+		$response = executePreparedQuery($query, array('s', $Item_Id));
+		if ($response[0] === true) {
+			if (is_array($response[1])) {
+				if (count($response[1]) >= 1)
+					return $response[1];
+				else {
+					return "NO_COMMENTS_ADDED_YET";
+				}
+			} else {
+				return "NO_COMMENTS_ADDED_YET";
+			}
+		}
+	} catch (Exception $e) {
+		echo "Error occured , when using Database function to try to validate User.<br>";
+		echo $e->getMessage();
+	}
+
+	return !empty($data);
 }
