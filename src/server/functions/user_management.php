@@ -63,6 +63,38 @@ function createUser($EMAIL, $FIRST_NAME, $LAST_NAME, $MD5_PASSWORD)
 	}
 }
 
+/**
+ * Summary of createUser
+ * @param mixed $EMAIL
+ * @param mixed $FIRST_NAME
+ * @param mixed $LAST_NAME
+ * @param mixed $MD5_PASSWORD
+ * @param blob $USR_IMAGE_BLOB - blob for the user image
+ * @return string , True if the User is created , and False if it is was not created.
+ * If returns false, user prob already exists.
+ */
+function createUser_WithImage($EMAIL, $FIRST_NAME, $LAST_NAME, $MD5_PASSWORD, $USR_IMAGE_BLOB)
+{
+
+	// Check to see if the user with the same email already exists.
+	if (userExists($EMAIL))
+		return "USER_ALREADY_EXISTS";
+	$query = "INSERT INTO USERS (Email, First_Name, Last_Name, MD5_Password , User_Image) VALUES (?,?,?,?,?);";
+
+	try {
+		$response = executePreparedQuery($query, array('sssss', $EMAIL, $FIRST_NAME, $LAST_NAME, $MD5_PASSWORD, $USR_IMAGE_BLOB));
+		echo "<h3>" .  implode(",", $response) . "<h3>";
+		if ($response[0] == true) {
+			return "USER_CREATED";
+		} else {
+			return "USER_NOT_CREATED";
+		}
+	} catch (Exception $e) {
+		echo "Error occured , when using Database function to try to validate User.<br>";
+		echo $e->getMessage();
+	}
+}
+
 function userExists($EMAIL)
 {
 	// Corrected the SQL query to use the proper placeholder syntax
