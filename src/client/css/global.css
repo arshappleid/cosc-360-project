@@ -2,6 +2,8 @@
 
 .default_body {
     text-align: center;
+    overflow-x: hidden; /*Turns off horizontal scroll on the whole body.*/
+    color: var(--main-font-color);
     background-color: var(--main-background-color);
 }
 .error_message {

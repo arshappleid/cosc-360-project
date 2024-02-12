@@ -1,0 +1,41 @@
+header {
+    margin: 1% 0% 0% 0%;
+    border: solid 1px var(--primary-color);
+    padding: 2.5% 2.5% 2.5% 2.5%;
+}
+nav {
+    margin: 1% 0% 0% 0%;
+    border: solid 1px var(--primary-color);
+    padding: 2.5% 2.5% 2.5% 2.5%;
+}
+#search_bar {
+    margin: 1% 0% 0% 0%;
+    border: solid 1px var(--primary-color);
+    padding: 2.5% 2.5% 2.5% 2.5%;
+}
+
+section {
+    margin: 5% 5% 0% 0%;
+    width: 100%;
+    float: left;
+    clear: both;
+}
+aside {
+    /*Item Names*/
+    width: 30%;
+    border: solid 1px var(--primary-color);
+    float: left;
+    clear: both;
+}
+article {
+    /*Item Comments*/
+    clear: right;
+    border: solid 1px var(--primary-color);
+}
+footer {
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    bottom: 5%;
+    margin-bottom: 0%;
+}
