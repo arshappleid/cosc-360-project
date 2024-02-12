@@ -253,7 +253,7 @@ function getBanStatus($USER_EMAIL)
  * 
  * Deletes The Associated Comments , and the User
  * 
- *Return Values:
+ * Return Values:
  * 	 	- USER_NOT_EXISTS
  * 		- USER_DELETED
  * 		- USER_NOT_DELETED

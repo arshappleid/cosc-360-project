@@ -4,7 +4,7 @@
 
 <head>
 	<title>UBC Market Store</title>
-	<link rel="stylesheet" type="text/css" href="./css/home.css">
+	<link rel="stylesheet" type="text/css" href="./css/user_login.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<!-- Bootstrap core CSS -->
 	<link href="bootstrap3_defaultTheme/dist/css/bootstrap.css" rel="stylesheet">
@@ -22,7 +22,7 @@
 
 	?>
 
-	<form method="POST" action="./../server/create_user.php">
+	<form method="POST" action="./../server/validate_user.php">
 
 		<label for="username">Username</label>
 		<input type="text" id="username" name="username">
