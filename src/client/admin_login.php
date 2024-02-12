@@ -12,12 +12,12 @@
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet"
+		href="./css/global.css" />
+	<link rel="stylesheet"
 		href="./css/admin_login.css" />
-	<link href="bootstrap3_defaultTheme/dist/css/bootstrap.css"
-		rel="stylesheet">
 </head>
 
-<body style="text-align:center;">
+<body class="default_body">
 	<div>
 		<h3>Admin Login</h3>
 		<form id="login_form"
@@ -33,7 +33,7 @@
 				name="password">
 			<?php
 			if (isset($_SESSION['MESSAGE'])) {
-				echo "<h4 style = \"color:red;\">" . $_SESSION['MESSAGE'] . "</h4>";
+				echo "<h4 class=\"error_message\">" . $_SESSION['MESSAGE'] . "</h4>";
 				unset($_SESSION['MESSAGE']);
 			}
 			?>

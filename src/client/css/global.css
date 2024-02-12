@@ -1,0 +1,9 @@
+@import url("variables.css");
+
+.default_body {
+    text-align: center;
+    background-color: var(--main-background-color);
+}
+.error_message {
+    color: red;
+}
