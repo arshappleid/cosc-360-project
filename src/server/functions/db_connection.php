@@ -87,13 +87,15 @@ function executePreparedQuery($query, $params)
           $data[] = $row;
         }
         if (count($data) == 0) {
+          // No response record
           return array(true, "NO_DATA_RETURNED");
         }
 
         if (count($data) == 1) {
+          // Only One response record
           return array(true, $data[0]);
         }
-
+        // More than one response record
         return array(true, $data);
       } else {
         // Possible scenarios are insert, update, delete

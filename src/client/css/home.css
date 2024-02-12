@@ -1,27 +1,29 @@
 header {
-    margin: 1% 0% 0% 0%;
+    margin-top: 1%;
     border: solid 1px var(--primary-color);
     padding: 2.5% 2.5% 2.5% 2.5%;
 }
 nav {
-    margin: 1% 0% 0% 0%;
+    margin-top: 1%;
     border: solid 1px var(--primary-color);
     padding: 2.5% 2.5% 2.5% 2.5%;
 }
 #search_bar {
-    margin: 1% 0% 0% 0%;
+    margin-top: 1%;
     border: solid 1px var(--primary-color);
     padding: 2.5% 2.5% 2.5% 2.5%;
 }
 
 section {
-    margin: 5% 5% 0% 0%;
+    height: 100px;
+    margin-top: 5%;
     width: 100%;
     float: left;
     clear: both;
 }
 aside {
     /*Item Names*/
+    height: 100px;
     width: 30%;
     border: solid 1px var(--primary-color);
     float: left;
@@ -29,8 +31,16 @@ aside {
 }
 article {
     /*Item Comments*/
+    text-align: center;
+    height: 100px;
+    overflow-y: auto;
     clear: right;
     border: solid 1px var(--primary-color);
+}
+#comment_table {
+    width: 100%;
+    align-items: center;
+    grid-template-columns: 1fr auto 1fr; /* Match the container columns */
 }
 footer {
     width: 100%;

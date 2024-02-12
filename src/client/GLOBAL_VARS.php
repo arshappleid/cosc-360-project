@@ -1,0 +1,2 @@
+<?php
+$COMMENT_DATE_TIME_FORMAT = 'd, M Y';

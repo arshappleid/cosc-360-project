@@ -112,8 +112,9 @@ function deleteComment($Comment_Id)
  * 
  * Return Values:
  * - Array - of all the comments
- * - NO_COMMENTS_ADDED_YET
- * - COMMENT_NOT_DELETED
+ * 		- Only 1 comment : [comment1]
+ * 		- More than 1 comment : [comment1,comment2]
+ * - 0 Comments : NO_COMMENTS_ADDED_YET
  */
 function getAllCommentsForItem($Item_Id)
 {
@@ -123,13 +124,16 @@ function getAllCommentsForItem($Item_Id)
 	$query = "SELECT * FROM Comments WHERE ITEM_ID = ?";
 	try {
 		$response = executePreparedQuery($query, array('s', $Item_Id));
+
 		if ($response[0] === true) {
 			if (is_array($response[1])) {
-				if (count($response[1]) >= 1)
-					return $response[1];
-				else {
+				// Valid Response
+				if (count($response[1]) == 0)
 					return "NO_COMMENTS_ADDED_YET";
-				}
+				elseif (!is_array($response[1][0])) // if the first element is not an
+					return array($response[1]);
+
+				return $response[1];
 			} else {
 				return "NO_COMMENTS_ADDED_YET";
 			}

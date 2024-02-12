@@ -1,2 +1,2 @@
-FROM php:7.4.3-apache
-RUN docker-php-ext-install mysqli pdo pdo_mysql phpunit
+FROM php:8.0.0-apache
+RUN docker-php-ext-install mysqli pdo pdo_mysql
