@@ -1,0 +1,16 @@
+@import url("variables.css");
+
+#login_form {
+    border: solid 1px black;
+    margin: 15% 15%;
+    padding: 5em;
+    text-align: center;
+}
+.input_field {
+    display: inline;
+    margin: 1%;
+}
+#button_holder {
+    display: block;
+    margin: 1%;
+}
