@@ -53,6 +53,7 @@ require_once("./../server/GLOBAL_VARS.php");
 		<p>Footer</p>
 	</footer>
 
+	<!--Since we would want to run these scripts after the pages have loaded.-->
 	<script type="text/javascript" src="./scripts/change_store.js"></script>
 	<?php echo "<script>
 	updateGlobalVariable(1);
