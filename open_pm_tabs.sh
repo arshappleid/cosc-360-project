@@ -7,4 +7,6 @@ chrome-cli open https://www.figma.com/file/jHfTMiCWkuuo3enG4uXNFi/360-Project?ty
 chrome-cli open https://www.w3schools.com/php/
 chrome-cli open https://www.w3schools.com/js/
 chrome-cli open http://localhost:8080/client/admin_login.php
+chrome-cli open http://localhost:8080/client/test.php
 chrome-cli open http://localhost:5055/
+open ./database/er_diagram.png

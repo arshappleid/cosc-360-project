@@ -25,7 +25,7 @@ if ($connection->connect_error) {
  *
  * @param string $query The SQL query to execute. The query can include placeholders for parameter binding.
  * @param array $params An array of parameters to bind to the query's placeholders.
- * 
+ * - Pass an empty array , if it does not require any bind paramters.
  * @return mixed An array of associative arrays for SELECT queries, true for successful INSERT/UPDATE/DELETE,
  *               false on failure, or "nullresult" if an error occurs during parameter binding.
  *               Additionally, it may output error messages directly and modify error reporting levels.
@@ -72,7 +72,9 @@ function executePreparedQuery($query, $params)
       die("Failed to prepare statement: " . $connection->error);
     }
     try {
-      $stmt->bind_param(...$params);
+      if (count($params) > 0) {
+        $stmt->bind_param(...$params);
+      }
     } catch (Exception $e) {
       return array(false, "Error occured , preparing the sql statement.<br>");
     }

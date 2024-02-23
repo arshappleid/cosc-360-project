@@ -41,6 +41,7 @@ function itemExists($ITEM_ID)
  * Returns an Associative array , of all the ITEM_ID at a store.
  * Response Values :
  * 		- NO_ITEMS_AVAILABLE_AT_STORE
+ * 		- ['ITEM_1_ID']
  * 		- ['ITEM_1_ID','ITEM_2_ID']
  */
 function getAllItems_IDS_AtStore($STORE_ID)
@@ -52,11 +53,11 @@ function getAllItems_IDS_AtStore($STORE_ID)
 			if ($response[1] === "NO_DATA_RETURNED") {
 				return "NO_ITEMS_AVAILABLE_AT_STORE";
 			} else if (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
-				if (count($response) == 1) {
-					return $response['ITEM_ID'];
+				if (!is_array($response[1][0])) {
+					return array($response[1]['ITEM_ID']);
 				}
-				$data = array();
 
+				$data = array();
 				foreach ($response[1] as $item) {
 					$data[] = $item['ITEM_ID'];
 				}
@@ -83,6 +84,28 @@ function getItemInfo($ITEM_ID)
 		if ($response[0]) { // Query executed properly
 			if ($response[1] === "NO_DATA_RETURNED") {
 				return "NO_ITEM_FOUND";
+			} else if (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
+				return $response[1];
+			}
+		}
+	} catch (Exception $e) {
+		echo "Error occurred, when using Database function to try to validate User.<br>";
+		echo $e->getMessage();
+	}
+}
+
+
+/**
+ * Returns a list of all the stores from the STORE table in the database.
+ */
+function getAllStoreList()
+{
+	$query = "SELECT * FROM STORE;";
+	try {
+		$response = executePreparedQuery($query, array()); // Adjusted parameter structure
+		if ($response[0]) { // Query executed properly
+			if ($response[1] === "NO_DATA_RETURNED") {
+				return "NO_STORES_IN_DATABASE";
 			} else if (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
 				return $response[1];
 			}
