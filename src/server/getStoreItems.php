@@ -3,11 +3,17 @@ session_start();
 include '../server/functions/item_info.php';
 require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
-
+require_once("./GLOBAL_VARS.php");
 $storeId = $_GET['SELECTED_STORE'];
 $item_IDS = getAllItems_IDS_AtStore($storeId);
 
-if (isset($storeId)) {
+if ($item_IDS == "NO_ITEMS_AVAILABLE_AT_STORE") {
+	echo "<section>";
+	echo "<h3>" . $NO_ITEM_AVAILABLE_AT_THE_STORE_MESSAGE . "</h3>";
+	echo "</section>";
+	exit;
+}
+if (count($item_IDS) > 0) {
 	foreach ($item_IDS as $item_ID) {
 		$item = getItemInfo($item_ID);
 		if ($item == "NO_ITEM_FOUND") continue;
