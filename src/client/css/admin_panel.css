@@ -1,0 +1,5 @@
+#Input_Form fieldset input,
+#Input_Form fieldset textarea {
+    width: 25%;
+    margin: 1% 1% 1% 1%;
+}

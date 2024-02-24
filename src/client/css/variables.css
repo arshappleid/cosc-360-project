@@ -6,4 +6,6 @@
     --error-message-color: red;
     --main-font-color: #e1e1e1;
     --main-background-color: rgb(44, 44, 44);
+    --main-button-background-color: #e1e1e1;
+    --main-button-foreground-color: #e1e1e1;
 }

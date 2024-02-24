@@ -1,4 +1,8 @@
 @import url("variables.css");
+nav a {
+    background-color: var(--main-button-background-color);
+    color: var(--main-button-foreground-color);
+}
 
 .default_body {
     text-align: center;

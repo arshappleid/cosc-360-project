@@ -33,6 +33,12 @@ if ($_SESSION['BREADCRUMBS'][$last_item_index][0] != $current_page[0]) {
 	<nav>
 		<a href="#">Home</a>
 		<a href="./admin_login.php">Logout</a>
+		<?php
+		if (isset($_SESSION['LOGGED_IN_ADMIN'])) {
+			echo "<a href=\"./admin_panel.php\">Admin</a>";
+		}
+		?>
+
 	</nav>
 	<?php include_once './../server/breadcrumbs.php' ?>
 	<div id="search_bar">
