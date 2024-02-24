@@ -36,7 +36,7 @@ if ($_SESSION['BREADCRUMBS'][$last_item_index][0] != $current_page[0]) {
 	</nav>
 	<?php include_once './../server/breadcrumbs.php' ?>
 	<div id="search_bar">
-		<input type="text" placeholder="Search Items...">
+		<input id="search_item" type="text" placeholder="Search Items...">
 		<?php
 		$stores = getAllStoreList();
 		if (count($stores) == 0) {
@@ -61,7 +61,7 @@ if ($_SESSION['BREADCRUMBS'][$last_item_index][0] != $current_page[0]) {
 	</footer>
 
 	<!--Since we would want to run these scripts after the pages have loaded.-->
-	<script type="text/javascript" src="./scripts/change_store.js"></script>
+	<script type="text/javascript" src="./scripts/home.js"></script>
 	<?php echo "<script>
 	updateGlobalVariable(1);
 	</script>";
