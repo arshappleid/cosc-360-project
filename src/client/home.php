@@ -3,7 +3,15 @@ require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
 require_once("./../server/GLOBAL_VARS.php");
 
-
+## ADD This to every Page , to modify Breadcrumbs
+if (!isset($_SESSION['BREADCRUMBS'])) {
+	$_SESSION['BREADCRUMBS'] = array();
+}
+$current_page = ["HOME", "./home.php"];
+$last_item_index = count($_SESSION['BREADCRUMBS']) - 1;
+if ($_SESSION['BREADCRUMBS'][$last_item_index][0] != $current_page[0]) {
+	array_push($_SESSION['BREADCRUMBS'], $current_page);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,11 +22,9 @@ require_once("./../server/GLOBAL_VARS.php");
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<script type="text/javascript" src="./jquery-library/jquery-3.1.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="./css/global.css" />
 	<link rel="stylesheet" href="./css/home.css" />
-
 </head>
 <!-- Refer to https://www.w3schools.com/html/html_layout.asp for Layout Design -->
 
@@ -28,6 +34,7 @@ require_once("./../server/GLOBAL_VARS.php");
 		<a href="#">Home</a>
 		<a href="./admin_login.php">Logout</a>
 	</nav>
+	<?php include_once './../server/breadcrumbs.php' ?>
 	<div id="search_bar">
 		<input type="text" placeholder="Search Items...">
 		<?php
