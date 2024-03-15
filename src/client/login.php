@@ -1,4 +1,7 @@
-<?php session_start();?>
+<?php
+session_unset();
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +10,12 @@
 	<meta http-equiv="X-UA-Compatible"
 		content="IE=edge" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet"
 		href="css/loginstyles.css" />
+	<link rel="stylesheet" href="./css/global.css" />
 	<link href="bootstrap3_defaultTheme/dist/css/bootstrap.css"
 		rel="stylesheet">
 </head>
@@ -18,7 +23,7 @@
 
 	<div class="container">
 		<div class="headerblack">
-			<a href="#"
+			<a href="home.php"
 				class="home-button">Home</a>
 		</div>
 		<div class="headeryellow">
@@ -36,7 +41,7 @@
 		<div class="triangleextendblack">
 			<form id="loginForm"
 				method="POST"
-				action="./../../server/verify_user_login.php">
+				action="../server/validate_user.php">
 				<input type="email"
 					id="email"
 					name="email"
