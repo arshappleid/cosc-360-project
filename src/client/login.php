@@ -14,8 +14,8 @@ session_start();
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet"
-		href="loginstyles.css" />
-	<link rel="stylesheet" href="./css/global.css" />
+		href="css/loginstyles.css" />
+	<link rel="stylesheet" href="css/global.css" />
 	<link href="bootstrap3_defaultTheme/dist/css/bootstrap.css"
 		rel="stylesheet">
 </head>
