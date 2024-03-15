@@ -1,0 +1,5 @@
+@import url("variables.css");
+
+form {
+    background-color: var(--primary-color);
+}
