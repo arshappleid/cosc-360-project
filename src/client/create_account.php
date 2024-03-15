@@ -6,6 +6,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/createaccountstyles.css" />
     <link rel="stylesheet" href="css/global.css" />
@@ -30,7 +31,7 @@
         </div>
       </div>
       <div class="triangleextendblack"> 
-        <form id = "createAccountForm" method="POST" action="./../../server/create_user.php">
+        <form id = "createAccountForm" method="POST" action="../server/create_user.php">
 
           <input type="email" id="email" name="email" placeholder="E-mail" required>
 
@@ -45,6 +46,12 @@
           <input type="file" id="profilePicture" name="profilePicture" placeholder="Upload Profile Picture" accept="image/*">
 
           <div class="button-container">
+          <?php
+          if (isset($_SESSION['MESSAGE'])) {
+				      echo "<h4 class=\"error_message\">" . $_SESSION['MESSAGE'] . "</h4>";
+				      unset($_SESSION['MESSAGE']);
+			      }
+            ?>
             <button type="submit">Create Account</button>
           </div>
         </form> 

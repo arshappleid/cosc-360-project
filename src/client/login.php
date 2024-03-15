@@ -1,6 +1,17 @@
-<?php
-session_unset();
-session_start();
+<?php session_start();
+require_once("./../server/functions/item_info.php");
+require_once("./../server/functions/comments.php");
+require_once("./../server/GLOBAL_VARS.php");
+
+## ADD This to every Page , to modify Breadcrumbs
+if (!isset($_SESSION['BREADCRUMBS'])) {
+	$_SESSION['BREADCRUMBS'] = array();
+}
+$current_page = ["LOGIN", "./login.php"];
+$last_item_index = count($_SESSION['BREADCRUMBS']) - 1;
+if ($_SESSION['BREADCRUMBS'][$last_item_index][0] != $current_page[0]) {
+	array_push($_SESSION['BREADCRUMBS'], $current_page);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,6 +63,12 @@ session_start();
 					placeholder="Password">
 				<div class="button-container">
 					<button type="submit">Login</button>
+					<?php
+			if (isset($_SESSION['MESSAGE'])) {
+				echo "<h4 class=\"error_message\">" . $_SESSION['MESSAGE'] . "</h4>";
+				unset($_SESSION['MESSAGE']);
+			}
+			?>
 				</div>
 					<a class="accounttext"
 						href="create_account.php">Need an account?</a>
