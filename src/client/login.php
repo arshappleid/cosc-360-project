@@ -10,7 +10,7 @@
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet"
-		href="loginstyles.css" />
+		href="css/loginstyles.css" />
 	<link href="bootstrap3_defaultTheme/dist/css/bootstrap.css"
 		rel="stylesheet">
 </head>
@@ -18,7 +18,7 @@
 
 	<div class="container">
 		<div class="headerblack">
-			<a href="#"
+			<a href="home.php"
 				class="home-button">Home</a>
 		</div>
 		<div class="headeryellow">
@@ -49,7 +49,7 @@
 					<button type="submit">Login</button>
 				</div>
 					<a class="accounttext"
-						href="./../createaccountpage/create_account.php">Need an account?</a>
+						href="create_account.php">Need an account?</a>
 			</form>
 		</div>
 		<div class="triangle-element"></div>
