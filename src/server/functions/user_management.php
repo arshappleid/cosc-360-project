@@ -274,3 +274,23 @@ function deleteUser($USER_EMAIL)
 	}
 	return "USER_NOT_DELETED";
 }
+
+
+function getUser_First_Last_Name($USER_ID)
+{
+	$USER_ID = intval($USER_ID);
+	$query = "SELECT First_Name, Last_Name FROM USERS WHERE USER_ID = ?;";
+	try {
+		$response = executePreparedQuery($query, array('i', $USER_ID));
+		if ($response[0]) { // Query executed properly
+			if ($response[1] == "NO_DATA_RETURNED") {
+				return "NO_NAME_FOUND";
+			}
+			return $response[1]['First_Name'] . " " . $response[1]['Last_Name'];
+		}
+		return "NO_NAME_FOUND";
+	} catch (Exception $e) {
+		echo "Error occurred, when using Database function to try to validate User.<br>";
+		echo $e->getMessage();
+	}
+}
