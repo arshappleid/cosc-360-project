@@ -86,3 +86,31 @@ function getAllUsers()
 
 	return !empty($data);
 }
+/**
+ * Creates an admin user in the database.
+ * 
+ * @param string $firstName The first name of the admin.
+ * @param string $lastName The last name of the admin.
+ * @param string $email The email address of the admin.
+ * @param string $md5password The MD5 hashed password of the admin.
+ * @param string|null $userImage An optional path or identifier for the user's image.
+ * @return string A message indicating the result of the operation.
+ */
+function createAdmin($firstName, $lastName, $email, $md5password, $userImage = null)
+{
+	$query = "INSERT INTO Admins(First_Name,Last_Name,Email,MD5_Password) VALUES(?,?,?,?);";
+	try {
+		$response = executePreparedQuery($query, array('ssss', $firstName, $lastName, $email, $md5password));
+		if ($response[0] == true) {
+			if ($userImage) {
+				updateImage("Admins", "Email", $email, $userImage);
+			}
+			return "USER_CREATED";
+		} else {
+			return "USER_NOT_CREATED";
+		}
+	} catch (Exception $e) {
+		echo "Error occured , when using Database function to try to validate User.<br>";
+		echo $e->getMessage();
+	}
+}

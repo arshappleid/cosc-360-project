@@ -151,6 +151,7 @@ function updateImage($table, $whereCol, $whereValue, $userImageFileName)
 
       // Execute the prepared statement
       if (!$stmt->execute()) {
+        echo "IMAGE_UPLOADED_SUCCESSFULLY";
         return "IMAGE_UPLOADED_SUCCESSFULLY";
       } else {
         return "UNABLE_TO_UPLOAD_IMAGE";
@@ -177,14 +178,15 @@ function updateImage($table, $whereCol, $whereValue, $userImageFileName)
 
  * - COULD_NOT_GET_IMAGE
  */
-function getImage($table, $whereCol , $whereValue){
+function getImage($table, $whereCol, $whereValue)
+{
   global $connection;
   $query = "SELECT DISPLAY_IMAGE from $table WHERE $whereCol = $whereValue";
   $stmt = $connection->prepare($query);
-   if ($stmt->execute()){
+  if ($stmt->execute()) {
     $result = $stmt->get_result();
     return $result["DISPLAY_IMAGE"];
-   }else{
-    return "COULD_NOT_GET_IMAGE"
-   }
+  } else {
+    return "COULD_NOT_GET_IMAGE";
+  }
 }
