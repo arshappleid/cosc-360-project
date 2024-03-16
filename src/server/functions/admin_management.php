@@ -1,6 +1,7 @@
 <?php
 
 include_once 'db_connection.php';
+include_once 'user_management.php';
 /**
  * Summary of validateAdminLogin
  * @param mixed $email
@@ -87,6 +88,27 @@ function getAllUsers()
 	return !empty($data);
 }
 /**
+ * Returns String if an Admin is already registered or not
+ * @param mixed $email
+ * @return string
+ * 
+ * Posible return Values
+ * - ADMIN_EXISTS
+ * - ADMIN_NOT_EXIST
+ */
+function checkAdminExists($email)
+{
+	$query = "SELECT Email FROM Admins WHERE Email = ?";
+	$response = executePreparedQuery($query, array('s', $email));
+	if ($response[0] == true) {
+		if ($response[1] == "NO_DATA_RETURNED") {
+			return "ADMIN_NOT_EXIST";
+		}
+		return "ADMIN_EXISTS";
+	}
+}
+
+/**
  * Creates an admin user in the database.
  * 
  * @param string $firstName The first name of the admin.
@@ -95,9 +117,15 @@ function getAllUsers()
  * @param string $md5password The MD5 hashed password of the admin.
  * @param string|null $userImage An optional path or identifier for the user's image.
  * @return string A message indicating the result of the operation.
+ * 
+ * Possible Return Values:
+ * - ADMIN_ALREADY_REGISTERED
  */
 function createAdmin($firstName, $lastName, $email, $md5password, $userImage = null)
 {
+	if (checkAdminExists($email) == "ADMIN_EXISTS") {
+		return "ADMIN_ALREADY_REGISTERED";
+	}
 	$query = "INSERT INTO Admins(First_Name,Last_Name,Email,MD5_Password) VALUES(?,?,?,?);";
 	try {
 		$response = executePreparedQuery($query, array('ssss', $firstName, $lastName, $email, $md5password));
@@ -112,5 +140,18 @@ function createAdmin($firstName, $lastName, $email, $md5password, $userImage = n
 	} catch (Exception $e) {
 		echo "Error occured , when using Database function to try to validate User.<br>";
 		echo $e->getMessage();
+	}
+}
+
+function displayName($email)
+{
+	if (userExists($email) == "USER_EXISTS") {
+		$response = executePreparedQuery("SELECT First_Name, Last_Name FROM USERS WHERE EMAIL = ?", array("s", $email));
+		return $response[1]['First_Name'] . " " . $response[1]['Last_Name'];
+	}
+
+	if (checkAdminExists($email)) {
+		$response = executePreparedQuery("SELECT First_Name, Last_Name FROM Admins WHERE EMAIL = ?", array("s", $email));
+		return $response[1]['First_Name'] . " " . $response[1]['Last_Name'];
 	}
 }

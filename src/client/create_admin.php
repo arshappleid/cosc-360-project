@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html>
 
@@ -54,14 +55,14 @@
 					e.preventDefault(); // Prevent form submission
 					$("#message").text("Not all of the fields have been filled properly.");
 				} else {
+					$("#message").text("");
 					// Hash The password
 					var password = document.getElementById("password").value;
 					var hashedPassword = CryptoJS.MD5(password).toString();
 					document.getElementById("password").value = hashedPassword;
+					e.submit();
 
-					document.getElementById("userImage").name = $("#email").val();
-					e.submit()
-					$("#message").text("");
+
 				}
 			});
 		});
@@ -85,11 +86,16 @@
 		<input id="passwordRetype" type="password" name="passwordRetype">
 
 		<label for="userImage">User Image:</label>
-		<input type="file" id="userImage" name="userImage">
+		<input type="file" id="userImage" name="image">
 
 		<button type="submit">Create Account</button>
 		<button type="reset">Reset</button>
 		<p id="message"></p>
+		<?php if (isset($_SESSION['MESSAGE'])) {
+			echo "<p id = \"message\">" . $_SESSION['MESSAGE'] . "</p>";
+			unset($_SESSION['MESSAGE']);
+		}
+		?>
 	</form>
 </body>
 

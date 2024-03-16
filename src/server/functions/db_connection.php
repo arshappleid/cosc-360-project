@@ -121,72 +121,128 @@ function executePreparedQuery($query, $params)
  * @param string $table The name of the database table to insert the image into.
  * @param string $whereCol The column name that will be used in the WHERE clause for identifying the record.
  * @param mixed $whereValue The value of the column specified in $whereCol to identify the record.
- * @param string $userImageFileName The form input name attribute for the file upload.
- * 
- * Return Values
- * - IMAGE_UPLOADED_SUCCESSFULLY
- * - UNABLE_TO_UPLOAD_IMAGE
- * - COULD_NOT_CONNECT
- * - COULD_NOT_LOAD_IMAGE
+ * @param string $uploadDir Location to Store the image on server
+ * Stores the image in the uploadDir/whereValue.jpeg
  */
-function updateImage($table, $whereCol, $whereValue, $userImageFileName)
+function updateImage($table, $whereCol, $whereValue, $uploadDir = "images/temp")
 {
   global $connection;
+  $tempName = $_FILES['image']['tmp_name'];
+  $fileExtension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+  $newName = $whereValue . "." . $fileExtension;
 
-  // Check if the file is an image
-  $check = getimagesize($_FILES[$userImageFileName]["tmp_name"]);
+  if (!is_dir($uploadDir)) {
+    mkdir($uploadDir, 0777, true);
+  }
+
+  $destinationPath = $uploadDir . '/' . $newName;
+  if (!move_uploaded_file($tempName, $destinationPath)) {
+    return "UNABLE_TO_MOVE_FILE";
+  }
+
+  $check = getimagesize($destinationPath);
   if ($check !== false) {
-    $image = $_FILES[$userImageFileName]['tmp_name'];
-    $imgContent = file_get_contents($image);
+    // Assuming you want to store the image's content in the database,
+    // It's more common to store just a reference to the file location.
+    $imgContent = addslashes(file_get_contents($destinationPath));
 
-    // Prepare a statement to insert image content into the database
-    $query = "UPDATE $table SET DISPLAY_IMAGE = ? WHERE $whereCol = $whereValue";
-    $stmt = $connection->prepare($query);
+    // Make sure to protect against SQL injection
+    $query = "UPDATE $table SET DISPLAY_IMAGE = ? WHERE $whereCol = ?";
 
-    if ($stmt) {
-      // Bind the parameters (blob and string) to the prepared statement
-      $null = NULL;
-      $stmt->bind_param("bs", $image);
-      $stmt->send_long_data(0, $imgContent); // Send the blob data in packets
+    if ($stmt = $connection->prepare($query)) {
+      // Bind the parameters
+      $stmt->bind_param("bs", $imgContent, $whereValue);
 
       // Execute the prepared statement
-      if (!$stmt->execute()) {
-        echo "IMAGE_UPLOADED_SUCCESSFULLY";
+      if ($stmt->execute()) {
+        $stmt->close();
         return "IMAGE_UPLOADED_SUCCESSFULLY";
       } else {
+        $stmt->close();
         return "UNABLE_TO_UPLOAD_IMAGE";
       }
-
-      // Close the statement
-      $stmt->close();
     } else {
-      return "COULD_NOT_CONNECT";
+      return "COULD_NOT_PREPARE_STATEMENT";
+    }
+  } else {
+    return "COULD_NOT_LOAD_IMAGE";
+  }
+}
+function updateImage2($table, $whereCol, $whereValue, $uploadDir = "images/temp")
+{
+  global $connection;
+  $tempName = $_FILES['image']['tmp_name'];
+  $fileExtension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+  $newName = $whereValue . "." . $fileExtension;
+
+  if (!is_dir($uploadDir)) {
+    mkdir($uploadDir, 0777, true);
+  }
+
+  $destinationPath = $uploadDir . '/' . $newName;
+  if (!move_uploaded_file($tempName, $destinationPath)) {
+    return "UNABLE_TO_MOVE_FILE";
+  }
+
+  $check = getimagesize($destinationPath);
+  if ($check !== false) {
+    // Assuming you want to store the image's content in the database,
+    // It's more common to store just a reference to the file location.
+    $imgContent = addslashes(file_get_contents($_FILES['image']['name']));
+
+    // Make sure to protect against SQL injection
+    $query = "UPDATE $table SET DISPLAY_IMAGE = ? WHERE $whereCol = ?";
+
+    if ($stmt = $connection->prepare($query)) {
+      // Bind the parameters
+      $stmt->bind_param("bs", $imgContent, $whereValue);
+
+      // Execute the prepared statement
+      if ($stmt->execute()) {
+        $stmt->close();
+        return "IMAGE_UPLOADED_SUCCESSFULLY";
+      } else {
+        $stmt->close();
+        return "UNABLE_TO_UPLOAD_IMAGE";
+      }
+    } else {
+      return "COULD_NOT_PREPARE_STATEMENT";
     }
   } else {
     return "COULD_NOT_LOAD_IMAGE";
   }
 }
 
+
 /**
- * Uploads an image to a specified table in the database.
- * Sample Update Query : UPDATE #table DISPLAY_IMAGE  = IMAGEBLOB $whereCol = $whereValue
- * 
+ * Returns the DISPLAY_IMAGE Attribute in the table
  * @param string $table The name of the database table to insert the image into.
  * @param string $whereCol The column name that will be used in the WHERE clause for identifying the record.
  * @param mixed $whereValue The value of the column specified in $whereCol to identify the record.
  * Return Values
-
  * - COULD_NOT_GET_IMAGE
  */
 function getImage($table, $whereCol, $whereValue)
 {
   global $connection;
-  $query = "SELECT DISPLAY_IMAGE from $table WHERE $whereCol = $whereValue";
-  $stmt = $connection->prepare($query);
-  if ($stmt->execute()) {
-    $result = $stmt->get_result();
-    return $result["DISPLAY_IMAGE"];
+  $query = "SELECT DISPLAY_IMAGE FROM $table WHERE $whereCol = ?";
+
+  if ($stmt = $connection->prepare($query)) {
+    $stmt->bind_param("s", $whereValue);
+
+    if ($stmt->execute()) {
+      $result = $stmt->get_result();
+      if ($row = $result->fetch_assoc()) {
+        return $row["DISPLAY_IMAGE"];
+      } else {
+        return "NO_IMAGE_FOUND";
+      }
+    } else {
+      return "COULD_NOT_EXECUTE_QUERY";
+    }
+
+    $stmt->close();
   } else {
-    return "COULD_NOT_GET_IMAGE";
+    return "COULD_NOT_PREPARE_STATEMENT";
   }
 }

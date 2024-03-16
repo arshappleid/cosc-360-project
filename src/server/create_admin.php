@@ -8,25 +8,34 @@ $hashedPassword = $_POST['password'];
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	if (isset($firstName) && isset($lastName) && isset($email) && isset($hashedPassword)) {
-		if (createAdmin($firstName, $lastName, $email, $hashedPassword)) {
+	try {
+		if (isset($firstName) && isset($lastName) && isset($email) && isset($hashedPassword)) {
+			$response = createAdmin($firstName, $lastName, $email, $hashedPassword);
+			//echo $response;
+			if ($response == "USER_CREATED") {
+				// Upload The Image
+				if (isset($_FILES["image"])) {
+					updateImage2("Admins", "Email", $email, "./images/userImages/admin/");
+				} else {
+					echo "Could not trace file";
+					exit();
+				}
 
-			// Upload The Image
-			if (isset($_FILES[$email]) && $_FILES[$email]["error"] == 0) {
-				$userImage = file_get_contents($_FILES[$email]["name"]);
-				updateImage("Admins", "Email", $email, $userImage);
+				header('Location: ../client/admin_login.php');
+			} elseif ($response == "ADMIN_ALREADY_REGISTERED") {
+				$_SESSION['MESSAGE'] = "ADMIN ALREADY REGISTERED";
+				header('Location: ../client/create_admin.php');
 			} else {
-				echo "Could not trace file";
+				$_SESSION['MESSAGE'] = "ERROR ON ADMIN CREATIONS";
+				header('Location: ../client/create_admin.php');
 			}
-
-			header('Location: ../client/admin_login.php');
 			exit();
 		} else {
-			$_SESSION['MESSAGE'] = 'error on Admin creation';
+			$_SESSION['MESSAGE'] = "Please Provide all Values";
 			header('Location: ../client/create_admin.php');
 		}
-		$_SESSION['EMAIL'] = $email;
-		header('Location: ../client/home.php');
-		exit();
+	} catch (Exception $e) {
+		echo "Error occured when creating the new Admin.<br>";
+		echo $e->getMessage();
 	}
 }

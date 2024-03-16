@@ -2,10 +2,10 @@
 
 include_once 'db_connection.php';
 
-function addImage($table,$whereCol,$whereValue,$userImageFileName)
+function addImage($table, $whereCol, $whereValue, $userImageFileName)
 {
 	global $connection;
-	$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+	$check = getimagesize($_FILES["image"]["tmp_name"]);
 	if ($check !== false) {
 		$image = $_FILES[$userImageFileName]['tmp_name'];
 		$imgContent = addslashes(file_get_contents($image));

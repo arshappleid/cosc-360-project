@@ -18,6 +18,7 @@ session_start();
 		href="./css/global.css" />
 	<link rel="stylesheet"
 		href="./css/admin_login.css" />
+
 </head>
 
 <body class="default_body">

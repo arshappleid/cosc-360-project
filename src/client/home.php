@@ -17,19 +17,26 @@ if ($_SESSION['BREADCRUMBS'][$last_item_index][0] != $current_page[0]) {
 <html lang="en">
 
 <head>
-	<title>Banana Hammock</title>
+	<title>Grocery Tracker</title>
 	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<script type="text/javascript" src="./jquery-library/jquery-3.1.1.min.js"></script>
+	<meta http-equiv="X-UA-Compatible"
+		content="IE=edge" />
+	<script type="text/javascript"
+		src="./jquery-library/jquery-3.1.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="./css/global.css" />
-	<link rel="stylesheet" href="./css/home.css" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet"
+		href="./css/global.css" />
+	<link rel="stylesheet"
+		href="./css/home.css" />
 </head>
 <!-- Refer to https://www.w3schools.com/html/html_layout.asp for Layout Design -->
 
 <body class="default_body">
-	<header>Welcome to our Grocery Tracker</header>
+	<header>
+		<h4>Welcome to our Grocery Tracker</h4>
+	</header>
 	<nav>
 		<a href="#">Home</a>
 		<a href="./admin_login.php">Logout</a>
@@ -42,7 +49,9 @@ if ($_SESSION['BREADCRUMBS'][$last_item_index][0] != $current_page[0]) {
 	</nav>
 	<?php include_once './../server/breadcrumbs.php' ?>
 	<div id="search_bar">
-		<input id="search_item" type="text" placeholder="Search Items...">
+		<input id="search_item"
+			type="text"
+			placeholder="Search Items...">
 		<?php
 		$stores = getAllStoreList();
 		if (count($stores) == 0) {
@@ -67,7 +76,8 @@ if ($_SESSION['BREADCRUMBS'][$last_item_index][0] != $current_page[0]) {
 	</footer>
 
 	<!--Since we would want to run these scripts after the pages have loaded.-->
-	<script type="text/javascript" src="./scripts/home.js"></script>
+	<script type="text/javascript"
+		src="./scripts/home.js"></script>
 	<?php echo "<script>
 	updateGlobalVariable(1);
 	</script>";

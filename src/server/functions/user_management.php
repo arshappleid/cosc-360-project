@@ -81,7 +81,7 @@ function createUser_WithImage($EMAIL, $FIRST_NAME, $LAST_NAME, $MD5_PASSWORD, $U
 	$query = "INSERT INTO USERS (Email, First_Name, Last_Name, MD5_Password , User_Image) VALUES (?,?,?,?,?);";
 
 	try {
-		$response = executePreparedQuery($query, array('sssss', $EMAIL, $FIRST_NAME, $LAST_NAME, $MD5_PASSWORD, $USR_IMAGE_BLOB));
+		$response = executePreparedQuery($query, array('ssssb', $EMAIL, $FIRST_NAME, $LAST_NAME, $MD5_PASSWORD, $USR_IMAGE_BLOB));
 		echo "<h3>" .  implode(",", $response) . "<h3>";
 		if ($response[0] == true) {
 			return "USER_CREATED";

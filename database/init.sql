@@ -37,10 +37,10 @@ VALUES (
 
 INSERT INTO
     Admins (
-        EMAIL, FIRST_NAME, LAST_NAME, MD5_PASSWORD
+        EMAIL, FIRST_NAME, LAST_NAME, MD5_PASSWORD, DISPLAY_IMAGE
     )
 VALUES (
-        'test@gmail.com', 'Test', 'User', '5f4dcc3b5aa765d61d8327deb882cf99'
+        'test@gmail.com', 'Test', 'User', '5f4dcc3b5aa765d61d8327deb882cf99',
     );
 -- Insert data into STORE
 INSERT INTO STORE (STORE_NAME) VALUES ('Electronics World');
