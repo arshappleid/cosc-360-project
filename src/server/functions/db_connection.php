@@ -113,3 +113,78 @@ function executePreparedQuery($query, $params)
   }
   error_reporting(E_ALL);
 }
+
+/**
+ * Uploads an image to a specified table in the database.
+ * Sample Update Query : UPDATE #table DISPLAY_IMAGE  = IMAGEBLOB $whereCol = $whereValue
+ * 
+ * @param string $table The name of the database table to insert the image into.
+ * @param string $whereCol The column name that will be used in the WHERE clause for identifying the record.
+ * @param mixed $whereValue The value of the column specified in $whereCol to identify the record.
+ * @param string $userImageFileName The form input name attribute for the file upload.
+ * 
+ * Return Values
+ * - IMAGE_UPLOADED_SUCCESSFULLY
+ * - UNABLE_TO_UPLOAD_IMAGE
+ * - COULD_NOT_CONNECT
+ * - COULD_NOT_LOAD_IMAGE
+ */
+function updateImage($table, $whereCol, $whereValue, $userImageFileName)
+{
+  global $connection;
+
+  // Check if the file is an image
+  $check = getimagesize($_FILES[$userImageFileName]["tmp_name"]);
+  if ($check !== false) {
+    $image = $_FILES[$userImageFileName]['tmp_name'];
+    $imgContent = file_get_contents($image);
+
+    // Prepare a statement to insert image content into the database
+    $query = "UPDATE $table SET DISPLAY_IMAGE = ? WHERE $whereCol = $whereValue";
+    $stmt = $connection->prepare($query);
+
+    if ($stmt) {
+      // Bind the parameters (blob and string) to the prepared statement
+      $null = NULL;
+      $stmt->bind_param("bs", $image);
+      $stmt->send_long_data(0, $imgContent); // Send the blob data in packets
+
+      // Execute the prepared statement
+      if (!$stmt->execute()) {
+        return "IMAGE_UPLOADED_SUCCESSFULLY";
+      } else {
+        return "UNABLE_TO_UPLOAD_IMAGE";
+      }
+
+      // Close the statement
+      $stmt->close();
+    } else {
+      return "COULD_NOT_CONNECT";
+    }
+  } else {
+    return "COULD_NOT_LOAD_IMAGE";
+  }
+}
+
+/**
+ * Uploads an image to a specified table in the database.
+ * Sample Update Query : UPDATE #table DISPLAY_IMAGE  = IMAGEBLOB $whereCol = $whereValue
+ * 
+ * @param string $table The name of the database table to insert the image into.
+ * @param string $whereCol The column name that will be used in the WHERE clause for identifying the record.
+ * @param mixed $whereValue The value of the column specified in $whereCol to identify the record.
+ * Return Values
+
+ * - COULD_NOT_GET_IMAGE
+ */
+function getImage($table, $whereCol , $whereValue){
+  global $connection;
+  $query = "SELECT DISPLAY_IMAGE from $table WHERE $whereCol = $whereValue";
+  $stmt = $connection->prepare($query);
+   if ($stmt->execute()){
+    $result = $stmt->get_result();
+    return $result["DISPLAY_IMAGE"];
+   }else{
+    return "COULD_NOT_GET_IMAGE"
+   }
+}

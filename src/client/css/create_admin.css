@@ -1,0 +1,11 @@
+form {
+    padding: 1em;
+    margin: auto;
+    border: solid 1px black;
+    display: block;
+    align-items: center;
+}
+form input,
+form label {
+    display: block;
+}
