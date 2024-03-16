@@ -17,7 +17,7 @@ if ($_SESSION['BREADCRUMBS'][$last_item_index][0] != $current_page[0]) {
 <html lang="en">
 
 <head>
-	<title>Login Page</title>
+	<title>Banana Hammock</title>
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<script type="text/javascript" src="./jquery-library/jquery-3.1.1.min.js"></script>
