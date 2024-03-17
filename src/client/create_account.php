@@ -1,4 +1,21 @@
-<?php session_start();?>
+<?php
+session_start();
+require_once("./../server/functions/item_info.php");
+require_once("./../server/functions/comments.php");
+require_once("./../server/GLOBAL_VARS.php");
+
+if (!isset($_SESSION['BREADCRUMBS'])) {
+    $_SESSION['BREADCRUMBS'] = array();
+}
+
+$current_page = ["create account", "./create_account.php"];
+$last_item_index = count($_SESSION['BREADCRUMBS']) - 1;
+
+// Add the current page only if it's not the last one already in the breadcrumb trail
+if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $current_page[0]) {
+    array_push($_SESSION['BREADCRUMBS'], $current_page);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,8 +27,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/createaccountstyles.css" />
     <link rel="stylesheet" href="css/global.css" />
-    <link href="bootstrap3_defaultTheme/dist/css/bootstrap.css"
-		rel="stylesheet">
   </head>
   <body>
     
@@ -19,17 +34,26 @@
       <div class="headerblack">
         <a href="home.php" class="home-button">Home</a>
       </div>
+
       <div class="headeryellow">
         <div class="search-container">
           <input type="text" placeholder="Search...">
-          <select>
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-          </select>
+          <?php
+					$stores = getAllStoreList();
+					if (count($stores) == 0) {
+						echo $stores;
+					} else {
+						echo "<select id = \"store_select\" class=\"select_dropdown\">";
+					foreach ($stores as $key => $store) {
+						echo "<option value=\"" . $store['STORE_ID'] . "\" >" . $store['STORE_NAME'] . "</option>";
+					}
+					echo "</select>";
+							}
+				  ?>
           <button type="submit">Search</button>
         </div>
       </div>
+      <?php include_once './../server/breadcrumbs.php' ?>
       <div class="triangleextendblack"> 
         <form id = "createAccountForm" method="POST" action="../server/create_user.php">
 

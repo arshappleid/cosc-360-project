@@ -4,6 +4,96 @@ nav a {
     color: var(--main-button-foreground-color);
 }
 
+body {
+  width: 100%;
+  margin: 0;
+  font-family: 'Poppins' , sans-serif;
+}
+
+.container {
+  background: var(--third-color);
+  height: 2033px;
+  width: 100%; 
+  position: relative;
+}
+
+.headeryellow {
+  background: var(--primary-color);
+  width: 100%;
+  height: 80px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerblack {
+  background: var(--secondary-color);
+  width: 100%;
+  height: 5em;
+  position: relative;
+}
+
+.home-button {
+  position: absolute;
+  width: 6em;
+  top: 20%;
+  left: 1%;
+  border-radius: 10px;
+  padding: 15px 15px;
+  color: var(--secondary-color);
+  text-align: center;
+  background-color: var(--primary-color);
+  border: none;
+  cursor: pointer;
+}
+
+.login-button {
+  position: absolute;
+  width: 6em;
+  top: 20%;
+  right: 1%;
+  border-radius: 10px;
+  padding: 15px 15px;
+  color: var(--secondary-color);
+  text-align: center;
+  background-color: var(--primary-color);
+  border: none;
+  cursor: pointer;
+}
+
+.admin-login-button {
+  position: absolute;
+  width: 6em;
+  top: 20%;
+  right: 12%;
+  border-radius: 10px;
+  padding: 15px 15px;
+  color: var(--secondary-color);
+  text-align: center;
+  background-color: var(--primary-color);
+  border: none;
+  cursor: pointer;
+}
+
+.create-account-button {
+  position: absolute;
+  width: 8em;
+  top: 20%;
+  left: 12%;
+  border-radius: 10px;
+  padding: 15px 15px;
+  color: var(--secondary-color);
+  text-align: center;
+  background-color: var(--primary-color);
+  border: none;
+  cursor: pointer;
+}
+
+.home-button:hover , .admin-login-button:hover, .login-button:hover , .create-account-button:hover{
+  background-color: var(--hover-color);
+}
+
 .default_body {
     text-align: center;
     overflow-x: hidden; /*Turns off horizontal scroll on the whole body.*/
@@ -13,42 +103,79 @@ nav a {
 .error_message {
     color: red;
 }
+
+.search-container {
+    width: 100%; 
+    display: flex;
+    justify-content: center;
+  }
+  
+  .search-container input[type="text"],
+  .search-container select {
+    width: 30vw; 
+    margin-right: 10px;
+    padding: 2vh 2vw;
+    border: 0;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+  
+  .search-container button {
+    width: 20vw;
+    padding: 1vh 1vw;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .search-container button:hover {
+    color: var(--hover-color);
+  }
+
 .select_dropdown {
     width: 20%;
-    padding: 12px 20px;
-    margin: 8px 0;
+    padding: 2vh 2vw;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
 }
 .breadcrumb_box {
-    align-items: left;
+    background-color: var(--primary-color);
     display: flex;
+    height: 2em;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
+
 /* Style the list */
 ul.breadcrumb {
-    padding: 10px 16px;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
     list-style: none;
-    background-color: #eee;
-    display: flex;
+    text-align: center;
 }
 
 /* Display list items side by side */
 ul.breadcrumb li {
-    font-size: 18px;
+    display: inline;
+    font-size: 12px;
 }
 
 /* Add a slash symbol (/) before/behind each list item */
 ul.breadcrumb li + li:before {
-    padding: 8px;
+    content: "/ ";
+    padding: 0 5px;
     color: black;
-    content: "/\00a0";
 }
 
 /* Add a color to all links inside the list */
 ul.breadcrumb li a {
-    color: #0275d8;
+    color: var(--secondary-color);
     text-decoration: none;
 }
 
