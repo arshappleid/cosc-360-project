@@ -10,6 +10,16 @@ label {
   width: 100px;
 }
 
+.headeryellow {
+  background: var(--primary-color);
+  width: 100%;
+  height: 80px;
+  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 form {
   position: absolute;
   top: 140%;
@@ -77,5 +87,9 @@ form input {
   position: relative;
   left: 0px;
   bottom: 0px;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 

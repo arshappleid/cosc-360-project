@@ -75,7 +75,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		?>
 	</div>
 	<footer>
-	<div class="footerblack"></div>
+	<div class="footerblack">&copy; Banana Hammock 2024</div>
 	</footer>
 
 	<script type="text/javascript"
