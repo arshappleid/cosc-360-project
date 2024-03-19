@@ -1,12 +1,26 @@
 <?php
-session_unset();
 session_start();
+require_once("./../server/functions/item_info.php");
+require_once("./../server/functions/comments.php");
+require_once("./../server/GLOBAL_VARS.php");
+
+if (!isset($_SESSION['BREADCRUMBS'])) {
+    $_SESSION['BREADCRUMBS'] = array();
+}
+
+$current_page = ["admin_login", "./adin_login.php"];
+$last_item_index = count($_SESSION['BREADCRUMBS']) - 1;
+
+// Add the current page only if it's not the last one already in the breadcrumb trail
+if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $current_page[0]) {
+    array_push($_SESSION['BREADCRUMBS'], $current_page);
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<title>Login Page</title>
+	<title>Admin Login Page</title>
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible"
 		content="IE=edge" />
@@ -14,59 +28,82 @@ session_start();
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet"
-		href="./css/global.css" />
-	<link rel="stylesheet"
-		href="./css/admin_login.css" />
-
+    <link rel="stylesheet"
+		href="css/admin_login.css" />
+	<link rel="stylesheet" href="css/global.css" />
 </head>
-
-<body class="default_body">
-	<div>
-		<h3>Admin Login</h3>
-		<form id="login_form"
-			method="POST"
-			action="./../server/validate_admin.php">
-			<input class="input_field"
-				placeholder="E-mail"
-				type="text"
-				name="email">
-			<input class="input_field"
-				placeholder="Password"
-				type="password"
-				name="password">
-			<?php
+<body>
+	<div class="container">
+		<div class="headerblack">
+			<a href="home.php"
+				class="home-button">Home</a>
+		</div>
+		<div class="headeryellow">
+			<div class="search-container">
+				<input type="text"
+					placeholder="Search...">
+				<?php
+					$stores = getAllStoreList();
+					if (count($stores) == 0) {
+						echo $stores;
+					} else {
+						echo "<select id = \"store_select\" class=\"select_dropdown\">";
+					foreach ($stores as $key => $store) {
+						echo "<option value=\"" . $store['STORE_ID'] . "\" >" . $store['STORE_NAME'] . "</option>";
+					}
+					echo "</select>";
+							}
+				?>
+				<button type="submit">Search</button>
+			</div>
+		</div>
+		<?php include_once './../server/breadcrumbs.php' ?>
+		<div class="triangleextendblack">Admin Login
+			<form id="admin_login_form"
+				method="POST"
+				action="./../server/validate_admin.php">
+				<input type="email"
+					id="email"
+					name="email"
+					placeholder="E-mail">
+				<input type="password"
+					id="password"
+					name="password"
+					placeholder="Password">
+				<div class="button-container">
+					<button type="submit">Login</button>
+					<?php
 			if (isset($_SESSION['MESSAGE'])) {
 				echo "<h4 class=\"error_message\">" . $_SESSION['MESSAGE'] . "</h4>";
 				unset($_SESSION['MESSAGE']);
 			}
 			?>
-			<div id="button_holder">
-				<button type="submit">Login</button>
-				<button onclick="location.href='./create_admin.php'"
-					type="button">Create Account</button>
-				<button type="reset">Reset</button>
-			</div>
-		</form>
+				</div>
+					<a class="accounttext"
+						href="create_account.php">Need an account?</a>
+			</form>
+		</div>
+		<div class="triangle-element"></div>
 	</div>
+	<div class="footerblack">&copy; Banana Hammock 2024</div>
 
 	<script>
-	document.getElementById("login_form").addEventListener("submit", function(e) {
+	document.getElementById("admin_login_form").addEventListener("submit", function(e) {
 		e.preventDefault();
-		var email = document.getElementById("login_form").elements['email'].value;
-		var password = document.getElementById("login_form").elements['password'].value;
+		var email = document.getElementById("email").value;
+		var password = document.getElementById("password").value;
 
 		if (!email || !password) {
 			alert('Please enter both email and password.');
 			return;
 		}
+
+		var password = document.getElementById("password").value;
 		var hashedPassword = CryptoJS.MD5(password).toString();
-		document.getElementById("login_form").elements['password'].value = hashedPassword;
+		document.getElementById("password").value = hashedPassword;
 		this.submit();
 	});
 	</script>
 
-
 </body>
-
 </html>
