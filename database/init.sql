@@ -52,7 +52,7 @@ INSERT INTO STORE (STORE_NAME) VALUES ('Tech Hub');
 -- Insert data into ITEMS
 INSERT INTO
     ITEMS (
-        ITEM_NAME, ITEM_DESCRIPTION, EXTERNAL_LINK, ITEM_IMAGE
+        ITEM_NAME, ITEM_DESCRIPTION, EXTERNAL_LINK, DISPLAY_IMAGE
     )
 VALUES (
         'Smartphone', 'Latest model smartphone with advanced features', 'http://example.com/smartphone', NULL
@@ -60,7 +60,7 @@ VALUES (
 
 INSERT INTO
     ITEMS (
-        ITEM_NAME, ITEM_DESCRIPTION, EXTERNAL_LINK, ITEM_IMAGE
+        ITEM_NAME, ITEM_DESCRIPTION, EXTERNAL_LINK, DISPLAY_IMAGE
     )
 VALUES (
         'Laptop', 'High-performance laptop suitable for gaming and professional work', 'http://example.com/laptop', NULL
@@ -68,7 +68,7 @@ VALUES (
 
 INSERT INTO
     ITEMS (
-        ITEM_NAME, ITEM_DESCRIPTION, EXTERNAL_LINK, ITEM_IMAGE
+        ITEM_NAME, ITEM_DESCRIPTION, EXTERNAL_LINK, DISPLAY_IMAGE
     )
 VALUES (
         'Smartwatch', 'Water-resistant smartwatch with health tracking', 'http://example.com/smartwatch', NULL
