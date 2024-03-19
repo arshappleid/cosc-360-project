@@ -11,8 +11,9 @@ include_once 'item_info.php';
  * @return string - Returns Status if a Comment was deleted
  * Return Values:
  * - USER_NOT_EXISTS
- * - COMMENT_DELETED
- * - COMMENT_NOT_DELETED
+ * - ITEM_NOT_EXISTS
+ * - COMMENT_ADDED
+ * - COMMENT_NOT_ADDED
  */
 function addComment($COMMENT_TEXT, $ITEM_ID, $USER_EMAIL)
 {
@@ -26,9 +27,9 @@ function addComment($COMMENT_TEXT, $ITEM_ID, $USER_EMAIL)
 	try {
 		$response = executePreparedQuery($query, array('i', $COMMENT_TEXT, $ITEM_ID, $USER_EMAIL));
 		if ($response[0]) { // Query executed properly
-			return "COMMENT_DELETED";
+			return "COMMENT_ADDED";
 		}
-		return "COMMENT_NOT_DELETED";
+		return "COMMENT_NOT_ADDED";
 	} catch (Exception $e) {
 		echo "Error occurred, when using Database function to try to validate User.<br>";
 		echo $e->getMessage();

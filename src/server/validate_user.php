@@ -6,7 +6,7 @@ $hashedPassword = $_POST['password'];
 
 if (isset($email) && isset($hashedPassword)) {
 	if (validateUserLogin($email, $hashedPassword) == "VALID_LOGIN") {
-		$_SESSION['LOGGED_IN_USER'] = $email;
+		$_SESSION['USER_EMAIL'] = $email;
 		header('Location: ../client/home.php');
 		exit();
 	} else {
