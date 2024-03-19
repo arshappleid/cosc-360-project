@@ -233,7 +233,11 @@ function getImage($table, $whereCol, $whereValue)
     if ($stmt->execute()) {
       $result = $stmt->get_result();
       if ($row = $result->fetch_assoc()) {
-        return $row["DISPLAY_IMAGE"];
+        if (empty($row["DISPLAY_IMAGE"])) {
+          return "NO IMAGE";
+        } else {
+          return $row["DISPLAY_IMAGE"];
+        }
       } else {
         return "NO_IMAGE_FOUND";
       }

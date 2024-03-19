@@ -21,24 +21,30 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 <head>
 	<title>Login Page</title>
 	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="X-UA-Compatible"
+		content="IE=edge" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="css/loginstyles.css" />
-	<link rel="stylesheet" href="css/global.css" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet"
+		href="css/loginstyles.css" />
+	<link rel="stylesheet"
+		href="css/global.css" />
 </head>
 
 <body>
 
 	<div class="container">
 		<div class="headerblack">
-			<a href="home.php" class="home-button">Home</a>
+			<a href="home.php"
+				class="home-button">Home</a>
 		</div>
 
 		<div class="headeryellow">
 			<div class="search-container">
-				<input type="text" placeholder="Search...">
+				<input type="text"
+					placeholder="Search...">
 				<?php
 				$stores = getAllStoreList();
 				if (count($stores) == 0) {
@@ -55,10 +61,19 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			</div>
 		</div>
 		<?php include_once './../server/breadcrumbs.php' ?>
+		<a href="./admin_login.php">Admin Login</a>
 		<div class="triangleextendblack">
-			<form id="loginForm" method="POST" action="../server/validate_user.php">
-				<input type="email" id="email" name="email" placeholder="E-mail">
-				<input type="password" id="password" name="password" placeholder="Password">
+			<form id="loginForm"
+				method="POST"
+				action="../server/validate_user.php">
+				<input type="email"
+					id="email"
+					name="email"
+					placeholder="E-mail">
+				<input type="password"
+					id="password"
+					name="password"
+					placeholder="Password">
 				<div class="button-container">
 					<button type="submit">Login</button>
 					<?php
@@ -68,7 +83,8 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 					}
 					?>
 				</div>
-				<a class="accounttext" href="create_account.php">Need an account?</a>
+				<a class="accounttext"
+					href="create_account.php">Need an account?</a>
 			</form>
 		</div>
 		<div class="triangle-element"></div>
@@ -76,21 +92,21 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	<div class="footerblack">&copy; Banana Hammock 2024</div>
 
 	<script>
-		document.getElementById("loginForm").addEventListener("submit", function(e) {
-			e.preventDefault();
-			var email = document.getElementById("email").value;
-			var password = document.getElementById("password").value;
+	document.getElementById("loginForm").addEventListener("submit", function(e) {
+		e.preventDefault();
+		var email = document.getElementById("email").value;
+		var password = document.getElementById("password").value;
 
-			if (!email || !password) {
-				alert('Please enter both email and password.');
-				return;
-			}
+		if (!email || !password) {
+			alert('Please enter both email and password.');
+			return;
+		}
 
-			var password = document.getElementById("password").value;
-			var hashedPassword = CryptoJS.MD5(password).toString();
-			document.getElementById("password").value = hashedPassword;
-			this.submit();
-		});
+		var password = document.getElementById("password").value;
+		var hashedPassword = CryptoJS.MD5(password).toString();
+		document.getElementById("password").value = hashedPassword;
+		this.submit();
+	});
 	</script>
 
 

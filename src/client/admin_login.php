@@ -53,7 +53,9 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			</div>
 		</div>
 		<?php include_once './../server/breadcrumbs.php' ?>
-		<div class="triangleextendblack">Admin Login
+		<a href="./login.php">User Login</a>
+		<div class="
+			triangleextendblack">Admin Login
 			<form id="admin_login_form" method="POST" action="./../server/validate_admin.php">
 				<input type="email" id="email" name="email" placeholder="E-mail">
 				<input type="password" id="password" name="password" placeholder="Password">

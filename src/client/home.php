@@ -37,14 +37,16 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	<div class="container">
 		<div class="headerblack">
 			<a href="home.php" class="home-button">Home</a>
-			<a href="login.php" class="login-button">
-				<?php
-				if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
-					echo "Logout";
-				} else {
-					echo "Login";
-				}
-				?>
+			<?php
+			if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
+				echo "<a href=\"login.php\" class=\"login-button\">";
+				echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";
+				echo "Logout</a>";
+			} else {
+				echo "<a href=\"login.php\" class=\"login-button\">";
+				echo "Login</a>";
+			}
+			?>
 			</a>
 			<?php
 			if (!isset($_SESSION['USER_EMAIL']) & !isset($_SESSION['ADMIN_EMAIL'])) {
