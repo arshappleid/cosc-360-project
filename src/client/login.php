@@ -87,7 +87,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		</div>
 		<div class="triangle-element"></div>
 	</div>
-	<div class="footerblack"></div>
+	<div class="footerblack">&copy; Banana Hammock 2024</div>
 
 	<script>
 	document.getElementById("loginForm").addEventListener("submit", function(e) {
