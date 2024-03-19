@@ -88,7 +88,6 @@ function createUser_WithImage($EMAIL, $FIRST_NAME, $LAST_NAME, $MD5_PASSWORD, $U
 
 	try {
 		$response = executePreparedQuery($query, array('ssssb', $EMAIL, $FIRST_NAME, $LAST_NAME, $MD5_PASSWORD, $USR_IMAGE_BLOB));
-		echo "<h3>" .  implode(",", $response) . "<h3>";
 		if ($response[0] == true) {
 			return "USER_CREATED";
 		} else {
