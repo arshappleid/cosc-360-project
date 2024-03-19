@@ -33,8 +33,8 @@ echo "checkAdminExists Should Exist : function :" .  checkAdminExists("test@gmai
 </html>
 <?php
 
-echo "createUser function :" . createUser("test2@gmail.com", "TEST", "USER", MD5("password")) . "<br>";
-echo "createUser function :" . createUser("test1@gmail.com", "test", "user", MD5("password")) . "<br>";
+echo "createUser function , user does not exist :" . createUser("test2@gmail.com", "TEST", "USER", MD5("password")) . "<br>";
+echo "createUser function , user exists :" . createUser("test1@gmail.com", "test", "user", MD5("password")) . "<br>";
 echo "userExists -Should Exist-function :" . userExists("test@gmail.com") . "<br>";
 echo "userExists - Should Not Exist -function :" . userExists("tet2@gmail.com") . "<br>";
 echo "validateUser function :" . validateUserLogin("test@gmail.com", MD5("password")) . "<br>";

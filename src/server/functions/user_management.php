@@ -37,15 +37,18 @@ function validateUserLogin($email, $hashed_password)
  * @param mixed $FIRST_NAME
  * @param mixed $LAST_NAME
  * @param mixed $MD5_PASSWORD
- * @return string , True if the User is created , and False if it is was not created.
- * If returns false, user prob already exists.
+ * @return string ,
+ * Possible return values :
+ * - USER_ALREADY_EXISTS
+ * - 
  */
 function createUser($EMAIL, $FIRST_NAME, $LAST_NAME, $MD5_PASSWORD)
 {
 
 	// Check to see if the user with the same email already exists.
-	if (userExists($EMAIL))
+	if (userExists($EMAIL) == "USER_EXISTS") {
 		return "USER_ALREADY_EXISTS";
+	}
 	$query = "INSERT INTO USERS (Email, First_Name, Last_Name, MD5_Password) VALUES (?,?,?,?);";
 
 	try {
@@ -69,14 +72,17 @@ function createUser($EMAIL, $FIRST_NAME, $LAST_NAME, $MD5_PASSWORD)
  * @param mixed $LAST_NAME
  * @param mixed $MD5_PASSWORD
  * @param blob $USR_IMAGE_BLOB - blob for the user image
- * @return string , True if the User is created , and False if it is was not created.
- * If returns false, user prob already exists.
+ * @return string , 
+ * Possible Return Values :
+ * - USER_ALREADY_EXISTS
+ * - USER_CREATED
+ * - USER_NOT_CREATED
  */
 function createUser_WithImage($EMAIL, $FIRST_NAME, $LAST_NAME, $MD5_PASSWORD, $USR_IMAGE_BLOB)
 {
 
 	// Check to see if the user with the same email already exists.
-	if (userExists($EMAIL))
+	if (userExists($EMAIL) == "USER_EXISTS")
 		return "USER_ALREADY_EXISTS";
 	$query = "INSERT INTO USERS (Email, First_Name, Last_Name, MD5_Password , User_Image) VALUES (?,?,?,?,?);";
 
@@ -93,7 +99,14 @@ function createUser_WithImage($EMAIL, $FIRST_NAME, $LAST_NAME, $MD5_PASSWORD, $U
 		echo $e->getMessage();
 	}
 }
-
+/**
+ * Summary of userExists
+ * @param mixed $EMAIL
+ * @return string
+ * Possible return values :
+ * - USER_NOT_EXISTS
+ * - USER_EXISTS
+ */
 function userExists($EMAIL)
 {
 	// Corrected the SQL query to use the proper placeholder syntax
