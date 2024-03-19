@@ -9,3 +9,13 @@ This document testifies, all the important tasks / milestones completed by all t
   - Search For items Functionality.
   - Breadcrumbs
   - Filter items by Store Functionality.
+
+#### Quin Finocchio
+
+- Website Design
+- Figma Mockup
+- Login Page Functionality , Account Creation Functionality
+- Header HTML and CSS , implemented breadcrubs into the header
+- Background HTML and CSS
+- Logout Functionality
+- Site Navigation Framework
