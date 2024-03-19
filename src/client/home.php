@@ -44,17 +44,21 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			<a href="login.php"
 				class="login-button">
 				<?php
-				if(isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])){
+				if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
 					echo "Logout";
-				}else{
+				} else {
 					echo "Login";
 				}
 				?>
 			</a>
-			<a href="admin_login.php"
-				class="admin-login-button">Admin Login</a>
-			<a href="create_account.php"
-				class="create-account-button">Create Account</a>
+			<?php
+			if (!isset($_SESSION['USER_EMAIL']) & !isset($_SESSION['ADMIN_EMAIL'])) {
+				echo "<a href=\"admin_login.php\"
+				class=\"admin-login-button\">Admin Login</a>";
+				echo "<a href=\"create_account.php\"
+				class=\"create-account-button\">Create Account</a>";
+			}
+			?>
 		</div>
 
 		<div class="headeryellow">
