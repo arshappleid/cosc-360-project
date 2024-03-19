@@ -7,7 +7,7 @@ $email = $_POST['email'];
 $hashedPassword = $_POST['password'];
 
 if (isset($firstName) && isset($lastName) && isset($email) && isset($hashedPassword)) {
-	if (createUser($email, $firstName, $lastName, $hashedPassword)) {
+	if (createUser($email, $firstName, $lastName, $hashedPassword) == "USER_CREATED") {
 		$_SESSION['EMAIL'] = $email;
 		header('Location: ../client/home.php');
 		exit();

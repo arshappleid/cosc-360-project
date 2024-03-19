@@ -8,7 +8,7 @@ if (!isset($_SESSION['BREADCRUMBS'])) {
 	$_SESSION['BREADCRUMBS'] = array();
 }
 
-$current_page = ["home", "./home.php"];
+$current_page = ["account details", "./account_page.php"];
 $last_item_index = count($_SESSION['BREADCRUMBS']) - 1;
 
 // Add the current page only if it's not the last one already in the breadcrumb trail
@@ -28,7 +28,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 	<script type="text/javascript" src="./scripts/home.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="css/loginstyles.css" />
+	<link rel="stylesheet" href="css/account_page.css" />
 	<link rel="stylesheet" href="css/global.css" />
 </head>
 
@@ -39,9 +39,9 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			<a href="home.php" class="home-button">Home</a>
 			<?php
 			if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
-				echo "<a href=\"account_page.php\" class=\"login-button\">";
+				echo "<a href=\"../server/logout.php\" class=\"login-button\">";
 				//echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";
-				echo "Account</a>";
+				echo "Logout</a>";
 			} else {
 				echo "<a href=\"login.php\" class=\"login-button\">";
 				echo "Login</a>";
@@ -79,9 +79,6 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		<?php include_once './../server/breadcrumbs.php' ?>
 		<div class="triangleextendblack"></div>
 		<div class="triangle-element"></div>
-		<?php
-		echo "<div id = \"item_list\"></div>";
-		?>
 	</div>
 	<footer>
 		<div class="footerblack"></div>
