@@ -155,3 +155,87 @@ function displayName($email)
 		return $response[1]['First_Name'] . " " . $response[1]['Last_Name'];
 	}
 }
+/**
+ * Returs the ITEM_ID of an given ITEM_NAME, if it exists in ITEMS Database
+ * @param mixed $ITEM_NAME
+ * @return mixed
+ * Possible Return Values:
+ * - ITEM_ID as String
+ * - ITEM_NOT_FOUND
+ * - COULD_NOT_EXECUTE_QUERY
+ * 
+ */
+function getItemID($ITEM_NAME)
+{
+
+	$query = "SELECT ITEM_ID FROM ITEMS WHERE ITEM_NAME = ?";
+	try {
+		$response = executePreparedQuery($query, array('s', $ITEM_NAME));
+		if ($response[0] == true) {
+			if (count($response[0][1]) > 0) {
+				return $response[0][1]['ITEM_ID'];
+			} else {
+				return "ITEM_NOT_FOUND";
+			}
+		} else {
+			return "COULD_NOT_EXECUTE_QUERY";
+		}
+	} catch (Exception $e) {
+		echo "Error occured , when using Database function to try to validate User.<br>";
+		echo $e->getMessage();
+	}
+}
+/**
+ * Summary of addItem
+ * @param mixed $ITEM_NAME
+ * @param mixed $ITEM_DESCRIPTION
+ * @param mixed $STORE_ID
+ * @param mixed $ITEM_PRICE
+ * @param mixed $EXTERNAL_LINK
+ * @return string
+ * 
+ * Possible Return Values :
+ * - ITEM_NOT_ADDED
+ * - ITEM_ADDED
+ * 
+ */
+function addItem($ITEM_NAME, $ITEM_DESCRIPTION, $STORE_ID, $ITEM_PRICE, $EXTERNAL_LINK)
+{
+	global $connection;
+	$query1 = "INSERT INTO ITEMS (ITEM_NAME, ITEM_DESCRIPTION, EXTERNAL_LINK) VALUES (?, ?, ?);";
+	$query2 = "INSERT INTO Item_Price_Entry (STORE_ID, ITEM_ID, ITEM_PRICE) VALUES (?, ?, ?);";
+
+	$connection->begin_transaction();
+	try {
+		$stmt1 = $connection->prepare($query1);
+		if (!$stmt1) {
+			return "ITEM_NOT_ADDED";
+		}
+		$stmt1->bind_param('sss', $ITEM_NAME, $ITEM_DESCRIPTION, $EXTERNAL_LINK);
+		if ($stmt1->execute()) {
+			$ITEM_ID = $connection->insert_id; // Corrected to get the last inserted ID
+
+			$ITEM_PRICE = strval(number_format(floatval($ITEM_PRICE), 2));
+			$stmt2 = $connection->prepare($query2);
+			if (!$stmt2) {
+				throw new Exception($connection->error);
+			}
+			// Corrected parameter types 'sii' if STORE_ID and ITEM_ID are integers
+			$stmt2->bind_param('iii', $STORE_ID, $ITEM_ID, $ITEM_PRICE);
+			if ($stmt2->execute()) {
+				$connection->commit();
+				return "ITEM_ADDED";
+			} else {
+				$connection->rollback();
+				return "ITEM_NOT_ADDED";
+			}
+		} else {
+			$connection->rollback();
+			return "ITEM_NOT_ADDED";
+		}
+	} catch (Exception $e) {
+		$connection->rollback();
+		echo "Error occurred, when using Database function to try to add item.<br>";
+		echo $e->getMessage();
+	}
+}
