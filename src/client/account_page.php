@@ -28,7 +28,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 	<script type="text/javascript" src="./scripts/home.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="css/account_page.css" />
+	<link rel="stylesheet" href="css/account.css" />
 	<link rel="stylesheet" href="css/global.css" />
 </head>
 
@@ -39,6 +39,10 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			<a href="home.php" class="home-button">Home</a>
 			<?php
 			if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
+				if(isset($_SESSION['ADMIN_EMAIL'])){
+					echo "<a href=\"admin_panel.php\" class=\"admin-login-button\">";
+					echo "Admin Panel</a>";
+				}	
 				echo "<a href=\"../server/logout.php\" class=\"login-button\">";
 				//echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";
 				echo "Logout</a>";
@@ -77,8 +81,14 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			</div>
 		</div>
 		<?php include_once './../server/breadcrumbs.php' ?>
-		<div class="triangleextendblack"></div>
-		<div class="triangle-element"></div>
+		<div class="underheadercontainer">
+				<div class="overlay">
+				</div>
+				<div class="triangleextendblack"></div>
+				<div class="triangle-element"></div>
+
+
+			</div>
 	</div>
 	<footer>
 		<div class="footerblack"></div>

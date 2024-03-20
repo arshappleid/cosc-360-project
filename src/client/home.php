@@ -28,8 +28,9 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 	<script type="text/javascript" src="./scripts/home.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="css/loginstyles.css" />
 	<link rel="stylesheet" href="css/global.css" />
+	<link rel="stylesheet" href="css/home.css" />
+	
 </head>
 
 <body>
@@ -76,12 +77,20 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 				<button type="submit">Search</button>
 			</div>
 		</div>
+
 		<?php include_once './../server/breadcrumbs.php' ?>
-		<div class="triangleextendblack"></div>
-		<div class="triangle-element"></div>
-		<?php
-		echo "<div id = \"item_list\"></div>";
-		?>
+		
+			<div class="underheadercontainer">
+				<div class="overlay">
+				<?php
+					echo "<div id = \"item_list\"></div>";
+				?>	
+				</div>
+				<div class="triangleextendblack"></div>
+				<div class="triangle-element"></div>
+
+
+			</div>
 	</div>
 	<footer>
 		<div class="footerblack"></div>

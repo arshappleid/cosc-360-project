@@ -25,7 +25,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="css/admin_login.css" />
+	<link rel="stylesheet" href="css/login.css" />
 	<link rel="stylesheet" href="css/global.css" />
 </head>
 
@@ -53,10 +53,9 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			</div>
 		</div>
 		<?php include_once './../server/breadcrumbs.php' ?>
-		<a href="./login.php">User Login</a>
-		<div class="
-			triangleextendblack">Admin Login
-			<form id="admin_login_form" method="POST" action="./../server/validate_admin.php">
+		<div class="underheadercontainer">
+				<div class="overlay">
+				<form id="admin_login_form" method="POST" action="./../server/validate_admin.php">
 				<input type="email" id="email" name="email" placeholder="E-mail">
 				<input type="password" id="password" name="password" placeholder="Password">
 				<div class="button-container">
@@ -69,9 +68,13 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 					?>
 				</div>
 				<a class="accounttext" href="create_account.php">Need an account?</a>
+				<a class="accounttext" href="./login.php">User Login</a>
 			</form>
-		</div>
-		<div class="triangle-element"></div>
+
+				</div>
+				<div class="triangleextendblack"></div>
+				<div class="triangle-element"></div>
+			</div>
 	</div>
 	<div class="footerblack">&copy; Banana Hammock 2024</div>
 
