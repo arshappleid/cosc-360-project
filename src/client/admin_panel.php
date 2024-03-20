@@ -25,6 +25,8 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<script type="text/javascript" src="./jquery-library/jquery-3.1.1.min.js"></script>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<script type="text/javascript" src="./jquery-library/jquery-3.1.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -47,14 +49,20 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	<?php include_once './../server/breadcrumbs.php' ?>
 	<div>
 
-		<form id="Input_Form">
+		<form id="Input_Form" method="POST" action="./../server/addItemToStore.php">
 			<fieldset>
 				<legend>Add New Item</legend>
-				<div class="container text-center">
+				<div class="
+			container
+			text-center">
 					<div clas="row">
 						<div class="col">
 							<input type="text" name="ITEM_NAME" placeholder="Item Name">
 							<input type="text" name="ITEM_EXTERNAL_LINK" placeholder="External Link">
+							<input type="text" name="ITEM_NAME" placeholder="Item Name">
+							<input type="text" name="EXTERNAL_LINK" placeholder="External Link">
+							<label for="ITEM_PRICE">Item Price</label>
+							<input type="number" name="ITEM_PRICE" pattern="[0-9]{1,2}" step="0.01">
 							<?php
 							$stores = getAllStoreList();
 							if (count($stores) == 0) {
@@ -73,17 +81,24 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 						<div class="col">
 							<textarea type="text" name="ITEM_DESCRIPTION" placeholder="Description..."></textarea>
 							<input type="file" name="PRODUCT_IMAGE">
+							<textarea type="text" name="DESCRIPTION" placeholder="Description..."></textarea>
+							<input type="file" name="PRODUCT_IMAGE">
 						</div>
 					</div>
 				</div>
-				<input type="submit">
+				<button type="submit">Add Item</button>
 				<input type="reset">
 			</fieldset>
 		</form>
+		<?php
+		if (isset($_GET['message'])) {
+			echo "<p>" . $_GET['message'] . "</p><br>";
+			unset($_GET['message']);
+		}
+		?>
 	</div>
 	</div>
 	<footer>
 		<p>Footer</p>
 	</footer>
-
 </body>

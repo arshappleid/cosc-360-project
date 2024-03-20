@@ -172,7 +172,7 @@ function getItemID($ITEM_NAME)
 	try {
 		$response = executePreparedQuery($query, array('s', $ITEM_NAME));
 		if ($response[0] == true) {
-			if (count($response[0][1]) > 0) {
+			if (is_array($response[0][1])) {
 				return $response[0][1]['ITEM_ID'];
 			} else {
 				return "ITEM_NOT_FOUND";
