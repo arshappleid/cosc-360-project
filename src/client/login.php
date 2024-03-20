@@ -28,7 +28,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet"
-		href="css/loginstyles.css" />
+		href="css/login.css" />
 	<link rel="stylesheet"
 		href="css/global.css" />
 </head>
@@ -61,33 +61,40 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			</div>
 		</div>
 		<?php include_once './../server/breadcrumbs.php' ?>
-		<a href="./admin_login.php">Admin Login</a>
-		<div class="triangleextendblack">
-			<form id="loginForm"
-				method="POST"
-				action="../server/validate_user.php">
-				<input type="email"
-					id="email"
-					name="email"
-					placeholder="E-mail">
-				<input type="password"
-					id="password"
-					name="password"
-					placeholder="Password">
-				<div class="button-container">
-					<button type="submit">Login</button>
-					<?php
-					if (isset($_SESSION['MESSAGE'])) {
-						echo "<h4 class=\"error_message\">" . $_SESSION['MESSAGE'] . "</h4>";
-						unset($_SESSION['MESSAGE']);
-					}
-					?>
+		<div class="underheadercontainer">
+				<div class="overlay">
+					<form id="loginForm"
+					method="POST"
+					action="../server/validate_user.php">
+					<input type="email"
+						id="email"
+						name="email"
+						placeholder="E-mail">
+					<input type="password"
+						id="password"
+						name="password"
+						placeholder="Password">
+					<div class="button-container">
+						<button type="submit">Login</button>
+						<?php
+						if (isset($_SESSION['MESSAGE'])) {
+							echo "<h4 class=\"error_message\">" . $_SESSION['MESSAGE'] . "</h4>";
+							unset($_SESSION['MESSAGE']);
+						}
+						?>
+					</div>
+					<a class="accounttext"
+						href="create_account.php">Need an account?</a>
+					<a class="accounttext" href="./admin_login.php">Admin Login</a>
+				</form>
+
 				</div>
-				<a class="accounttext"
-					href="create_account.php">Need an account?</a>
-			</form>
+				<div class="triangleextendblack"></div>
+				<div class="triangle-element"></div>
+
+
+			</div>
 		</div>
-		<div class="triangle-element"></div>
 	</div>
 	<div class="footerblack">&copy; Banana Hammock 2024</div>
 

@@ -26,7 +26,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/createaccountstyles.css" />
+  <link rel="stylesheet" href="css/createaccount.css" />
   <link rel="stylesheet" href="css/global.css" />
 </head>
 
@@ -56,33 +56,38 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
       </div>
     </div>
     <?php include_once './../server/breadcrumbs.php' ?>
-    <div class="triangleextendblack">
-      <form id="createAccountForm" method="POST" action="../server/create_user.php">
+    <div class="underheadercontainer">
+				<div class="overlay">
+          <form id="createAccountForm" method="POST" action="../server/create_user.php">
 
-        <input type="email" id="email" name="email" placeholder="E-mail" required>
+            <input type="email" id="email" name="email" placeholder="E-mail" required>
 
-        <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
 
-        <input type="password" id="password2" name="password2" placeholder="Re-enter Password" required>
+            <input type="password" id="password2" name="password2" placeholder="Re-enter Password" required>
 
-        <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+            <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
 
-        <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+            <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
 
-        <input type="file" id="profilePicture" name="profilePicture" placeholder="Upload Profile Picture" accept="image/*">
+            <input type="file" id="profilePicture" name="profilePicture" placeholder="Upload Profile Picture" accept="image/*">
 
-        <div class="button-container">
-          <?php
-          if (isset($_SESSION['MESSAGE'])) {
-            echo "<h4 class=\"error_message\">" . $_SESSION['MESSAGE'] . "</h4>";
-            unset($_SESSION['MESSAGE']);
-          }
-          ?>
-          <button type="submit">Create Account</button>
-        </div>
-      </form>
+            <div class="button-container">
+              <?php
+              if (isset($_SESSION['MESSAGE'])) {
+                echo "<h4 class=\"error_message\">" . $_SESSION['MESSAGE'] . "</h4>";
+                unset($_SESSION['MESSAGE']);
+              }
+              ?>
+              <button type="submit">Create Account</button>
+            </div>
+          </form>
+
+				</div>
+				<div class="triangleextendblack"></div>
+				<div class="triangle-element"></div>
+			</div>
     </div>
-    <div class="triangle-element"></div>
   </div>
   <div class="footerblack">&copy; Banana Hammock 2024</div>
 
