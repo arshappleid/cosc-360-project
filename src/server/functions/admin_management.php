@@ -197,10 +197,15 @@ function getItemID($ITEM_NAME)
  * Possible Return Values :
  * - ITEM_NOT_ADDED
  * - ITEM_ADDED
+ * - ITEM_WITH_NAME_ALREADY_EXISTS
  * 
  */
 function addItem($ITEM_NAME, $ITEM_DESCRIPTION, $STORE_ID, $ITEM_PRICE, $EXTERNAL_LINK)
 {
+	$ITEM_ID = getItemID($ITEM_NAME);
+	if ($ITEM_ID != "ITEM_NOT_FOUND") {
+		return "ITEM_WITH_NAME_ALREADY_EXISTS";
+	}
 	global $connection;
 	$query1 = "INSERT INTO ITEMS (ITEM_NAME, ITEM_DESCRIPTION, EXTERNAL_LINK) VALUES (?, ?, ?);";
 	$query2 = "INSERT INTO Item_Price_Entry (STORE_ID, ITEM_ID, ITEM_PRICE) VALUES (?, ?, ?);";
