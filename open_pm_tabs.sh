@@ -1,5 +1,5 @@
 #bin/bash
-
+git pull --all
 ## Requires chrome-cli to be installed from : https://github.com/prasmussen/chrome-cli
 chrome-cli open https://github.com/arshappleid/cosc-360-project -n
 chrome-cli open https://github.com/users/arshappleid/projects/5/views/2
