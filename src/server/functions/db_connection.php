@@ -33,20 +33,10 @@ if ($connection->connect_error) {
  * @throws Exception Throws an exception if an error occurs during the execution of the query or parameter binding.
  *
  * @global mysqli $connection The global mysqli connection object used for database operations.
+ * [0] = If the query was executed
+ * [1] = If 1 record returned [record1]
+ * [1] = If more than one record returned : [[record1],[record2]] 
  *
- * Usage Example:
- * ```
- * $query = "SELECT * FROM users WHERE id = ?";
- * $params = ['i', $userId]; // 'i' indicates the type of the parameter is integer.
- * $result = executePreparedQuery($query, $params);
- * if (is_array($result)) {
- *     // Process result
- * } elseif ($result === true) {
- *     // Success for non-select queries
- * } else {
- *     // Handle error or failed execution
- * }
- * ```
  */
 function executePreparedQuery($query, $params)
 {

@@ -5,7 +5,7 @@
 /composer.phar
 /composer.json
 *.php~
-
+.idea
 # macOS
 .DS_Store
 **/.vscode/*

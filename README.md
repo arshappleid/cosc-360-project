@@ -69,7 +69,8 @@ In the Docker Shell , run ``phpunit tests/*`` , Which will run all the tests in 
    	}
    }
    ```
-
-   
-
 5. In the Docker Shell , run ``phpunit tests/*`` , Which will run all the tests in the tests folder.
+
+### Testing out Bulk Upload
+1. Select a sample file from ```docs/sample_item_records.txt```
+2. Click on Submit

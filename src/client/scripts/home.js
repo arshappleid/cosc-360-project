@@ -5,6 +5,7 @@ $(document).ready(function () {
             $("#item_list").html(data);
         });
     }
+    updateGlobalVariable(1);
 
     $("#store_select").on("change", function () {
         //console.log("store_select change event triggered with value: " + this.value);

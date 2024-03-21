@@ -30,7 +30,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="css/global.css" />
 	<link rel="stylesheet" href="css/home.css" />
-	
+
 </head>
 
 <body>
@@ -79,16 +79,16 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		</div>
 
 		<?php include_once './../server/breadcrumbs.php' ?>
-		
-			<div class="underheadercontainer">
-				<div class="overlay">
+
+		<div class="underheadercontainer">
+			<div class="overlay">
 				<?php
-					echo "<div id = \"item_list\"></div>";
-				?>	
-				</div>
-				<div class="triangleextendblack"></div>
-				<div class="triangle-element"></div>
+				echo "<div id = \"item_list\"></div>";
+				?>
 			</div>
+			<div class="triangleextendblack"></div>
+			<div class="triangle-element"></div>
+		</div>
 	</div>
 	<footer>
 		<div>
@@ -98,7 +98,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 					<?php
 					if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
 						echo "<li><a href=\"account_page.php\">Account</a></li>";
-					}else{
+					} else {
 						echo "<li><a href=\"create_account.php\">Create Account</a></li>
 						<li><a href=\"login.php\">Login</a></li>
 						<li><a href=\"admin_login.php\">Admin Login</a></li>";
@@ -108,10 +108,9 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 				<p>&copy; Banana Hammock 2024</p>
 			</nav>
 		</div>
-</footer>
+	</footer>
 	<?php
 	echo "<script type=\"text/javascript\" src=\"./scripts/home.js\"></script>";
-	echo "<script>updateGlobalVariable(1)</script>";
 	?>
 
 </body>
