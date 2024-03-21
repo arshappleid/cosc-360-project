@@ -164,6 +164,7 @@ function displayName($email)
  * - ITEM_NOT_FOUND
  * - COULD_NOT_EXECUTE_QUERY
  * 
+ * If multiple items with the same name exist , will return the ID of the first record.
  */
 function getItemID($ITEM_NAME)
 {
@@ -172,8 +173,11 @@ function getItemID($ITEM_NAME)
 	try {
 		$response = executePreparedQuery($query, array('s', $ITEM_NAME));
 		if ($response[0] == true) {
-			if (is_array($response[0][1])) {
-				return $response[0][1]['ITEM_ID'];
+			if (is_array($response[1])) {
+				if (is_array($response[1][0])) {
+					return $response[1][0]['ITEM_ID'];
+				}
+				return $response[1]['ITEM_ID'];
 			} else {
 				return "ITEM_NOT_FOUND";
 			}
