@@ -21,6 +21,10 @@ function functionName(variable1 : int , variable2: string){
 }
 ```
 
-### Declaring variables
+### Important Session Variables used :
 
-``thisIsMyName ## Camel Cased only``
+These variables are accessed using ``$_SESSION['VARNAME']``
+
+1. USER_EMAIL - If Set , the email of the logged in user.
+2. ADMIN_EMAIL - If Set , the email of the logged in admin.
+3. MESSAGE - If Set , Any usefull message returned by the Server.
