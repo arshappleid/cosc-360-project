@@ -1,25 +1,7 @@
-:root {
-  --primary-color: #dfce2d ;
-  --secondary-color:#000000;
-  --third-color: #d9d9d9;
-  --hover-color: #fff177;
-}
-
 label {
   display: inline-block;
   width: 100px;
 }
-
-.headeryellow {
-  background: var(--primary-color);
-  width: 100%;
-  height: 80px;
-  padding: 0.5em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 form {
   position: relative;
   top: 0%;
@@ -31,8 +13,6 @@ form {
   background-color: transparent;
   text-align: center;
 }
-
-
 form input {
   width: calc(100% - 100px); 
   padding: 10px; 
@@ -68,16 +48,4 @@ form input {
   color: var(--hover-color);
 }
 
-.footerblack {
-  background: var(--secondary-color);
-  width: 100%;
-  height: 5em;
-  position: relative;
-  left: 0px;
-  bottom: 0px;
-  color: var(--primary-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 

@@ -86,8 +86,24 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			</div>
 	</div>
 	<footer>
-		<div class="footerblack"></div>
-	</footer>
+	<div class="footerblack">
+		<nav>
+			<ul>
+				<li><a href="home.php">Home</a></li>
+				<?php
+				if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
+					echo "<li><a href=\"account_page.php\">Account</a></li>";
+				}else{
+					echo "<li><a href=\"create_account.php\">Create Account</a></li>
+					<li><a href=\"login.php\">Login</a></li>
+					<li><a href=\"admin_login.php\">Admin Login</a></li>";
+				}
+				?>
+			</ul>
+			<p>&copy; Banana Hammock 2024</p>
+		</nav>
+	</div>
+</footer>
 	<?php
 	echo "<script type=\"text/javascript\" src=\"./scripts/home.js\"></script>";
 	echo "<script>updateGlobalVariable(1)</script>";
