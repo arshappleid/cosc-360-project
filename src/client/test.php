@@ -56,3 +56,4 @@ echo "getBanStatus function :" . User_management::getBanStatus("test@gmail.com")
 echo "deleteUser function :" . User_management::deleteUser("test@gmail.com") . "<br>";
 echo "createUser function :" . User_management::createUser("test77@gmail.com", "test", "user", MD5("password")) . "<br>";
 echo "getAllItems_IDS_AtStore function :" . implode(",", getAllItems_IDS_AtStore(2)) . "<br>";
+echo "getAllUserData function : " . implode(",", getAllUserData("test@gmail.com")) . "<br>";

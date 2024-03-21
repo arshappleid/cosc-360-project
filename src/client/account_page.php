@@ -83,6 +83,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		<?php include_once './../server/breadcrumbs.php' ?>
 		<div class="underheadercontainer">
 				<div class="overlay">
+				<?php include_once './../server/displaySingleUser.php' ?>
 				</div>
 				<div class="triangleextendblack"></div>
 				<div class="triangle-element"></div>
