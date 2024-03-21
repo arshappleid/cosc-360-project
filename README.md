@@ -4,7 +4,8 @@ COSC 360 Project
 
 ## Getting Started with Developement
 
-1. Run the following command for development environment : ``docker compose up -d``.
+1. Run the following command for development environment : ``docker compose up -d``. 
+   - Run ```bash open_pm_tabs.sh``` if you have a bash shell running.
 2. Make sure all containors are healthy.
    - If not , re run the above command again.
 3. Viewing the tables on ``localhost:5055`` , under databases select market_database.
@@ -32,3 +33,43 @@ These variables are accessed using ``$_SESSION['VARNAME']``
 ### Running Unit Tests 
 
 In the Docker Shell , run ``phpunit tests/*`` , Which will run all the tests in the tests folder.
+
+### How to write Unit Tests
+
+1. Make Sure all the tests are kept in the folder ```src/tests/*```
+
+2. Ensure all the functions required for Testing , are part of a class
+
+   ```php
+   <?php
+   class Class_Name{
+   	static function functionName($param){}
+   }
+   
+   ```
+
+   
+
+3. Import the class in a test File , that has the same name for the testClass
+
+4. Write the tests in the <u>same exact notation given below</u>, sample test given for file ```User_management_Test.php```
+
+   ```php
+   <?php
+   use PHPUnit\Framework\TestCase;
+   require_once __DIR__ . '/../server/functions/User_management.php';
+   class User_management_Test extends TestCase{
+   	/** @test */
+   	public function validateUserLogin_ValidLogin(){
+   		$this->assertEquals(User_management::validateUserLogin("test@gmail.com", MD5("password")), "VALID_LOGIN");
+   	}
+   	/** @test */
+   	public function validateUserLogin_InValidLogin(){
+   		$this->assertEquals(User_management::validateUserLogin("test2@gmail.com", MD5("password1")), "INVALID_LOGIN");
+   	}
+   }
+   ```
+
+   
+
+5. In the Docker Shell , run ``phpunit tests/*`` , Which will run all the tests in the tests folder.
