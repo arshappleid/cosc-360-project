@@ -18,7 +18,7 @@ include_once 'item_info.php';
 function addComment($COMMENT_TEXT, $ITEM_ID, $USER_EMAIL)
 {
 
-	if (userExists($USER_EMAIL) == "USER_NOT_EXISTS") return "USER_NOT_EXISTS";
+	if ( User_management::userExists($USER_EMAIL) == "USER_NOT_EXISTS") return "USER_NOT_EXISTS";
 	if (itemExists($ITEM_ID == "ITEM_NOT_EXISTS")) return "ITEM_NOT_EXISTS";
 	$user_ID = getUserID($USER_EMAIL);
 
@@ -48,7 +48,7 @@ function addComment($COMMENT_TEXT, $ITEM_ID, $USER_EMAIL)
 function getUserID($USER_EMAIL)
 {
 	try {
-		if (userExists($USER_EMAIL) == "USER_NOT_EXISTS")
+		if ( User_management::userExists($USER_EMAIL) == "USER_NOT_EXISTS")
 			return "USER_NOT_EXISTS";
 		$user_ID = executePreparedQuery("SELECT * FROM USERS WHERE Email = ?;", array('i', $USER_EMAIL))[1]["USER_ID"];
 		return $user_ID;
