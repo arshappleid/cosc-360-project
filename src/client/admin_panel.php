@@ -16,15 +16,12 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	array_push($_SESSION['BREADCRUMBS'], $current_page);
 }
 ?>
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 	<title>Admin Panel</title>
 	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<script type="text/javascript" src="./jquery-library/jquery-3.1.1.min.js"></script>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<script type="text/javascript" src="./jquery-library/jquery-3.1.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
@@ -49,6 +46,10 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	<?php include_once './../server/breadcrumbs.php' ?>
 	<div>
 
+
+
+
+
 		<form id="Input_Form" method="POST" action="./../server/addItemToStore.php">
 			<fieldset>
 				<legend>Add New Item</legend>
@@ -57,8 +58,6 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			text-center">
 					<div clas="row">
 						<div class="col">
-							<input type="text" name="ITEM_NAME" placeholder="Item Name">
-							<input type="text" name="ITEM_EXTERNAL_LINK" placeholder="External Link">
 							<input type="text" name="ITEM_NAME" placeholder="Item Name">
 							<input type="text" name="EXTERNAL_LINK" placeholder="External Link">
 							<label for="ITEM_PRICE">Item Price</label>
@@ -79,8 +78,6 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 							?>
 						</div>
 						<div class="col">
-							<textarea type="text" name="ITEM_DESCRIPTION" placeholder="Description..."></textarea>
-							<input type="file" name="PRODUCT_IMAGE">
 							<textarea type="text" name="DESCRIPTION" placeholder="Description..."></textarea>
 							<input type="file" name="PRODUCT_IMAGE">
 						</div>
@@ -91,9 +88,9 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			</fieldset>
 		</form>
 		<?php
-		if (isset($_GET['message'])) {
-			echo "<p>" . $_GET['message'] . "</p><br>";
-			unset($_GET['message']);
+		if (isset($_SESSION['message'])) {
+			echo "<p>" . $_SESSION['message'] . "</p><br>";
+			unset($_SESSION['message']);
 		}
 		?>
 	</div>
