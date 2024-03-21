@@ -35,6 +35,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="./css/global.css" />
 	<link rel="stylesheet" href="./css/admin_panel.css" />
+  
 </head>
 <!-- Refer to https://www.w3schools.com/html/html_layout.asp for Layout Design -->
 
@@ -111,17 +112,65 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			?>
 	</div>
 	</div>
-	<footer>
-		<p>Footer</p>
+        <div class="underheadercontainer">
+            <div class="overlay">
+                <form id="Input_Form">
+                    <fieldset>
+                        <legend>Add New Item</legend>
+                            <div class="row">
+                                <div class="col">
+                                    <input type="text" name="ITEM_NAME" placeholder="Item Name">
+                                    <input type="text" name="ITEM_EXTERNAL_LINK" placeholder="External Link">
+                                    <?php
+                                    if (count($stores) > 0) {
+                                        echo "<select id=\"store_select\" name=\"STORE_ID\" class=\"select_dropdown\">";
+                                        foreach ($stores as $key => $store) {
+                                            echo "<option value=\"" .$store['STORE_ID']. "\">" .$store['STORE_NAME']. "</option>";
+                                        }
+                                        echo "</select>";
+                                    }
+                                    ?>
+                                </div>
+                                <div class="col">
+                                    <textarea name="ITEM_DESCRIPTION" placeholder="Description..."></textarea>
+                                    <input type="file" name="PRODUCT_IMAGE">
+                                </div>
+                            </div>
+                        <input type="submit" value="Submit">
+                        <input type="reset" value="Reset">
+                    </fieldset>
+                </form>
+            </div>
+            <div class="triangleextendblack"></div>
+            <div class="triangle-element"></div>
+        </div>
+    </div>
+    <footer>
+		<div>
+			<nav>
+				<ul>
+					<li><a href="home.php">Home</a></li>
+					<?php
+					if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
+						echo "<li><a href=\"account_page.php\">Account</a></li>";
+					}else{
+						echo "<li><a href=\"create_account.php\">Create Account</a></li>
+						<li><a href=\"login.php\">Login</a></li>
+						<li><a href=\"admin_login.php\">Admin Login</a></li>";
+					}
+					?>
+				</ul>
+				<p>&copy; Banana Hammock 2024</p>
+			</nav>
+		</div>
 	</footer>
-	<script>
+  <script>
 		$('#bulk-upload').click(function() {
 			$('#individual-upload').prop('checked', false)
 			$('#Input_form').hide();
 			$('#fileUploadForm').show();
 		});
-
-		$('#individual-upload').click(function() {
+  $('#individual-upload').click(function() {
 			$('#bulk-upload').prop('checked', false)
 			$('#fileUploadForm').hide();
 			$('#Input_Form').show();
