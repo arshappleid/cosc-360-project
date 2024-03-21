@@ -20,7 +20,7 @@ foreach ($item_IDS as $item_ID) {
 
     echo "<section>";
     echo "<aside>";
-    echo "<img>";  // Consider adding src and alt attributes to your <img> tag.
+    echo "<img>";  
     echo "<h3>" . htmlspecialchars($item['ITEM_NAME']) . "</h3>";
     echo "</aside>";
     echo "<article>";

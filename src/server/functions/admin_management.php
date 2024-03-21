@@ -72,7 +72,7 @@ function getAllUsers()
 	try {
 		$response = executePreparedQuery($query, array());
 		if ($response[0] === true) {
-			if (count($response[1]) >= 1) {
+			if (count($response[1]) == true) {
 				return $response[1];
 			} else {
 				return "NO_USERS_FOUND";
