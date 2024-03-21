@@ -24,7 +24,13 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<script type="text/javascript" src="./jquery-library/jquery-3.1.1.min.js"></script>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<script type="text/javascript" src="./jquery-library/jquery-3.1.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="./css/global.css" />
+	<link rel="stylesheet" href="./css/admin_panel.css" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="./css/global.css" />
@@ -46,56 +52,79 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	<?php include_once './../server/breadcrumbs.php' ?>
 	<div>
 
+		<label for="bulk-upload">Bulk Upload</label>
+		<input type="radio" name="Bulk Upload" id="bulk-upload" value="1">
 
+		<label for="individual-upload">Individual Upload</label>
+		<input type="radio" name="Individual Upload" id="individual-upload" checked value="0">
 
+		<form id="fileUploadForm" style="display:hidden;" method="POST" action="./../server/addItemToStore.php">
+			<label for="PRODUCT_IMAGE">Upload Product Info</label>
+			<input type="file" name="PRODUCT_INFO">
+		</form>
 
 
 		<form id="Input_Form" method="POST" action="./../server/addItemToStore.php">
-			<fieldset>
-				<legend>Add New Item</legend>
-				<div class="
+			<form id="Input_Form" method="POST" action="./../server/addItemToStore.php">
+				<fieldset>
+					<legend>Add New Item</legend>
+					<div class="
 			container
 			text-center">
-					<div clas="row">
-						<div class="col">
-							<input type="text" name="ITEM_NAME" placeholder="Item Name">
-							<input type="text" name="EXTERNAL_LINK" placeholder="External Link">
-							<label for="ITEM_PRICE">Item Price</label>
-							<input type="number" name="ITEM_PRICE" pattern="[0-9]{1,2}" step="0.01">
-							<?php
-							$stores = getAllStoreList();
-							if (count($stores) == 0) {
-								echo $stores;
-							} else {
-								echo "<select id = \"store_select\" 
+						<div clas="row">
+							<div class="col">
+								<input type="text" name="ITEM_NAME" placeholder="Item Name">
+								<input type="text" name="EXTERNAL_LINK" placeholder="External Link">
+								<label for="ITEM_PRICE">Item Price</label>
+								<input type="number" name="ITEM_PRICE" pattern="[0-9]{1,2}" step="0.01">
+								<?php
+								$stores = getAllStoreList();
+								if (count($stores) == 0) {
+									echo $stores;
+								} else {
+									echo "<select id = \"store_select\" 
 								name = \"STORE_ID\"
 								class=\"select_dropdown\">";
-								foreach ($stores as $key => $store) {
-									echo "<option value=\"" . $store['STORE_ID'] . "\" >" . $store['STORE_NAME'] . "</option>";
+									foreach ($stores as $key => $store) {
+										echo "<option value=\"" . $store['STORE_ID'] . "\" >" . $store['STORE_NAME'] . "</option>";
+									}
+									echo "</select>";
 								}
-								echo "</select>";
-							}
-							?>
-						</div>
-						<div class="col">
-							<textarea type="text" name="DESCRIPTION" placeholder="Description..."></textarea>
-							<input type="file" name="PRODUCT_IMAGE">
+								?>
+							</div>
+							<div class="col">
+								<textarea type="text" name="DESCRIPTION" placeholder="Description..."></textarea>
+								<label for="PRODUCT_IMAGE">Upload Product Image</label>
+								<input type="file" name="PRODUCT_IMAGE">
+							</div>
 						</div>
 					</div>
-				</div>
-				<button type="submit">Add Item</button>
-				<input type="reset">
-			</fieldset>
-		</form>
-		<?php
-		if (isset($_SESSION['message'])) {
-			echo "<p>" . $_SESSION['message'] . "</p><br>";
-			unset($_SESSION['message']);
-		}
-		?>
+					<button type="submit">Add Item</button>
+					<input type="reset">
+				</fieldset>
+			</form>
+			<?php
+			if (isset($_SESSION['message'])) {
+				echo "<p>" . $_SESSION['message'] . "</p><br>";
+				unset($_SESSION['message']);
+			}
+			?>
 	</div>
 	</div>
 	<footer>
 		<p>Footer</p>
 	</footer>
+	<script>
+		$('#bulk-upload').click(function() {
+			$('#individual-upload').prop('checked', false)
+			$('#Input_form').hide();
+			$('#fileUploadForm').show();
+		});
+
+		$('#individual-upload').click(function() {
+			$('#bulk-upload').prop('checked', false)
+			$('#fileUploadForm').hide();
+			$('#Input_Form').show();
+		});
+	</script>
 </body>
