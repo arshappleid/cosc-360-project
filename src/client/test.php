@@ -68,3 +68,4 @@ echo "getBanStatus function :" . getBanStatus("test@gmail.com") . "<br>";
 echo "deleteUser function :" . deleteUser("test@gmail.com") . "<br>";
 echo "createUser function :" . createUser("test77@gmail.com", "test", "user", MD5("password")) . "<br>";
 echo "getAllItems_IDS_AtStore function :" . implode(",", getAllItems_IDS_AtStore(2)) . "<br>";
+echo "getAllUserData function : " . implode(",", getAllUserData("test@gmail.com")) . "<br>";

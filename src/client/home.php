@@ -84,6 +84,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 				<div class="overlay">
 				<?php
 					echo "<div id = \"item_list\"></div>";
+					//echo '<pre>' . print_r($_SESSION, true) . '</pre>';
 				?>	
 				</div>
 				<div class="triangleextendblack"></div>

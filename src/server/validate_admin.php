@@ -8,7 +8,7 @@ if (isset($email) && isset($hashedPassword)) {
 	if (validateAdminLogin($email, $hashedPassword) == "VALID_LOGIN") {
 		$_SESSION['ADMIN_EMAIL'] = $email;
 		//$_SESSION['DISPLAY_NAME'] = displayName($email);
-		$_SESSION['EMAIL'] = $email;
+		$_SESSION['USER_EMAIL'] = $email;
 		header('Location: ../client/home.php');
 		exit();
 	} else {

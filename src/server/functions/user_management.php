@@ -4,6 +4,8 @@ include_once 'db_connection.php';
 
 class User_management
 {
+
+
 	/**
 	 * Summary of validateUserLogin
 	 * @param mixed $email
@@ -309,4 +311,31 @@ class User_management
 			echo $e->getMessage();
 		}
 	}
+
+		/**
+	 * Summary of getAllUserData
+	 * @param $USER_EMAIL
+	 * @return string
+	 * 
+	 * Returns all user data 
+	 * 
+	 */
+	static function getAllUserData($USER_EMAIL)
+	{
+		$query = "SELECT * FROM USERS WHERE Email = ?;";
+		try {
+			$response = executePreparedQuery($query, array('s', $USER_EMAIL));
+			if ($response[0]) { // Query executed properly
+				if ($response[1] == "NO_DATA_RETURNED") {
+					return "NO_USER_FOUND";
+				}
+				return $response[1];
+			}
+			return "NO_USER_FOUND";
+		} catch (Exception $e) {
+			echo "Error occurred, when using Database function to try to validate User.<br>";
+			echo $e->getMessage();
+		}
+	}
+
 }
