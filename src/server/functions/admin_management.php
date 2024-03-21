@@ -145,7 +145,7 @@ function createAdmin($firstName, $lastName, $email, $md5password, $userImage = n
 
 function displayName($email)
 {
-	if (userExists($email) == "USER_EXISTS") {
+	if (User_management::userExists($email) == "USER_EXISTS") {
 		$response = executePreparedQuery("SELECT First_Name, Last_Name FROM USERS WHERE EMAIL = ?", array("s", $email));
 		return $response[1]['First_Name'] . " " . $response[1]['Last_Name'];
 	}
