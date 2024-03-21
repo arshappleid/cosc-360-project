@@ -33,7 +33,7 @@ class UserManagementTest extends TestCase
     public function createUser_WithImage_SuccessfulCreation()
     {
         // Ensure that this email does not exist in the database before testing
-        $imageBlob = file_get_contents('./../images/userImages/admin/test@gmail.com.jpeg'); // Example image
+        $imageBlob = file_get_contents('./../images/userImages/admin/test@gmail.com.jpeg');
         $this->assertEquals("USER_CREATED", User_management::createUser_WithImage("uniqueemailimage@gmail.com", "First", "Last", md5("password"), $imageBlob));
     }
 

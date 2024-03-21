@@ -114,4 +114,24 @@ function getAllStoreList()
 		echo "Error occurred, when using Database function to try to validate User.<br>";
 		echo $e->getMessage();
 	}
+
+	
+}
+
+function getAllItems()
+{
+	$query = "SELECT * FROM ITEMS;";
+	try {
+		$response = executePreparedQuery($query, array()); // Adjusted parameter structure
+		if ($response[0]) { // Query executed properly
+			if ($response[1] === "NO_DATA_RETURNED") {
+				return "NO_ITEMS_IN_DATABASE";
+			} else if (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
+				return $response[1];
+			}
+		}
+	} catch (Exception $e) {
+		echo "Error occurred, when using Database function to try to validate User.<br>";
+		echo $e->getMessage();
+	}	
 }

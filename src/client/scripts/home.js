@@ -1,15 +1,21 @@
 $(document).ready(function () {
-    function updateGlobalVariable(storeId) {
-        $.get("../server/getStoreItems.php?SELECTED_STORE=" + storeId, function (data) {
-            //console.log(data);
+    function updateItemList() {
+        $.get("./../server/getAllItems.php", function (data) {
             $("#item_list").html(data);
         });
     }
-    updateGlobalVariable(1);
+
+    updateItemList();
+
+    function updateStoreFilterList(storenumber) {
+        $.get("./../server/getStoreItems.php?SELECTED_STORE=" + storenumber, function (data) {
+            $("#item_list").html(data);
+        });
+    }
 
     $("#store_select").on("change", function () {
-        //console.log("store_select change event triggered with value: " + this.value);
-        updateGlobalVariable(this.value);
+        console.log("store_select change event triggered with value: " + this.value);
+        updateStoreFilterList(this.value);
     });
 
     function filterStoreItems(searchTerm) {

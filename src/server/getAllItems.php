@@ -4,18 +4,13 @@ include '../server/functions/item_info.php';
 require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
 require_once("./GLOBAL_VARS.php");
-$storeId = $_GET['SELECTED_STORE'];
-$item_IDS = getAllItems_IDS_AtStore($storeId);
 
-if ($item_IDS == "NO_ITEMS_AVAILABLE_AT_STORE") {
-    echo "<section>";
-    echo "<h3>" . $NO_ITEM_AVAILABLE_AT_THE_STORE_MESSAGE . "</h3>";
-    echo "</section>";
-    exit;
-}
+$items = getAllItems();
 
-foreach ($item_IDS as $item_ID) {
-    $item = getItemInfo($item_ID);
+//print_r($items);
+
+foreach ($items as $item) {
+    $item_id = getItemInfo($item_ID);
     if ($item == "NO_ITEM_FOUND") continue;
 
     echo "<section>";
@@ -26,7 +21,7 @@ foreach ($item_IDS as $item_ID) {
     echo "<article>";
 
     // Display comments
-    $comments = getAllCommentsForItem($item_ID);
+    $comments = getAllCommentsForItem($item['ITEM_ID']);
     if (is_array($comments)) {
         if (count($comments) == 0) {
             echo "<h4>No Comments Yet.</h4>";
@@ -48,7 +43,7 @@ foreach ($item_IDS as $item_ID) {
         $email = isset($_SESSION['USER_EMAIL']) ? $_SESSION['USER_EMAIL'] : $_SESSION['ADMIN_EMAIL'];
         echo "<form action=\"./../server/addcomment.php\" action=\"post\">";
         echo "<input type=\"text\" placeholder=\"Add new Comment...\" name=\"COMMENT_TEXT\">";
-        echo "<input type=\"hidden\" name=\"ITEM_ID\" value=\"" . htmlspecialchars($item_ID) . "\">";
+        echo "<input type=\"hidden\" name=\"ITEM_ID\" value=\"" . htmlspecialchars($item_id) . "\">";
         echo "<input type=\"hidden\" name=\"USER_EMAIL\" value=\"" . htmlspecialchars($email) . "\">";
         echo "<button type=\"submit\">Add Comment</button>";
         echo "</form>";
