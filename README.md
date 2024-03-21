@@ -28,3 +28,7 @@ These variables are accessed using ``$_SESSION['VARNAME']``
 1. USER_EMAIL - If Set , the email of the logged in user.
 2. ADMIN_EMAIL - If Set , the email of the logged in admin.
 3. MESSAGE - If Set , Any usefull message returned by the Server.
+
+### Running Unit Tests 
+
+In the Docker Shell , run ``phpunit tests/*`` , Which will run all the tests in the tests folder.
