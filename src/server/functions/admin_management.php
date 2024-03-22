@@ -172,25 +172,23 @@ class Admin_management{
 	 * 
 	 * If multiple items with the same name exist , will return the ID of the first record.
 	 */
-	static function getItemID($ITEM_NAME,$STORE_ID)
+	static function getItemID($ITEM_NAME, $STORE_ID)
 	{
 		$query = "SELECT * FROM ITEMS NATURAL JOIN Item_Price_Entry WHERE Item_Price_Entry.STORE_ID = ? AND ITEMS.ITEM_NAME = ?";
 		try {
-			$response = executePreparedQuery($query, array('ss',$STORE_ID, $ITEM_NAME));
+			$response = executePreparedQuery($query, array('is', $STORE_ID, $ITEM_NAME));
 			if ($response[0] == true) {
-				if(is_array($response[1])) {
-					if (count($response[1]) > 0) {
-						// records found
-						return $response[1]['ITEM_ID'];
-					}else{
-						return "ITEM_NOT_FOUND";
-					}
+				if (is_array($response[1])) {
+					// records found
+					return $response[1]['ITEM_ID'];
+				} else {
+					return "ITEM_NOT_FOUND";
 				}
 			} else {
 				return "COULD_NOT_EXECUTE_QUERY";
 			}
 		} catch (Exception $e) {
-			echo "Error occured , when using Database function to try to validate User.<br>";
+			echo "Error occurred, when using Database function to try to validate User.<br>";
 			echo $e->getMessage();
 		}
 	}
@@ -203,7 +201,7 @@ class Admin_management{
 	static function itemExistsInStore($ITEM_ID,$STORE_ID){
 		$query = "SELECT * FROM Item_Price_Entry WHERE Item_Entry = ? AND STORE_ID = ?;";
 			try {
-				$response = executePreparedQuery($query , array('ss',$ITEM_NAME,$STORE_ID));
+				$response = executePreparedQuery($query , array('ss',$ITEM_ID,$STORE_ID));
 				if($response[0]==true){
 					if(is_array($response[1])) {
 						if (count($response[1]) > 0) {
