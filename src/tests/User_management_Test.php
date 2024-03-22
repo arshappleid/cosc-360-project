@@ -94,4 +94,20 @@ class UserManagementTest extends TestCase
         $this->assertIsArray($data);
         $this->assertEquals("test@gmail.com", $data['Email']); // Basic check to ensure some data matches
     }
+    /** @test */
+    public function getUserID_USER_EXISTS()
+    {
+        $this->assertEquals("1", User_management::getUserID("test@gmail.com"));
+    }
+
+    /** @test */
+    public function getUserID_USER_DOES_NOT_EXIST()
+    {
+        $this->assertEquals("USER_NOT_EXISTS", User_management::getUserID("doesNotExist@gmail.com"));
+    }
+    /** @test */
+    public function getUserID_EMPTY_VALUE()
+    {
+        $this->assertEquals("USER_NOT_EXISTS", User_management::getUserID(""));
+    }
 }

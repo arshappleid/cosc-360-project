@@ -281,7 +281,7 @@ class User_management
 			return "USER_NOT_EXISTS";
 
 		$query1 = "DELETE  FROM USERS WHERE Email = ?";
-		$user_id = intval(getUserID($USER_EMAIL));
+		$user_id = intval(User_management::getUserID($USER_EMAIL));
 		$query2 = "DELETE  FROM Comments WHERE  USER_ID = ?";
 
 		$response = executePreparedQuery($query1, array('s', $USER_EMAIL));
@@ -312,7 +312,7 @@ class User_management
 		}
 	}
 
-		/**
+	/**
 	 * Summary of getAllUserData
 	 * @param $USER_EMAIL
 	 * @return string
@@ -337,5 +337,26 @@ class User_management
 			echo $e->getMessage();
 		}
 	}
-
+	/**
+	 * Summary of getUserID
+	 * @param mixed $USER_EMAIL
+	 * @return string
+	 * 
+	 * If User_Email does not exists returns USER_NOT_EXISTS
+	 * 
+	 * Return the User_Id of the given User Email
+	 * 
+	 */
+	static function getUserID($USER_EMAIL)
+	{
+		try {
+			if (User_management::userExists($USER_EMAIL) == "USER_NOT_EXISTS")
+				return "USER_NOT_EXISTS";
+			$user_ID = executePreparedQuery("SELECT * FROM USERS WHERE Email = ?;", array('i', $USER_EMAIL))[1]["USER_ID"];
+			return $user_ID;
+		} catch (Exception $e) {
+			echo "Error occurred, when using Database static function to try to validate User.<br>";
+			echo $e->getMessage();
+		}
+	}
 }

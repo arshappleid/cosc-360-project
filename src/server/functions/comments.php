@@ -24,7 +24,7 @@ class Comments
 			return "USER_NOT_EXISTS";
 		if (Item_info::itemExists($ITEM_ID) == "ITEM_NOT_EXISTS")
 			return "ITEM_NOT_EXISTS";
-		$user_ID = getUserID($USER_EMAIL);
+		$user_ID = User_management::getUserID($USER_EMAIL);
 
 		$query = "INSERT INTO Comments(COMMENT_TEXT ,ITEM_ID ,USER_ID, DATE_TIME_ADDED) VALUES(?,?,?,$user_ID,NOW());";
 
@@ -39,28 +39,7 @@ class Comments
 			echo $e->getMessage();
 		}
 	}
-	/**
-	 * Summary of getUserID
-	 * @param mixed $USER_EMAIL
-	 * @return string
-	 * 
-	 * If User_Email does not exists returns USER_NOT_EXISTS
-	 * 
-	 * Return the User_Id of the given User Email
-	 * 
-	 */
-	static function getUserID($USER_EMAIL)
-	{
-		try {
-			if (User_management::userExists($USER_EMAIL) == "USER_NOT_EXISTS")
-				return "USER_NOT_EXISTS";
-			$user_ID = executePreparedQuery("SELECT * FROM USERS WHERE Email = ?;", array('i', $USER_EMAIL))[1]["USER_ID"];
-			return $user_ID;
-		} catch (Exception $e) {
-			echo "Error occurred, when using Database static function to try to validate User.<br>";
-			echo $e->getMessage();
-		}
-	}
+
 
 	static function commentExists($COMMENT_ID)
 	{
@@ -123,7 +102,7 @@ class Comments
 	 */
 	static function getAllCommentsForItem($Item_Id)
 	{
-		if (itemExists($Item_Id) == "ITEM_NOT_EXISTS")
+		if (Item_info::itemExists($Item_Id) == "ITEM_NOT_EXISTS")
 			return "ITEM_NOT_EXISTS";
 
 		$query = "SELECT * FROM Comments WHERE ITEM_ID = ?";
