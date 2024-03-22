@@ -1,0 +1,32 @@
+name: Docker Image CI
+
+on:
+    push:
+        branches: ["main"]
+    pull_request:
+        branches: ["main"]
+
+jobs:
+    build-mysql-server:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Build the mysql-server Docker image
+              run: |
+                  docker build ./database --file ./database/Dockerfile --tag mysql-server-image:$(date +%s)
+
+    build-web-server:
+        runs-on: ubuntu-latest
+        needs: build-mysql-server
+        steps:
+            - uses: actions/checkout@v3
+            - name: Build the web-server Docker image
+              run: |
+                  docker build . --file php.Dockerfile --tag web-server-image:$(date +%s)
+
+            - name: Start web-server container
+              run: |
+                  docker run -d --name web-server-container web-server-image:$(date +%s)
+
+            - name: Execute PHPUnit tests
+              run: docker exec web-server-container phpunit --testdox tests/*
