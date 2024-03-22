@@ -91,6 +91,29 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		<div class="underheadercontainer">
 			<div class="overlay">
 				<?php include_once './../server/displaySingleUser.php' ?>
+
+				<form id="updateFirstNameForm" method="POST" action="../server/updateFirstName.php">
+					<input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+					<button type="submit">Update First Name</button>
+				</form>
+
+				<form id="updateLastNameForm" method="POST" action="../server/updateLastName.php">
+					<input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+					<button type="submit">Update Last Name</button>
+				</form>
+
+				<form id="updatePasswordForm" method="POST" action="../server/updateUserPassword.php">
+					<input type="password" id="oldpassword" name="oldpassword" placeholder="Old Password" required>
+					<input type="password" id="password" name="password" placeholder="New Password" required>
+					<input type="password" id="password2" name="password2" placeholder="Re-enter New Password" required>
+					<button type="submit">Update Password</button>
+				</form>
+
+				<form id="updatePfpForm" method="POST" action="../server/updateUser.php">
+					<input type="file" id="profilePicture" name="profilePicture" placeholder="Upload Profile Picture" accept="image/*">
+					<button type="submit">Update Profile Picture</button>
+				</form>
+
 			</div>
 			<div class="triangleextendblack"></div>
 			<div class="triangle-element"></div>
@@ -117,9 +140,27 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			</nav>
 		</div>
 	</footer>
-	<?php
-	echo "<script type=\"text/javascript\" src=\"./scripts/home.js\"></script>";
-	echo "<script>updateGlobalVariable(1)</script>";
-	?>
+
+	<script>
+    document.getElementById("updatePasswordForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      var oldpassword = document.getElementById("oldpassword").value;
+      var password = document.getElementById("password").value;
+	  var password2 = document.getElementById("password2").value;
+
+      if (password !== password2) {
+        alert("Passwords Don't Match");
+        return;
+      }
+
+      var hashedOldPassword = CryptoJS.MD5(oldpassword).toString();
+      document.getElementById("oldpassword").value = hashedOldPassword;
+
+	  var hashedNewPassword = CryptoJS.MD5(password).toString();
+      document.getElementById("password").value = hashedNewPassword;
+
+      this.submit();
+    });
+  </script>
 
 </body>
