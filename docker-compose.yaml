@@ -29,6 +29,7 @@ services:
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin:5.0.1
+        platform: linux/amd64
         restart: always
         environment:
             PMA_HOST: mysql-server

@@ -94,3 +94,4 @@ class UserManagementTest extends TestCase
         $this->assertEquals("test@gmail.com", $data['Email']); // Basic check to ensure some data matches
     }
 }
+?>
