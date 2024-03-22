@@ -198,7 +198,7 @@ function getItemID($ITEM_NAME,$STORE_ID)
 function itemExistsInStore($ITEM_ID,$STORE_ID){
     $query = "SELECT * FROM Item_Price_Entry WHERE Item_Entry = ? AND STORE_ID = ?;";
         try {
-            $response = executePreparedQuery($query , array('ss',$ITEM_NAME,$STORE_ID));
+            $response = executePreparedQuery($query , array('ss',$ITEM_ID,$STORE_ID));
             if($response[0]==true){
                 if(is_array($response[1])) {
                     if (count($response[1]) > 0) {
