@@ -52,7 +52,7 @@ class Admin_management{
 		$query = "UPDATE USERS SET BANNED_STATUS = NOT BANNED_STATUS WHERE Email = ?;";
 		try {
 			$response = executePreparedQuery($query, array('s', $userEmail));
-			if ($response[0] === true) {
+			if ($response[0] === true && User_management::userExists($userEmail) == "USER_EXISTS") {
 				return "STATUS_UPDATED";
 			} else {
 				return "STATUS_NOT_UPDATED";
@@ -77,7 +77,7 @@ class Admin_management{
 		try {
 			$response = executePreparedQuery($query, array());
 			if ($response[0] === true) {
-				if (count($response[1]) == true) {
+				if (count($response[1]) > 0) {
 					return $response[1];
 				} else {
 					return "NO_USERS_FOUND";
@@ -155,7 +155,7 @@ class Admin_management{
 			return $response[1]['First_Name'] . " " . $response[1]['Last_Name'];
 		}
 
-		if (checkAdminExists($email)) {
+		if (Admin_management::checkAdminExists($email) == "ADMIN_EXISTS") {
 			$response = executePreparedQuery("SELECT First_Name, Last_Name FROM Admins WHERE EMAIL = ?", array("s", $email));
 			return $response[1]['First_Name'] . " " . $response[1]['Last_Name'];
 		}
@@ -201,7 +201,7 @@ class Admin_management{
 	static function itemExistsInStore($ITEM_ID,$STORE_ID){
 		$query = "SELECT * FROM Item_Price_Entry WHERE Item_Entry = ? AND STORE_ID = ?;";
 			try {
-				$response = executePreparedQuery($query , array('ss',$ITEM_ID,$STORE_ID));
+				$response = executePreparedQuery($query , array('ii',$ITEM_ID,$STORE_ID));
 				if($response[0]==true){
 					if(is_array($response[1])) {
 						if (count($response[1]) > 0) {

@@ -81,7 +81,12 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		
 		<div class="underheadercontainer">
 				<div class="overlay">
-					<?php include_once './../server/allUserList.php'; 
+					<?php 
+
+					//$test = Admin_management::displayName("dfgsdfgtest@gmail.com");
+					//print_r($test);
+					
+					include_once './../server/allUserList.php'; 
 
 					?>
 
