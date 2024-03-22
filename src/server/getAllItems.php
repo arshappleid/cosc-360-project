@@ -10,18 +10,18 @@ $items = getAllItems();
 //print_r($items);
 
 foreach ($items as $item) {
-    $item_id = getItemInfo($item_ID);
+    $item_id = Item_info::getItemInfo($item_ID);
     if ($item == "NO_ITEM_FOUND") continue;
 
     echo "<section>";
     echo "<aside>";
-    echo "<img>";  
+    echo "<img>";
     echo "<h3>" . htmlspecialchars($item['ITEM_NAME']) . "</h3>";
     echo "</aside>";
     echo "<article>";
 
     // Display comments
-    $comments = getAllCommentsForItem($item['ITEM_ID']);
+    $comments = Comments::getAllCommentsForItem($item['ITEM_ID']);
     if (is_array($comments)) {
         if (count($comments) == 0) {
             echo "<h4>No Comments Yet.</h4>";
@@ -52,4 +52,3 @@ foreach ($items as $item) {
     echo "</article>";
     echo "</section>";
 }
-?>
