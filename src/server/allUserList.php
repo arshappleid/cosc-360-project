@@ -1,8 +1,8 @@
 <?php
 include './functions/admin_management.php';
 
-$users = getAllUsers();
-//print_r($users);
+$users = Admin_management::getAllUsers();
+print_r($users);
 if (is_array($users)) {
     if (count($users) == 0) {
         echo "<h4>No Users Found</h4>";
