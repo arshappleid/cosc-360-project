@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
+require_once __DIR__ . '/../server/functions/User_management.php';
 class UserManagementTest extends TestCase
 {
     /** @test */
