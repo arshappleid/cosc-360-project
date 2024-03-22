@@ -4,7 +4,7 @@ require_once("./../server/functions/item_info.php");
 if (!isset($_SESSION['SELECTED_STORE'])) {
 	$_SESSION['SELECTED_STORE'] = 1;
 }
-$items = getAllItems_IDS_AtStore($_SESSION['SELECTED_STORE']);
+$items = Item_info::getAllItems_IDS_AtStore($_SESSION['SELECTED_STORE']);
 
 
 

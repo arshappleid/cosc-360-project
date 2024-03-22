@@ -5,7 +5,7 @@ $email = $_POST['email'];
 $hashedPassword = $_POST['password'];
 
 if (isset($email) && isset($hashedPassword)) {
-	if (validateAdminLogin($email, $hashedPassword) == "VALID_LOGIN") {
+	if (Admin_management::validateAdminLogin($email, $hashedPassword) == "VALID_LOGIN") {
 		$_SESSION['ADMIN_EMAIL'] = $email;
 		//$_SESSION['DISPLAY_NAME'] = displayName($email);
 		$_SESSION['USER_EMAIL'] = $email;

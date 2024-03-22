@@ -5,7 +5,7 @@ require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
 require_once("./GLOBAL_VARS.php");
 $storeId = $_GET['SELECTED_STORE'];
-$item_IDS = getAllItems_IDS_AtStore($storeId);
+$item_IDS = Item_info::getAllItems_IDS_AtStore($storeId);
 
 if ($item_IDS == "NO_ITEMS_AVAILABLE_AT_STORE") {
     echo "<section>";
@@ -15,18 +15,18 @@ if ($item_IDS == "NO_ITEMS_AVAILABLE_AT_STORE") {
 }
 
 foreach ($item_IDS as $item_ID) {
-    $item = getItemInfo($item_ID);
+    $item = Item_info::getItemInfo($item_ID);
     if ($item == "NO_ITEM_FOUND") continue;
 
     echo "<section>";
     echo "<aside>";
-    echo "<img>";  
+    echo "<img>";
     echo "<h3>" . htmlspecialchars($item['ITEM_NAME']) . "</h3>";
     echo "</aside>";
     echo "<article>";
 
     // Display comments
-    $comments = getAllCommentsForItem($item_ID);
+    $comments = Comments::getAllCommentsForItem($item_ID);
     if (is_array($comments)) {
         if (count($comments) == 0) {
             echo "<h4>No Comments Yet.</h4>";
@@ -57,4 +57,3 @@ foreach ($item_IDS as $item_ID) {
     echo "</article>";
     echo "</section>";
 }
-?>

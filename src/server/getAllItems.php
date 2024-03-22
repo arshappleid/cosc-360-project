@@ -5,23 +5,23 @@ require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
 require_once("./GLOBAL_VARS.php");
 
-$items = getAllItems();
+$items = Item_info::getAllItems();
 
 //print_r($items);
 
 foreach ($items as $item) {
-    $item_id = getItemInfo($item_ID);
-    if ($item == "NO_ITEM_FOUND") continue;
+    $item_id = Item_info::getItemInfo($item['ITEM_ID']);
+    if ($item_id == "NO_ITEM_FOUND") continue;
 
     echo "<section>";
     echo "<aside>";
-    echo "<img>";  
+    echo "<img src = \"./../server/getItemImage.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\" alt=\"NO IMAGE IN DATABASE\">";
     echo "<h3>" . htmlspecialchars($item['ITEM_NAME']) . "</h3>";
     echo "</aside>";
     echo "<article>";
 
     // Display comments
-    $comments = getAllCommentsForItem($item['ITEM_ID']);
+    $comments = Comments::getAllCommentsForItem($item['ITEM_ID']);
     if (is_array($comments)) {
         if (count($comments) == 0) {
             echo "<h4>No Comments Yet.</h4>";
@@ -43,7 +43,7 @@ foreach ($items as $item) {
         $email = isset($_SESSION['USER_EMAIL']) ? $_SESSION['USER_EMAIL'] : $_SESSION['ADMIN_EMAIL'];
         echo "<form action=\"./../server/addcomment.php\" action=\"post\">";
         echo "<input type=\"text\" placeholder=\"Add new Comment...\" name=\"COMMENT_TEXT\">";
-        echo "<input type=\"hidden\" name=\"ITEM_ID\" value=\"" . htmlspecialchars($item_id) . "\">";
+        echo "<input type=\"hidden\" name=\"ITEM_ID\" value=\"" . htmlspecialchars($item['ITEM_ID']) . "\">";
         echo "<input type=\"hidden\" name=\"USER_EMAIL\" value=\"" . htmlspecialchars($email) . "\">";
         echo "<button type=\"submit\">Add Comment</button>";
         echo "</form>";
@@ -52,4 +52,3 @@ foreach ($items as $item) {
     echo "</article>";
     echo "</section>";
 }
-?>
