@@ -5,7 +5,7 @@ require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
 require_once("./GLOBAL_VARS.php");
 
-$items = getAllItems();
+$items = Item_info::getAllItems();
 
 //print_r($items);
 
