@@ -1,8 +1,8 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-
-class AdminManagementTest extends TestCase
+require_once __DIR__ . "./../server/functions/admin_management.php";
+class Admin_management_Test extends TestCase
 {
     /**function validateAdminLogin($email, $hashed_password)
 	 * @return string if the given hashed password , matches the hashed password in the database

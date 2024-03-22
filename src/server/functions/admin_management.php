@@ -12,7 +12,6 @@ class Admin_management{
 	 * @param mixed $hashed_password
 	 * @return string if the given hashed password , matches the hashed password in the database
 	 * 
-	 * Validates if an Admin login info is correct.
 	 */
 
 
