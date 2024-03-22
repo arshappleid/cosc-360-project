@@ -58,7 +58,7 @@ class User_management
 
 		try {
 			$response = executePreparedQuery($query, array('ssss', $EMAIL, $FIRST_NAME, $LAST_NAME, $MD5_PASSWORD));
-			echo "<h3>" . implode(",", $response) . "<h3>";
+			//echo "<h3>" . implode(",", $response) . "<h3>";
 			if ($response[0] == true) {
 				return "USER_CREATED";
 			} else {
