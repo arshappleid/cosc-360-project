@@ -216,6 +216,7 @@ function getImage($table, $whereCol, $whereValue)
 {
   global $connection;
   $query = "SELECT DISPLAY_IMAGE FROM $table WHERE $whereCol = ?";
+
   if ($stmt = $connection->prepare($query)) {
     $stmt->bind_param("s", $whereValue);
 
@@ -223,21 +224,19 @@ function getImage($table, $whereCol, $whereValue)
       $result = $stmt->get_result();
       if ($row = $result->fetch_assoc()) {
         if (empty($row["DISPLAY_IMAGE"])) {
-          return ["status" => "NO IMAGE"];
+          return "NO IMAGE";
         } else {
-          $finfo = new finfo(FILEINFO_MIME_TYPE);
-          $mimeType = $finfo->buffer($row["DISPLAY_IMAGE"]);
-          return ["status" => "SUCCESS", "data" => $row["DISPLAY_IMAGE"], "mime" => $mimeType];
+          return $row["DISPLAY_IMAGE"];
         }
       } else {
-        return ["status" => "NO_IMAGE_FOUND"];
+        return "NO_IMAGE_FOUND";
       }
     } else {
-      return ["status" => "COULD_NOT_EXECUTE_QUERY"];
+      return "COULD_NOT_EXECUTE_QUERY";
     }
 
     $stmt->close();
   } else {
-    return ["status" => "COULD_NOT_PREPARE_STATEMENT"];
+    return "COULD_NOT_PREPARE_STATEMENT";
   }
 }

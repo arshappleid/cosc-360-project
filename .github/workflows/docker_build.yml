@@ -11,13 +11,16 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
+            - name: Create Docker Network
+              run: docker network create my_network
+
             - name: Build the mysql-server Docker image
               run: |
-                  docker build ./database --file ./database/Dockerfile --build-arg MYSQL_ROOT_PASSWORD=secret -p 3306:3306 --tag mysql-web-server
+                  docker build ./database --file ./database/Dockerfile --tag mysql-web-server
 
             - name: Start Database Container
               run: |
-                  docker run -d --name mysql-web-server-container mysql-web-server
+                  docker run --network my_network -d --expose=3306 -v ./database:/docker-entrypoint-initdb.d -e "MYSQL_ROOT_PASSWORD=secret" --name mysql-server mysql-web-server
     build-web-server:
         runs-on: ubuntu-latest
         needs: build-mysql-server
@@ -29,7 +32,7 @@ jobs:
 
             - name: Start web-server container
               run: |
-                  docker run -d --name web-server-container web-server
+                  docker run  --network my_network -d -v ./src/:/var/www/html/ --name web-server web-server
 
             - name: Execute PHPUnit tests
-              run: docker exec web-server-container sh -c "phpunit --testdox tests/*"
+              run: docker exec web-server sh -c "phpunit --testdox tests/*"
