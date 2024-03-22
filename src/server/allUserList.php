@@ -2,7 +2,11 @@
 include './functions/admin_management.php';
 
 $users = Admin_management::getAllUsers();
-print_r($users);
+//print_r($users);
+//$itemid = Admin_management::getItemID("Laptop", 1);
+//print_r($itemid);
+//$itemid1 = Admin_management::getItemID("Laptop", 3);
+//print_r($itemid1);
 if (is_array($users)) {
     if (count($users) == 0) {
         echo "<h4>No Users Found</h4>";
