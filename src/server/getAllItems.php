@@ -11,12 +11,17 @@ $items = Item_info::getAllItems();
 
 foreach ($items as $item) {
     $item_id = Item_info::getItemInfo($item['ITEM_ID']);
+    $item_price = Item_info::getCurrentPrice($item['ITEM_ID']);
+    $store_name = Item_info::getStoreName($item['STORE_ID']);
     if ($item_id == "NO_ITEM_FOUND") continue;
 
     echo "<section>";
     echo "<aside>";
     echo "<img src = \"./../server/getItemImage.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\" alt=\"NO IMAGE IN DATABASE\">";
     echo "<h3>" . htmlspecialchars($item['ITEM_NAME']) . "</h3>";
+    echo "<h2>" . $item_price . "$" . "</h2>";
+    echo "<h1>" . $store_name . "</h1>";
+    echo "<button><a href=#>See Product Details</a></button>";
     echo "</aside>";
     echo "<article>";
 
