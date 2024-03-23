@@ -150,7 +150,7 @@ class Item_info
 		}
 	}
 	/**
-	 * Summary of getAllItems
+	 * Summary of getAllItemsAtStore
 	 * @return mixed
 	 * Sample Response :
 	 * - INVALID_STORE_ID
