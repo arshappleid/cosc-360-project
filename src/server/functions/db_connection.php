@@ -1,5 +1,5 @@
 <?php
-$host = "mysql-server";  // docker container name
+$host = "localhost";  // docker container name
 $database = "market_database";
 $user = "root";   // i created a new user using this login for the db
 $password = "secret";
