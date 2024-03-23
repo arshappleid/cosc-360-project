@@ -36,6 +36,22 @@ VALUES (
     );
 
 INSERT INTO
+    USERS (
+        EMAIL, FIRST_NAME, LAST_NAME, MD5_PASSWORD
+    )
+VALUES (
+        'test2@gmail.com', 'Test', 'User', '5f4dcc3b5aa765d61d8327deb882cf99'
+    );
+
+INSERT INTO
+    USERS (
+        EMAIL, FIRST_NAME, LAST_NAME, MD5_PASSWORD
+    )
+VALUES (
+        'test3@gmail.com', 'Test', 'User', '5f4dcc3b5aa765d61d8327deb882cf99'
+    );
+
+INSERT INTO
     Admins (
         EMAIL, FIRST_NAME, LAST_NAME, MD5_PASSWORD
     )
@@ -95,6 +111,14 @@ INSERT INTO
     )
 VALUES (
         'Excellent performance.', 2, 1, NOW()
+    );
+
+INSERT INTO
+    Comments (
+        COMMENT_TEXT, ITEM_ID, USER_ID, DATE_TIME_ADDED
+    )
+VALUES (
+        'Great performance.', 2, 2, NOW()
     );
 
 -- Insert data into Item_Price_Entry
