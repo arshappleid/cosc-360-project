@@ -30,6 +30,7 @@ class User_management_Test extends TestCase
         $this->assertIsArray($resp);
         $this->assertNotEmpty($resp);
         $this->assertArrayHasKey('COMMENT_TEXT', $resp);
+        $this->assertArrayHasKey('COMMENT_ID', $resp);
         $this->assertIsString($resp['COMMENT_TEXT']);
         $this->assertIsString($resp['ITEM_NAME']);
     }
@@ -42,6 +43,7 @@ class User_management_Test extends TestCase
         $this->assertNotEmpty($resp);
         foreach ($resp as $comment) {
             $this->assertIsArray($comment);
+            $this->assertArrayHasKey('COMMENT_ID', $comment);
             $this->assertIsString($comment['COMMENT_TEXT']);
             $this->assertIsString($comment['ITEM_NAME']);
         }
