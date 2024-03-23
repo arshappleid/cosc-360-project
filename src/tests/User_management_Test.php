@@ -3,8 +3,49 @@
 use PHPUnit\Framework\TestCase;
 
 require_once __DIR__ . '/../server/functions/User_management.php';
-class UserManagementTest extends TestCase
+class User_management_Test extends TestCase
 {
+    /** @test */
+    public function validateUserID_VALIDID()
+    {
+        $this->assertEquals("VALID_USER", User_management::validateUserID("1"));
+    }
+    /** @test */
+    public function validateUserID_INVALIDID()
+    {
+        $this->assertEquals("USER_DOES_NOT_EXIST", User_management::validateUserID("99"));
+    }
+
+    /** @test */
+    public function getAllUserComments_NoComments()
+    {
+        $resp =  User_management::getAllUserComments("3");
+        $this->assertEquals("NO_COMMENTS_FOUND", $resp);
+    }
+
+    /** @test */
+    public function getAllUserComments_1Comment()
+    {
+        $resp = User_management::getAllUserComments("2");
+        $this->assertIsArray($resp);
+        $this->assertNotEmpty($resp);
+        $this->assertArrayHasKey('COMMENT_TEXT', $resp);
+        $this->assertIsString($resp['COMMENT_TEXT']);
+        $this->assertIsString($resp['ITEM_NAME']);
+    }
+
+    /** @test */
+    public function getAllUserComments_MoreThan1Comments()
+    {
+        $resp = User_management::getAllUserComments("1");
+        $this->assertIsArray($resp);
+        $this->assertNotEmpty($resp);
+        foreach ($resp as $comment) {
+            $this->assertIsArray($comment);
+            $this->assertIsString($comment['COMMENT_TEXT']);
+            $this->assertIsString($comment['ITEM_NAME']);
+        }
+    }
     /** @test */
     public function validateUserLogin_ValidLogin()
     {
@@ -111,4 +152,3 @@ class UserManagementTest extends TestCase
         $this->assertEquals("USER_NOT_EXISTS", User_management::getUserID(""));
     }
 }
-?>
