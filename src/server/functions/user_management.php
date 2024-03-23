@@ -391,12 +391,12 @@ class User_management
 	 * Returns all the Comments By a User , on all items
 	 * - INVALID_USER_ID
 	 * - NO_COMMENTS_FOUND
-	 * - [COMMENT_TEXT,DATE_TIME_ADDED,ITEM_NAME]
-	 * - [[COMMENT_TEXT,DATE_TIME_ADDED,ITEM_NAME],[COMMENT_TEXT,DATE_TIME_ADDED,ITEM_NAME]]
+	 * - [COMMENT_ID,COMMENT_TEXT,DATE_TIME_ADDED,ITEM_NAME]
+	 * - [[COMMENT_ID,COMMENT_TEXT,DATE_TIME_ADDED,ITEM_NAME],[COMMENT_TEXT,DATE_TIME_ADDED,ITEM_NAME]]
 	 */
 	static function getAllUserComments($USER_ID)
 	{
-		$query = "SELECT Comments.COMMENT_TEXT,Comments.DATE_TIME_ADDED, Comments.ITEM_ID,ITEMS.ITEM_NAME FROM Comments NATURAL JOIN ITEMS WHERE Comments.USER_ID = ?";
+		$query = "SELECT Comments.COMMENT_ID, Comments.COMMENT_TEXT,Comments.DATE_TIME_ADDED, Comments.ITEM_ID,ITEMS.ITEM_NAME FROM Comments NATURAL JOIN ITEMS WHERE Comments.USER_ID = ?";
 		try {
 			if (User_management::validateUserID($USER_ID) == "USER_DOES_NOT_EXIST")
 				return "INVALID_USER_ID";

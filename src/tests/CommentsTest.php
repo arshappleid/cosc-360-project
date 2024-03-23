@@ -45,4 +45,18 @@ class CommentsTest extends TestCase
 		$resp = Comments::getAllCommentsForItem("3");
 		$this->assertEquals("NO_COMMENTS_ADDED_YET", $resp);
 	}
+
+	/** @test */
+	public function deleteComment_Comment_Exists()
+	{
+		$resp = Comments::deleteComment("1");
+		$this->assertEquals("COMMENT_DELETED", $resp);
+	}
+
+	/** @test */
+	public function deleteComment_Comment_DNExists()
+	{
+		$resp = Comments::deleteComment("99");
+		$this->assertEquals("COMMENT_NOT_EXISTS", $resp);
+	}
 }

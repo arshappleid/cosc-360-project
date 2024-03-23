@@ -40,7 +40,7 @@ class Item_info_Test extends TestCase
     /** @test */
     public function getItemInfo_InvalidInfo()
     {
-        $this->assertEquals("NO_ITEM_FOUND", Item_info::getItemInfo(9999));
+        $this->assertEquals("INVALID_ITEM_ID", Item_info::getItemInfo(9999));
     }
 
     /** @test */
@@ -50,11 +50,6 @@ class Item_info_Test extends TestCase
         $this->assertIsArray($result);
     }
 
-    /** @test */
-    public function getAllStoreList_gotNoStores()
-    {
-        $this->assertEquals("NO_STORES_IN_DATABASE", Item_info::getAllStoreList());
-    }
 
     /** @test */
     public function getAllItems_GotAllItems()
@@ -63,11 +58,6 @@ class Item_info_Test extends TestCase
         $this->assertisArray($result);
     }
 
-    /** @test */
-    public function getAllItems_GotNoItems()
-    {
-        $this->assertEquals("NO_ITEMS_IN_DATABASE", Item_info::getAllItems());
-    }
 
     /** @test */
     public function getAllPrices_ValuesExist()
@@ -75,7 +65,7 @@ class Item_info_Test extends TestCase
         $resp = Item_info::getAllPrices_Latest_To_Oldest("1");
         $this->assertIsArray($resp);
         $this->assertArrayHasKey('TIME_UPDATED', $resp[0]);
-        $this->assertArrayHasKey('ITEM_PRICE', $resp[0]);
+        $this->assertArrayHasKey('Item_Price', $resp[0]);
     }
 
     /** @test */

@@ -78,17 +78,20 @@ class Item_info
 	 * 
 	 * Returns an associate array (length 1) of response with all the item info.
 	 * Possible Return Types :
-	 * - NO_ITEM_FOUND
-	 * - [[ITEM_ID,ITEM_NAME,ITEM_DESCRIPTION,EXTERNAL_LINK,ITEM_IMAGE],[ITEM_ID,ITEM_NAME,ITEM_DESCRIPTION,EXTERNAL_LINK,ITEM_IMAGE]]
+	 * - INVALID_ITEM_ID
+	 * - [[ITEM_ID,ITEM_NAME,ITEM_DESCRIPTION,EXTERNAL_LINK,ITEM_IMAGE,CATEGORY_NAME],[ITEM_ID,ITEM_NAME,ITEM_DESCRIPTION,EXTERNAL_LINK,ITEM_IMAGE,CATEGORY_NAME]]
 	 */
 	static function getItemInfo($ITEM_ID)
 	{
-		$query = "SELECT * FROM ITEMS where ITEM_ID = ?;";
+		if (Item_info::itemExists($ITEM_ID) == "ITEM_NOT_EXISTS") {
+			return "INVALID_ITEM_ID";
+		}
+		$query = "SELECT * FROM ITEMS LEFT JOIN ITEM_CATEGORY ON ITEMS.ITEM_ID = ITEM_CATEGORY.ITEM_ID where ITEMS.ITEM_ID = ?;";
 		try {
 			$response = executePreparedQuery($query, array('i', $ITEM_ID)); // Adjusted parameter structure
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
-					return "NO_ITEM_FOUND";
+					return "INVALID_ITEM_ID";
 				} else if (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
 					return $response[1];
 				}
@@ -123,7 +126,7 @@ class Item_info
 
 	static function getHomePageItems()
 	{
-		$query = "SELECT * FROM ITEMS JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID LEFT JOIN ITEM_CATEGORY ON Item_Price_Entry.ITEM_ID = ITEM_CATEGORY.ITEM_ID;";
+		$query = "SELECT * FROM ITEMS RIGHT JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID NATURAL JOIN ITEM_CATEGORY;";
 		try {
 			$response = executePreparedQuery($query, array()); // Adjusted parameter structure
 			if ($response[0]) { // Query executed properly
@@ -155,7 +158,7 @@ class Item_info
 	 */
 	static function getAllPrices_Latest_To_Oldest($ITEM_ID, $LIMIT_BY = 30)
 	{
-		if (Item_info::getItemInfo($ITEM_ID) == "NO_ITEM_FOUND") {
+		if (Item_info::itemExists($ITEM_ID) == "ITEM_NOT_EXISTS") {
 			return "INVALID_ITEM_ID";
 		}
 		$query = "SELECT TIME_UPDATED,Item_Price FROM `Item_Price_Entry` WHERE ITEM_ID = ? ORDER BY TIME_UPDATED DESC";
@@ -212,5 +215,4 @@ class Item_info
 			echo $e->getMessage();
 		}
 	}
-
 }
