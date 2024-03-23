@@ -32,7 +32,7 @@ jobs:
                   docker run --network my_network -d -v ./src/:/var/www/html/ --name web-server web-server
 
             - name: Execute AdminManagement tests
-              run: docker exec web-server sh -c "phpunit --testdox tests/Admin_Management_Test.php"
+              run: docker exec web-server sh -c "phpunit --testdox tests/Admin_management_Test.php"
 
             - name: Execute Comments tests
               run: docker exec web-server sh -c "phpunit --testdox tests/CommentsTest.php"
@@ -41,4 +41,4 @@ jobs:
               run: docker exec web-server sh -c "phpunit --testdox tests/Item_info_Test.php"
 
             - name: Execute UserManagement tests
-              run: docker exec web-server sh -c "phpunit --testdox tests/User_Management_Test.php"
+              run: docker exec web-server sh -c "phpunit --testdox tests/User_management_Test.php"
