@@ -1,33 +1,29 @@
 <?php
+session_start();
+include '../server/functions/item_info.php';
 require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
 require_once("./GLOBAL_VARS.php");
 
-if (isset($_GET['ITEM_ID'])) {
-    $item_id = $_GET['ITEM_ID'];
-}
-
-$item = Item_info::getItemInfo($item_id);
-
+$item_id = $_GET['ITEM_ID'];
+$item_IDS = Item_info::getAllItemData($item_id);
+//print_r($item_IDS);
 
 foreach ($item_IDS as $item_ID) {
-    $item = Item_info::getItemInfo($item_ID);
-    $item_price = Item_info::getCurrentPrice($item['ITEM_ID']);
-    $store_name = Item_info::getStoreName($storeId);
+    $store_name = Item_info::getStoreName($item_ID['STORE_ID']);
     if ($item == "NO_ITEM_FOUND") continue;
 
     echo "<section>";
     echo "<aside>";
-    echo "<img src = \"./../server/getItemImage.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\" alt=\"NO IMAGE IN DATABASE\">";
-    echo "<h3>" . htmlspecialchars($item['ITEM_NAME']) . "</h3>";
-    echo "<h2>" . $item_price . "$" . "</h2>";
+    echo "<img src = \"./../server/getItemImage.php?ITEM_ID=" . urlencode($item_ID['ITEM_ID']) . "\" alt=\"NO IMAGE IN DATABASE\">";
+    echo "<h3>" . htmlspecialchars($item_ID['ITEM_NAME']) . "</h3>";
+    echo "<h2>" . htmlspecialchars($item_ID['Item_Price']) . "$" . "</h2>";
     echo "<h1>" . $store_name . "</h1>";
-    echo "<button><a href=\"product.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\">See Product Details</a></button>";
     echo "</aside>";
     echo "<article>";
 
     // Display comments
-    $comments = Comments::getAllCommentsForItem($item_ID);
+    $comments = Comments::getAllCommentsForItem($item_ID['ITEM_ID']);
     if (is_array($comments)) {
         if (count($comments) == 0) {
             echo "<h4>No Comments Yet.</h4>";
@@ -49,7 +45,7 @@ foreach ($item_IDS as $item_ID) {
         $email = isset($_SESSION['USER_EMAIL']) ? $_SESSION['USER_EMAIL'] : $_SESSION['ADMIN_EMAIL'];
         echo "<form action=\"./../server/addcomment.php\" action=\"post\">";
         echo "<input type=\"text\" placeholder=\"Add new Comment...\" name=\"COMMENT_TEXT\">";
-        echo "<input type=\"hidden\" name=\"ITEM_ID\" value=\"" . htmlspecialchars($item_ID) . "\">";
+        echo "<input type=\"hidden\" name=\"ITEM_ID\" value=\"" . htmlspecialchars($item_ID['ITEM_ID']) . "\">";
         echo "<input type=\"hidden\" name=\"USER_EMAIL\" value=\"" . htmlspecialchars($email) . "\">";
         echo "<button type=\"submit\">Add Comment</button>";
         echo "</form>";
@@ -58,3 +54,4 @@ foreach ($item_IDS as $item_ID) {
     echo "</article>";
     echo "</section>";
 }
+
