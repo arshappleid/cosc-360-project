@@ -123,7 +123,7 @@ class Item_info
 
 	static function getAllItems()
 	{
-		$query = "SELECT * FROM ITEMS;";
+		$query = "SELECT * FROM ITEMS RIGHT JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID;";
 		try {
 			$response = executePreparedQuery($query, array()); // Adjusted parameter structure
 			if ($response[0]) { // Query executed properly
@@ -173,4 +173,44 @@ class Item_info
 			echo $e->getMessage();
 		}
 	}
+
+	static function getCurrentPrice($ITEM_ID)
+	{
+		if (Item_info::getItemInfo($ITEM_ID) == "NO_ITEM_FOUND") {
+			return "INVALID_ITEM_ID";
+		}
+		$query = "SELECT Item_Price FROM `Item_Price_Entry` WHERE ITEM_ID = ? ORDER BY TIME_UPDATED DESC LIMIT 1";
+		try {
+			$response = executePreparedQuery($query, array('i', $ITEM_ID));
+			if ($response[0]) { // Query executed properly
+				if ($response[1] === "NO_DATA_RETURNED") {
+					return "NO_PRICE_FOUND";
+				} else if (is_array($response[1]) && count($response[1]) == 1) { // Corrected condition to check for an array with at least one result
+					return $response[1]['Item_Price'];
+				}
+			}
+		} catch (Exception $e) {
+			echo "Error occurred, when using Database function to try to validate User.<br>";
+			echo $e->getMessage();
+		}
+	}
+
+	static function getStoreName($STORE_ID)
+	{
+		$query = "SELECT STORE_NAME FROM STORE WHERE STORE_ID = ?";
+		try {
+			$response = executePreparedQuery($query, array('i', $STORE_ID));
+			if ($response[0]) { // Query executed properly
+				if ($response[1] === "NO_DATA_RETURNED") {
+					return "NO_STORE_FOUND";
+				} else if (is_array($response[1]) && count($response[1]) == 1) { // Corrected condition to check for an array with at least one result
+					return $response[1]['STORE_NAME'];
+				}
+			}
+		} catch (Exception $e) {
+			echo "Error occurred, when using Database function to try to validate User.<br>";
+			echo $e->getMessage();
+		}
+	}
+
 }

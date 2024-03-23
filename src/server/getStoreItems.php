@@ -16,12 +16,17 @@ if ($item_IDS == "NO_ITEMS_AVAILABLE_AT_STORE") {
 
 foreach ($item_IDS as $item_ID) {
     $item = Item_info::getItemInfo($item_ID);
+    $item_price = Item_info::getCurrentPrice($item['ITEM_ID']);
+    $store_name = Item_info::getStoreName($storeId);
     if ($item == "NO_ITEM_FOUND") continue;
 
     echo "<section>";
     echo "<aside>";
-    echo "<img>";
+    echo "<img src = \"./../server/getItemImage.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\" alt=\"NO IMAGE IN DATABASE\">";
     echo "<h3>" . htmlspecialchars($item['ITEM_NAME']) . "</h3>";
+    echo "<h2>" . $item_price . "$" . "</h2>";
+    echo "<h1>" . $store_name . "</h1>";
+    echo "<button><a href=#>See Product Details</a></button>";
     echo "</aside>";
     echo "<article>";
 
