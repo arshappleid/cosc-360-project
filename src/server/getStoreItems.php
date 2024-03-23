@@ -17,7 +17,7 @@ if ($item_IDS == "NO_ITEMS_AVAILABLE_AT_STORE") {
 
 foreach ($item_IDS as $item_ID) {
     $item = Item_info::getItemInfo($item_ID);
-    $item_price = Item_info::getCurrentPrice($item['ITEM_ID'], $storeId);
+    $item_price = Item_info::getCurrentPrice($item_ID, $storeId);
     //print_r($item_price);
     $store_name = Item_info::getStoreName($storeId);
     if ($item == "NO_ITEM_FOUND") continue;

@@ -7,7 +7,7 @@ require_once("./GLOBAL_VARS.php");
 
 $items = Item_info::getHomePageItems();
 
-print_r($items);
+//print_r($items);
 
 foreach ($items as $item) {
     $item_id = Item_info::getItemInfo($item['ITEM_ID']);

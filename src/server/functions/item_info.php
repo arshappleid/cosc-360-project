@@ -126,7 +126,7 @@ class Item_info
 
 	static function getHomePageItems()
 	{
-		$query = "SELECT * FROM ITEMS RIGHT JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID NATURAL JOIN ITEM_CATEGORY;";
+		$query = "SELECT * FROM ITEMS RIGHT JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID  LEFT JOIN ITEM_CATEGORY ON ITEMS.ITEM_ID = ITEM_CATEGORY.ITEM_ID ";
 		try {
 			$response = executePreparedQuery($query, array()); // Adjusted parameter structure
 			if ($response[0]) { // Query executed properly
