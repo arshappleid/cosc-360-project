@@ -21,7 +21,7 @@ foreach ($items as $item) {
     echo "<h3>" . htmlspecialchars($item['ITEM_NAME']) . "</h3>";
     echo "<h2>" . $item_price . "$" . "</h2>";
     echo "<h1>" . $store_name . "</h1>";
-    echo "<button><a href=#>See Product Details</a></button>";
+    echo "<button><a href=\"product.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\">See Product Details</a></button>";
     echo "</aside>";
     echo "<article>";
 

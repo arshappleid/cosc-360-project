@@ -62,7 +62,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			<div class="search-container">
 				<input type="text" placeholder="Search...">
 				<?php
-				$stores = getAllStoreList();
+				$stores = Item_info::getAllStoreList();
 				if (count($stores) == 0) {
 					echo $stores;
 				} else {
@@ -79,6 +79,8 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		<?php include_once './../server/breadcrumbs.php' ?>
 		<div class="underheadercontainer">
 				<div class="overlay">
+
+				<?php echo "<div id = \"item_list\"></div>"; ?>
 
 				</div>
 				<div class="triangleextendblack"></div>
@@ -107,8 +109,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		</div>
 	</footer>
 	<?php
-	echo "<script type=\"text/javascript\" src=\"./scripts/home.js\"></script>";
-	echo "<script>updateGlobalVariable(1)</script>";
+	echo "<script type=\"text/javascript\" src=\"./scripts/product.js\"></script>";
 	?>
 
 </body>
