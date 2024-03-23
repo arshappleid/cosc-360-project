@@ -1,18 +1,14 @@
 <?php
-session_start();
-include '../server/functions/item_info.php';
 require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
 require_once("./GLOBAL_VARS.php");
-$storeId = $_GET['SELECTED_STORE'];
-$item_IDS = Item_info::getAllItems_IDS_AtStore($storeId);
 
-if ($item_IDS == "NO_ITEMS_AVAILABLE_AT_STORE") {
-    echo "<section>";
-    echo "<h3>" . $NO_ITEM_AVAILABLE_AT_THE_STORE_MESSAGE . "</h3>";
-    echo "</section>";
-    exit;
+if (isset($_GET['ITEM_ID'])) {
+    $item_id = $_GET['ITEM_ID'];
 }
+
+$item = Item_info::getItemInfo($item_id);
+
 
 foreach ($item_IDS as $item_ID) {
     $item = Item_info::getItemInfo($item_ID);
