@@ -124,16 +124,83 @@ class Item_info
 		}
 	}
 	/**
+	 * Summary of ValidateStoreId
+	 * @param mixed $STORE_ID
+	 * @return string
+	 * 
+	 * Returns Status if the STORE_ID Exists in STORE Table
+	 * Sample Responses :
+	 * - STORE_EXISTS
+	 * - INVALID_STORE_ID
+	 */
+	static function ValidateStoreId($STORE_ID)
+	{
+		$query = "SELECT STORE_ID FROM STORE WHERE STORE_ID = ?";
+		try {
+			$response = executePreparedQuery($query, array('s', $STORE_ID)); // Adjusted parameter structure
+			if ($response[0]) { // Query executed properly
+				if ($response[1] === "NO_DATA_RETURNED") {
+					return "INVALID_STORE_ID";
+				}
+				return "STORE_EXISTS";
+			}
+		} catch (Exception $e) {
+			echo "Error occurred, when using Database function to try to validate User.<br>";
+			echo $e->getMessage();
+		}
+	}
+	/**
 	 * Summary of getAllItems
 	 * @return mixed
 	 * Sample Response :
-	 * [[ITEM_ID,ITEM_NAME,ITEM_DESCRIPTION,EXTERNAL_LINK,ITEM_IMAGE,CATEGORY_NAME],[ITEM_ID,ITEM_NAME,ITEM_DESCRIPTION,EXTERNAL_LINK,ITEM_IMAGE,CATEGORY_NAME]]
+	 * - INVALID_STORE_ID
+	 * - [ITEM_ID,ITEM_NAME,CATEGORY_NAME,ITEM_PRICE,ITEM_DESCRIPTION,EXTERNAL_LINK,STORE_ID,Time_Updated]
+	 * - [[ITEM_ID,ITEM_NAME,CATEGORY_NAME,ITEM_PRICE,ITEM_DESCRIPTION,EXTERNAL_LINK,STORE_ID,Time_Updated],[ITEM_ID,ITEM_NAME,CATEGORY_NAME,ITEM_PRICE,ITEM_DESCRIPTION,EXTERNAL_LINK,STORE_ID,Time_Updated]]
 	 */
-	static function getAllItems()
+	static function getAllItemsAtStore($STORE_ID)
 	{
-		$query = "SELECT * FROM ITEMS NATURAL JOIN ITEM_CATEGORY;";
+		if (Item_info::ValidateStoreId($STORE_ID) == "INVALID_STORE_ID") {
+			return "INVALID_STORE_ID";
+		}
+
+		$query = "SELECT 
+			ITEMS.ITEM_ID, 
+			ITEMS.ITEM_NAME,
+			ITEM_CATEGORY.CATEGORY_NAME, 
+			Latest_Price_Entry.Item_Price, 
+			ITEMS.ITEM_DESCRIPTION, 
+			ITEMS.EXTERNAL_LINK, 
+			Latest_Price_Entry.STORE_ID, 
+			Latest_Price_Entry.Time_Updated
+		FROM 
+			ITEMS 
+		LEFT JOIN 
+			ITEM_CATEGORY ON ITEMS.ITEM_ID = ITEM_CATEGORY.ITEM_ID
+		LEFT JOIN (
+			SELECT 
+				ITEM_ID, 
+				STORE_ID, 
+				Item_Price, 
+				Time_Updated
+			FROM 
+				Item_Price_Entry
+			WHERE 
+				(ITEM_ID, Time_Updated) IN (
+					SELECT 
+						ITEM_ID, 
+						MAX(Time_Updated)
+					FROM 
+						Item_Price_Entry
+					WHERE 
+						STORE_ID = ?
+					GROUP BY 
+						ITEM_ID
+				)
+		) AS Latest_Price_Entry ON ITEMS.ITEM_ID = Latest_Price_Entry.ITEM_ID
+		WHERE 
+			Latest_Price_Entry.STORE_ID = ?";
 		try {
-			$response = executePreparedQuery($query, array()); // Adjusted parameter structure
+			$response = executePreparedQuery($query, array('ss', $STORE_ID, $STORE_ID)); // Adjusted parameter structure
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_ITEMS_IN_DATABASE";
@@ -157,18 +224,27 @@ class Item_info
 	 * 
 	 * Possible return types :
 	 *  - INVALID_ITEM_ID
+	 * 	- INVALID_STORE_ID
 	 * 	- NO_ENTRIES_FOUND
 	 * 	-  [[Time_Updated_1,Item_Price_1],[Time_Updated_2,Item_Price_2]]
 	 * 
 	 */
-	static function getAllPrices_Latest_To_Oldest($ITEM_ID, $LIMIT_BY = 30)
+	static function getAllPrices_Latest_To_Oldest($ITEM_ID, $STORE_ID, $LIMIT_BY = 30)
 	{
 		if (Item_info::itemExists($ITEM_ID) == "ITEM_NOT_EXISTS") {
 			return "INVALID_ITEM_ID";
 		}
-		$query = "SELECT TIME_UPDATED,Item_Price FROM `Item_Price_Entry` WHERE ITEM_ID = ? ORDER BY TIME_UPDATED DESC";
+		if (Item_info::ValidateStoreId($STORE_ID) == "INVALID_STORE_ID") {
+			return "INVALID_STORE_ID";
+		}
+
+		$query = "SELECT TIME_UPDATED,Item_Price 
+					FROM `Item_Price_Entry` 
+					WHERE 
+					ITEM_ID = ? AND STORE_ID = ?
+					ORDER BY TIME_UPDATED DESC";
 		try {
-			$response = executePreparedQuery($query, array('s', $ITEM_ID));
+			$response = executePreparedQuery($query, array('ss', $ITEM_ID, $STORE_ID));
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_ENTRIES_FOUND";
