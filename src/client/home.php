@@ -67,21 +67,21 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 
 		<div class="headeryellow">
 			<div class="search-container">
-				<input type="text"
-					placeholder="Search...">
+				<input type="text" id="search-input" placeholder="Search...">
 				<?php
 				$stores = Item_info::getAllStoreList();
 				if (count($stores) == 0) {
 					echo $stores;
 				} else {
 					echo "<select id = \"store_select\" class=\"select_dropdown\">";
+					echo "<option value=\"all\">All Stores</option>";
 					foreach ($stores as $key => $store) {
 						echo "<option value=\"" . $store['STORE_ID'] . "\" >" . $store['STORE_NAME'] . "</option>";
 					}
 					echo "</select>";
 				}
 				?>
-				<button type="submit">Search</button>
+				<button type="button" id="search-button">Search</button>
 			</div>
 		</div>
 
