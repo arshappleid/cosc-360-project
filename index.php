@@ -1,5 +1,3 @@
-<?php //header("Location: src/client/home.php");
-
-echo "hello"  ;
+<?php header("Location: src/client/home.php");
 
 ?>
