@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";  // docker container name
-$database = "market_database";
-$user = "root";   // i created a new user using this login for the db
-$password = "secret";
+$database = "db_68424464";
+$user = "68424464";   // i created a new user using this login for the db
+$password = "@1717Tesseract17";
 $connection = mysqli_connect($host, $user, $password, $database);
 
 // Check connection
