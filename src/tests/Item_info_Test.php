@@ -40,7 +40,7 @@ class Item_info_Test extends TestCase
     /** @test */
     public function getItemInfo_InvalidInfo()
     {
-        $this->assertEquals("NO_ITEM_FOUND", Item_info::getItemInfo(9999));
+        $this->assertEquals("INVALID_ITEM_ID", Item_info::getItemInfo(9999));
     }
 
     /** @test */
