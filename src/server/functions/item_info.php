@@ -79,11 +79,11 @@ class Item_info
 	 * Returns an associate array (length 1) of response with all the item info.
 	 * Possible Return Types :
 	 * - NO_ITEM_FOUND
-	 * - [[ITEM_ID,ITEM_NAME,ITEM_DESCRIPTION,EXTERNAL_LINK,ITEM_IMAGE],[ITEM_ID,ITEM_NAME,ITEM_DESCRIPTION,EXTERNAL_LINK,ITEM_IMAGE]]
+	 * - [[ITEM_ID,ITEM_NAME,ITEM_DESCRIPTION,EXTERNAL_LINK,ITEM_IMAGE,CATEGORY_NAME],[ITEM_ID,ITEM_NAME,ITEM_DESCRIPTION,EXTERNAL_LINK,ITEM_IMAGE,CATEGORY_NAME]]
 	 */
 	static function getItemInfo($ITEM_ID)
 	{
-		$query = "SELECT * FROM ITEMS where ITEM_ID = ?;";
+		$query = "SELECT * FROM ITEMS Natural Join ITEM_CATEGORY where ITEM_ID = ?;";
 		try {
 			$response = executePreparedQuery($query, array('i', $ITEM_ID)); // Adjusted parameter structure
 			if ($response[0]) { // Query executed properly
@@ -120,10 +120,15 @@ class Item_info
 			echo $e->getMessage();
 		}
 	}
-
+	/**
+	 * Summary of getAllItems
+	 * @return mixed
+	 * Sample Response :
+	 * [[ITEM_ID,ITEM_NAME,ITEM_DESCRIPTION,EXTERNAL_LINK,ITEM_IMAGE,CATEGORY_NAME],[ITEM_ID,ITEM_NAME,ITEM_DESCRIPTION,EXTERNAL_LINK,ITEM_IMAGE,CATEGORY_NAME]]
+	 */
 	static function getAllItems()
 	{
-		$query = "SELECT * FROM ITEMS RIGHT JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID;";
+		$query = "SELECT * FROM ITEMS NATURAL JOIN ITEM_CATEGORY;";
 		try {
 			$response = executePreparedQuery($query, array()); // Adjusted parameter structure
 			if ($response[0]) { // Query executed properly
@@ -212,5 +217,4 @@ class Item_info
 			echo $e->getMessage();
 		}
 	}
-
 }
