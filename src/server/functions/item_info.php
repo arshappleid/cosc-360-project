@@ -77,6 +77,9 @@ class Item_info
 	 * @return array
 	 * 
 	 * Returns an associate array (length 1) of response with all the item info.
+	 * Possible Return Types :
+	 * - NO_ITEM_FOUND
+	 * - [[ITEM_ID,ITEM_NAME,ITEM_DESCRIPTION,EXTERNAL_LINK,ITEM_IMAGE],[ITEM_ID,ITEM_NAME,ITEM_DESCRIPTION,EXTERNAL_LINK,ITEM_IMAGE]]
 	 */
 	static function getItemInfo($ITEM_ID)
 	{
@@ -116,8 +119,6 @@ class Item_info
 			echo "Error occurred, when using Database function to try to validate User.<br>";
 			echo $e->getMessage();
 		}
-
-		
 	}
 
 	static function getAllItems()
@@ -135,6 +136,41 @@ class Item_info
 		} catch (Exception $e) {
 			echo "Error occurred, when using Database function to try to validate User.<br>";
 			echo $e->getMessage();
-		}	
+		}
+	}
+	/**
+	 * Summary of getAllPrioes
+	 * @param mixed $ITEM_ID
+	 * @return mixed
+	 * 
+	 * Returns the $LIMIT_BY Latest Record.
+	 * If no value for $LIMIT_BY provided, provides latest 30 prices
+	 * Sample Return : [[Time_Updated_1,Item_Price_1],[Time_Updated_2,Item_Price_2],[Time_Updated_3,Item_Price_3]]
+	 * 
+	 * Possible return types :
+	 *  - INVALID_ITEM_ID
+	 * 	- NO_ENTRIES_FOUND
+	 * 	-  [[Time_Updated_1,Item_Price_1],[Time_Updated_2,Item_Price_2]]
+	 * 
+	 */
+	static function getAllPrices_Latest_To_Oldest($ITEM_ID, $LIMIT_BY = 30)
+	{
+		if (Item_info::getItemInfo($ITEM_ID) == "NO_ITEM_FOUND") {
+			return "INVALID_ITEM_ID";
+		}
+		$query = "SELECT TIME_UPDATED,Item_Price FROM `Item_Price_Entry` WHERE ITEM_ID = ? ORDER BY TIME_UPDATED DESC";
+		try {
+			$response = executePreparedQuery($query, array('s', $ITEM_ID));
+			if ($response[0]) { // Query executed properly
+				if ($response[1] === "NO_DATA_RETURNED") {
+					return "NO_ENTRIES_FOUND";
+				} else if (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
+					return $response[1];
+				}
+			}
+		} catch (Exception $e) {
+			echo "Error occurred, when using Database function to try to validate User.<br>";
+			echo $e->getMessage();
+		}
 	}
 }
