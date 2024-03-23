@@ -9,9 +9,13 @@ $item_id = $_GET['ITEM_ID'];
 $item_IDS = Item_info::getAllItemData($item_id);
 //print_r($item_IDS);
 
+if (isset($item_IDS['ITEM_ID'])) { // Assuming a single item would have 'ITEM_ID' set
+    $item_IDS = [$item_IDS]; // Wrap the single item in an array
+}
+
 foreach ($item_IDS as $item_ID) {
     $store_name = Item_info::getStoreName($item_ID['STORE_ID']);
-    if ($item == "NO_ITEM_FOUND") continue;
+    if ($item_ID == "NO_ITEM_FOUND") continue;
 
     echo "<section>";
     echo "<aside>";
