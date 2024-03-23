@@ -121,9 +121,9 @@ class Item_info
 		}
 	}
 
-	static function getAllItems()
+	static function getHomePageItems()
 	{
-		$query = "SELECT * FROM ITEMS RIGHT JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID NATURAL JOIN ITEM_CATEGORY;";
+		$query = "SELECT * FROM ITEMS JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID LEFT JOIN ITEM_CATEGORY ON Item_Price_Entry.ITEM_ID = ITEM_CATEGORY.ITEM_ID;";
 		try {
 			$response = executePreparedQuery($query, array()); // Adjusted parameter structure
 			if ($response[0]) { // Query executed properly
@@ -174,14 +174,14 @@ class Item_info
 		}
 	}
 
-	static function getCurrentPrice($ITEM_ID)
-	{
+	static function getCurrentPrice($ITEM_ID, $STORE_ID)
+	{ //print_r($ITEM_ID); print_r($STORE_ID);
 		if (Item_info::getItemInfo($ITEM_ID) == "NO_ITEM_FOUND") {
 			return "INVALID_ITEM_ID";
 		}
-		$query = "SELECT Item_Price FROM `Item_Price_Entry` WHERE ITEM_ID = ? ORDER BY TIME_UPDATED DESC LIMIT 1";
+		$query = "SELECT Item_Price FROM `Item_Price_Entry` WHERE ITEM_ID = ? AND STORE_ID = ? ORDER BY TIME_UPDATED DESC LIMIT 1";
 		try {
-			$response = executePreparedQuery($query, array('i', $ITEM_ID));
+			$response = executePreparedQuery($query, array('ii', $ITEM_ID, $STORE_ID));
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_PRICE_FOUND";

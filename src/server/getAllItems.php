@@ -5,13 +5,13 @@ require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
 require_once("./GLOBAL_VARS.php");
 
-$items = Item_info::getAllItems();
+$items = Item_info::getHomePageItems();
 
-//print_r($items);
+print_r($items);
 
 foreach ($items as $item) {
     $item_id = Item_info::getItemInfo($item['ITEM_ID']);
-    $item_price = Item_info::getCurrentPrice($item['ITEM_ID']);
+    //$item_price = Item_info::getCurrentPrice($item['ITEM_ID']);
     $store_name = Item_info::getStoreName($item['STORE_ID']);
     if ($item_id == "NO_ITEM_FOUND") continue;
 
@@ -19,7 +19,7 @@ foreach ($items as $item) {
     echo "<aside>";
     echo "<img src = \"./../server/getItemImage.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\" alt=\"NO IMAGE IN DATABASE\">";
     echo "<h3>" . htmlspecialchars($item['ITEM_NAME']) . "</h3>";
-    echo "<h2>" . $item_price . "$" . "</h2>";
+    echo "<h2>" . htmlspecialchars($item['Item_Price']) . "$" . "</h2>";
     echo "<h1>" . $store_name . "</h1>";
     echo "<button><a href=\"product.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\">See Product Details</a></button>";
     echo "</aside>";
