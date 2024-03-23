@@ -124,6 +124,98 @@ class Item_info
 		}
 	}
 
+	/**
+	 * Summary of ValidateStoreId
+	 * @param mixed $STORE_ID
+	 * @return string
+	 * 
+	 * Returns Status if the STORE_ID Exists in STORE Table
+	 * Sample Responses :
+	 * - STORE_EXISTS
+	 * - INVALID_STORE_ID
+	 */
+	static function ValidateStoreId($STORE_ID)
+	{
+		$query = "SELECT STORE_ID FROM STORE WHERE STORE_ID = ?";
+		try {
+			$response = executePreparedQuery($query, array('s', $STORE_ID)); // Adjusted parameter structure
+			if ($response[0]) { // Query executed properly
+				if ($response[1] === "NO_DATA_RETURNED") {
+					return "INVALID_STORE_ID";
+				}
+				return "STORE_EXISTS";
+			}
+		} catch (Exception $e) {
+			echo "Error occurred, when using Database function to try to validate User.<br>";
+			echo $e->getMessage();
+		}
+	}
+
+	/**
+	 * Summary of getAllItemsAtStore
+	 * @return mixed
+	 * Sample Response :
+	 * - INVALID_STORE_ID
+	 * - [ITEM_ID,ITEM_NAME,CATEGORY_NAME,ITEM_PRICE,ITEM_DESCRIPTION,EXTERNAL_LINK,STORE_ID,Time_Updated]
+	 * - [[ITEM_ID,ITEM_NAME,CATEGORY_NAME,ITEM_PRICE,ITEM_DESCRIPTION,EXTERNAL_LINK,STORE_ID,Time_Updated],[ITEM_ID,ITEM_NAME,CATEGORY_NAME,ITEM_PRICE,ITEM_DESCRIPTION,EXTERNAL_LINK,STORE_ID,Time_Updated]]
+	 */
+	static function getAllItemsAtStore($STORE_ID)
+	{
+		if (Item_info::ValidateStoreId($STORE_ID) == "INVALID_STORE_ID") {
+			return "INVALID_STORE_ID";
+		}
+
+		$query = "SELECT 
+			ITEMS.ITEM_ID, 
+			ITEMS.ITEM_NAME,
+			ITEM_CATEGORY.CATEGORY_NAME, 
+			Latest_Price_Entry.Item_Price, 
+			ITEMS.ITEM_DESCRIPTION, 
+			ITEMS.EXTERNAL_LINK, 
+			Latest_Price_Entry.STORE_ID, 
+			Latest_Price_Entry.Time_Updated
+		FROM 
+			ITEMS 
+		LEFT JOIN 
+			ITEM_CATEGORY ON ITEMS.ITEM_ID = ITEM_CATEGORY.ITEM_ID
+		LEFT JOIN (
+			SELECT 
+				ITEM_ID, 
+				STORE_ID, 
+				Item_Price, 
+				Time_Updated
+			FROM 
+				Item_Price_Entry
+			WHERE 
+				(ITEM_ID, Time_Updated) IN (
+					SELECT 
+						ITEM_ID, 
+						MAX(Time_Updated)
+					FROM 
+						Item_Price_Entry
+					WHERE 
+						STORE_ID = ?
+					GROUP BY 
+						ITEM_ID
+				)
+		) AS Latest_Price_Entry ON ITEMS.ITEM_ID = Latest_Price_Entry.ITEM_ID
+		WHERE 
+			Latest_Price_Entry.STORE_ID = ?";
+		try {
+			$response = executePreparedQuery($query, array('ss', $STORE_ID, $STORE_ID)); // Adjusted parameter structure
+			if ($response[0]) { // Query executed properly
+				if ($response[1] === "NO_DATA_RETURNED") {
+					return "NO_ITEMS_IN_DATABASE";
+				} else if (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
+					return $response[1];
+				}
+			}
+		} catch (Exception $e) {
+			echo "Error occurred, when using Database function to try to validate User.<br>";
+			echo $e->getMessage();
+		}
+	}
+
 	static function getHomePageItems()
 	{
 		$query = "SELECT * FROM ITEMS RIGHT JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID  LEFT JOIN ITEM_CATEGORY ON ITEMS.ITEM_ID = ITEM_CATEGORY.ITEM_ID ";
