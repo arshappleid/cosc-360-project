@@ -52,33 +52,60 @@ class Item_info_Test extends TestCase
 
 
     /** @test */
-    public function getAllItems_GotAllItems()
+    public function getAllItemsAtStore_GotAllItems()
     {
-        $result = Item_info::getAllItems();
+        $result = Item_info::getAllItemsAtStore("1");
         $this->assertisArray($result);
+    }
+
+    /** @test */
+    public function getAllItemsAtStore_InvalidStore()
+    {
+        $result = Item_info::getAllItemsAtStore("99");
+        $this->assertEquals($result, "INVALID_STORE_ID");
     }
 
 
     /** @test */
     public function getAllPrices_ValuesExist()
     {
-        $resp = Item_info::getAllPrices_Latest_To_Oldest("1");
+        $resp = Item_info::getAllPrices_Latest_To_Oldest("1", "1");
         $this->assertIsArray($resp);
-        $this->assertArrayHasKey('TIME_UPDATED', $resp[0]);
-        $this->assertArrayHasKey('Item_Price', $resp[0]);
+        $this->assertArrayHasKey('TIME_UPDATED', $resp);
+        $this->assertArrayHasKey('Item_Price', $resp);
     }
 
     /** @test */
     public function getAllPrices_InvalidItemID()
     {
-        $resp = Item_info::getAllPrices_Latest_To_Oldest("99");
+        $resp = Item_info::getAllPrices_Latest_To_Oldest("99", "1");
         $this->assertEquals($resp, "INVALID_ITEM_ID");
     }
 
     /** @test */
+    public function getAllPrices_INVALID_STORE_ID()
+    {
+        $resp = Item_info::getAllPrices_Latest_To_Oldest("1", "99");
+        $this->assertEquals($resp, "INVALID_STORE_ID");
+    }
+    /** @test */
     public function getAllPrices_NoRecordsFound()
     {
-        $resp = Item_info::getAllPrices_Latest_To_Oldest("3");
+        $resp = Item_info::getAllPrices_Latest_To_Oldest("2", "2");
         $this->assertEquals($resp, "NO_ENTRIES_FOUND");
+    }
+
+    /** @test */
+    public function ValidateStoreId_Valid_Store_ID()
+    {
+        $resp = Item_info::ValidateStoreId("1");
+        $this->assertEquals($resp, "STORE_EXISTS");
+    }
+
+    /** @test */
+    public function ValidateStoreId_InValid_Store_ID()
+    {
+        $resp = Item_info::ValidateStoreId("99");
+        $this->assertEquals($resp, "INVALID_STORE_ID");
     }
 }
