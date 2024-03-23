@@ -220,7 +220,7 @@ class Item_info
 	{
 		$query = "SELECT * FROM ITEMS RIGHT JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID  LEFT JOIN ITEM_CATEGORY ON ITEMS.ITEM_ID = ITEM_CATEGORY.ITEM_ID ";
 		try {
-			$response = executePreparedQuery($query, array('ss', $STORE_ID, $STORE_ID)); // Adjusted parameter structure
+			$response = executePreparedQuery($query, array()); // Adjusted parameter structure
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_ITEMS_IN_DATABASE";
