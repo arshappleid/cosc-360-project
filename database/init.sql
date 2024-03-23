@@ -157,3 +157,9 @@ INSERT INTO
         STORE_ID, ITEM_ID, Item_Price, Time_Updated
     )
 VALUES (1, 2, 150.00, NOW());
+
+INSERT INTO
+    Item_Price_Entry (
+        STORE_ID, ITEM_ID, Item_Price, Time_Updated
+    )
+VALUES (4,3,3,75.69,NOW());
