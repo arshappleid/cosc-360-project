@@ -1,4 +1,8 @@
 <?php
+//$host = "localhost:;
+//$database = "db_68424464";
+//$user = "68424464";   // i created a new user using this login for the db
+//$password = "68424464";
 $host = "mysql-server";  // docker container name
 $database = "market_database";
 $user = "root";   // i created a new user using this login for the db

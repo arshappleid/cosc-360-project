@@ -68,12 +68,13 @@ class Comments
 	 * Return Values:
 	 * - COMMENT_DELETED
 	 * - COMMENT_NOT_DELETED
+	 * - COMMENT_NOT_EXISTS
 	 *
 	 * Deletes the comment , given the comment ID.
 	 */
 	static function deleteComment($Comment_Id)
 	{
-		if (commentExists($Comment_Id) == "COMMENT_NOT_EXISTS")
+		if (Comments::commentExists($Comment_Id) == "COMMENT_NOT_EXISTS")
 			return "COMMENT_NOT_EXISTS";
 
 		$query = "DELETE FROM Comments WHERE COMMENT_ID = ?";

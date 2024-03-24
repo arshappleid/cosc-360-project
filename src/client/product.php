@@ -63,6 +63,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 				<input type="text" placeholder="Search...">
 				<?php
 				$stores = Item_info::getAllStoreList();
+				$stores = Item_info::getAllStoreList();
 				if (count($stores) == 0) {
 					echo $stores;
 				} else {
