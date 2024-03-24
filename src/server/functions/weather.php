@@ -3,6 +3,7 @@ include_once 'db_connection.php';
 
 class weather
 {
+	private static $UPDATE_WEATHER_EVERY_N_MINUTES = 30;
 	private static $API_URL_1 = "https://api.open-meteo.com/v1/forecast?latitude=";
 	private static $API_URL_2 = "&longitude=";
 	private static $API_URL_3 = "&current_weather=true&timezone=auto";
@@ -12,24 +13,24 @@ class weather
 	 * @param string $CITY_NAME The name of the city.
 	 * @return string 'UPDATED' if the weather has been updated in the last 15 minutes, otherwise 'NOT_UPDATED'.
 	 */
-	static function weatherUpdatedInThePast15Mins($CITY_NAME)
+	static function weatherUpdatedInThePastNMins($CITY_NAME)
 	{
 
 		$query = "SELECT CITY_NAME,
             (CASE 
-                WHEN TIMESTAMPDIFF(MINUTE, TIME_UPDATED, NOW()) <= 15 THEN 'UPDATED'
+                WHEN TIMESTAMPDIFF(MINUTE, TIME_UPDATED, NOW()) <= ? THEN 'UPDATED'
                 ELSE 'NOT_UPDATED'
-            END) AS 'UpdatedInLast15Minutes'
+            END) AS 'UpdatedInLastNMinutes'
         FROM WEATHER
         WHERE CITY_NAME = ?";
 
 		try {
-			$resp = executePreparedQuery($query, array('s', $CITY_NAME));
+			$resp = executePreparedQuery($query, array('ss', weather::$UPDATE_WEATHER_EVERY_N_MINUTES, $CITY_NAME));
 			if ($resp[0] == true) {
 				if ($resp[1] == "NO_DATA_RETURNED") {
 					return "COULD_NOT_FETCH_UPDATE_STATUS";
 				}
-				return $resp[1]['UpdatedInLast15Minutes'];
+				return $resp[1]['UpdatedInLastNMinutes'];
 			}
 			return "NOT_UPDATED";
 		} catch (Exception $e) {
@@ -45,7 +46,7 @@ class weather
 	 */
 	public static function getWeather($CITY_NAME)
 	{
-		if (self::weatherUpdatedInThePast15Mins($CITY_NAME) === "NOT_UPDATED") {
+		if (self::weatherUpdatedInThePastNMins($CITY_NAME) === "NOT_UPDATED") {
 			self::updateWeather($CITY_NAME);
 		}
 		$cityNameLike = '"%' . $CITY_NAME . '%"';

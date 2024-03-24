@@ -7,9 +7,9 @@ class weatherTest extends TestCase
 {
 	static $CITYNAME = "Kelowna";
 	/** @test */
-	public function weatherUpdatedInThePast15Mins_Test()
+	public function weatherUpdatedInThePastNMins_Test()
 	{
-		$resp = weather::weatherUpdatedInThePast15Mins(weatherTest::$CITYNAME);
+		$resp = weather::weatherUpdatedInThePastNMins(weatherTest::$CITYNAME);
 		$this->assertIsString($resp);
 	}
 
