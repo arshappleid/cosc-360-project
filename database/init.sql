@@ -33,6 +33,47 @@ CREATE TABLE ITEM_CATEGORY (
 CREATE TABLE CATEGORY_INFO (
     CATEGORY_NAME VARCHAR(15) REFERENCES ITEM_CATEGORY (CATEGORY_NAME), CATEGORY_DESCRIPTION VARCHAR(255)
 );
+
+CREATE TABLE WEATHER (
+    CITY_NAME VARCHAR(255) PRIMARY KEY, LATITUDE FLOAT(10, 6) NOT NULL, LONGITUDE FLOAT(10, 6) NOT NULL, CURRENT_WEATHER_CELCIUS FLOAT(5, 2), WINDSPEED_KMH FLOAT(5, 2), WIND_DIRECTION FLOAT(5, 2), TIME_UPDATED DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert into Weather
+INSERT INTO
+    WEATHER (
+        CITY_NAME, LATITUDE, LONGITUDE
+    )
+VALUES (
+        'Toronto', 43.651070, -79.347015
+    ),
+    (
+        'Montreal', 45.508888, -73.561668
+    ),
+    (
+        'Vancouver', 49.282730, -123.120735
+    ),
+    (
+        'Calgary', 51.044733, -114.071883
+    ),
+    (
+        'Edmonton', 53.546124, -113.493823
+    ),
+    (
+        'Ottawa', 45.421530, -75.697193
+    ),
+    (
+        'Winnipeg', 49.895077, -97.138451
+    ),
+    (
+        'Quebec City', 46.813878, -71.207981
+    ),
+    (
+        'Hamilton', 43.255721, -79.871102
+    ),
+    (
+        'Kelowna', 49.887952, -119.496011
+    );
+
 -- Insert into users
 INSERT INTO
     USERS (
@@ -170,4 +211,8 @@ INSERT INTO
     Item_Price_Entry (
         STORE_ID, ITEM_ID, Item_Price, Time_Updated
     )
+<<<<<<< HEAD
 VALUES (3,3,75.69,NOW());
+=======
+VALUES (4, 3, 3, 75.69, NOW());
+>>>>>>> 1a3fb46 (Finished Get Weather Api)
