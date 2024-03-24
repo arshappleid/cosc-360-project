@@ -13,36 +13,55 @@ if (isset($item_IDS['ITEM_ID'])) { // Assuming a single item would have 'ITEM_ID
     $item_IDS = [$item_IDS]; // Wrap the single item in an array
 }
 
+$testUserImage = "../../server/images/userImages/admin/test@gmail.com.jpeg";
+$chartImage = "../server/images/chart.jpg";
+$show_button = (isset($_SESSION['USER_EMAIL']) & !isset($_SESSION['ADMIN_EMAIL']));
+$show_chart = true;
+
 foreach ($item_IDS as $item_ID) {
     $store_name = Item_info::getStoreName($item_ID['STORE_ID']);
     if ($item_ID == "NO_ITEM_FOUND") continue;
 
-    echo "<section>";
-    echo "<aside>";
-    echo "<img src = \"./../server/getItemImage.php?ITEM_ID=" . urlencode($item_ID['ITEM_ID']) . "\" alt=\"NO IMAGE IN DATABASE\">";
-    echo "<h3>" . htmlspecialchars($item_ID['ITEM_NAME']) . "</h3>";
-    echo "<h2>" . htmlspecialchars($item_ID['Item_Price']) . "$" . "</h2>";
-    echo "<h1>" . $store_name . "</h1>";
-    echo "</aside>";
-    echo "<article>";
+    echo "<div class = \"first\">";
+        echo "<div class = \"left\">";
+            echo "<img src = \"./../server/getItemImage.php?ITEM_ID=" . urlencode($item_ID['ITEM_ID']) . "\" alt=\"NO IMAGE IN DATABASE\">";
+            echo "<div id=\"item-name\">" . ($item_ID['ITEM_NAME']) . "</div>";
+            echo "<div id=\"item-price\">" . ($item_ID['Item_Price']) . "$</div>";
+            echo "<h1>" . $store_name . "</h1>";
+            //echo "<button id=\"comment-button\">Add Comment</button>";
+        echo "</div>";
+        echo "<div class = \"right\">";
+            echo "<img src =\"" . $chartImage . "\" class='chart'></div>";
+        echo "</div>";
+    echo "</div>";
 
-    // Display comments
-    $comments = Comments::getAllCommentsForItem($item_ID['ITEM_ID']);
-    if (is_array($comments)) {
-        if (count($comments) == 0) {
-            echo "<h4>No Comments Yet.</h4>";
-        } else {
-            echo "<table id=\"comment_table\">";
-            foreach ($comments as $comment) {
-                echo "<tr>";
-                echo "<td>" . htmlspecialchars(User_management::getUser_First_Last_Name($comment['USER_ID'])) . "</td>";
-                echo "<td>" . htmlspecialchars($comment['COMMENT_TEXT']) . "</td>";
-                echo "<td>" . (new DateTime($comment['DATE_TIME_ADDED']))->format($COMMENT_DATE_TIME_FORMAT) . "</td>";
-                echo "</tr>";
+    echo '<form id="add-comment-form" action="../server/addcomment.php">' .
+    '<label for="add-comment-text" id="form-label">Add Comment</label>' .
+    '<textarea id="add-comment-text" name="add-comment-text"></textarea>' .
+    '<button type="submit">Submit</button>' .
+    '</form>';
+
+    echo "<div class = \"second\">";
+        echo "<div class = \"all-comments\">";    
+
+            // Display comments
+            $comments = Comments::getAllCommentsForItem($item_ID['ITEM_ID']);
+            if (is_array($comments)) {
+                if (count($comments) == 0) {
+                    echo "<h4>No Comments Yet.</h4>";
+                } else {
+                    foreach ($comments as $comment) {
+                        echo "<div class=\"comment-container\">";
+                        echo "<div class=\"user-info\"><div class=\"user-id\">" . User_management::getUser_First_Last_Name($comment['USER_ID']) . "</div>";
+                        echo "<img src =\"" .$testUserImage . "\" class='user-image'></div>";
+                        echo "<p class=\"comment-text\">" . $comment['COMMENT_TEXT'] . "</p>";
+                        echo "</div>";
+
+                    }
+                }
             }
-            echo "</table>";
-        }
-    }
+        echo "</div>";
+    echo "</div>";
 
     // Render the add comment form inside the article for each item.
     if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
@@ -55,7 +74,5 @@ foreach ($item_IDS as $item_ID) {
         echo "</form>";
     }
 
-    echo "</article>";
-    echo "</section>";
 }
 

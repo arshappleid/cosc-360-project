@@ -63,7 +63,6 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 				<input type="text" placeholder="Search...">
 				<?php
 				$stores = Item_info::getAllStoreList();
-				$stores = Item_info::getAllStoreList();
 				if (count($stores) == 0) {
 					echo $stores;
 				} else {
@@ -80,100 +79,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		<?php include_once './../server/breadcrumbs.php' ?>
 		<div class="underheadercontainer">
 				<div class="overlay">
-                <div class="first">
-						<div class = "left">
-
-                            <?php
-                            //code to decide if comment-button and/or chart image should be shown;
-                            //both these are accessed in the javascript code at bottom of page
-                            $show_button = isset($_SESSION['USER_EMAIL']) & !isset($_SESSION['ADMIN_EMAIL']);
-                            $show_chart = true;
-
-                            //$item_ID = $_GET['ITEM_ID'];
-                            $item_ID = 1;
-                            $item = item_info::getItemInfo($item_ID);
-                            $itemName = $item['ITEM_NAME'];
-                            $itemPrice = 2.99; //getItemPrice($item_ID);
-                            $itemImage = "../server/images/banana.jpg";
-                            $chartImage = "../server/images/chart.jpg";
-
-
-                            echo "<img src=" . $itemImage." id=item-image>"
-                            ."<div id=\"item-name\">" . $itemName . "</div>" 
-                            ."<div id=\"item-price\">" . $itemPrice . "</div>"
-                            ."<button id=\"comment-button\">Add Comment</button>";
-                            ?>
-						</div>
-                        <div class="right">
-                            <?php
-                                echo "<img src=" . $chartImage . " id=\"chart\">";
-                            ?>
-                        </div>
-				</div>
-                <!--- adding comments doesnt work yet ---->
-				<form id="add-comment-form" action="../server/addcomment.php">
-						<label for="add-comment-text" id = "form-label">Add Comment</label>
-						<textarea id="add-comment-text" name="add-comment-text"></textarea>
-						<button type="submit">Submit</button>
-				</form>
-                    <div class="second">
-                        <div id = "all-comments">
-                            <?php
-                            //posts the user ID, comment ID and text for all the comments. 
-                            //the  user image is a placeholder 
-                            if (isset($item_ID)){
-                                $item_comments = comments::getAllCommentsForItem($item_ID);
-                                if ($item_comments){
-                                    foreach($item_comments as $comment){
-                                        $commentUserID = $comment['USER_ID'];
-                                        $commentID = $comment['COMMENT_ID'];
-                                        $commentText = $comment['COMMENT_TEXT'];
-                                        $testUserImage =  "../../server/images/userImages/admin/test@gmail.com.jpeg";
-
-                                        echo "<div class=\"comment-container\">"
-                                        ."<div class=\"user-info\"><div class=\"user-id\">user id: " . $commentUserID . "</div>"
-                                        ."<img src =\"".$testUserImage . "\" class='user-image'></div>"
-                                        ."<p class=\"comment-text\">" . $commentText . "</p></div>";
-                                    }
-                                }
-                            }
-                            ?>
-                        </div>
-                        <div id = "similar-items">
-                            <?php
-                            /*this code is not functional, I just filled out what I think would be needed 
-                            $similarItems = item_info::getSimilarItems($item_ID);
-                            if ($similarItems){
-                                foreach($similarItems as $similarItem){
-                                 $similarItemName = $similarItem['ITEM_NAME'];
-                                 $similarItemPrice = getPrice($similarItem['ITEM_ID']);
-                                 $similarItemImage = $similarItem['DISPLAY_IMAGE'];
-
-                                 echo "<div class=\"similar-item-info\"><img src=\"banana.jpg\">"
-                                 ."<div class=\"similar-item-name\">" . $similarItemName . "</div>"
-                                 ."<div class=\"similar-item-price\">" . $similarItemPrice . "</div></div>";
-                                
-                                }
-                            }
-                            */
-                            ?>
-                            <?php
-                            //this code populates similar-items with placeholders... something like the code above can replace it 
-                            $similarItemName = "Similar Item";
-                            $similarItemPrice = "$2.99";
-                            $similarItemImage = "../server/images/banana.jpg";
-
-                            $numSimilarItems= 3 ;
-                            for ($numSimilarItems;$numSimilarItems>0; $numSimilarItems--){
-                                echo "<div class=\"similar-item-info\"><img src=" . $similarItemImage . ">"
-                                ."<div class=\"similar-item-name\">" . $similarItemName . "</div>"
-                                ."<div class=\"similar-item-price\">" . $similarItemPrice . "</div></div>";
-                            }
-                            echo "</div>";
-                            ?>                  
-						<?php					
-						?>
-					</div>
+					<?php echo "<div id = \"item_list\"></div>"; ?>
 				</div>
 				<div class="triangleextendblack"></div>
 				<div class="triangle-element"></div>
@@ -198,50 +104,9 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			</nav>
 		</div>
 	</footer>
-	<?php
-	echo "<script type=\"text/javascript\" src=\"./scripts/product.js\"></script>";
-	?>
-
-<script>
-    //this funuction centers the item image and info if the chart img is not rendered in the right container
-    $(document).ready(function() {
-        // Check if the right container has an image
-        var showChart = <?php echo json_encode($show_chart); ?>;
-        if (!showChart) {
-            $('.right').hide();
-            $('.first').css('justify-content','center');
-        }
-    });
-
-    $(document).ready(function() {
-			// This function should make the visible button if the right conditions are set
-			// If they aren't, top and bottom margin for product-info are 1em respectively
-			// If the button is there, then
-			var show_button = <?php echo json_encode($show_button); ?>;
-			// Change margins if button is visible
-			if (!show_button) {
-				$('.left').css({
-					'position': 'relative', // Change position to relative
-                'top': '1em' // Move down by 1em
-				});
-                $('#comment-button').hide();
-			}
-		});
-        //this form reveals the message form if the comment button is clicked
-        document.addEventListener("DOMContentLoaded", function() {
-        const commentButton = document.getElementById("comment-button");
-        const commentForm = document.getElementById("add-comment-form");
-
-        commentButton.addEventListener("click", function() {
-            if (commentForm.style.display === "none") {
-                commentForm.style.display = "block";
-                commentButton.textContent = "Hide Comment Form";
-            } else {
-                commentForm.style.display = "none";
-                commentButton.textContent = "Add Comment";
-            }
-        });
-    });
-</script>
-
+	<script>
+    var showChart = <?php echo json_encode($show_chart); ?>;
+    var showButton = <?php echo json_encode($show_button); ?>;
+	</script>
+	<script src="scripts/product.js"></script>";
 </body>

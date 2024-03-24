@@ -8,34 +8,7 @@ header {
     border: solid 1px var(--primary-color);
     padding: 2.5% 2.5% 2.5% 2.5%;
 }
-section {
-    height: 100px;
-    margin-top: 5%;
-    width: 100%;
-    float: left;
-    clear: both;
-}
-aside {
-    /*Item Names*/
-    height: 100px;
-    width: 30%;
-    border: solid 1px var(--primary-color);
-    float: left;
-    clear: both;
-}
-article {
-    /*Item Comments*/
-    text-align: center;
-    height: 100px;
-    overflow-y: auto;
-    clear: right;
-    border: solid 1px var(--primary-color);
-}
-#comment_table {
-    width: 100%;
-    align-items: center;
-    grid-template-columns: 1fr auto 1fr; /* Match the container columns */
-}
+
 #item_list {
     margin-bottom: 30%;
 }
@@ -122,10 +95,12 @@ article {
     align-items: center;
     color: grey;
 }
+
 .user-image{
     height: 3em;
     width: 3em;
 }
+
 #all-comments{
     display: flex;
     flex-direction: column;
@@ -133,6 +108,7 @@ article {
     width: 70%;
     margin-right: 0.5em;
 }
+
 .comment-container{
     display: flex;
     flex-direction: row;
@@ -142,13 +118,12 @@ article {
     width: 100%;
     margin-bottom: 0.25em;
 }
+
 .comment-text{
     margin-left: 1em;
     
 }
-#similar-items{
-    width: 30%;
-}
+
 .second{
     display: flex;
     flex-direction: row;
@@ -156,24 +131,3 @@ article {
     height: auto;
 }
 
-.similar-item-info{
-    height: 14em;
-    margin-bottom: 0.5em;
-    display: flex;
-    flex-direction: column;
-    border-radius: 5px;
-    margin-left: 0.25em;
-}
-
-.similar-item-info img{
-    height: 11.5em; 
-    width: 100%;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-.similar-item-name, .similar-item-price{
-    height: 1.25em;
-    width: 100%;
-    background-color: white;
-    text-align: center;
-}

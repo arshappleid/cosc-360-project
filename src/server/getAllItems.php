@@ -17,7 +17,7 @@ foreach ($items as $item) {
 
     echo "<section>";
     echo "<aside>";
-    echo "<img src = \"./../server/getItemImage.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\" alt=\"NO IMAGE IN DATABASE\">";
+    echo "<img class =\"display-image\" src = \"./../server/getItemImage.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\" alt=\"NO IMAGE IN DATABASE\">";
     echo "<h3>" . htmlspecialchars($item['ITEM_NAME']) . "</h3>";
     echo "<h2>" . htmlspecialchars($item['Item_Price']) . "$" . "</h2>";
     echo "<h1>" . $store_name . "</h1>";

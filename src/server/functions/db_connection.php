@@ -216,31 +216,40 @@ function updateImage2($table, $whereCol, $whereValue, $uploadDir = "images/temp"
  * Return Values
  * - COULD_NOT_GET_IMAGE
  */
-function getImage($table, $whereCol, $whereValue)
-{
+function getImage($table, $whereCol, $whereValue) {
   global $connection;
   $query = "SELECT DISPLAY_IMAGE FROM $table WHERE $whereCol = ?";
+  
+  $response = [
+      'status' => 'ERROR',
+      'mime' => 'image/jpeg', // Default MIME type; adjust as needed based on your actual image types
+      'data' => ''
+  ];
 
   if ($stmt = $connection->prepare($query)) {
-    $stmt->bind_param("s", $whereValue);
+      $stmt->bind_param("s", $whereValue);
 
-    if ($stmt->execute()) {
-      $result = $stmt->get_result();
-      if ($row = $result->fetch_assoc()) {
-        if (empty($row["DISPLAY_IMAGE"])) {
-          return "NO IMAGE";
-        } else {
-          return $row["DISPLAY_IMAGE"];
-        }
+      if ($stmt->execute()) {
+          $result = $stmt->get_result();
+          if ($row = $result->fetch_assoc()) {
+              if (empty($row["DISPLAY_IMAGE"])) {
+                  $response['status'] = "NO IMAGE";
+              } else {
+                  $response['status'] = "SUCCESS";
+                  $response['data'] = $row["DISPLAY_IMAGE"];
+              }
+          } else {
+              $response['status'] = "NO_IMAGE_FOUND";
+          }
       } else {
-        return "NO_IMAGE_FOUND";
+          $response['status'] = "COULD_NOT_EXECUTE_QUERY";
       }
-    } else {
-      return "COULD_NOT_EXECUTE_QUERY";
-    }
 
-    $stmt->close();
+      $stmt->close();
   } else {
-    return "COULD_NOT_PREPARE_STATEMENT";
+      $response['status'] = "COULD_NOT_PREPARE_STATEMENT";
   }
+
+  return $response;
 }
+
