@@ -2,6 +2,8 @@
 include './functions/admin_management.php';
 
 $users = Admin_management::getAllUsers();
+//$item = Admin_management::getItemID("Smartwatch", 2);
+//print_r($item);
 //print_r($users);
 //$itemid = Admin_management::getItemID("Laptop", 1);
 //print_r($itemid);

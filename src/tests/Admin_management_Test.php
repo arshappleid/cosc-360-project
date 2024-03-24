@@ -152,7 +152,7 @@ class Admin_management_Test extends TestCase
     public function getItemID_ItemNotFound()
     {
         //assumes Smartwatch is not added to store 3
-        $this->assertEquals("ITEM_NOT_FOUND", Admin_management::getItemID("Smartwatch", 3));
+        $this->assertEquals("ITEM_NOT_FOUND", Admin_management::getItemID("Smartwatch", 2));
     }
 
     /*function itemExistsInStore($ITEM_ID,$STORE_ID){
