@@ -206,12 +206,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
     $(document).ready(function() {
         // Check if the right container has an image
         var showChart = <?php echo json_encode($show_chart); ?>;
-
-        // If the right container doesn't have an image
         if (!showChart) {
-            // Adjust the width of the right container
-            //$('.right').css('width', '0%').css('height','0');
-            //$('.first').css('justify-content','center');
             $('.right').hide();
             $('.first').css('justify-content','center');
         }
