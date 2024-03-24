@@ -42,3 +42,138 @@ article {
 #avatar_img {
     height: 15%;
 }
+.first{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    height: 22em;
+}
+.left{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 0.25em;
+}
+#item-image{
+    height: 18em; /* Adjusted height of the image, subtracting the total height of the other elements */
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+#item-name,#item-price{
+    height: 1.1em;
+    width: 100%;
+    background-color: white;
+    text-align: center;
+}
+#item-price{
+    padding-bottom: 0.125em;
+}
+#comment-button{
+    height: 2em;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+}
+
+.right{
+    width: 50%;
+    height: 100%;
+    margin-left: 0.25em;
+}
+.right img{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+.overlay{
+    margin-top: 1em;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.overlay > * {
+    margin-bottom: 2em; /* Adjust margin as needed for space between items */
+}
+
+#add-comment-form {
+    display: none;
+    background-color: transparent;
+    width: 350px;
+
+}
+#form-label{
+    width: 100%;
+    background-color: white;
+    color: var(--secondary-color);
+}
+
+#add-comment-text{
+    width: 30em;
+    height: 5em;
+}
+
+.user-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: grey;
+}
+.user-image{
+    height: 3em;
+    width: 3em;
+}
+#all-comments{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    margin-right: 0.5em;
+}
+.comment-container{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    border-radius: 10px;
+    padding: 0.25em;
+    width: 100%;
+    margin-bottom: 0.25em;
+}
+.comment-text{
+    margin-left: 1em;
+    
+}
+#similar-items{
+    width: 30%;
+}
+.second{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    height: auto;
+}
+
+.similar-item-info{
+    height: 14em;
+    margin-bottom: 0.5em;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    margin-left: 0.25em;
+}
+
+.similar-item-info img{
+    height: 11.5em; 
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.similar-item-name, .similar-item-price{
+    height: 1.25em;
+    width: 100%;
+    background-color: white;
+    text-align: center;
+}
