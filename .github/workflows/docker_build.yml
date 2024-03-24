@@ -41,4 +41,4 @@ jobs:
               run: docker exec web-server sh -c "phpunit --testdox tests/Item_info_Test.php"
 
             - name: Execute UserManagement tests
-              run: docker exec web-server sh -c "phpunit --testdox tests/User_management_Test.php"
+              run: docker exec web-server sh -c "phpunit --testdox tests/weatherTest.php"
