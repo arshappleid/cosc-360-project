@@ -352,7 +352,8 @@ class User_management
 		try {
 			if (User_management::userExists($USER_EMAIL) == "USER_NOT_EXISTS")
 				return "USER_NOT_EXISTS";
-			$user_ID = executePreparedQuery("SELECT * FROM USERS WHERE Email = ?;", array('i', $USER_EMAIL))[1]["USER_ID"];
+			///fixed this here to specify that its a stirng and not integer
+			$user_ID = executePreparedQuery("SELECT * FROM USERS WHERE Email = ?;", array('s', $USER_EMAIL))[1]["USER_ID"];
 			return $user_ID;
 		} catch (Exception $e) {
 			echo "Error occurred, when using Database static function to try to validate User.<br>";

@@ -18,6 +18,12 @@ $chartImage = "../server/images/chart.jpg";
 $show_button = (isset($_SESSION['USER_EMAIL']) & !isset($_SESSION['ADMIN_EMAIL']));
 $show_chart = true;
 
+//getting user id and user emai
+if ($show_button){
+    $userEmail = $_SESSION['USER_EMAIL'];
+    $userID = User_management::getAllUserData($userEmail)['USER_ID'];
+}
+
 foreach ($item_IDS as $item_ID) {
     $store_name = Item_info::getStoreName($item_ID['STORE_ID']);
     if ($item_ID == "NO_ITEM_FOUND") continue;
@@ -35,17 +41,23 @@ foreach ($item_IDS as $item_ID) {
         echo "</div>";
     echo "</div>";
 
-    echo '<form id="add-comment-form" action="../server/addcomment.php">' .
-    '<label for="add-comment-text" id="form-label">Add Comment</label>' .
-    '<textarea id="add-comment-text" name="add-comment-text"></textarea>' .
-    '<button type="submit">Submit</button>' .
-    '</form>';
+    echo"<div id=\"form-container\">
+            
+                <button id=\"comment-button\">Show Comment Form</button>";
+                echo '<form id="add-comment-form" action="../server/addcomment.php" method="post">' .
+                '<input type="hidden" id="item-id" name="ITEM_ID" value="'. $_GET['ITEM_ID'] . '"/>'.
+                '<input type="hidden" id="user-email" name="USER_EMAIL" value="'. $userEmail . '"/>'.
+                '<textarea id="add-comment-text" name="COMMENT_TEXT"></textarea>' .
+                '<button type="submit">Add Comment</button>' .
+                '</form>                
+            </div>';
 
     echo "<div class = \"second\">";
-        echo "<div class = \"all-comments\">";    
+        echo "<div class = \"all-comments\">"; 
+        
 
             // Display comments
-            $comments = Comments::getAllCommentsForItem($item_ID['ITEM_ID']);
+            $comments = Comments::getAllCommentsForItemDescending($item_ID['ITEM_ID']);
             if (is_array($comments)) {
                 if (count($comments) == 0) {
                     echo "<h4>No Comments Yet.</h4>";
@@ -60,19 +72,19 @@ foreach ($item_IDS as $item_ID) {
                     }
                 }
             }
+
         echo "</div>";
     echo "</div>";
-
-    // Render the add comment form inside the article for each item.
-    if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
-        $email = isset($_SESSION['USER_EMAIL']) ? $_SESSION['USER_EMAIL'] : $_SESSION['ADMIN_EMAIL'];
-        echo "<form action=\"./../server/addcomment.php\" action=\"post\">";
-        echo "<input type=\"text\" placeholder=\"Add new Comment...\" name=\"COMMENT_TEXT\">";
-        echo "<input type=\"hidden\" name=\"ITEM_ID\" value=\"" . htmlspecialchars($item_ID['ITEM_ID']) . "\">";
-        echo "<input type=\"hidden\" name=\"USER_EMAIL\" value=\"" . htmlspecialchars($email) . "\">";
-        echo "<button type=\"submit\">Add Comment</button>";
-        echo "</form>";
-    }
-
 }
+?>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    var showButton = <?php echo $show_button?>;
+    if (!showButton){
+        console.log($('#comment-button').length);
+        $('#comment-button').hide();
+    }
+</script>
 

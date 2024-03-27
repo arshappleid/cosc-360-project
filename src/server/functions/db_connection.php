@@ -7,7 +7,7 @@ $password = "68424464";
 //$database = "market_database";
 //$user = "root";   // i created a new user using this login for the db
 //$password = "secret";
-$connection = mysqli_connect($host, $user, $password, $database);
+//$connection = mysqli_connect($host, $user, $password, $database);
 
 // Check connection
 if ($connection->connect_error) {
