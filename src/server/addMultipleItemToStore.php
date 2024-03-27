@@ -16,7 +16,7 @@ $externalLink = $data['EXTERNAL_LINK'] ?? null;
 
 // Error handling and message display
 if (!empty($itemName) && !empty($description) && !empty($storeId) && !empty($itemPrice) && !empty($externalLink)) {
-    $resp = addItem($itemName, $description, $storeId, $itemPrice, $externalLink);
+    $resp = Admin_management::addItem($itemName, $description, $storeId, $itemPrice, $externalLink);
     $response = ["status" => $resp];
 } else {
     $response = ["status" => "Not All Values Provided"];

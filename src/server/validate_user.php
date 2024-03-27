@@ -2,26 +2,27 @@
 session_start();
 require_once './functions/user_management.php';
 
-//ini_set('display_errors', 1);
-//error_reporting(E_ALL);
 
-$email = $_POST['email'];
-$hashedPassword = $_POST['password'];
-//print_r($email);
-//print_r($hashedPassword);
-
-	if (isset($email) && isset($hashedPassword)) {
-		if (User_management::validateUserLogin($email, $hashedPassword) == "VALID_LOGIN") {
-			//print_r("shit not broken");
-			$_SESSION['USER_EMAIL'] = $email;
-			header('Location: ../client/home.php');
-			exit();
-		} else {
-			$_SESSION['MESSAGE'] = 'INVALID LOGIN';
-			header('Location: ../client/login.php');
-			exit();
+try {
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		$email = $_POST['email'];
+		$hashedPassword = $_POST['password'];
+		if (isset($email) && isset($hashedPassword)) {
+			if (User_management::validateUserLogin($email, $hashedPassword) == "VALID_LOGIN") {
+				//print_r("shit not broken");
+				$_SESSION['USER_EMAIL'] = $email;
+				header('Location: ../client/home.php');
+				exit();
+			} else {
+				$_SESSION['MESSAGE'] = 'INVALID LOGIN';
+				header('Location: ../client/login.php');
+				exit();
+			}
 		}
-	}
 
-header('Location: ../server/validate_user.php');
-exit();
+		header('Location: ../server/validate_user.php');
+		exit();
+	}
+} catch (Exception $e) {
+	echo "<script>console.error(" . json_encode($e->getMessage()) . ");</script>";
+}
