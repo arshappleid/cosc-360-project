@@ -119,6 +119,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	</footer>
 	<?php
 	echo "<script type=\"text/javascript\" src=\"./scripts/home.js\"></script>";
+	
 	?>
 
 </body>

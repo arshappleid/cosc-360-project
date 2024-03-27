@@ -128,7 +128,7 @@ class Admin_management{
 	 */
 	static function createAdmin($firstName, $lastName, $email, $md5password, $userImage = null)
 	{
-		if (checkAdminExists($email) == "ADMIN_EXISTS") {
+		if (Admin_management::checkAdminExists($email) == "ADMIN_EXISTS") {
 			return "ADMIN_ALREADY_REGISTERED";
 		}
 		$query = "INSERT INTO Admins(First_Name,Last_Name,Email,MD5_Password) VALUES(?,?,?,?);";
@@ -236,8 +236,8 @@ class Admin_management{
 	 */
 	static function addItem($ITEM_NAME, $ITEM_DESCRIPTION, $STORE_ID, $ITEM_PRICE, $EXTERNAL_LINK)
 	{
-		$ITEM_ID = getItemID($ITEM_NAME,$STORE_ID);
-		if (itemExistsInStore($ITEM_ID, $ITEM_ID)!="ITEM_DOES_NOT_EXIST_IN_STORE") {
+		$ITEM_ID = admin_management::getItemID($ITEM_NAME,$STORE_ID);
+		if (Item_info::itemExists($ITEM_ID)!="ITEM_DOES_NOT_EXIST_IN_STORE") {
 			return "ITEM_WITH_NAME_ALREADY_EXISTS";
 		}
 		global $connection;

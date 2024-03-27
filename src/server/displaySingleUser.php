@@ -5,6 +5,8 @@ if (!isset($_SESSION['USER_EMAIL'])) {
     //die("User email is not set in the session.");
 }  
 
+echo "SESSION_['USER_EMAIL']:" . $_SESSION['USER_EMAIL'];
+
 $users = User_management::getAllUserData($_SESSION['USER_EMAIL']);
 
 //print_r($users);
