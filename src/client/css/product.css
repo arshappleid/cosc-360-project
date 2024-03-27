@@ -9,8 +9,8 @@ header {
     padding: 2.5% 2.5% 2.5% 2.5%;
 }
 
-#item_list {
-    margin-bottom: 30%;
+#item_list > * {
+    margin-bottom: 0.5em;
 }
 #avatar_img {
     height: 15%;
@@ -20,13 +20,31 @@ header {
     flex-direction: row;
     width: 80%;
     height: 22em;
+    align-items: center;
 }
 .left{
     width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    display: inline-block;
+    height: fit-content;
     margin-right: 0.25em;
+    background-color: white;
+    text-align: center;
+    border-radius: 5px;
+}
+h1 {
+    /* Override default font size */
+    font-size: 1.5em; /* Adjust the font size to your preference */
+
+    /* Override default margins */
+    margin: 0; /* Remove default margins */
+    
+    /* Override default font weight */
+    font-weight: normal; /* Change the font weight to normal or other value */
+
+    /* Override default padding */
+    padding: 0; /* Remove default padding */
+
+    font-weight: bold;
 }
 #item-image{
     height: 18em; /* Adjusted height of the image, subtracting the total height of the other elements */
@@ -54,6 +72,7 @@ header {
     width: 50%;
     height: 100%;
     margin-left: 0.25em;
+    background-color: white;
 }
 .right img{
     width: 100%;
@@ -71,22 +90,30 @@ header {
     margin-bottom: 2em; /* Adjust margin as needed for space between items */
 }
 
-#add-comment-form {
-    display: none;
-    background-color: transparent;
-    width: 350px;
-
+#form-container{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
 }
-#form-label{
+#add-comment-form {
+    float: right;
+    display: none;
+    border-radius: 5px;
+    margin-left: 1em;
+}
+#add-comment-form label{
     width: 100%;
     background-color: white;
     color: var(--secondary-color);
 }
-
 #add-comment-text{
-    width: 30em;
-    height: 5em;
+    width: 100%;
 }
+#add-comment-form button{
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+}
+
 
 .user-info{
     display: flex;
@@ -105,6 +132,7 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     width: 70%;
     margin-right: 0.5em;
 }

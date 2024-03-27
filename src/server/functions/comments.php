@@ -17,28 +17,39 @@ class Comments
 	 * - COMMENT_ADDED
 	 * - COMMENT_NOT_ADDED
 	 */
-	static function addComment($COMMENT_TEXT, $ITEM_ID, $USER_EMAIL)
-	{
 
-		if (User_management::userExists($USER_EMAIL) == "USER_NOT_EXISTS")
-			return "USER_NOT_EXISTS";
-		if (Item_info::itemExists($ITEM_ID) == "ITEM_NOT_EXISTS")
-			return "ITEM_NOT_EXISTS";
-		$user_ID = User_management::getUserID($USER_EMAIL);
+	 static function addComment($COMMENT_TEXT, $ITEM_ID, $USER_EMAIL)
+{
+    // Check if the user exists
+    $userExists = User_management::userExists($USER_EMAIL);
+    if ($userExists === "USER_NOT_EXISTS") {
+        return "USER_NOT_EXISTS";
+    }
+    
+    // Get the user ID
+    $user_ID = User_management::getUserID($USER_EMAIL);
 
-		$query = "INSERT INTO Comments(COMMENT_TEXT ,ITEM_ID ,USER_ID, DATE_TIME_ADDED) VALUES(?,?,?,$user_ID,NOW());";
+    // Check if the item exists
+    $itemExists = Item_info::itemExists($ITEM_ID);
+    if ($itemExists === "ITEM_NOT_EXISTS") {
+        return "ITEM_NOT_EXISTS";
+    }
 
-		try {
-			$response = executePreparedQuery($query, array('i', $COMMENT_TEXT, $ITEM_ID, $USER_EMAIL));
-			if ($response[0]) { // Query executed properly
-				return "COMMENT_ADDED";
-			}
-			return "COMMENT_NOT_ADDED";
-		} catch (Exception $e) {
-			echo "Error occurred, when using Database static function to try to validate User.<br>";
-			echo $e->getMessage();
-		}
-	}
+    $query = "INSERT INTO Comments(COMMENT_TEXT, ITEM_ID, USER_ID, DATE_TIME_ADDED) VALUES(?,?,?,NOW())";
+
+    try {
+        $response = executePreparedQuery($query, array('sii', $COMMENT_TEXT, $ITEM_ID, $user_ID));
+        if ($response[0]) {
+            return "COMMENT_ADDED";
+        } else {
+            return "COMMENT_NOT_ADDED";
+        }
+    } catch (Exception $e) {
+        echo "Error occurred when trying to add comment: " . $e->getMessage();
+        return "COMMENT_NOT_ADDED_EXCEPTION";
+    }
+}
+	 
 
 
 	static function commentExists($COMMENT_ID)
@@ -130,4 +141,34 @@ class Comments
 
 		return !empty($data);
 	}
+	static function getAllCommentsForItemDescending($Item_Id)
+{
+    if (Item_info::itemExists($Item_Id) == "ITEM_NOT_EXISTS")
+        return "ITEM_NOT_EXISTS";
+
+    $query = "SELECT * FROM Comments WHERE ITEM_ID = ? ORDER BY DATE_TIME_ADDED DESC";
+    try {
+        $response = executePreparedQuery($query, array('s', $Item_Id));
+
+        if ($response[0] === true) {
+            if (is_array($response[1])) {
+                // Valid Response
+                if (count($response[1]) == 0)
+                    return "NO_COMMENTS_ADDED_YET";
+                elseif (!is_array($response[1][0])) // if the first element is not an array
+                    return array($response[1]);
+
+                return $response[1];
+            } else {
+                return "NO_COMMENTS_ADDED_YET";
+            }
+        }
+    } catch (Exception $e) {
+        echo "Error occurred when using Database static function to try to validate User.<br>";
+        echo $e->getMessage();
+    }
+
+    return !empty($data);
+}
+
 }

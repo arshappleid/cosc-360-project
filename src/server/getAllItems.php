@@ -46,7 +46,7 @@ foreach ($items as $item) {
     // Render the add comment form inside the article for each item.
     if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
         $email = isset($_SESSION['USER_EMAIL']) ? $_SESSION['USER_EMAIL'] : $_SESSION['ADMIN_EMAIL'];
-        echo "<form action=\"./../server/addcomment.php\" action=\"post\">";
+        echo "<form action=\"./../server/addcomment.php\" method=\"post\">";
         echo "<input type=\"text\" placeholder=\"Add new Comment...\" name=\"COMMENT_TEXT\">";
         echo "<input type=\"hidden\" name=\"ITEM_ID\" value=\"" . htmlspecialchars($item['ITEM_ID']) . "\">";
         echo "<input type=\"hidden\" name=\"USER_EMAIL\" value=\"" . htmlspecialchars($email) . "\">";
@@ -57,3 +57,6 @@ foreach ($items as $item) {
     echo "</article>";
     echo "</section>";
 }
+?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
