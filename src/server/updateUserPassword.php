@@ -1,5 +1,5 @@
 <?php
-require_once './functions/User_management.php';
+require_once './functions/user_management.php';
 session_start();
 $oldPassword = $_POST['oldpassword'];
 $newPassword = $_POST['password'];
