@@ -2,13 +2,13 @@
 session_start();
 require_once __DIR__ . './functions/User_management.php';
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//error_reporting(E_ALL);
 
 $email = $_POST['email'];
 $hashedPassword = $_POST['password'];
-print_r($email);
-print_r($hashedPassword);
+//print_r($email);
+//print_r($hashedPassword);
 
 	if (isset($email) && isset($hashedPassword)) {
 		if (User_management::validateUserLogin($email, $hashedPassword) == "VALID_LOGIN") {
