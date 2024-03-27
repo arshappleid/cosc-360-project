@@ -9,11 +9,11 @@ if (!isset($_SESSION['USER_EMAIL'])) {
 }  
 
 var_dump($_SESSION['USER_EMAIL']);
-var_dump($users);
 
 
 
 $users = User_management::getAllUserData($_SESSION['USER_EMAIL']);
+var_dump($users);
 
 echo $users;
 
