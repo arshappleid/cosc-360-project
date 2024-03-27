@@ -322,7 +322,9 @@ class User_management
 	 */
 	static function getAllUserData($USER_EMAIL)
 	{
-		$query = "SELECT * FROM USERS WHERE Email = ?;";
+		$query = "SELECT * FROM USERS WHERE Email = ?
+		UNION
+		SELECT * FROM ADMINS WHERE Email = ?;";
 		try {
 			$response = executePreparedQuery($query, array('s', $USER_EMAIL));
 			if ($response[0]) { // Query executed properly
