@@ -211,8 +211,4 @@ INSERT INTO
     Item_Price_Entry (
         STORE_ID, ITEM_ID, Item_Price, Time_Updated
     )
-<<<<<<< HEAD
-VALUES (3,3,75.69,NOW());
-=======
 VALUES (4, 3, 3, 75.69, NOW());
->>>>>>> 1a3fb46 (Finished Get Weather Api)

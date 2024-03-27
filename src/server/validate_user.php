@@ -16,5 +16,5 @@ if (isset($email) && isset($hashedPassword)) {
 	}
 }
 
-header('Location: ../client/login.php');
+header('Location: ../client/validate_user.php');
 exit();
