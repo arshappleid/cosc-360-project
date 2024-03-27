@@ -19,6 +19,10 @@ This document testifies, all the important tasks / milestones completed by all t
 - Background HTML and CSS
 - Logout Functionality
 - Site Navigation Framework
+- Hosted Site
+- product.php backend
+- admin panel backend
+- user list backend.
 
 
 #### Max Bigwood

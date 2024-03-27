@@ -3,7 +3,7 @@ session_start();
 require_once './functions/User_management.php';
 $email = $_POST['email'];
 $hashedPassword = $_POST['password'];
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
 	if (isset($email) && isset($hashedPassword)) {
 		if (User_management::validateUserLogin($email, $hashedPassword) == "VALID_LOGIN") {
 			//print_r("shit not broken");
@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			exit();
 		}
 	}
-}
 
-header('Location: ../client/login.php');
+header('Location: ../server/validate_user.php');
 exit();

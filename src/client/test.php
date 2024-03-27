@@ -10,6 +10,8 @@ include_once './../server/functions/item_info.php';
 include_once './../server/functions/db_connection.php';
 echo "checkAdminExists Should not exist : function :" . Admin_management::checkAdminExists("test1@gmail.com") . "<br>";
 echo "checkAdminExists Should Exist : function :" .  Admin_management::checkAdminExists("test@gmail.com") . "<br>";
+echo "checkuserexists Should Exist : function :" .  User_management::validateUserLogin("test@gmail.com" , "5f4dcc3b5aa765d61d8327deb882cf99") . "<br>";
+echo "checkuserexists Should Exist : function :" .  User_management::validateUserLogin("test@gmail.com" , "wrongpassword") . "<br>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,29 +33,3 @@ echo "checkAdminExists Should Exist : function :" .  Admin_management::checkAdmi
 </body>
 
 </html>
-<?php
-echo "addItem Function " . addItem("NEW_ITEM", "MY New DEscription", "1", "10.99", "abc.com") . "<br>";
-echo "createUser function , user does not exist :" . User_management::createUser("test2@gmail.com", "TEST", "USER", MD5("password")) . "<br>";
-echo "createUser function , user exists :" . User_management::createUser("test1@gmail.com", "test", "user", MD5("password")) . "<br>";
-
-echo "editUserFirstName function :" . User_management::editUserFirstName("test@gmail.com", "New Name") . "<br>";
-
-echo "editUserLastName function :" .  User_management::editUserLastName("test@gmail.com", "New LastName") . "<br>";
-
-echo "toggleBanUserAccount function :" . toggleBanUserAccount("test@gmail.com") . "<br>";
-echo "deleteComment function :" . deleteComment(1) . "<br>";
-echo "addComment function :" . addComment("MY New comment", 1, "test@gmail.com") . "<br>";
-echo "itemExists should exist function :" . itemExists(1) . "<br>";
-echo "itemExists shot not function :" . itemExists(99) . "<br>";
-echo "getItemID item should exist function :" . getItemID("Laptop","1") . "<br>";
-echo "getItemID item should exist multiple times function :" . getItemID("NEW_ITEM","1") . "<br>";
-echo "getItemID item shot not function :" . getItemID("Does not exist","1") . "<br>";
-echo "commentExists function :" . commentExists(1) . "<br>";
-echo "getUserID function :" . getUserID("test@gmail.com") . "<br>";
-echo "getAllCommentsForItem - should have no comments - function :" . getAllCommentsForItem(99) . "<br>";
-//echo "getAllCommentsForItem - should have comments - function :" . implode("<br>", getAllCommentsForItem(1)) . "<br>";
-echo "getBanStatus function :" . User_management::getBanStatus("test@gmail.com") . "<br>";
-echo "deleteUser function :" . User_management::deleteUser("test@gmail.com") . "<br>";
-echo "createUser function :" . User_management::createUser("test77@gmail.com", "test", "user", MD5("password")) . "<br>";
-echo "getAllItems_IDS_AtStore function :" . implode(",", getAllItems_IDS_AtStore(2)) . "<br>";
-echo "getAllUserData function : " . implode(",", getAllUserData("test@gmail.com")) . "<br>";
