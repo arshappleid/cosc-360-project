@@ -1,13 +1,21 @@
 <?php
 include './functions/user_management.php';
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 if (!isset($_SESSION['USER_EMAIL'])) {
     //die("User email is not set in the session.");
 }  
 
-echo "SESSION_['USER_EMAIL']:" . $_SESSION['USER_EMAIL'];
+var_dump($_SESSION['USER_EMAIL']);
+var_dump($users);
+
+
 
 $users = User_management::getAllUserData($_SESSION['USER_EMAIL']);
+
+echo $users;
 
 //print_r($users);
 
