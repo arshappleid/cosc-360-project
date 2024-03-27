@@ -6,6 +6,7 @@ $hashedPassword = $_POST['password'];
 
 if (isset($email) && isset($hashedPassword)) {
 	if (User_management::validateUserLogin($email, $hashedPassword) == "VALID_LOGIN") {
+		print_r("shit not broken");
 		$_SESSION['USER_EMAIL'] = $email;
 		header('Location: ../client/home.php');
 		exit();

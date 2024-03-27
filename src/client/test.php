@@ -8,8 +8,8 @@ include_once './../server/functions/admin_management.php';
 include_once './../server/functions/comments.php';
 include_once './../server/functions/item_info.php';
 include_once './../server/functions/db_connection.php';
-echo "checkAdminExists Should not exist : function :" . checkAdminExists("test1@gmail.com") . "<br>";
-echo "checkAdminExists Should Exist : function :" .  checkAdminExists("test@gmail.com") . "<br>";
+echo "checkAdminExists Should not exist : function :" . Admin_management::checkAdminExists("test1@gmail.com") . "<br>";
+echo "checkAdminExists Should Exist : function :" .  Admin_management::checkAdminExists("test@gmail.com") . "<br>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
