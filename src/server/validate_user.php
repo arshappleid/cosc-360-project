@@ -7,6 +7,8 @@ error_reporting(E_ALL);
 
 $email = $_POST['email'];
 $hashedPassword = $_POST['password'];
+print_r($email);
+print_r($hashedPassword);
 
 	if (isset($email) && isset($hashedPassword)) {
 		if (User_management::validateUserLogin($email, $hashedPassword) == "VALID_LOGIN") {
