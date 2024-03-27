@@ -1,6 +1,6 @@
 <?php
 session_start();
-//include_once './functions/User_management.php';
+require_once __DIR__ . './server/functions/User_management.php';
 $email = $_POST['email'];
 $hashedPassword = $_POST['password'];
 

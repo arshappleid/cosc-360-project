@@ -1,7 +1,5 @@
 <?php
 session_start();
-require_once("./../server/functions/item_info.php");
-require_once("./../server/functions/comments.php");
 //require_once("/../server/functions/user_management.php");
 require_once("./../server/GLOBAL_VARS.php");
 $_SESSION['BREADCRUMBS'] = array();
