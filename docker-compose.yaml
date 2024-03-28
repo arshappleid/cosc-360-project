@@ -4,6 +4,8 @@ services:
             dockerfile: php.Dockerfile
             context: .
         restart: always
+        environment:
+            SERVER_ENV: LOCAL
         volumes:
             - "./src/:/var/www/html/"
         ports:

@@ -1,17 +1,27 @@
 <?php
-function parseExistingIniFile($filename1, $filename2)
+function parseIniFileBasedOnEnvironment()
 {
-  if (file_exists($filename1)) {
-    return parse_ini_file($filename1);
-  } elseif (file_exists($filename2)) {
-    return parse_ini_file($filename2);
+  $env = getenv('SERVER_ENV'); // Get the environment variable
+  $filename = '';
+
+  switch ($env) {
+    case 'LOCAL':
+      $filename = '/var/www/html/local.env';
+      break;
+    default:
+      $filename = '/var/www/html/server.env';
+      break;
+  }
+
+  if (file_exists($filename)) {
+    return parse_ini_file($filename);
   } else {
-    return false; // Neither file exists
+    return false; // File does not exist
   }
 }
 
 // Usage
-$ENV_VAR = parseExistingIniFile('/var/www/html/local.env', '/var/www/html/server.env');
+$ENV_VAR = parseIniFileBasedOnEnvironment();
 $connection = mysqli_connect($ENV_VAR['HOST'], $ENV_VAR['USER'], $ENV_VAR['PASSWORD'], $ENV_VAR['DATABASE']);
 
 // Check connection
