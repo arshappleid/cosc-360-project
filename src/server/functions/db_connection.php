@@ -1,13 +1,18 @@
 <?php
-$host = "localhost";
-$database = "db_68424464";
-$user = "68424464";   // i created a new user using this login for the db
-$password = "68424464";
-//$host = "mysql-server";  // docker container name
-//$database = "market_database";
-//$user = "root";   // i created a new user using this login for the db
-//$password = "secret";
-$connection = mysqli_connect($host, $user, $password, $database);
+function parseExistingIniFile($filename1, $filename2)
+{
+  if (file_exists($filename1)) {
+    return parse_ini_file($filename1);
+  } elseif (file_exists($filename2)) {
+    return parse_ini_file($filename2);
+  } else {
+    return false; // Neither file exists
+  }
+}
+
+// Usage
+$ENV_VAR = parseExistingIniFile('/var/www/html/local.env', '/var/www/html/server.env');
+$connection = mysqli_connect($ENV_VAR['HOST'], $ENV_VAR['USER'], $ENV_VAR['PASSWORD'], $ENV_VAR['DATABASE']);
 
 // Check connection
 if ($connection->connect_error) {
@@ -216,40 +221,40 @@ function updateImage2($table, $whereCol, $whereValue, $uploadDir = "images/temp"
  * Return Values
  * - COULD_NOT_GET_IMAGE
  */
-function getImage($table, $whereCol, $whereValue) {
+function getImage($table, $whereCol, $whereValue)
+{
   global $connection;
   $query = "SELECT DISPLAY_IMAGE FROM $table WHERE $whereCol = ?";
-  
+
   $response = [
-      'status' => 'ERROR',
-      'mime' => 'image/jpeg', // Default MIME type; adjust as needed based on your actual image types
-      'data' => ''
+    'status' => 'ERROR',
+    'mime' => 'image/jpeg', // Default MIME type; adjust as needed based on your actual image types
+    'data' => ''
   ];
 
   if ($stmt = $connection->prepare($query)) {
-      $stmt->bind_param("s", $whereValue);
+    $stmt->bind_param("s", $whereValue);
 
-      if ($stmt->execute()) {
-          $result = $stmt->get_result();
-          if ($row = $result->fetch_assoc()) {
-              if (empty($row["DISPLAY_IMAGE"])) {
-                  $response['status'] = "NO IMAGE";
-              } else {
-                  $response['status'] = "SUCCESS";
-                  $response['data'] = $row["DISPLAY_IMAGE"];
-              }
-          } else {
-              $response['status'] = "NO_IMAGE_FOUND";
-          }
+    if ($stmt->execute()) {
+      $result = $stmt->get_result();
+      if ($row = $result->fetch_assoc()) {
+        if (empty($row["DISPLAY_IMAGE"])) {
+          $response['status'] = "NO IMAGE";
+        } else {
+          $response['status'] = "SUCCESS";
+          $response['data'] = $row["DISPLAY_IMAGE"];
+        }
       } else {
-          $response['status'] = "COULD_NOT_EXECUTE_QUERY";
+        $response['status'] = "NO_IMAGE_FOUND";
       }
+    } else {
+      $response['status'] = "COULD_NOT_EXECUTE_QUERY";
+    }
 
-      $stmt->close();
+    $stmt->close();
   } else {
-      $response['status'] = "COULD_NOT_PREPARE_STATEMENT";
+    $response['status'] = "COULD_NOT_PREPARE_STATEMENT";
   }
 
   return $response;
 }
-
