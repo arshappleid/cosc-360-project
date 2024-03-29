@@ -217,22 +217,52 @@ class Item_info
 	}
 
 	static function getHomePageItems()
-	{
-		$query = "SELECT * FROM ITEMS RIGHT JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID  LEFT JOIN ITEM_CATEGORY ON ITEMS.ITEM_ID = ITEM_CATEGORY.ITEM_ID ";
-		try {
-			$response = executePreparedQuery($query, array()); // Adjusted parameter structure
-			if ($response[0]) { // Query executed properly
-				if ($response[1] === "NO_DATA_RETURNED") {
-					return "NO_ITEMS_IN_DATABASE";
-				} else if (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
-					return $response[1];
-				}
-			}
-		} catch (Exception $e) {
-			echo "Error occurred, when using Database function to try to validate User.<br>";
-			echo $e->getMessage();
-		}
-	}
+{
+    $query = "
+        SELECT 
+            ITEMS.ITEM_ID, 
+            ITEM_NAME, 
+            LatestPriceEntry.STORE_ID, 
+            LatestPriceEntry.Item_Price,
+            LatestPriceEntry.Item_Entry
+        FROM ITEMS
+        JOIN (
+            SELECT 
+                Item_Price_Entry.ITEM_ID, 
+                Item_Price_Entry.STORE_ID, 
+                Item_Price_Entry.Item_Price,
+                Item_Price_Entry.Item_Entry
+            FROM Item_Price_Entry
+            INNER JOIN (
+                SELECT 
+                    ITEM_ID, 
+                    STORE_ID, 
+                    MAX(Item_Entry) AS MaxItemEntry
+                FROM Item_Price_Entry
+                GROUP BY ITEM_ID, STORE_ID
+            ) AS MaxEntries ON Item_Price_Entry.ITEM_ID = MaxEntries.ITEM_ID 
+                AND Item_Price_Entry.STORE_ID = MaxEntries.STORE_ID 
+                AND Item_Price_Entry.Item_Entry = MaxEntries.MaxItemEntry
+        ) AS LatestPriceEntry ON ITEMS.ITEM_ID = LatestPriceEntry.ITEM_ID
+        LEFT JOIN ITEM_CATEGORY ON ITEMS.ITEM_ID = ITEM_CATEGORY.ITEM_ID
+        ORDER BY ITEMS.ITEM_ID, LatestPriceEntry.STORE_ID;
+    ";
+
+    try {
+        $response = executePreparedQuery($query, array()); // Assuming executePreparedQuery is a custom function
+        if ($response[0]) { // Check if query executed properly
+            if ($response[1] === "NO_DATA_RETURNED") {
+                return "NO_ITEMS_IN_DATABASE";
+            } else if (is_array($response[1]) && count($response[1]) >= 1) {
+                return $response[1];
+            }
+        }
+    } catch (Exception $e) {
+        echo "Error occurred when using Database function to try to retrieve home page items.<br>";
+        echo $e->getMessage();
+    }
+}
+
 
 	static function getAllItemData($ITEM_ID)
 	{
