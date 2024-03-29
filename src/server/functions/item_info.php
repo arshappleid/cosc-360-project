@@ -298,6 +298,22 @@ class Item_info
 		}
 	}
 
+	static function parsed_GetAllPrices($ITEM_ID, $STORE_ID, $LIMIT_BY = 30)
+	{
+		$records = Item_info::getAllPrices_Latest_To_Oldest($ITEM_ID, $STORE_ID, $LIMIT_BY);
+		if (!is_array($records)) {
+			// String Response
+			return $records;
+		}
+		$prices = array();
+		$dates = array();
+		foreach ($records as $record) {
+			$dates[] = (new DateTime($record['TIME_UPDATED']))->format('d M y');
+			$prices[] = $record['Item_Price'];
+		}
+		return array($dates, $prices);
+	}
+
 	static function getCurrentPrice($ITEM_ID, $STORE_ID)
 	{ //print_r($ITEM_ID); print_r($STORE_ID);
 		if (Item_info::getItemInfo($ITEM_ID) == "NO_ITEM_FOUND") {

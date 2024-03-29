@@ -17,12 +17,24 @@ foreach ($items as $item) {
 
     echo "<section>";
     echo "<aside>";
+
+    // Left Bar
+    echo "<section>"; // Left Section
+    echo "<aside>";
     echo "<img class =\"display-image\" src = \"./../server/getItemImage.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\" alt=\"NO IMAGE IN DATABASE\">";
     echo "<h3>" . htmlspecialchars($item['ITEM_NAME']) . "</h3>";
     echo "<h2>" . htmlspecialchars($item['Item_Price']) . "$" . "</h2>";
     echo "<h1>" . $store_name . "</h1>";
     echo "<button><a href=\"product.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\">See Product Details</a></button>";
     echo "</aside>";
+    // Price chart within the Article Tags
+    echo "<article>";
+    include "./priceChart.php";
+    echo "</article>";
+    echo "</section>";
+    echo "</aside>";
+
+    // Right Bar
     echo "<article>";
 
     // Display comments
@@ -59,4 +71,3 @@ foreach ($items as $item) {
 }
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-

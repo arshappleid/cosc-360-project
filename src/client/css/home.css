@@ -12,25 +12,24 @@ section {
     float: left;
     clear: both;
 }
-
-aside, article {
+aside {
+    width: 40%;
+}
+aside,
+article {
     /* Common styles for both */
     align-items: center;
-    height: auto; 
+    height: auto;
     background-color: white;
-    border-radius: 10px; 
-    padding: 10px; 
-    box-sizing: border-box; 
-}
-
-aside {
-    width: 30%;
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 article {
     text-align: center;
     overflow-y: auto;
-    flex-grow: 1; 
+    flex-grow: 1;
 }
 
 #comment_table {
@@ -45,18 +44,18 @@ article {
 #comment-table tr {
     background-color: white; /* Background color for cells */
     border: solid 1px black; /* Black outline for cells */
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.5); /* Shadow for cells */
-  }
-  
-  #comment-table td:first-child {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Shadow for cells */
+}
+
+#comment-table td:first-child {
     border-top-left-radius: 10px; /* Rounded top left corner */
     border-bottom-left-radius: 10px; /* Rounded bottom left corner */
-  }
-  
-  #comment-table td:last-child {
+}
+
+#comment-table td:last-child {
     border-top-right-radius: 10px; /* Rounded top right corner */
     border-bottom-right-radius: 10px; /* Rounded bottom right corner */
-  }
+}
 
 .display-image {
     max-width: 200px;

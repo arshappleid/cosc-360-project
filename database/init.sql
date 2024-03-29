@@ -199,6 +199,44 @@ INSERT INTO
     Item_Price_Entry (
         STORE_ID, ITEM_ID, Item_Price, Time_Updated
     )
+VALUES (
+        1, 1, 149.99, DATE_SUB(NOW(), INTERVAL 1 DAY)
+    );
+
+INSERT INTO
+    Item_Price_Entry (
+        STORE_ID, ITEM_ID, Item_Price, Time_Updated
+    )
+VALUES (
+        1, 1, 99.99, DATE_SUB(NOW(), INTERVAL 2 DAY)
+    );
+
+INSERT INTO
+    Item_Price_Entry (
+        STORE_ID, ITEM_ID, Item_Price, Time_Updated
+    )
+VALUES (
+        1, 1, 49.99, DATE_SUB(NOW(), INTERVAL 3 DAY)
+    );
+
+INSERT INTO
+    Item_Price_Entry (
+        STORE_ID, ITEM_ID, Item_Price, Time_Updated
+    )
+VALUES (
+        1, 1, 99.99, DATE_SUB(NOW(), INTERVAL 4 DAY)
+    );
+
+INSERT INTO
+    Item_Price_Entry (
+        STORE_ID, ITEM_ID, Item_Price, Time_Updated
+    )
+VALUES (2, 1, 102.50, NOW());
+
+INSERT INTO
+    Item_Price_Entry (
+        STORE_ID, ITEM_ID, Item_Price, Time_Updated
+    )
 VALUES (2, 1, 102.50, NOW());
 
 INSERT INTO
@@ -206,6 +244,30 @@ INSERT INTO
         STORE_ID, ITEM_ID, Item_Price, Time_Updated
     )
 VALUES (1, 2, 150.00, NOW());
+
+INSERT INTO
+    Item_Price_Entry (
+        STORE_ID, ITEM_ID, Item_Price, Time_Updated
+    )
+VALUES (
+        1, 2, 300.00, DATE_SUB(NOW(), INTERVAL 1 DAY)
+    );
+
+INSERT INTO
+    Item_Price_Entry (
+        STORE_ID, ITEM_ID, Item_Price, Time_Updated
+    )
+VALUES (
+        1, 2, 150.00, DATE_SUB(NOW(), INTERVAL 2 DAY)
+    );
+
+INSERT INTO
+    Item_Price_Entry (
+        STORE_ID, ITEM_ID, Item_Price, Time_Updated
+    )
+VALUES (
+        1, 2, 900.00, DATE_SUB(NOW(), INTERVAL 3 DAY)
+    );
 
 INSERT INTO
     Item_Price_Entry (
