@@ -3,7 +3,8 @@
 include_once 'db_connection.php';
 include_once 'user_management.php';
 
-class Admin_management{
+class Admin_management
+{
 
 
 	/**
@@ -174,12 +175,19 @@ class Admin_management{
 	 */
 	static function getItemID($ITEM_NAME, $STORE_ID)
 	{
-		$query = "SELECT * FROM ITEMS NATURAL JOIN Item_Price_Entry WHERE Item_Price_Entry.STORE_ID = ? AND ITEMS.ITEM_NAME = ?";
+		$query = "SELECT * FROM ITEMS 
+		LEFT JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID 
+		WHERE Item_Price_Entry.STORE_ID = ? AND ITEMS.ITEM_NAME = ?
+		";
 		try {
 			$response = executePreparedQuery($query, array('is', $STORE_ID, $ITEM_NAME));
 			if ($response[0] == true) {
 				if (is_array($response[1])) {
 					// records found
+					if (is_array($response[1][0])) {
+						// If multiple items, return Item ID of the first one.
+						return $response[1][0]['ITEM_ID'];
+					}
 					return $response[1]['ITEM_ID'];
 				} else {
 					return "ITEM_NOT_FOUND";
@@ -198,26 +206,27 @@ class Admin_management{
 	* - ITEM_DOES_NOT_EXIST_IN_STORE
 	* - COULD_NOT_CHECK
 	* */
-	static function itemExistsInStore($ITEM_ID,$STORE_ID){
+	static function itemExistsInStore($ITEM_ID, $STORE_ID)
+	{
 		$query = "SELECT * FROM Item_Price_Entry WHERE Item_Entry = ? AND STORE_ID = ?;";
-			try {
-				$response = executePreparedQuery($query , array('ii',$ITEM_ID,$STORE_ID));
-				if($response[0]==true){
-					if(is_array($response[1])) {
-						if (count($response[1]) > 0) {
-							return "ITEM_EXISTS_IN_STORE";
-						}
-						return "ITEM_DOES_NOT_EXIST_IN_STORE";
-					}else{
-						return "ITEM_DOES_NOT_EXIST_IN_STORE";
+		try {
+			$response = executePreparedQuery($query, array('ii', $ITEM_ID, $STORE_ID));
+			if ($response[0] == true) {
+				if (is_array($response[1])) {
+					if (count($response[1]) > 0) {
+						return "ITEM_EXISTS_IN_STORE";
 					}
-				}else{
-					return "COULD_NOT_CHECK";
+					return "ITEM_DOES_NOT_EXIST_IN_STORE";
+				} else {
+					return "ITEM_DOES_NOT_EXIST_IN_STORE";
 				}
-			}catch (Exception $e) {
-				echo "Error occurred, when using Database function to try to add item.<br>";
-				echo $e->getMessage();
+			} else {
+				return "COULD_NOT_CHECK";
 			}
+		} catch (Exception $e) {
+			echo "Error occurred, when using Database function to try to add item.<br>";
+			echo $e->getMessage();
+		}
 	}
 	/**
 	 * Summary of addItem
@@ -236,8 +245,8 @@ class Admin_management{
 	 */
 	static function addItem($ITEM_NAME, $ITEM_DESCRIPTION, $STORE_ID, $ITEM_PRICE, $EXTERNAL_LINK)
 	{
-		$ITEM_ID = getItemID($ITEM_NAME,$STORE_ID);
-		if (itemExistsInStore($ITEM_ID, $ITEM_ID)!="ITEM_DOES_NOT_EXIST_IN_STORE") {
+		$ITEM_ID = Admin_management::getItemID($ITEM_NAME, $STORE_ID);
+		if (Admin_management::itemExistsInStore($ITEM_ID, $ITEM_ID) != "ITEM_DOES_NOT_EXIST_IN_STORE") {
 			return "ITEM_WITH_NAME_ALREADY_EXISTS";
 		}
 		global $connection;
