@@ -4,16 +4,7 @@ require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
 //require_once("/../server/functions/user_management.php");
 require_once("./../server/GLOBAL_VARS.php");
-$_SESSION['BREADCRUMBS'] = array();
 
-
-$current_page = ["login", "./login.php"];
-$last_item_index = count($_SESSION['BREADCRUMBS']) - 1;
-
-// Add the current page only if it's not the last one already in the breadcrumb trail
-if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $current_page[0]) {
-	array_push($_SESSION['BREADCRUMBS'], $current_page);
-}
 ?>
 
 <!DOCTYPE html>
@@ -22,30 +13,24 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 <head>
 	<title>Login Page</title>
 	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible"
-		content="IE=edge" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet"
-		href="css/login.css" />
-	<link rel="stylesheet"
-		href="css/global.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="css/login.css" />
+	<link rel="stylesheet" href="css/global.css" />
 </head>
 
 <body>
 
 	<div class="container">
 		<div class="headerblack">
-			<a href="home.php"
-				class="home-button">Home</a>
+			<a href="home.php" class="home-button">Home</a>
 		</div>
 
 		<div class="headeryellow">
 			<div class="search-container">
-				<input type="text"
-					placeholder="Search...">
+				<input type="text" placeholder="Search...">
 				<?php
 				$stores = Item_info::getAllStoreList();
 				if (count($stores) == 0) {
@@ -63,18 +48,10 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		</div>
 		<?php include_once './../server/breadcrumbs.php' ?>
 		<div class="underheadercontainer">
-				<div class="overlay">
-					<form id="loginForm"
-					method="POST"
-					action="./../server/validate_user.php">
-					<input type="email"
-						id="email"
-						name="email"
-						placeholder="E-mail">
-					<input type="password"
-						id="password"
-						name="password"
-						placeholder="Password">
+			<div class="overlay">
+				<form id="loginForm" method="POST" action="./../server/validate_user.php">
+					<input type="email" id="email" name="email" placeholder="E-mail">
+					<input type="password" id="password" name="password" placeholder="Password">
 					<div class="button-container">
 						<button type="submit">Login</button>
 						<?php
@@ -84,18 +61,17 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 						}
 						?>
 					</div>
-					<a class="accounttext"
-						href="create_account.php">Need an account?</a>
+					<a class="accounttext" href="create_account.php">Need an account?</a>
 					<a class="accounttext" href="./admin_login.php">Admin Login</a>
 				</form>
 
-				</div>
-				<div class="triangleextendblack"></div>
-				<div class="triangle-element"></div>
-
-
 			</div>
+			<div class="triangleextendblack"></div>
+			<div class="triangle-element"></div>
+
+
 		</div>
+	</div>
 	</div>
 	<footer>
 		<div>
@@ -105,7 +81,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 					<?php
 					if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
 						echo "<li><a href=\"account_page.php\">Account</a></li>";
-					}else{
+					} else {
 						echo "<li><a href=\"create_account.php\">Create Account</a></li>
 						<li><a href=\"login.php\">Login</a></li>
 						<li><a href=\"admin_login.php\">Admin Login</a></li>";
@@ -114,24 +90,24 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 				</ul>
 				<p>&copy; Banana Hammock 2024</p>
 			</nav>
-	</div>
-</footer>
+		</div>
+	</footer>
 	<script>
-	document.getElementById("loginForm").addEventListener("submit", function(e) {
-		e.preventDefault();
-		var email = document.getElementById("email").value;
-		var password = document.getElementById("password").value;
+		document.getElementById("loginForm").addEventListener("submit", function(e) {
+			e.preventDefault();
+			var email = document.getElementById("email").value;
+			var password = document.getElementById("password").value;
 
-		if (!email || !password) {
-			alert('Please enter both email and password.');
-			return;
-		}
+			if (!email || !password) {
+				alert('Please enter both email and password.');
+				return;
+			}
 
-		var password = document.getElementById("password").value;
-		var hashedPassword = CryptoJS.MD5(password).toString();
-		document.getElementById("password").value = hashedPassword;
-		this.submit();
-	});
+			var password = document.getElementById("password").value;
+			var hashedPassword = CryptoJS.MD5(password).toString();
+			document.getElementById("password").value = hashedPassword;
+			this.submit();
+		});
 	</script>
 
 </body>

@@ -4,17 +4,6 @@ require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
 require_once("./../server/GLOBAL_VARS.php");
 
-if (!isset($_SESSION['BREADCRUMBS'])) {
-	$_SESSION['BREADCRUMBS'] = array();
-}
-
-$current_page = ["home", "./home.php"];
-$last_item_index = count($_SESSION['BREADCRUMBS']) - 1;
-
-// Add the current page only if it's not the last one already in the breadcrumb trail
-if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $current_page[0] && (!in_array($current_page, $_SESSION['BREADCRUMBS']))) {
-	array_push($_SESSION['BREADCRUMBS'], $current_page);
-}
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +32,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
 				echo "<div style = \"display:flex;\">";
 				if (isset($_SESSION['ADMIN_EMAIL'])) {
-					echo "<a href=\"admin_management.php\" class=\"login-button\" >Admin Management</a>";
+					echo "<a href=\"home/admin_management.php\" class=\"login-button\" >Admin Management</a>";
 				}
 				echo "<a href=\"account_page.php\" class=\"login-button\">";
 				//echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";

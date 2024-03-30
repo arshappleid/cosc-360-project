@@ -336,7 +336,16 @@ class Item_info
 			echo $e->getMessage();
 		}
 	}
-
+	/**
+	 * Summary of parsed_GetAllPrices
+	 * @param mixed $ITEM_ID
+	 * @param mixed $STORE_ID
+	 * @param mixed $LIMIT_BY
+	 * @return mixed
+	 * 
+	 * Utilized Item::getAllPrices_Latest_To_Oldest() to return the parsed Array Values , for ChartJS Api To Consume
+	 * - [[Date1,Date2],[Price1,Price2]]
+	 */
 	static function parsed_GetAllPrices($ITEM_ID, $STORE_ID, $LIMIT_BY = 30)
 	{
 		$records = Item_info::getAllPrices_Latest_To_Oldest($ITEM_ID, $STORE_ID, $LIMIT_BY);

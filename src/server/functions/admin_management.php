@@ -14,8 +14,6 @@ class Admin_management
 	 * @return string if the given hashed password , matches the hashed password in the database
 	 * 
 	 */
-
-
 	static function validateAdminLogin($email, $hashed_password)
 	{
 

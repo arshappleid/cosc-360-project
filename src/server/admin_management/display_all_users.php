@@ -1,11 +1,15 @@
 <?php
-include_once './../functions/admin_management.php';
+include_once "./../functions/admin_management.php";
 if (isset($_GET["ban_user"])) {
 	Admin_management::toggleBanUserAccount($_GET["ban_user"]);
 	unset($_GET["ban_user"]);
 }
 
 $users = Admin_management::getAllUsers();
+if ($users == "NO_USERS_FOUND") {
+	echo "<h3>No Users Found</h3>";
+	exit;
+}
 echo "<table>";
 echo "<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Ban Status</th></tr>";
 foreach ($users as $user) {

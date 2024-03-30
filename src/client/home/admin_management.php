@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once("./../server/functions/item_info.php");
-require_once("./../server/functions/comments.php");
-require_once("./../server/GLOBAL_VARS.php");
+require_once("./../../server/functions/item_info.php");
+require_once("./../../server/functions/comments.php");
+require_once("./../../server/GLOBAL_VARS.php");
 
 if (!isset($_SESSION['BREADCRUMBS'])) {
 	$_SESSION['BREADCRUMBS'] = array();
@@ -58,9 +58,9 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			}
 			?>
 		</div>
-		<?php include_once './../server/breadcrumbs.php' ?>
+		<?php include_once './../../server/breadcrumbs.php' ?>
 	</div>
 	<div>
-		<?php include_once './../server/admin_management/display_all_users.php' ?>
+		<?php include_once './../../server/admin_management/display_all_users.php' ?>
 	</div>
 </body>
