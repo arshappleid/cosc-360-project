@@ -215,10 +215,19 @@ class Item_info
 			echo $e->getMessage();
 		}
 	}
-
+	/**
+	 * Summary of getHomePageItems
+	 * @return mixed
+	 * 
+	 * Returns Items from the Home Page as an Array
+	 * - 
+	 * - [ITEM_ID,ITEM_NAME,STORE_ID,Item_Price,Item_Entry]
+	 * - [[ITEM_ID,ITEM_NAME,STORE_ID,Item_Price,Item_Entry],[ITEM_ID,ITEM_NAME,STORE_ID,Item_Price,Item_Entry]]
+	 * 
+	 */
 	static function getHomePageItems()
-{
-    $query = "
+	{
+		$query = "
         SELECT 
             ITEMS.ITEM_ID, 
             ITEM_NAME, 
@@ -248,20 +257,20 @@ class Item_info
         ORDER BY ITEMS.ITEM_ID, LatestPriceEntry.STORE_ID;
     ";
 
-    try {
-        $response = executePreparedQuery($query, array()); // Assuming executePreparedQuery is a custom function
-        if ($response[0]) { // Check if query executed properly
-            if ($response[1] === "NO_DATA_RETURNED") {
-                return "NO_ITEMS_IN_DATABASE";
-            } else if (is_array($response[1]) && count($response[1]) >= 1) {
-                return $response[1];
-            }
-        }
-    } catch (Exception $e) {
-        echo "Error occurred when using Database function to try to retrieve home page items.<br>";
-        echo $e->getMessage();
-    }
-}
+		try {
+			$response = executePreparedQuery($query, array()); // Assuming executePreparedQuery is a custom function
+			if ($response[0]) { // Check if query executed properly
+				if ($response[1] === "NO_DATA_RETURNED") {
+					return "NO_ITEMS_IN_DATABASE";
+				} else if (is_array($response[1]) && count($response[1]) >= 1) {
+					return $response[1];
+				}
+			}
+		} catch (Exception $e) {
+			echo "Error occurred when using Database function to try to retrieve home page items.<br>";
+			echo $e->getMessage();
+		}
+	}
 
 
 	static function getAllItemData($ITEM_ID)

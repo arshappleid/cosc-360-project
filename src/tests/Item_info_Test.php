@@ -9,9 +9,18 @@ class Item_info_Test extends TestCase
     public function getHomePageItems_Test()
     {
         $resp = Item_info::getHomePageItems();
-        print_r($resp);
         $this->assertIsArray($resp);
-        $this->assertArrayHasKey('ITEM_ID', $resp[0]);
+        if (is_array($resp[0])) {
+            $this->assertArrayHasKey('ITEM_ID', $resp[0]);
+            $this->assertArrayHasKey('ITEM_NAME', $resp[0]);
+            $this->assertArrayHasKey('STORE_ID', $resp[0]);
+            $this->assertArrayHasKey('Item_Entry', $resp[0]);
+        } else {
+            $this->assertArrayHasKey('ITEM_ID', $resp);
+            $this->assertArrayHasKey('ITEM_NAME', $resp);
+            $this->assertArrayHasKey('STORE_ID', $resp);
+            $this->assertArrayHasKey('Item_Entry', $resp);
+        }
     }
     /** @test */
     public function itemExists_ItemExists()

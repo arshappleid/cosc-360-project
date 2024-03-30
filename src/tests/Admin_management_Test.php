@@ -21,6 +21,12 @@ class Admin_management_Test extends TestCase
     }
 
     /** @test */
+    public function toggleBanUserAccount_ValidUser()
+    {
+        $this->assertEquals("STATUS_UPDATED", Admin_management::toggleBanUserAccount("test@gmail.com"));
+    }
+
+    /** @test */
     public function toggleBanUserAccount_StatusNotChanged()
     {
         $this->assertEquals("STATUS_NOT_UPDATED", Admin_management::toggleBanUserAccount("invalidemail@gmail.com"));
