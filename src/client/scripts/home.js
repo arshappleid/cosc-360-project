@@ -1,10 +1,11 @@
 $(document).ready(function () {
-    var selectedStoreId = "all"; 
+    var selectedStoreId = "all";
 
     updateFilteredItemList(selectedStoreId, "");
 
     function updateFilteredItemList(storeId, searchTerm) {
-        var url = storeId === "all" ? "./../server/getAllItems.php" : "./../server/getStoreItems.php";
+        var url =
+            storeId === "all" ? "./../server/getAllItems.php" : "./../server/getStoreItems.php";
         if (storeId !== "all") {
             url += "?SELECTED_STORE=" + encodeURIComponent(storeId);
         }
@@ -17,10 +18,10 @@ $(document).ready(function () {
             }
 
             if ($("#item_list section:visible").length === 0) {
-                $("#item_list").html('<h1>No products found.</h1>');
+                $("#item_list").html("<h1>No products found.</h1>");
             }
-        }).fail(function() {
-            $("#item_list").html('<p>Error fetching products. Please try again.</p>');
+        }).fail(function () {
+            $("#item_list").html("<p>Error fetching products. Please try again.</p>");
         });
     }
 

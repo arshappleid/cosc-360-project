@@ -6,6 +6,14 @@ require_once __DIR__ . '/../server/functions/item_info.php';
 class Item_info_Test extends TestCase
 {
     /** @test */
+    public function getHomePageItems_Test()
+    {
+        $resp = Item_info::getHomePageItems();
+        print_r($resp);
+        $this->assertIsArray($resp);
+        $this->assertArrayHasKey('ITEM_ID', $resp[0]);
+    }
+    /** @test */
     public function itemExists_ItemExists()
     {
         $this->assertEquals("ITEM_EXISTS", Item_info::itemExists(1));
