@@ -68,13 +68,13 @@ class Admin_management_Test extends TestCase
     }
 
     /** @test */
-    public function getItemID_gotItemID()
+    public function getItemID_ItemExists()
     {
         //should return itemId(1) for with store ID 1 
         $this->assertEquals(1, Admin_management::getItemID("Smartphone", 1));
     }
     /** @test */
-    public function getItemID_ItemNotFound()
+    public function getItemID_ItemDoesNotExists()
     {
         //assumes Smartwatch is not added to store 3
         $this->assertEquals("ITEM_NOT_FOUND", Admin_management::getItemID("Smartwatch", 2));

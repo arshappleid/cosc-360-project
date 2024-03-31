@@ -305,6 +305,7 @@ class Item_info
 	 *  - INVALID_ITEM_ID
 	 * 	- INVALID_STORE_ID
 	 * 	- NO_ENTRIES_FOUND
+	 * -  [Time_Updated_1,Item_Price_1]
 	 * 	-  [[Time_Updated_1,Item_Price_1],[Time_Updated_2,Item_Price_2]]
 	 * 
 	 */

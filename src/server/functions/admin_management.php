@@ -110,6 +110,7 @@ class Admin_management
 			}
 			return "ADMIN_EXISTS";
 		}
+		return "COULD_NOT_CHECK";
 	}
 
 	/**
@@ -127,7 +128,7 @@ class Admin_management
 	 */
 	static function createAdmin($firstName, $lastName, $email, $md5password, $userImage = null)
 	{
-		if (checkAdminExists($email) == "ADMIN_EXISTS") {
+		if (Admin_management::checkAdminExists($email) == "ADMIN_EXISTS") {
 			return "ADMIN_ALREADY_REGISTERED";
 		}
 		$query = "INSERT INTO Admins(First_Name,Last_Name,Email,MD5_Password) VALUES(?,?,?,?);";
@@ -174,7 +175,7 @@ class Admin_management
 	static function getItemID($ITEM_NAME, $STORE_ID)
 	{
 		$query = "SELECT * FROM ITEMS 
-		LEFT JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID 
+		JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID 
 		WHERE Item_Price_Entry.STORE_ID = ? AND ITEMS.ITEM_NAME = ?
 		";
 		try {
@@ -182,8 +183,7 @@ class Admin_management
 			if ($response[0] == true) {
 				if (is_array($response[1])) {
 					// records found
-					if (is_array($response[1][0])) {
-						// If multiple items, return Item ID of the first one.
+					if (isset($response[1][0]) && is_array($response[1][0])) {
 						return $response[1][0]['ITEM_ID'];
 					}
 					return $response[1]['ITEM_ID'];

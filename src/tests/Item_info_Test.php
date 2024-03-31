@@ -88,8 +88,13 @@ class Item_info_Test extends TestCase
     {
         $resp = Item_info::getAllPrices_Latest_To_Oldest("1", "1");
         $this->assertIsArray($resp);
-        $this->assertArrayHasKey('TIME_UPDATED', $resp[0]);
-        $this->assertArrayHasKey('Item_Price', $resp[0]);
+        if (isset($resp[0]) && is_array($resp[0])) {
+            $this->assertArrayHasKey('TIME_UPDATED', $resp[0]);
+            $this->assertArrayHasKey('Item_Price', $resp[0]);
+        } else {
+            $this->assertArrayHasKey('TIME_UPDATED', $resp);
+            $this->assertArrayHasKey('Item_Price', $resp);
+        }
     }
 
     /** @test */
