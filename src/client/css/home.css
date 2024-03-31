@@ -4,32 +4,63 @@
     padding: 2.5% 2.5% 2.5% 2.5%;
 }
 section {
-    height: 100px;
-    margin-top: 5%;
+    display: flex;
+    gap: 20px;
+    height: auto;
+    margin-top: 1%;
     width: 100%;
     float: left;
     clear: both;
 }
 aside {
-    /*Item Names*/
-    height: 100px;
-    width: 30%;
-    border: solid 1px var(--primary-color);
-    float: left;
-    clear: both;
+    width: 40%;
 }
+aside,
 article {
-    /*Item Comments*/
-    text-align: center;
-    height: 100px;
-    overflow-y: auto;
-    clear: right;
-    border: solid 1px var(--primary-color);
+    /* Common styles for both */
+    align-items: center;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
 }
+
+article {
+    text-align: center;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
 #comment_table {
     width: 100%;
     align-items: center;
     grid-template-columns: 1fr auto 1fr; /* Match the container columns */
+    width: 100%; /* Adjust table width as needed */
+    border-collapse: separate; /* This allows spacing between rows */
+    border-spacing: 0 10px; /* Creates space between rows but not columns */
+}
+
+#comment-table tr {
+    background-color: white; /* Background color for cells */
+    border: solid 1px black; /* Black outline for cells */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Shadow for cells */
+}
+
+#comment-table td:first-child {
+    border-top-left-radius: 10px; /* Rounded top left corner */
+    border-bottom-left-radius: 10px; /* Rounded bottom left corner */
+}
+
+#comment-table td:last-child {
+    border-top-right-radius: 10px; /* Rounded top right corner */
+    border-bottom-right-radius: 10px; /* Rounded bottom right corner */
+}
+
+.display-image {
+    max-width: 200px;
+    max-height: 150px;
+    object-fit: contain; /* This ensures the image's aspect ratio is maintained */
 }
 
 #item_list {

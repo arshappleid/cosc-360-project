@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once './functions/User_management.php';
+include_once './functions/user_management.php';
 include_once './functions/db_connection.php';
 include_once './functions/admin_management.php';
 

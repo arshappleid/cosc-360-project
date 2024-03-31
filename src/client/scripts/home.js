@@ -1,38 +1,50 @@
 $(document).ready(function () {
-    function updateItemList() {
-        $.get("./../server/getAllItems.php", function (data) {
-            $("#item_list").html(data);
+    var selectedStoreId = "all";
+
+    updateFilteredItemList(selectedStoreId, "");
+
+    function updateFilteredItemList(storeId, searchTerm) {
+        var url =
+            storeId === "all" ? "./../server/getAllItems.php" : "./../server/getStoreItems.php";
+        if (storeId !== "all") {
+            url += "?SELECTED_STORE=" + encodeURIComponent(storeId);
+        }
+
+        $.get(url, function (data) {
+            $("#item_list").empty().html(data);
+
+            if (searchTerm) {
+                filterStoreItems(searchTerm); // Apply text filter if there's a search term
+            }
+
+            if ($("#item_list section:visible").length === 0) {
+                $("#item_list").html("<h1>No products found.</h1>");
+            }
+        }).fail(function () {
+            $("#item_list").html("<p>Error fetching products. Please try again.</p>");
         });
     }
 
-    updateItemList();
-
-    function updateStoreFilterList(storenumber) {
-        $.get("./../server/getStoreItems.php?SELECTED_STORE=" + storenumber, function (data) {
-            $("#item_list").html(data);
-        });
-    }
-
-    $("#store_select").on("change", function () {
-        console.log("store_select change event triggered with value: " + this.value);
-        updateStoreFilterList(this.value);
+    $("#search-button").on("click", function () {
+        var searchTerm = $("#search-input").val();
+        updateFilteredItemList(selectedStoreId, searchTerm);
     });
 
+    $("#store_select").on("change", function () {
+        selectedStoreId = this.value;
+    });
+
+    // Filters items in the item list based on the search term
     function filterStoreItems(searchTerm) {
+        var searchTermLower = searchTerm.toLowerCase();
+
         $("#item_list section").each(function () {
             var itemText = $(this).find("aside h3").text().toLowerCase();
-            var searchTermLower = searchTerm.toLowerCase(); // Converts searchTerm to lowercase
-
-            // Check if itemText contains the searchTermLower
             if (itemText.indexOf(searchTermLower) === -1) {
-                $(this).hide(); // Hide if not containing searchTerm
+                $(this).hide(); // Hide items that do not match the search term
             } else {
-                $(this).show(); // Show if containing searchTerm
+                $(this).show(); // Show items that match the search term
             }
         });
     }
-
-    $("#search_item").on("keyup", function () {
-        filterStoreItems(this.value);
-    });
 });

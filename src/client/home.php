@@ -4,17 +4,6 @@ require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
 require_once("./../server/GLOBAL_VARS.php");
 
-if (!isset($_SESSION['BREADCRUMBS'])) {
-	$_SESSION['BREADCRUMBS'] = array();
-}
-
-$current_page = ["home", "./home.php"];
-$last_item_index = count($_SESSION['BREADCRUMBS']) - 1;
-
-// Add the current page only if it's not the last one already in the breadcrumb trail
-if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $current_page[0] && (!in_array($current_page, $_SESSION['BREADCRUMBS']))) {
-	array_push($_SESSION['BREADCRUMBS'], $current_page);
-}
 ?>
 
 <!DOCTYPE html>
@@ -23,32 +12,32 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 <head>
 	<title>Banana Hammock</title>
 	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible"
-		content="IE=edge" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-	<script type="text/javascript"
-		src="./scripts/home.js"></script>
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet"
-		href="css/global.css" />
-	<link rel="stylesheet"
-		href="css/home.css" />
-
+	<script type="text/javascript" src="./scripts/home.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="css/global.css" />
+	<link rel="stylesheet" href="css/home.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+	</script>
 </head>
 
 <body>
 
 	<div class="container">
 		<div class="headerblack">
-			<a href="home.php"
-				class="home-button">Home</a>
+			<a href="home.php" class="home-button">Home</a>
 			<?php
 			if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
+				echo "<div style = \"display:flex;\">";
+				if (isset($_SESSION['ADMIN_EMAIL'])) {
+					echo "<a href=\"home/admin_management.php\" class=\"login-button\" >Admin Management</a>";
+				}
 				echo "<a href=\"account_page.php\" class=\"login-button\">";
 				//echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";
 				echo "Account</a>";
+				echo "</div>";
 			} else {
 				echo "<a href=\"login.php\" class=\"login-button\">";
 				echo "Login</a>";
@@ -67,21 +56,21 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 
 		<div class="headeryellow">
 			<div class="search-container">
-				<input type="text"
-					placeholder="Search...">
+				<input type="text" id="search-input" placeholder="Search...">
 				<?php
 				$stores = Item_info::getAllStoreList();
 				if (count($stores) == 0) {
 					echo $stores;
 				} else {
 					echo "<select id = \"store_select\" class=\"select_dropdown\">";
+					echo "<option value=\"all\">All Stores</option>";
 					foreach ($stores as $key => $store) {
 						echo "<option value=\"" . $store['STORE_ID'] . "\" >" . $store['STORE_NAME'] . "</option>";
 					}
 					echo "</select>";
 				}
 				?>
-				<button type="submit">Search</button>
+				<button type="button" id="search-button">Search</button>
 			</div>
 		</div>
 
@@ -90,8 +79,8 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		<div class="underheadercontainer">
 			<div class="overlay">
 				<?php
-					echo "<div id = \"item_list\"></div>";
-					//echo '<pre>' . print_r($_SESSION, true) . '</pre>';
+				echo "<div id = \"item_list\"></div>";
+				//echo '<pre>' . print_r($_SESSION, true) . '</pre>';
 				?>
 			</div>
 			<div class="triangleextendblack"></div>
@@ -105,6 +94,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 					<li><a href="home.php">Home</a></li>
 					<?php
 					if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
+
 						echo "<li><a href=\"account_page.php\">Account</a></li>";
 					} else {
 						echo "<li><a href=\"create_account.php\">Create Account</a></li>

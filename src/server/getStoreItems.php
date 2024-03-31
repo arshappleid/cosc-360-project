@@ -5,6 +5,7 @@ require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
 require_once("./GLOBAL_VARS.php");
 $storeId = $_GET['SELECTED_STORE'];
+//print_r($storeId);
 $item_IDS = Item_info::getAllItems_IDS_AtStore($storeId);
 
 if ($item_IDS == "NO_ITEMS_AVAILABLE_AT_STORE") {
@@ -16,12 +17,18 @@ if ($item_IDS == "NO_ITEMS_AVAILABLE_AT_STORE") {
 
 foreach ($item_IDS as $item_ID) {
     $item = Item_info::getItemInfo($item_ID);
+    $item_price = Item_info::getCurrentPrice($item_ID, $storeId);
+    //print_r($item_price);
+    $store_name = Item_info::getStoreName($storeId);
     if ($item == "NO_ITEM_FOUND") continue;
 
     echo "<section>";
     echo "<aside>";
-    echo "<img>";
+    echo "<img class =\"display-image\" src = \"./../server/getItemImage.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\" alt=\"NO IMAGE IN DATABASE\">";
     echo "<h3>" . htmlspecialchars($item['ITEM_NAME']) . "</h3>";
+    echo "<h2>" . $item_price . "$" . "</h2>";
+    echo "<h1>" . $store_name . "</h1>";
+    echo "<button><a href=\"product.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\">See Product Details</a></button>";
     echo "</aside>";
     echo "<article>";
 

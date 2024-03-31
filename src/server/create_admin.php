@@ -10,7 +10,7 @@ $hashedPassword = $_POST['password'];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	try {
 		if (isset($firstName) && isset($lastName) && isset($email) && isset($hashedPassword)) {
-			$response = createAdmin($firstName, $lastName, $email, $hashedPassword);
+			$response = Admin_management::createAdmin($firstName, $lastName, $email, $hashedPassword);
 			//echo $response;
 			if ($response == "USER_CREATED") {
 				// Upload The Image

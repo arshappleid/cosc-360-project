@@ -1,9 +1,28 @@
 <?php
-$host = "mysql-server";  // docker container name
-$database = "market_database";
-$user = "root";   // i created a new user using this login for the db
-$password = "secret";
-$connection = mysqli_connect($host, $user, $password, $database);
+function parseIniFileBasedOnEnvironment()
+{
+  $env = getenv('SERVER_ENV'); // Get the environment variable
+  $filename = '';
+
+  switch ($env) {
+    case 'LOCAL':
+      $filename = '/var/www/html/local.env';
+      break;
+    default:
+      $filename = '/var/www/html/server.env';
+      break;
+  }
+
+  if (file_exists($filename)) {
+    return parse_ini_file($filename);
+  } else {
+    return false; // File does not exist
+  }
+}
+
+// Usage
+$ENV_VAR = parseIniFileBasedOnEnvironment();
+$connection = mysqli_connect($ENV_VAR['HOST'], $ENV_VAR['USER'], $ENV_VAR['PASSWORD'], $ENV_VAR['DATABASE']);
 
 // Check connection
 if ($connection->connect_error) {
@@ -216,6 +235,13 @@ function getImage($table, $whereCol, $whereValue)
 {
   global $connection;
   $query = "SELECT DISPLAY_IMAGE FROM $table WHERE $whereCol = ?";
+
+  $response = [
+    'status' => 'ERROR',
+    'mime' => 'image/jpeg', // Default MIME type; adjust as needed based on your actual image types
+    'data' => ''
+  ];
+
   if ($stmt = $connection->prepare($query)) {
     $stmt->bind_param("s", $whereValue);
 
@@ -223,21 +249,22 @@ function getImage($table, $whereCol, $whereValue)
       $result = $stmt->get_result();
       if ($row = $result->fetch_assoc()) {
         if (empty($row["DISPLAY_IMAGE"])) {
-          return ["status" => "NO IMAGE"];
+          $response['status'] = "NO IMAGE";
         } else {
-          $finfo = new finfo(FILEINFO_MIME_TYPE);
-          $mimeType = $finfo->buffer($row["DISPLAY_IMAGE"]);
-          return ["status" => "SUCCESS", "data" => $row["DISPLAY_IMAGE"], "mime" => $mimeType];
+          $response['status'] = "SUCCESS";
+          $response['data'] = $row["DISPLAY_IMAGE"];
         }
       } else {
-        return ["status" => "NO_IMAGE_FOUND"];
+        $response['status'] = "NO_IMAGE_FOUND";
       }
     } else {
-      return ["status" => "COULD_NOT_EXECUTE_QUERY"];
+      $response['status'] = "COULD_NOT_EXECUTE_QUERY";
     }
 
     $stmt->close();
   } else {
-    return ["status" => "COULD_NOT_PREPARE_STATEMENT"];
+    $response['status'] = "COULD_NOT_PREPARE_STATEMENT";
   }
+
+  return $response;
 }

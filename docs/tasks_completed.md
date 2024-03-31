@@ -19,3 +19,21 @@ This document testifies, all the important tasks / milestones completed by all t
 - Background HTML and CSS
 - Logout Functionality
 - Site Navigation Framework
+- Hosted Site
+- product.php backend
+- admin panel backend
+- user list backend.
+
+
+#### Max Bigwood
+- Changed appearance of admin_login.php to match rest of pages
+- added footer NAV and text to all pages 
+- product.php front end - displays data for items name and price
+- also displays a placeholder image for the product and a chart
+- comments for the item should populate with proper css
+- fixed JS on product.js to hide buttons properly 
+- redid css on product.js, also altered getQUeryParam to be case insensitive
+- altered some ddl to stop causing an error
+- altered getUserID function as it had an error 
+- fixed the addcomment functionality  
+- added a new function to order comments by most recent (for product page) 

@@ -42,3 +42,54 @@ article {
 #avatar_img {
     height: 15%;
 }
+
+label {
+    display: inline-block;
+    width: 100px;
+  }
+  form {
+    position: relative;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    z-index: 4;
+    width: 350px;
+    padding: 20px;
+    background-color: transparent;
+    text-align: center;
+  }
+  form input {
+    width: calc(100% - 100px); 
+    padding: 10px; 
+    margin-bottom: 10px; 
+    padding: 15px 15px;
+    border: 0;
+    border-radius: 10px;
+  }
+  
+  .button-container {
+    text-align: center;
+  }
+  
+  .button-container button {
+    background-color: var(--primary-color);
+    border: 0;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 15px 30px; 
+    font-size: 16px; 
+  }
+  
+  .button-container button:hover {
+    background-color: var(--hover-color);
+  }
+  
+  .accounttext {
+    color: var(--primary-color);
+    font-size: 12px;
+  }
+  
+  .accounttext:hover{
+    color: var(--hover-color);
+  }
+  
