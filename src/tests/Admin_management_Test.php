@@ -5,6 +5,18 @@ use PHPUnit\Framework\TestCase;
 require_once __DIR__ . "./../server/functions/admin_management.php";
 class Admin_management_Test extends TestCase
 {
+    /** @test */
+    public function getUserID_UserExists()
+    {
+        $resp = Admin_management::getUserID("test@gmail.com");
+        $this->assertEquals("1", $resp);
+    }
+    /** @test */
+    public function getUserID_DoesNotExists()
+    {
+        $resp = Admin_management::getUserID("DNE@gmail.com");
+        $this->assertEquals("USER_NOT_EXISTS", $resp);
+    }
 
     /** @test */
     public function validateAdminLogin_ValidLogin()

@@ -163,6 +163,15 @@ VALUES
         'http://example.com/smartwatch',
         NULL
     );
+INSERT INTO
+    ITEMS (ITEM_NAME, ITEM_DESCRIPTION, EXTERNAL_LINK, DISPLAY_IMAGE)
+VALUES
+    (
+        'iPhone',
+        'This time its a pro',
+        'http://example.com/smartphone',
+        NULL
+    );
 
 INSERT INTO
     ITEM_CATEGORY (CATEGORY_NAME, ITEM_ID)
@@ -209,7 +218,10 @@ INSERT INTO
     Comments (COMMENT_TEXT, ITEM_ID, USER_ID, DATE_TIME_ADDED)
 VALUES
     ('Great performance.', 2, 2, CURRENT_TIMESTAMP);
-
+INSERT INTO
+    Comments (COMMENT_TEXT, ITEM_ID, USER_ID, DATE_TIME_ADDED)
+VALUES
+    ('Mediocre', 3, 1, CURRENT_TIMESTAMP);
 -- Insert data into Item_Price_Entry
 INSERT INTO
     Item_Price_Entry (STORE_ID, ITEM_ID, Item_Price, Time_Updated)

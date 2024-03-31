@@ -38,6 +38,35 @@ class Admin_management
 
 		return !empty($data);
 	}
+	/**
+	 * Given the USER EMAIL , Returns the USER_ID
+	 * If the User Exists in USERS.
+	 * 
+	 * Possible Return Values
+	 * - USER_NOT_EXISTS
+	 * - USER_ID
+	 */
+	static function getUserID($USER_EMAIL)
+	{
+
+		if (User_management::userExists($USER_EMAIL) != "USER_EXISTS") {
+			return "USER_NOT_EXISTS";
+		}
+		$query = "SELECT USER_ID FROM USERS WHERE EMAIL = ?";
+		try {
+			$response = executePreparedQuery($query, array('s', $USER_EMAIL));
+			if ($response[0] == true) { // Single Record
+				if (isset($response[1]['USER_ID'])) {
+					return $response[1]['USER_ID'];
+				} elseif (isset($response[1][0]['USER_ID'])) { // Multiple Records 
+					return isset($response[1][0]['USER_ID']);
+				}
+			}
+		} catch (Exception $e) {
+			echo "Error occured , when using Database function to try to validate User.<br>";
+			echo $e->getMessage();
+		}
+	}
 
 	/**
 	 * Summary of toggleBanUserAccount

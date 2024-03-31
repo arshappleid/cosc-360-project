@@ -38,21 +38,38 @@ foreach ($items as $item) {
     echo "<article>";
 
     // Display comments
-    $comments = Comments::getAllCommentsForItem($item['ITEM_ID']);
-    if (is_array($comments)) {
-        if (count($comments) == 0) {
-            echo "<h4>No Comments Yet.</h4>";
-        } else {
+    $comments = Comments::getAllCommentsForItem($item['ITEM_ID']); // Handle 1 comment and more than 1
+    if($comments == "NO_COMMENTS_ADDED_YET"){
+        echo "<h3>No Comments yet.</h3>";
+    }elseif (is_array($comments)) {
             echo "<table id=\"comment_table\">";
-            foreach ($comments as $comment) {
+        if (is_array($comments) && !empty($comments) && is_array($comments[0])) { // Multiple Comments
+                foreach ($comments as $comment) {
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars(User_management::getUser_First_Last_Name($comment['USER_ID'])) . "</td>";
+                    echo "<td>" . htmlspecialchars($comment['COMMENT_TEXT']) . "</td>";
+                    echo "<td>" . (new DateTime($comment['DATE_TIME_ADDED']))->format($COMMENT_DATE_TIME_FORMAT) . "</td>";
+                    // Show a Deletion Button here
+                    if (isset($_SESSION['ADMIN_EMAIL']) || (isset($_SESSION['USER_EMAIL']) && $comment['USER_ID'] == Admin_management::getUserID($_SESSION['USER_EMAIL']))) {
+                        // Show the Delete Button
+                        echo "<td><a href=\"./../server/deleteComment.php?commentId=" . htmlspecialchars($comment['COMMENT_ID']) . "\" class=\"button\">Delete Comment</a></td>";
+                    }
+                    echo "</tr>";
+                }
+            }else{ // Just 1 comment
                 echo "<tr>";
-                echo "<td>" . htmlspecialchars(User_management::getUser_First_Last_Name($comment['USER_ID'])) . "</td>";
-                echo "<td>" . htmlspecialchars($comment['COMMENT_TEXT']) . "</td>";
-                echo "<td>" . (new DateTime($comment['DATE_TIME_ADDED']))->format($COMMENT_DATE_TIME_FORMAT) . "</td>";
+                echo "<td>" . htmlspecialchars(User_management::getUser_First_Last_Name($comments['USER_ID'])) . "</td>";
+                echo "<td>" . htmlspecialchars($comments['COMMENT_TEXT']) . "</td>";
+                echo "<td>" . (new DateTime($comments['DATE_TIME_ADDED']))->format($COMMENT_DATE_TIME_FORMAT) . "</td>";
+                // Show a Deletion Button here
+                if (isset($_SESSION['ADMIN_EMAIL']) || (isset($_SESSION['USER_EMAIL']) && $comments['USER_ID'] == Admin_management::getUserID($_SESSION['USER_EMAIL']))) {
+                    // Show the Delete Button
+                    echo "<td><a href=\"./../server/deleteComment.php?commentId=" . htmlspecialchars($comments['COMMENT_ID']) . "\" class=\"button\">Delete Comment</a></td>";
+                }
                 echo "</tr>";
             }
             echo "</table>";
-        }
+
     }
 
     // Render the add comment form inside the article for each item.
