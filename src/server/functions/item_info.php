@@ -357,12 +357,12 @@ class Item_info
 		$prices = array();
 		$dates = array();
 		foreach ($records as $record) {
-			$date = DateTime::createFromFormat('Y-m-d H:i:s', $record['TIME_UPDATED']);
+			$date = DateTime::createFromFormat('Y-m-d H:i:s', (string) $record['TIME_UPDATED']);
 			if ($date) {
-				$dates[] = $date->format('d M y');
+				$dates[] = (string) $date->format('d M y');
 				$prices[] = $record['Item_Price'];
 			} else {
-				$dates[] = $record['TIME_UPDATED'];
+				$dates[] = (string) $record['TIME_UPDATED'];
 			}
 		}
 

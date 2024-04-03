@@ -14,7 +14,6 @@ require_once("./../server/GLOBAL_VARS.php");
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<script type="text/javascript" src="./jquery-library/jquery-3.1.1.min.js"></script>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="./css/global.css" />
 	<link rel="stylesheet" href="./css/admin_panel.css" />
@@ -30,15 +29,14 @@ require_once("./../server/GLOBAL_VARS.php");
 		<div class="headerblack">
 			<a href="home.php" class="home-button">Home</a>
 			<?php
-			if (isset($_SESSION['ADMIN_EMAIL'])) {
-				echo "<a href=\"login.php\" class=\"login-button\">";
-				//echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";
+            echo "<a href=\"login.php\" class=\"login-button\">";
+            if (isset($_SESSION['ADMIN_EMAIL'])) {
+                //echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";
 				echo "Logout</a>";
 				echo "<a href=\"display_users.php\"
 				class=\"admin-login-button\">Users</a>";
 			} else {
-				echo "<a href=\"login.php\" class=\"login-button\">";
-				echo "Login</a>";
+                echo "Login</a>";
 			}
 			?>
 			</a>
@@ -46,8 +44,11 @@ require_once("./../server/GLOBAL_VARS.php");
 
 		<div class="headeryellow">
 			<div class="search-container">
-				<input type="text" placeholder="Search...">
-				<?php
+                <label>
+                    Search For Item:
+                    <input type="text" placeholder="Search...">
+                </label>
+                <?php
 				$stores = Item_info::getAllStoreList();
 				if (count($stores) == 0) {
 					echo $stores;

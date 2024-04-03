@@ -4,9 +4,11 @@ echo "<p> " . $item_id['ITEM_NAME'] . " Chart</p>";
 echo "<canvas id=\"chart-" . $item_id['ITEM_ID'] . "\" style=\"width:100%;max-width:600px\"></canvas>";
 ?>
 <script>
-	<?php $chartData = Item_info::parsed_GetAllPrices($item_id['ITEM_ID'], $item['STORE_ID']) ?>;
+	<?php $chartData = Item_info::parsed_GetAllPrices($item_id['ITEM_ID'], $item_id) ?>;
 	var xValues = <?php echo json_encode($chartData[0]); ?>;
 	var yValues = <?php echo json_encode($chartData[1]); ?>;
+    console.log(xValues);
+    console.log(yValues);
 	var chartId = "chart-" + "<?php echo $item_id['ITEM_ID']; ?>";
 	var minValue = Math.min(...yValues);
 	var maxValue = Math.max(...yValues);

@@ -1,6 +1,6 @@
 <?php
+global $COMMENT_DATE_TIME_FORMAT;
 session_start();
-include '../server/functions/item_info.php';
 require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
 require_once("./../server/functions/admin_management.php");
@@ -44,41 +44,38 @@ foreach ($items as $item) {
         echo "<h3>No Comments yet.</h3>";
     } elseif (is_array($comments)) {
         echo "<table id=\"comment_table\">";
-        if (is_array($comments) && !empty($comments) && is_array($comments[0])) { // Multiple Comments
-            foreach ($comments as $comment) {
-                echo "<tr>";
-                echo "<td>" . htmlspecialchars(User_management::getUser_First_Last_Name($comment['USER_ID'])) . "</td>";
-                echo "<td>" . htmlspecialchars($comment['COMMENT_TEXT']) . "</td>";
-                echo "<td>" . (new DateTime($comment['DATE_TIME_ADDED']))->format($COMMENT_DATE_TIME_FORMAT) . "</td>";
-                // Show a Deletion Button here
-                if (isset($_SESSION['ADMIN_EMAIL']) || (isset($_SESSION['USER_EMAIL']) && $comment['USER_ID'] == Admin_management::getUserID($_SESSION['USER_EMAIL']))) {
-                    // Show the Delete Button
-                    echo "<td><a href=\"./../server/deleteComment.php?commentId=" . htmlspecialchars($comment['COMMENT_ID']) . "\" class=\"button\">Delete Comment</a></td>";
-                }
-                echo "</tr>";
-            }
-        } else { // Just 1 comment
+        // Ensure $comments is always treated as an array.
+        if (isset($comments['USER_ID'])) {
+            $comments = [$comments]; // Wrap single comment in an array
+        }
+        foreach ($comments as $comment) {
             echo "<tr>";
-            echo "<td>" . htmlspecialchars(User_management::getUser_First_Last_Name($comments['USER_ID'])) . "</td>";
-            echo "<td>" . htmlspecialchars($comments['COMMENT_TEXT']) . "</td>";
-            echo "<td>" . (new DateTime($comments['DATE_TIME_ADDED']))->format($COMMENT_DATE_TIME_FORMAT) . "</td>";
+            echo "<td>" . htmlspecialchars(User_management::getUser_First_Last_Name($comment['USER_ID'])) . "</td>";
+            echo "<td>" . htmlspecialchars($comment['COMMENT_TEXT']) . "</td>";
+            try {
+                echo "<td>" . (new DateTime($comment['DATE_TIME_ADDED']))->format($COMMENT_DATE_TIME_FORMAT) . "</td>";
+            } catch (Exception $e) {
+                echo "<td>Could Not Parse Date</td>";
+            }
             // Show a Deletion Button here
-            if (isset($_SESSION['ADMIN_EMAIL']) || (isset($_SESSION['USER_EMAIL']) && $comments['USER_ID'] == Admin_management::getUserID($_SESSION['USER_EMAIL']))) {
+            if (isset($_SESSION['ADMIN_EMAIL']) || (isset($_SESSION['USER_EMAIL']) && $comment['USER_ID'] == Admin_management::getUserID($_SESSION['USER_EMAIL']))) {
                 // Show the Delete Button
-                echo "<td><a href=\"./../server/deleteComment.php?commentId=" . htmlspecialchars($comments['COMMENT_ID']) . "\" class=\"button\">Delete Comment</a></td>";
+                echo "<td><a href=\"./../server/deleteComment.php?commentId=" . htmlspecialchars($comment['COMMENT_ID']) . "\" class=\"button\">Delete Comment</a></td>";
             }
             echo "</tr>";
         }
+
         echo "</table>";
     }
 
     // Render the add comment form inside the article for each item.
     if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
-        $email = isset($_SESSION['USER_EMAIL']) ? $_SESSION['USER_EMAIL'] : $_SESSION['ADMIN_EMAIL'];
-        echo "<form id =\"Comment_Form\" action=\"./../server/addcomment.php\" method=\"post\">";
-        echo "<input id = \"Comment\" type=\"text\" placeholder=\"Add new Comment...\" name=\"COMMENT_TEXT\">";
-        echo "<input type=\"hidden\" name=\"ITEM_ID\" value=\"" . htmlspecialchars($item['ITEM_ID']) . "\">";
-        echo "<input type=\"hidden\" name=\"USER_EMAIL\" value=\"" . htmlspecialchars($email) . "\">";
+        $email = $_SESSION['USER_EMAIL'] ?? $_SESSION['ADMIN_EMAIL'];
+        echo "<form class =\"Comment_Form\" action=\"./../server/addcomment.php\" method=\"post\">";
+        echo "<input class=\"Comment_Input\" id = \"Comment\" type=\"text\" placeholder=\"Add new Comment...\" name=\"COMMENT_TEXT\">";
+        echo "<input type=\"hidden\" name=\"ITEM_ID\" value=\" " . htmlspecialchars($item['ITEM_ID']) . "\" >";
+        echo "<input type=\"hidden\" name=\"USER_EMAIL\" value=\" " . htmlspecialchars($email) . " \" >";
+        echo "<p class = \"Comment_Msg\" style = \"display:none;color:red;\">Comment Text Cannot be Empty</p>";
         echo "<button type=\"submit\">Add Comment</button>";
         echo "</form>";
     }
@@ -89,11 +86,21 @@ foreach ($items as $item) {
 ?>
 <script>
     $(document).ready(function() {
-        $("#Comment_Form").submit(function(event) {
-            var field1Value = $("#Comment").val();
+        $(".Comment_Form").on("submit", function(event) {
+            var field1Value = $(this).find(".Comment_Input").val();
             if (field1Value.trim().length === 0) {
-                alert("Cannot add an Empty Comment.");
+                $(this).find(".Comment_Msg").show();
                 event.preventDefault(); // prevent form submission
+            }
+        });
+        $(".Comment_Input").on("keyup", function() {
+            // Hide the message when the user starts typing
+            var inputVal = $(this).val().trim();
+            if (inputVal.length > 0) {
+                $(this).closest(".Comment_Form").find(".Comment_Msg").hide();
+            } else {
+                // Optional: Show the message again if the input is empty
+                $(this).closest(".Comment_Form").find(".Comment_Msg").show();
             }
         });
     });
