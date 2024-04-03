@@ -75,8 +75,8 @@ foreach ($items as $item) {
     // Render the add comment form inside the article for each item.
     if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
         $email = isset($_SESSION['USER_EMAIL']) ? $_SESSION['USER_EMAIL'] : $_SESSION['ADMIN_EMAIL'];
-        echo "<form action=\"./../server/addcomment.php\" method=\"post\">";
-        echo "<input type=\"text\" placeholder=\"Add new Comment...\" name=\"COMMENT_TEXT\">";
+        echo "<form id =\"Comment_Form\" action=\"./../server/addcomment.php\" method=\"post\">";
+        echo "<input id = \"Comment\" type=\"text\" placeholder=\"Add new Comment...\" name=\"COMMENT_TEXT\">";
         echo "<input type=\"hidden\" name=\"ITEM_ID\" value=\"" . htmlspecialchars($item['ITEM_ID']) . "\">";
         echo "<input type=\"hidden\" name=\"USER_EMAIL\" value=\"" . htmlspecialchars($email) . "\">";
         echo "<button type=\"submit\">Add Comment</button>";
@@ -87,4 +87,15 @@ foreach ($items as $item) {
     echo "</section>";
 }
 ?>
+<script>
+    $(document).ready(function() {
+        $("#Comment_Form").submit(function(event) {
+            var field1Value = $("#Comment").val();
+            if (field1Value.trim().length === 0) {
+                alert("Cannot add an Empty Comment.");
+                event.preventDefault(); // prevent form submission
+            }
+        });
+    });
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

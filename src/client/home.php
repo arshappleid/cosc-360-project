@@ -29,13 +29,17 @@ require_once("./../server/GLOBAL_VARS.php");
 		<div class="headerblack">
 			<a href="home.php" class="home-button">Home</a>
 			<?php
+
 			if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
 				echo "<div style = \"display:flex;\">";
+				if (isset($_SESSION['USER_EMAIL'])) {
+					echo "<a href=\"home/track_user_comments.php\" class=\"login-button\" >History</a>";
+				}
+
 				if (isset($_SESSION['ADMIN_EMAIL'])) {
 					echo "<a href=\"home/admin_management.php\" class=\"login-button\" >Admin Management</a>";
 				}
 				echo "<a href=\"account_page.php\" class=\"login-button\">";
-				//echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";
 				echo "Account</a>";
 				echo "</div>";
 			} else {
