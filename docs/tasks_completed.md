@@ -2,13 +2,32 @@ This document testifies, all the important tasks / milestones completed by all t
 
 #### Prabhmeet Deol
 
-- Setup Docker Containers.
+- Setup Docker Containers , Testing Environment, Impot Libraries, Repo Setup.
+  - Developed a Continuous Testing pipeline , to test all the unit tests on each push.
+
 - Database Schema Design, All the SQL , and Test Data.
-- Admin Login Page Functionality , Admin Account Creation Functionaliy.
+- Admin Login, Validation with MD5 hash Page Server Functionality and Frontend PHP , with form validation.
+- Admin Account Creation Functionality.
 - Home Page - 
-  - Search For items Functionality.
+  - Search For items Functionality, using Jquery.
   - Breadcrumbs
   - Filter items by Store Functionality.
+  - Display All Items as a List , and their Comments. 
+    - With Ability to add/delete them.
+  - Admin Functionality to delete the comments.
+  - Server code to recieve latest prices -> Generate a graph using chart JS.
+  - Responsible for the main layout of the home page, and how everything is organized.
+- Admin Management , list all the users, and give ability to ban them.
+- 80% of the written unit tests of all the functions created , using TDD.
+  - Wrote out all the functions in ```src/server/functions/*``` for basic requirements.
+
+- Image Store Functionality in the database as a BLOB , and Image Retrieval funcationality and displaying.
+- File parsing , to upload / add multiple items at once from Admin Management console to database.
+- Global Function , to execute all SQL queries from one point / function in ```src/server/function/db_connection.php```
+- Coordinated Deployment of the application for First Milestone, created deploy scripts and documentation.
+- Documentation for the whole project repo.
+- Functions to retrieve latest Weather Information , using <u>external Web Api</u> as per lecture provided instructions.
+- Comments - Add , Delete Functonality. 
 
 #### Quin Finocchio
 
