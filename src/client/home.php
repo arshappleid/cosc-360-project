@@ -78,7 +78,7 @@ require_once("./../server/GLOBAL_VARS.php");
 		</div>
 
 		<?php include_once './../server/breadcrumbs.php' ?>
-
+        <?php include_once './../server/weather.php'?>
 		<div class="underheadercontainer">
 			<div class="overlay">
 				<?php

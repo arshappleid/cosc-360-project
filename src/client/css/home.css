@@ -70,3 +70,8 @@ article {
 #avatar_img {
     height: 15%;
 }
+
+#weather_block p {
+    display: inline-block;
+    margin-right: 20px;
+}
