@@ -24,7 +24,7 @@ $weather = weather::getWeather($selectedCity);
 
 <!-- Weather Information Display -->
 <div id="weather_block">
-    <p>Current Weather: <?= htmlspecialchars($weather['CURRENT_WEATHER_CELCIUS']) ?> Celsius</p>
+    <p>Current Weather: <?= htmlspecialchars($weather['CURRENT_WEATHER_CELCIUS']) ?> Celcius</p>
     <p>Wind Speed: <?= htmlspecialchars($weather['WINDSPEED_KMH']) ?> Km/H</p>
     <p>Wind Direction: <?= htmlspecialchars($weather['WIND_DIRECTION']) ?></p>
 </div>

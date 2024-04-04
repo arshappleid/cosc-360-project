@@ -28,7 +28,7 @@ class CommentsTest extends TestCase
 	{
 		$resp = Comments::getAllCommentsForItem("3");
 		$this->assertIsArray($resp);
-		$this->assertArrayHasKey('COMMENT_ID',$resp);
+		$this->assertArrayHasKey('COMMENT_ID', $resp);
 	}
 
 	/** @test */
@@ -58,5 +58,18 @@ class CommentsTest extends TestCase
 	{
 		$resp = Comments::deleteComment("99");
 		$this->assertEquals("COMMENT_NOT_EXISTS", $resp);
+	}
+	/** @test */
+	public function addComment_UserExists_ItemExists()
+	{
+		$resp = Comments::addComment("New Comment", "1", "test@gmail.com");
+		$this->assertEquals("COMMENT_ADDED", $resp);
+	}
+
+	/** @test */
+	public function addComment_UserExists_ItemDoesNotExists()
+	{
+		$resp = Comments::addComment("New Comment", "99", "test@gmail.com");
+		$this->assertEquals("ITEM_NOT_EXISTS", $resp);
 	}
 }
