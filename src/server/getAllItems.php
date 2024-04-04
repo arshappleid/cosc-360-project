@@ -18,7 +18,6 @@ foreach ($items as $item) {
 
     echo "<section>";
     echo "<aside>";
-
     // Left Bar
     echo "<section>"; // Left Section
     echo "<aside>";
