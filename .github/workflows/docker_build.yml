@@ -47,3 +47,7 @@ jobs:
             - name: Execute UserManagement tests
               if: always()
               run: docker exec web-server sh -c "phpunit --testdox tests/weatherTest.php"
+
+            - name: Execute Login Tracking tests
+              if: always()
+              run: docker exec web-server sh -c "phpunit --testdox tests/login_tracking_Test.php"
