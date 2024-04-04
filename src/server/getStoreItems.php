@@ -43,7 +43,7 @@ foreach ($item_IDS as $item_ID) {
                 echo "<tr>";
                 echo "<td>" . htmlspecialchars(User_management::getUser_First_Last_Name($comment['USER_ID'])) . "</td>";
                 echo "<td>" . htmlspecialchars($comment['COMMENT_TEXT']) . "</td>";
-                echo "<td>" . (new DateTime($comment['DATE_TIME_ADDED']))->format($COMMENT_DATE_TIME_FORMAT) . "</td>";
+                echo "<td>" . (new DateTime($comment['DATE_TIME_ADDED']))->format(GLOBAL_VARS::$COMMENT_DATE_TIME_FORMAT) . "</td>";
                 echo "</tr>";
             }
             echo "</table>";

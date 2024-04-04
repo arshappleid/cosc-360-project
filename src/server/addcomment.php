@@ -6,10 +6,9 @@ try {
 			if ($_POST['COMMENT_TEXT'] != "") {
 				$resp = Comments::addComment($_POST['COMMENT_TEXT'], $_POST['ITEM_ID'], $_POST['USER_EMAIL']);
 			}
-
-			header('Location: ../client/home.php');
 		}
 	}
 } catch (Exception $e) {
 	echo "<script>console.error(" . json_encode($e->getMessage()) . ");</script>";
 }
+header('Location: ./../client/home.php');
