@@ -5,6 +5,7 @@ include_once "./functions/admin_management.php";
 $itemName = $_POST['ITEM_NAME'];
 $description = $_POST['DESCRIPTION'];
 $storeId = $_POST['STORE_ID'];
+$category = $_POST['ITEM_CATEGORY'];
 $itemPrice = $_POST['ITEM_PRICE'];
 $externalLink = $_POST['EXTERNAL_LINK'];
 
