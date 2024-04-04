@@ -1,7 +1,7 @@
 <?php
 
 include_once 'db_connection.php';
-include_once './../GLOBAL_VARS.php';
+include_once __DIR__ . "./../GLOBAL_VARS.php";
 
 class Item_info
 {
@@ -56,7 +56,7 @@ class Item_info
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_ITEMS_AVAILABLE_AT_STORE";
 				} else if (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
-					if (!is_array($response[1][0])) {
+					if (!isset($response[1][0])) {
 						return array($response[1]['ITEM_ID']);
 					}
 

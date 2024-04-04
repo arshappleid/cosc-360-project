@@ -14,7 +14,7 @@ if (
 	!empty($itemName) && !empty($description) && !empty($storeId) && !empty($itemPrice) &&
 	!empty($externalLink)
 ) {
-	$resp = Admin_management::addItem($itemName, $description, $storeId, $itemPrice, $externalLink);
+	$resp = Admin_management::addItem($itemName, $description, $storeId, $itemPrice, $externalLink, $category);
 	$_SESSION["message"] = $resp;
 	header('Location: ../client/admin_panel.php');
 } else {

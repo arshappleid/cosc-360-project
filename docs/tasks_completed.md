@@ -34,16 +34,28 @@ This document testifies, all the important tasks / milestones completed by all t
 
 - Website Design
 - Figma Mockup
-- Login Page Functionality , Account Creation Functionality
+- Login Page Functionality 
+- Account Creation Page Functionality
+- Account Page Functionality
+    - Edit user information
+- Front End Framework for the entire site
+- Contributed to the ```src/server/functions/*```
+    - added functions as needed
+    - fixed functions as needed
 - Header HTML and CSS , implemented breadcrubs into the header
 - Background HTML and CSS
 - Logout Functionality
-- Site Navigation Framework
 - Hosted Site
-- product.php backend
-- admin panel backend
-- user list backend.
-
+- Contributed to the search bar functionality
+    - Wrote the js script that loads the items initially and enabled all stores to be searched
+    - Contributed to the ability to be able to search items accurately
+- Programmed the dynamic loading of the product.php page
+- Programmed the User list page
+- Admin Panel Front end
+- Home page frontend.
+- Most of the general styling of the website
+- The HTML and CSS framework that is used on every page
+- A lot of detail work, getting things to work how they actually should
 
 #### Max Bigwood
 - Changed appearance of admin_login.php to match rest of pages
