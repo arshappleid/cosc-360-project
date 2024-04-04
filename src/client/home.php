@@ -2,7 +2,6 @@
 session_start();
 require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
-require_once("./../server/GLOBAL_VARS.php");
 
 ?>
 

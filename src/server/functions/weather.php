@@ -1,5 +1,6 @@
 <?php
 include_once 'db_connection.php';
+include_once './../GLOBAL_VARS.php';
 
 class weather
 {
@@ -7,6 +8,14 @@ class weather
 	private static $API_URL_1 = "https://api.open-meteo.com/v1/forecast?latitude=";
 	private static $API_URL_2 = "&longitude=";
 	private static $API_URL_3 = "&current_weather=true&timezone=auto";
+	public static array $WEATHER_CITIES = ['Kelowna', 'Vancouver', 'Winnipeg', 'Toronto', 'Quebec City', 'Ottawa', 'Montreal', 'Hamilton', 'Edmonton', 'Calgary'];
+
+	static function updateWeatherForAllCities()
+	{
+		foreach (self::$WEATHER_CITIES as $city) {
+			self::updateWeather($city);
+		}
+	}
 
 	/**
 	 * Checks if the weather for a given city has been updated in the past 15 minutes.
