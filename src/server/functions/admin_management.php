@@ -270,7 +270,7 @@ class Admin_management
 	 * - ITEM_WITH_NAME_ALREADY_EXISTS
 	 * 
 	 */
-	static function addItem($ITEM_NAME, $ITEM_DESCRIPTION, $STORE_ID, $ITEM_PRICE, $EXTERNAL_LINK)
+	static function addItem($ITEM_NAME, $ITEM_DESCRIPTION, $STORE_ID, $ITEM_PRICE, $EXTERNAL_LINK, $CATEGORY)
 	{
 		$ITEM_ID = Admin_management::getItemID($ITEM_NAME, $STORE_ID);
 		if (Admin_management::itemExistsInStore($ITEM_ID, $ITEM_ID) != "ITEM_DOES_NOT_EXIST_IN_STORE") {
@@ -279,8 +279,10 @@ class Admin_management
 		global $connection;
 		$query1 = "INSERT INTO ITEMS (ITEM_NAME, ITEM_DESCRIPTION, EXTERNAL_LINK) VALUES (?, ?, ?);";
 		$query2 = "INSERT INTO Item_Price_Entry (STORE_ID, ITEM_ID, ITEM_PRICE) VALUES (?, ?, ?);";
+        $query3 = "INSERT INTO ITEM_CATEGORY(ITEM_ID, CATEGORY_NAME) VALUES(?,?);";
 
 		$connection->begin_transaction();
+        $resp = "ITEM_NOT_ADDED";
 		try {
 			$stmt1 = $connection->prepare($query1);
 			if (!$stmt1) {
@@ -298,15 +300,24 @@ class Admin_management
 				// Corrected parameter types 'sii' if STORE_ID and ITEM_ID are integers
 				$stmt2->bind_param('iii', $STORE_ID, $ITEM_ID, $ITEM_PRICE);
 				if ($stmt2->execute()) {
-					$connection->commit();
-					return "ITEM_ADDED";
+                    $stmt3 = $connection->prepare($query3);
+                    $stmt2->bind_param('ss', $ITEM_ID, $CATEGORY);
+                    if($stmt3->execute()){
+                        $connection->commit();
+                        $resp =  "ITEM_ADDED";
+                    }
+					else{
+                        $connection->rollback();
+                        return $resp;
+                    }
 				} else {
 					$connection->rollback();
-					return "ITEM_NOT_ADDED";
+                    return $resp;
 				}
+                return $resp;
 			} else {
 				$connection->rollback();
-				return "ITEM_NOT_ADDED";
+				return $resp;
 			}
 		} catch (Exception $e) {
 			$connection->rollback();

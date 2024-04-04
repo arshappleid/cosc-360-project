@@ -1,6 +1,7 @@
 <?php
 
 include_once 'db_connection.php';
+include_once './../GLOBAL_VARS.php';
 
 class Item_info
 {
@@ -406,5 +407,18 @@ class Item_info
 			echo "Error occurred, when using Database function to try to validate User.<br>";
 			echo $e->getMessage();
 		}
+	}
+
+	/**
+	 * Summary of getAllItems_IDS_AtStore
+	 * Returns an Associative array , of all the ITEM_ID at a store.
+	 * Response Values :
+	 * 		- NO_ITEMS_AVAILABLE_AT_STORE
+	 * 		- ['CATEGORY_1']
+	 * 		- ['CATEGORY_1','CATEGORY_2']
+	 */
+	static function getAllCategories()
+	{
+		return GLOBAL_VARS::$CATEGORIES;
 	}
 }

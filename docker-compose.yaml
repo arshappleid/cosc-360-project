@@ -8,7 +8,6 @@ services:
             SERVER_ENV: LOCAL
         volumes:
             - "./src:/var/www/html/"
-            - "./php.ini:/usr/local/etc/php/php.ini"
         ports:
             - "8080:80"
         depends_on:

@@ -103,13 +103,23 @@ require_once("./../server/GLOBAL_VARS.php");
 								<input type="text" name="ITEM_EXTERNAL_LINK" placeholder="External Link">
 								<?php
 								$stores = Item_info::getAllStoreList();
-								if (count($stores) > 0) {
+								if (is_array($stores)) {
 									echo "<select id=\"store_select\" name=\"STORE_ID\" class=\"select_dropdown\">";
 									foreach ($stores as $key => $store) {
 										echo "<option value=\"" . $store['STORE_ID'] . "\">" . $store['STORE_NAME'] . "</option>";
 									}
 									echo "</select>";
 								}
+                                $categories = Item_info::getAllCategories();
+                                if (is_array($categories)) {
+                                    echo "<br>";
+                                    echo "<select id=\"category_select\" name=\"ITEM_CATEGORY\" class=\"select_dropdown\">";
+                                    foreach ($categories as $category) {
+                                        echo "<option value=\"" . $category . "\">" . $category  . "</option>";
+                                    }
+                                    echo "</select>";
+                                }
+
 								?>
 							</div>
 							<div class="col">

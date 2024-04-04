@@ -130,4 +130,12 @@ class Item_info_Test extends TestCase
         $resp = Item_info::ValidateStoreId("99");
         $this->assertEquals($resp, "INVALID_STORE_ID");
     }
+
+    /** @test */
+    public function getAllCategories_RecordsExist()
+    {
+        $resp = Item_info::getAllCategories();
+        print_r($resp);
+        $this->assertIsArray($resp);
+    }
 }
