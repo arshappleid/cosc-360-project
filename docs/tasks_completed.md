@@ -28,6 +28,7 @@ This document testifies, all the important tasks / milestones completed by all t
 - Documentation for the whole project repo.
 - Functions to retrieve latest Weather Information , using <u>external Web Api</u> as per lecture provided instructions.
 - Comments - Add , Delete Functonality. 
+- User Login Tracking , For Each Month. Implemented in Admin Management . 
 
 #### Quin Finocchio
 

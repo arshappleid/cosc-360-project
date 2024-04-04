@@ -1,5 +1,7 @@
 <?php
 include './functions/admin_management.php';
+include './functions/user_management.php';
+include './functions/login_tracking.php';
 
 $users = Admin_management::getAllUsers();
 //$item = Admin_management::getItemID("Smartwatch", 2);
@@ -16,10 +18,12 @@ if (is_array($users)) {
         echo "<table id=\"user_table\">";
         echo "<tr><th>First Name</th><th>Last Name</th><th>Email</th></tr>";
         foreach ($users as $user) {
+            $user_id = User_management::getUserID($user['Email']);
             echo "<tr>";
             echo "<td>" . $user['First_Name'] . "</td>";
             echo "<td>" . $user['Last_Name'] . "</td>";
             echo "<td>" . $user['Email'] . "</td>";
+            echo "<td>" . Login_tracking::getCountForCurrentMonth($user_id) . "</td>";
             echo "<td><button>User Details</button>";
             echo "</tr>";
         }
