@@ -2,6 +2,7 @@
 session_start();
 require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/admin_management.php");
+require_once("./../server/functions/login_tracking.php");
 require_once("./../server/GLOBAL_VARS.php");
 
 ?>

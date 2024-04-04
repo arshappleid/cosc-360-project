@@ -32,11 +32,11 @@ require_once("./../server/GLOBAL_VARS.php");
 			if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
 				echo "<div style = \"display:flex;\">";
 				if (isset($_SESSION['USER_EMAIL'])) {
-					echo "<a href=\"home/track_user_comments.php\" class=\"login-button\" >History</a>";
+					echo "<a href=\"home/track_user_comments.php\" class=\"admin-login-button\" >History</a>";
 				}
 
 				if (isset($_SESSION['ADMIN_EMAIL'])) {
-					echo "<a href=\"home/admin_management.php\" class=\"login-button\" >Admin Management</a>";
+					echo "<a href=\"display_users.php\" class=\"admin-management-button\" >Admin Management</a>";
 				}
 				echo "<a href=\"account_page.php\" class=\"login-button\">";
 				echo "Account</a>";
