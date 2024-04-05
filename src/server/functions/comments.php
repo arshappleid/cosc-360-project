@@ -18,7 +18,7 @@ class Comments
 	 * - COMMENT_NOT_ADDED
 	 */
 
-	static function addComment($COMMENT_TEXT, $ITEM_ID, $USER_EMAIL)
+	public static function addComment($COMMENT_TEXT, $ITEM_ID, $USER_EMAIL)
 	{
 		// Check if the user exists
 		$userExists = User_management::userExists($USER_EMAIL);
@@ -51,16 +51,16 @@ class Comments
 	}
 
 
-    /**
-     * Returns if a Comment Exists Given the COMMENT_ID in Comments Table
-     * @param $COMMENT_ID
-     * @return string
-     *
-     * Return Values:
-     * - COMMENT_EXISTS
-     * - COMMENT_NOT_EXISTS
-     */
-	static function commentExists($COMMENT_ID)
+	/**
+	 * Returns if a Comment Exists Given the COMMENT_ID in Comments Table
+	 * @param $COMMENT_ID
+	 * @return string
+	 *
+	 * Return Values:
+	 * - COMMENT_EXISTS
+	 * - COMMENT_NOT_EXISTS
+	 */
+	public static function commentExists($COMMENT_ID)
 	{
 		// Corrected the SQL query to use the proper placeholder syntax
 		$query = "SELECT * FROM Comments WHERE COMMENT_ID = ?;";
@@ -69,12 +69,12 @@ class Comments
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "COMMENT_NOT_EXISTS";
-				} else if (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
+				} elseif (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
 					return "COMMENT_EXISTS";
 				}
 			}
 		} catch (Exception $e) {
-			echo "Error occurred, when using Database static function to try to validate User.<br>";
+			echo "Error occurred, when using Database public static function to try to validate User.<br>";
 			echo $e->getMessage();
 		}
 		return "COMMENT_NOT_EXISTS"; // Default return if no condition is met
@@ -91,10 +91,11 @@ class Comments
 	 *
 	 * Deletes the comment , given the comment ID.
 	 */
-	static function deleteComment($Comment_Id)
+	public static function deleteComment($Comment_Id)
 	{
-		if (Comments::commentExists($Comment_Id) == "COMMENT_NOT_EXISTS")
+		if (Comments::commentExists($Comment_Id) == "COMMENT_NOT_EXISTS") {
 			return "COMMENT_NOT_EXISTS";
+		}
 
 		$query = "DELETE FROM Comments WHERE COMMENT_ID = ?";
 
@@ -105,7 +106,7 @@ class Comments
 			}
 			return "COMMENT_NOT_DELETED";
 		} catch (Exception $e) {
-			echo "Error occurred, when using Database static function to try to validate User.<br>";
+			echo "Error occurred, when using Database public static function to try to validate User.<br>";
 			echo $e->getMessage();
 		}
 	}
@@ -113,17 +114,18 @@ class Comments
 	 * Summary of getAllCommentsForItem
 	 * @param int $Item_Id
 	 * @return mixed - Return an associate array of all the comments , associated with an ID.
-	 * 
+	 *
 	 * Return Values:
 	 * - Array - of all the comments
 	 * 		- Only 1 comment : [comment1]
 	 * 		- More than 1 comment : [comment1,comment2]
 	 * - 0 Comments : NO_COMMENTS_ADDED_YET
 	 */
-	static function getAllCommentsForItem($Item_Id)
+	public static function getAllCommentsForItem($Item_Id)
 	{
-		if (Item_info::itemExists($Item_Id) == "ITEM_NOT_EXISTS")
+		if (Item_info::itemExists($Item_Id) == "ITEM_NOT_EXISTS") {
 			return "ITEM_NOT_EXISTS";
+		}
 
 		$query = "SELECT * FROM Comments WHERE ITEM_ID = ?";
 		try {
@@ -133,27 +135,28 @@ class Comments
 				if (is_array($response[1])) {
 					// Valid Response
 					if (count($response[1]) == 0) {
-                        return "NO_COMMENTS_ADDED_YET";
-                    }
-                    if (is_array($response[1]) && array_key_exists(0, $response[1]) && !is_array($response[1][0]) && array_key_exists('COMMENT_ID', $response[1])) {
-                        return $response[1]; // Only 1 comment exists
-                    }
-                    return $response[1]; // Return All comments
+						return "NO_COMMENTS_ADDED_YET";
+					}
+					if (is_array($response[1]) && array_key_exists(0, $response[1]) && !is_array($response[1][0]) && array_key_exists('COMMENT_ID', $response[1])) {
+						return $response[1]; // Only 1 comment exists
+					}
+					return $response[1]; // Return All comments
 				} else {
 					return "NO_COMMENTS_ADDED_YET";
 				}
 			}
 		} catch (Exception $e) {
-			echo "Error occured , when using Database static function to try to validate User.<br>";
+			echo "Error occured , when using Database public static function to try to validate User.<br>";
 			echo $e->getMessage();
 		}
 
 		return !empty($data);
 	}
-	static function getAllCommentsForItemDescending($Item_Id)
+	public static function getAllCommentsForItemDescending($Item_Id)
 	{
-		if (Item_info::itemExists($Item_Id) == "ITEM_NOT_EXISTS")
+		if (Item_info::itemExists($Item_Id) == "ITEM_NOT_EXISTS") {
 			return "ITEM_NOT_EXISTS";
+		}
 
 		$query = "SELECT * FROM Comments WHERE ITEM_ID = ? ORDER BY DATE_TIME_ADDED DESC";
 		try {
@@ -162,10 +165,11 @@ class Comments
 			if ($response[0] === true) {
 				if (is_array($response[1])) {
 					// Valid Response
-					if (count($response[1]) == 0)
+					if (count($response[1]) == 0) {
 						return "NO_COMMENTS_ADDED_YET";
-					elseif (!is_array($response[1][0])) // if the first element is not an array
+					} elseif (!is_array($response[1][0])) { // if the first element is not an array
 						return array($response[1]);
+					}
 
 					return $response[1];
 				} else {
@@ -173,7 +177,7 @@ class Comments
 				}
 			}
 		} catch (Exception $e) {
-			echo "Error occurred when using Database static function to try to validate User.<br>";
+			echo "Error occurred when using Database public static function to try to validate User.<br>";
 			echo $e->getMessage();
 		}
 

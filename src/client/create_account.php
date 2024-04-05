@@ -25,7 +25,6 @@ require_once("./../server/GLOBAL_VARS.php");
     <div class="headerblack">
       <a href="home.php" class="home-button">Home</a>
     </div>
-
     <header class="headeryellow">
 			<div class="search-container">
 				<label for="search-input" class="visually-hidden">Enter keywords to search:</label> 
@@ -47,6 +46,24 @@ require_once("./../server/GLOBAL_VARS.php");
 				<button type="button" id="search-button">Search</button>
 			</div>
 		</header>
+    <div class="headeryellow">
+      <div class="search-container">
+        <input type="text" placeholder="Search...">
+        <?php
+        $stores = Item_info::getAllStoreList();
+        if (count($stores) == 0) {
+            echo $stores;
+        } else {
+            echo "<select id = \"store_select\" class=\"select_dropdown\">";
+            foreach ($stores as $key => $store) {
+                echo "<option value=\"" . $store['STORE_ID'] . "\" >" . $store['STORE_NAME'] . "</option>";
+            }
+            echo "</select>";
+        }
+        ?>
+        <button type="submit">Search</button>
+      </div>
+    </div>
     <?php include_once './../server/breadcrumbs.php' ?>
     <div class="underheadercontainer">
       <div class="overlay">
@@ -73,8 +90,8 @@ require_once("./../server/GLOBAL_VARS.php");
           <div class="button-container">
             <?php
             if (isset($_SESSION['MESSAGE'])) {
-              echo "<h4 class=\"error_message\">" . $_SESSION['MESSAGE'] . "</h4>";
-              unset($_SESSION['MESSAGE']);
+                echo "<h4 class=\"error_message\">" . $_SESSION['MESSAGE'] . "</h4>";
+                unset($_SESSION['MESSAGE']);
             }
             ?>
             <button type="submit">Create Account</button>
@@ -93,14 +110,14 @@ require_once("./../server/GLOBAL_VARS.php");
         <ul>
           <li><a href="home.php">Home</a></li>
           <?php
-          if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
-            echo "<li><a href=\"account_page.php\">Account</a></li>";
-          } else {
-            echo "<li><a href=\"create_account.php\">Create Account</a></li>
+            if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
+                echo "<li><a href=\"account_page.php\">Account</a></li>";
+            } else {
+                echo "<li><a href=\"create_account.php\">Create Account</a></li>
             <li><a href=\"login.php\">Login</a></li>
             <li><a href=\"admin_login.php\">Admin Login</a></li>";
-          }
-          ?>
+            }
+            ?>
         </ul>
         <p>&copy; Banana Hammock 2024</p>
       </nav>

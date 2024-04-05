@@ -1,4 +1,5 @@
 <?php
+
 include_once 'db_connection.php';
 include_once './../GLOBAL_VARS.php';
 
@@ -10,7 +11,7 @@ class weather
 	private static $API_URL_3 = "&current_weather=true&timezone=auto";
 	public static array $WEATHER_CITIES = ['Kelowna', 'Vancouver', 'Winnipeg', 'Toronto', 'Quebec City', 'Ottawa', 'Montreal', 'Hamilton', 'Edmonton', 'Calgary'];
 
-	static function updateWeatherForAllCities()
+	public static function updateWeatherForAllCities()
 	{
 		foreach (self::$WEATHER_CITIES as $city) {
 			self::updateWeather($city);
@@ -22,7 +23,7 @@ class weather
 	 * @param string $CITY_NAME The name of the city.
 	 * @return string 'UPDATED' if the weather has been updated in the last 15 minutes, otherwise 'NOT_UPDATED'.
 	 */
-	static function weatherUpdatedInThePastNMins($CITY_NAME)
+	public static function weatherUpdatedInThePastNMins($CITY_NAME)
 	{
 
 		$query = "SELECT CITY_NAME,
@@ -37,7 +38,7 @@ class weather
 			$resp = executePreparedQuery($query, array('ss', weather::$UPDATE_WEATHER_EVERY_N_MINUTES, $CITY_NAME));
 			if ($resp[0] == true) {
 				if ($resp[1] == "NO_DATA_RETURNED") {
-					return "COULD_NOT_FETCH_UPDATE_STATUS";
+					return "NOT_UPDATED";
 				}
 				return $resp[1]['UpdatedInLastNMinutes'];
 			}
@@ -55,6 +56,7 @@ class weather
 	 */
 	public static function getWeather($CITY_NAME)
 	{
+		$CITY_NAME = trim($CITY_NAME);
 		if (self::weatherUpdatedInThePastNMins($CITY_NAME) === "NOT_UPDATED") {
 			self::updateWeather($CITY_NAME);
 		}
@@ -77,7 +79,7 @@ class weather
 	 * @param string $CITY_NAME The name of the city.
 	 * @return string 'WEATHER_UPDATED' if the update was successful, otherwise 'WEATHER_NOT_UPDATED'.
 	 */
-	static function updateWeather($CITY_NAME)
+	public static function updateWeather($CITY_NAME)
 	{
 
 		$query = "SELECT LATITUDE, LONGITUDE FROM WEATHER WHERE CITY_NAME = ?";
@@ -114,7 +116,7 @@ class weather
 	}
 
 
-	static function parseURL($LATITUDE, $LONGITUDE)
+	public static function parseURL($LATITUDE, $LONGITUDE)
 	{
 		return weather::$API_URL_1 . $LATITUDE . weather::$API_URL_2 . $LONGITUDE . weather::$API_URL_3;
 	}

@@ -5,16 +5,14 @@ include_once 'user_management.php';
 
 class Admin_management
 {
-
-
 	/**
 	 * Summary of validateAdminLogin
 	 * @param mixed $email
 	 * @param mixed $hashed_password
 	 * @return string if the given hashed password , matches the hashed password in the database
-	 * 
+	 *
 	 */
-	static function validateAdminLogin($email, $hashed_password)
+	public static function validateAdminLogin($email, $hashed_password)
 	{
 
 		$query = "SELECT * FROM Admins WHERE Email = ?";
@@ -22,11 +20,11 @@ class Admin_management
 			$response = executePreparedQuery($query, array('s', $email));
 			if ($response[0] === true) {
 				if (is_array($response[1])) {
-
-					if ($response[1]['MD5_Password'] === $hashed_password)
+					if ($response[1]['MD5_Password'] === $hashed_password) {
 						return "VALID_LOGIN";
-					else
+					} else {
 						return "INVALID_LOGIN";
+					}
 				} else {
 					return "ADMIN_NOT_FOUND";
 				}
@@ -41,12 +39,12 @@ class Admin_management
 	/**
 	 * Given the USER EMAIL , Returns the USER_ID
 	 * If the User Exists in USERS.
-	 * 
+	 *
 	 * Possible Return Values
 	 * - USER_NOT_EXISTS
 	 * - USER_ID
 	 */
-	static function getUserID($USER_EMAIL)
+	public static function getUserID($USER_EMAIL)
 	{
 
 		if (User_management::userExists($USER_EMAIL) != "USER_EXISTS") {
@@ -58,7 +56,7 @@ class Admin_management
 			if ($response[0] == true) { // Single Record
 				if (isset($response[1]['USER_ID'])) {
 					return $response[1]['USER_ID'];
-				} elseif (isset($response[1][0]['USER_ID'])) { // Multiple Records 
+				} elseif (isset($response[1][0]['USER_ID'])) { // Multiple Records
 					return isset($response[1][0]['USER_ID']);
 				}
 			}
@@ -72,10 +70,10 @@ class Admin_management
 	 * Summary of toggleBanUserAccount
 	 * @param mixed $userEmail
 	 * @return bool|string - Account Updated or not
-	 * 
+	 *
 	 * Toggles between the banned status for a UserEmail provided.
 	 */
-	static function toggleBanUserAccount($userEmail)
+	public static function toggleBanUserAccount($userEmail)
 	{
 		$query = "UPDATE USERS SET BANNED_STATUS = NOT BANNED_STATUS WHERE Email = ?;";
 		try {
@@ -95,11 +93,11 @@ class Admin_management
 	/**
 	 * Summary of getAllUsers
 	 * @return mixed
-	 * 
+	 *
 	 * Returns NO_USERS_FOUND , if no users found.
 	 * Else Returns an Asssociative Array of all the users.
 	 */
-	static function getAllUsers()
+	public static function getAllUsers()
 	{
 		$query = "SELECT * FROM USERS;";
 		try {
@@ -124,12 +122,12 @@ class Admin_management
 	 * Returns String if an Admin is already registered or not
 	 * @param mixed $email
 	 * @return string
-	 * 
+	 *
 	 * Posible return Values
 	 * - ADMIN_EXISTS
 	 * - ADMIN_NOT_EXIST
 	 */
-	static function checkAdminExists($email)
+	public static function checkAdminExists($email)
 	{
 		$query = "SELECT Email FROM Admins WHERE Email = ?";
 		$response = executePreparedQuery($query, array('s', $email));
@@ -144,18 +142,18 @@ class Admin_management
 
 	/**
 	 * Creates an admin user in the database.
-	 * 
+	 *
 	 * @param string $firstName The first name of the admin.
 	 * @param string $lastName The last name of the admin.
 	 * @param string $email The email address of the admin.
 	 * @param string $md5password The MD5 hashed password of the admin.
 	 * @param string|null $userImage An optional path or identifier for the user's image.
 	 * @return string A message indicating the result of the operation.
-	 * 
+	 *
 	 * Possible Return Values:
 	 * - ADMIN_ALREADY_REGISTERED
 	 */
-	static function createAdmin($firstName, $lastName, $email, $md5password, $userImage = null)
+	public static function createAdmin($firstName, $lastName, $email, $md5password, $userImage = null)
 	{
 		if (Admin_management::checkAdminExists($email) == "ADMIN_EXISTS") {
 			return "ADMIN_ALREADY_REGISTERED";
@@ -177,7 +175,7 @@ class Admin_management
 		}
 	}
 
-	static function displayName($email)
+	public static function displayName($email)
 	{
 		if (User_management::userExists($email) == "USER_EXISTS") {
 			$response = executePreparedQuery("SELECT First_Name, Last_Name FROM USERS WHERE EMAIL = ?", array("s", $email));
@@ -198,10 +196,10 @@ class Admin_management
 	 * - ITEM_ID as String
 	 * - ITEM_NOT_FOUND
 	 * - COULD_NOT_EXECUTE_QUERY
-	 * 
+	 *
 	 * If multiple items with the same name exist , will return the ID of the first record.
 	 */
-	static function getItemID($ITEM_NAME, $STORE_ID)
+	public static function getItemID($ITEM_NAME, $STORE_ID)
 	{
 		$query = "SELECT * FROM ITEMS 
 		JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID 
@@ -233,7 +231,7 @@ class Admin_management
 	* - ITEM_DOES_NOT_EXIST_IN_STORE
 	* - COULD_NOT_CHECK
 	* */
-	static function itemExistsInStore($ITEM_ID, $STORE_ID)
+	public static function itemExistsInStore($ITEM_ID, $STORE_ID)
 	{
 		$query = "SELECT * FROM Item_Price_Entry WHERE Item_Entry = ? AND STORE_ID = ?;";
 		try {
@@ -263,14 +261,14 @@ class Admin_management
 	 * @param mixed $ITEM_PRICE
 	 * @param mixed $EXTERNAL_LINK
 	 * @return string
-	 * 
+	 *
 	 * Possible Return Values :
 	 * - ITEM_NOT_ADDED
 	 * - ITEM_ADDED
 	 * - ITEM_WITH_NAME_ALREADY_EXISTS
-	 * 
+	 *
 	 */
-	static function addItem($ITEM_NAME, $ITEM_DESCRIPTION, $STORE_ID, $ITEM_PRICE, $EXTERNAL_LINK, $CATEGORY)
+	public static function addItem($ITEM_NAME, $ITEM_DESCRIPTION, $STORE_ID, $ITEM_PRICE, $EXTERNAL_LINK, $CATEGORY)
 	{
 		$ITEM_ID = Admin_management::getItemID($ITEM_NAME, $STORE_ID);
 		if (Admin_management::itemExistsInStore($ITEM_ID, $ITEM_ID) != "ITEM_DOES_NOT_EXIST_IN_STORE") {
@@ -279,10 +277,10 @@ class Admin_management
 		global $connection;
 		$query1 = "INSERT INTO ITEMS (ITEM_NAME, ITEM_DESCRIPTION, EXTERNAL_LINK) VALUES (?, ?, ?);";
 		$query2 = "INSERT INTO Item_Price_Entry (STORE_ID, ITEM_ID, ITEM_PRICE) VALUES (?, ?, ?);";
-        $query3 = "INSERT INTO ITEM_CATEGORY(ITEM_ID, CATEGORY_NAME) VALUES(?,?);";
+		$query3 = "INSERT INTO ITEM_CATEGORY(ITEM_ID, CATEGORY_NAME) VALUES(?,?);";
 
 		$connection->begin_transaction();
-        $resp = "ITEM_NOT_ADDED";
+		$resp = "ITEM_NOT_ADDED";
 		try {
 			$stmt1 = $connection->prepare($query1);
 			if (!$stmt1) {
@@ -300,21 +298,20 @@ class Admin_management
 				// Corrected parameter types 'sii' if STORE_ID and ITEM_ID are integers
 				$stmt2->bind_param('iii', $STORE_ID, $ITEM_ID, $ITEM_PRICE);
 				if ($stmt2->execute()) {
-                    $stmt3 = $connection->prepare($query3);
-                    $stmt2->bind_param('ss', $ITEM_ID, $CATEGORY);
-                    if($stmt3->execute()){
-                        $connection->commit();
-                        $resp =  "ITEM_ADDED";
-                    }
-					else{
-                        $connection->rollback();
-                        return $resp;
-                    }
+					$stmt3 = $connection->prepare($query3);
+					$stmt2->bind_param('ss', $ITEM_ID, $CATEGORY);
+					if ($stmt3->execute()) {
+						$connection->commit();
+						$resp =  "ITEM_ADDED";
+					} else {
+						$connection->rollback();
+						return $resp;
+					}
 				} else {
 					$connection->rollback();
-                    return $resp;
+					return $resp;
 				}
-                return $resp;
+				return $resp;
 			} else {
 				$connection->rollback();
 				return $resp;

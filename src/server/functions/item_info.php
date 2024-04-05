@@ -16,7 +16,7 @@ class Item_info
 	 * - ITEM_EXISTS
 	 * - ITEM_NOT_EXISTS
 	 */
-	static function itemExists($ITEM_ID)
+	public static function itemExists($ITEM_ID)
 	{
 		// Corrected the SQL query to use the proper placeholder syntax
 		$query = "SELECT * FROM ITEMS WHERE ITEM_ID = ?;";
@@ -25,7 +25,7 @@ class Item_info
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "ITEM_NOT_EXISTS";
-				} else if (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
+				} elseif (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
 					return "ITEM_EXISTS";
 				}
 			}
@@ -39,15 +39,15 @@ class Item_info
 	/**
 	 * Summary of getAllItems_IDS_AtStore
 	 * @param int $STORE_ID
-	 * @return array 
-	 * 
+	 * @return array
+	 *
 	 * Returns an Associative array , of all the ITEM_ID at a store.
 	 * Response Values :
 	 * 		- NO_ITEMS_AVAILABLE_AT_STORE
 	 * 		- ['ITEM_1_ID']
 	 * 		- ['ITEM_1_ID','ITEM_2_ID']
 	 */
-	static function getAllItems_IDS_AtStore($STORE_ID)
+	public static function getAllItems_IDS_AtStore($STORE_ID)
 	{
 		$query = "SELECT * FROM Item_Price_Entry where STORE_ID = ?;";
 		try {
@@ -55,7 +55,7 @@ class Item_info
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_ITEMS_AVAILABLE_AT_STORE";
-				} else if (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
+				} elseif (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
 					if (!isset($response[1][0])) {
 						return array($response[1]['ITEM_ID']);
 					}
@@ -76,13 +76,13 @@ class Item_info
 	 * Summary of getItemInfo
 	 * @param int $ITEM_ID
 	 * @return array
-	 * 
+	 *
 	 * Returns an associate array (length 1) of response with all the item info.
 	 * Possible Return Types :
 	 * - INVALID_ITEM_ID
 	 * - [[ITEM_ID,ITEM_NAME,ITEM_DESCRIPTION,EXTERNAL_LINK,ITEM_IMAGE,CATEGORY_NAME],[ITEM_ID,ITEM_NAME,ITEM_DESCRIPTION,EXTERNAL_LINK,ITEM_IMAGE,CATEGORY_NAME]]
 	 */
-	static function getItemInfo($ITEM_ID)
+	public static function getItemInfo($ITEM_ID)
 	{
 		if (Item_info::itemExists($ITEM_ID) == "ITEM_NOT_EXISTS") {
 			return "INVALID_ITEM_ID";
@@ -93,7 +93,7 @@ class Item_info
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "INVALID_ITEM_ID";
-				} else if (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
+				} elseif (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
 					return $response[1];
 				}
 			}
@@ -107,7 +107,7 @@ class Item_info
 	/**
 	 * Returns a list of all the stores from the STORE table in the database.
 	 */
-	static function getAllStoreList()
+	public static function getAllStoreList()
 	{
 		$query = "SELECT * FROM STORE;";
 		try {
@@ -115,7 +115,7 @@ class Item_info
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_STORES_IN_DATABASE";
-				} else if (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
+				} elseif (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
 					return $response[1];
 				}
 			}
@@ -129,13 +129,13 @@ class Item_info
 	 * Summary of ValidateStoreId
 	 * @param mixed $STORE_ID
 	 * @return string
-	 * 
+	 *
 	 * Returns Status if the STORE_ID Exists in STORE Table
 	 * Sample Responses :
 	 * - STORE_EXISTS
 	 * - INVALID_STORE_ID
 	 */
-	static function ValidateStoreId($STORE_ID)
+	public static function ValidateStoreId($STORE_ID)
 	{
 		$query = "SELECT STORE_ID FROM STORE WHERE STORE_ID = ?";
 		try {
@@ -160,7 +160,7 @@ class Item_info
 	 * - [ITEM_ID,ITEM_NAME,CATEGORY_NAME,ITEM_PRICE,ITEM_DESCRIPTION,EXTERNAL_LINK,STORE_ID,Time_Updated]
 	 * - [[ITEM_ID,ITEM_NAME,CATEGORY_NAME,ITEM_PRICE,ITEM_DESCRIPTION,EXTERNAL_LINK,STORE_ID,Time_Updated],[ITEM_ID,ITEM_NAME,CATEGORY_NAME,ITEM_PRICE,ITEM_DESCRIPTION,EXTERNAL_LINK,STORE_ID,Time_Updated]]
 	 */
-	static function getAllItemsAtStore($STORE_ID)
+	public static function getAllItemsAtStore($STORE_ID)
 	{
 		if (Item_info::ValidateStoreId($STORE_ID) == "INVALID_STORE_ID") {
 			return "INVALID_STORE_ID";
@@ -207,7 +207,7 @@ class Item_info
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_ITEMS_IN_DATABASE";
-				} else if (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
+				} elseif (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
 					return $response[1];
 				}
 			}
@@ -219,14 +219,14 @@ class Item_info
 	/**
 	 * Summary of getHomePageItems
 	 * @return mixed
-	 * 
+	 *
 	 * Returns Items from the Home Page as an Array
-	 * - 
+	 * -
 	 * - [ITEM_ID,ITEM_NAME,STORE_ID,Item_Price,Item_Entry]
 	 * - [[ITEM_ID,ITEM_NAME,STORE_ID,Item_Price,Item_Entry],[ITEM_ID,ITEM_NAME,STORE_ID,Item_Price,Item_Entry]]
-	 * 
+	 *
 	 */
-	static function getHomePageItems()
+	public static function getHomePageItems()
 	{
 		$query = "
         SELECT 
@@ -263,7 +263,7 @@ class Item_info
 			if ($response[0]) { // Check if query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_ITEMS_IN_DATABASE";
-				} else if (is_array($response[1]) && count($response[1]) >= 1) {
+				} elseif (is_array($response[1]) && count($response[1]) >= 1) {
 					return $response[1];
 				}
 			}
@@ -274,7 +274,7 @@ class Item_info
 	}
 
 
-	static function getAllItemData($ITEM_ID)
+	public static function getAllItemData($ITEM_ID)
 	{
 		$query = "SELECT * FROM ITEMS RIGHT JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID  LEFT JOIN ITEM_CATEGORY ON ITEMS.ITEM_ID = ITEM_CATEGORY.ITEM_ID
 				  	WHERE ITEMS.ITEM_ID = ?";
@@ -283,7 +283,7 @@ class Item_info
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_ITEMS_IN_DATABASE";
-				} else if (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
+				} elseif (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
 					return $response[1];
 				}
 			}
@@ -297,20 +297,20 @@ class Item_info
 	 * Summary of getAllPrioes
 	 * @param mixed $ITEM_ID
 	 * @return mixed
-	 * 
+	 *
 	 * Returns the $LIMIT_BY Latest Record.
 	 * If no value for $LIMIT_BY provided, provides latest 30 prices
 	 * Sample Return : [[Time_Updated_1,Item_Price_1],[Time_Updated_2,Item_Price_2],[Time_Updated_3,Item_Price_3]]
-	 * 
+	 *
 	 * Possible return types :
 	 *  - INVALID_ITEM_ID
 	 * 	- INVALID_STORE_ID
 	 * 	- NO_ENTRIES_FOUND
 	 * -  [Time_Updated_1,Item_Price_1]
 	 * 	-  [[Time_Updated_1,Item_Price_1],[Time_Updated_2,Item_Price_2]]
-	 * 
+	 *
 	 */
-	static function getAllPrices_Latest_To_Oldest($ITEM_ID, $STORE_ID, $LIMIT_BY = 30)
+	public static function getAllPrices_Latest_To_Oldest($ITEM_ID, $STORE_ID, $LIMIT_BY = 30)
 	{
 		if (Item_info::itemExists($ITEM_ID) == "ITEM_NOT_EXISTS") {
 			return "INVALID_ITEM_ID";
@@ -329,7 +329,7 @@ class Item_info
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_ENTRIES_FOUND";
-				} else if (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
+				} elseif (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
 					return $response[1];
 				}
 			}
@@ -344,11 +344,11 @@ class Item_info
 	 * @param mixed $STORE_ID
 	 * @param mixed $LIMIT_BY
 	 * @return mixed
-	 * 
+	 *
 	 * Utilized Item::getAllPrices_Latest_To_Oldest() to return the parsed Array Values , for ChartJS Api To Consume
 	 * - [[Date1,Date2],[Price1,Price2]]
 	 */
-	static function parsed_GetAllPrices($ITEM_ID, $STORE_ID, $LIMIT_BY = 30)
+	public static function parsed_GetAllPrices($ITEM_ID, $STORE_ID, $LIMIT_BY = 30)
 	{
 		$records = Item_info::getAllPrices_Latest_To_Oldest($ITEM_ID, $STORE_ID, $LIMIT_BY);
 		if (!is_array($records)) {
@@ -370,8 +370,9 @@ class Item_info
 		return array($dates, $prices);
 	}
 
-	static function getCurrentPrice($ITEM_ID, $STORE_ID)
-	{ //print_r($ITEM_ID); print_r($STORE_ID);
+	public static function getCurrentPrice($ITEM_ID, $STORE_ID)
+	{
+		//print_r($ITEM_ID); print_r($STORE_ID);
 		if (Item_info::getItemInfo($ITEM_ID) == "NO_ITEM_FOUND") {
 			return "INVALID_ITEM_ID";
 		}
@@ -381,7 +382,7 @@ class Item_info
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_PRICE_FOUND";
-				} else if (is_array($response[1]) && count($response[1]) == 1) { // Corrected condition to check for an array with at least one result
+				} elseif (is_array($response[1]) && count($response[1]) == 1) { // Corrected condition to check for an array with at least one result
 					return $response[1]['Item_Price'];
 				}
 			}
@@ -391,7 +392,7 @@ class Item_info
 		}
 	}
 
-	static function getStoreName($STORE_ID)
+	public static function getStoreName($STORE_ID)
 	{
 		$query = "SELECT STORE_NAME FROM STORE WHERE STORE_ID = ?";
 		try {
@@ -399,7 +400,7 @@ class Item_info
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_STORE_FOUND";
-				} else if (is_array($response[1]) && count($response[1]) == 1) { // Corrected condition to check for an array with at least one result
+				} elseif (is_array($response[1]) && count($response[1]) == 1) { // Corrected condition to check for an array with at least one result
 					return $response[1]['STORE_NAME'];
 				}
 			}
@@ -417,7 +418,7 @@ class Item_info
 	 * 		- ['CATEGORY_1']
 	 * 		- ['CATEGORY_1','CATEGORY_2']
 	 */
-	static function getAllCategories()
+	public static function getAllCategories()
 	{
 		return GLOBAL_VARS::$CATEGORIES;
 	}

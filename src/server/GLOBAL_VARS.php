@@ -1,4 +1,5 @@
 <?php
+
 class GLOBAL_VARS
 {
 	public static string $COMMENT_DATE_TIME_FORMAT = 'd, M Y';

@@ -1,4 +1,5 @@
 <?php
+
 require_once './functions/admin_management.php';
 session_start();
 $firstName = $_POST['firstName'];

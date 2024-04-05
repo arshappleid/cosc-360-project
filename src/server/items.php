@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require_once("./../server/functions/item_info.php");
 if (!isset($_SESSION['SELECTED_STORE'])) {

@@ -1,9 +1,10 @@
 <?php
+
 include './functions/user_management.php';
 
 if (!isset($_SESSION['USER_EMAIL'])) {
     //die("User email is not set in the session.");
-}  
+}
 
 $users = User_management::getAllUserData($_SESSION['USER_EMAIL']);
 
@@ -20,4 +21,3 @@ if (is_array($users)) {
 } else {
     echo "<h4>Error Retrieving User Data: " . htmlspecialchars($users) . "</h4>";
 }
-

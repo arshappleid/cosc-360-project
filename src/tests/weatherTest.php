@@ -10,17 +10,22 @@ class weatherTest extends TestCase
 	public function weatherUpdatedInThePastNMins_Test()
 	{
 		$resp = weather::weatherUpdatedInThePastNMins(weatherTest::$CITYNAME);
-		$this->assertIsString($resp);
+		$this->assertEquals("NOT_UPDATED", $resp);
 	}
 
-	/** @test */
+	/** 
+	 * @test 
+	 * @depends weatherUpdatedInThePastNMins_Test
+	 * */
 	public function updateWeather_Test()
 	{
 		$resp = weather::updateWeather(weatherTest::$CITYNAME);
-		$this->assertIsString($resp);
+		$this->assertEquals("WEATHER_UPDATED", $resp);
 	}
 
-	/** @test */
+	/** @test 
+	 * @depends updateWeather_Test
+	 */
 	public function getWeather_Test()
 	{
 		$resp = weather::getWeather(weatherTest::$CITYNAME);

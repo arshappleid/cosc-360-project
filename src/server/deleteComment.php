@@ -1,4 +1,5 @@
 <?php
+
 include_once './functions/comments.php';
 if ($_SERVER['METHOD'] = "GET" && isset($_GET['commentId'])) {
 	$resp = Comments::deleteComment($_GET['commentId']);

@@ -44,10 +44,14 @@ jobs:
               if: always()
               run: docker exec web-server sh -c "phpunit --testdox tests/Item_info_Test.php"
 
-            - name: Execute UserManagement tests
+            - name: Execute Weather tests
               if: always()
               run: docker exec web-server sh -c "phpunit --testdox tests/weatherTest.php"
 
             - name: Execute Login Tracking tests
               if: always()
               run: docker exec web-server sh -c "phpunit --testdox tests/login_tracking_Test.php"
+            
+            - name: Code Formatting
+              if: always()
+              run: docker exec web-server sh -c "phpcs --standard=PSR12 --exclude=PSR1.Methods.CamelCapsMethodName,Generic.Files.LineLength,Generic.WhiteSpace.DisallowTabIndent --error-severity=1 ./"

@@ -1,0 +1,243 @@
+
+FILE: /var/www/html/tests/CommentsTest.php
+-----------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 1 ERROR AND 1 WARNING AFFECTING 2 LINES
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ 1 | WARNING | A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute
+   |         | logic with side effects, but should not do both. The first symbol is defined on line 6 and the first side effect is on line 5.
+ 6 | ERROR   | Each class must be in a namespace of at least one level (a top-level vendor name)
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /var/www/html/tests/User_management_Test.php
+-----------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 2 ERRORS AND 1 WARNING AFFECTING 2 LINES
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ 1 | WARNING | A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute
+   |         | logic with side effects, but should not do both. The first symbol is defined on line 6 and the first side effect is on line 5.
+ 6 | ERROR   | Each class must be in a namespace of at least one level (a top-level vendor name)
+ 6 | ERROR   | Class name "User_management_Test" is not in PascalCase format
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /var/www/html/tests/Item_info_Test.php
+-----------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 2 ERRORS AND 1 WARNING AFFECTING 2 LINES
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ 1 | WARNING | A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute
+   |         | logic with side effects, but should not do both. The first symbol is defined on line 6 and the first side effect is on line 5.
+ 6 | ERROR   | Each class must be in a namespace of at least one level (a top-level vendor name)
+ 6 | ERROR   | Class name "Item_info_Test" is not in PascalCase format
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /var/www/html/tests/login_tracking_Test.php
+-----------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 2 ERRORS AND 1 WARNING AFFECTING 2 LINES
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ 1 | WARNING | A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute
+   |         | logic with side effects, but should not do both. The first symbol is defined on line 6 and the first side effect is on line 5.
+ 6 | ERROR   | Each class must be in a namespace of at least one level (a top-level vendor name)
+ 6 | ERROR   | Class name "login_tracking_Test" is not in PascalCase format
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /var/www/html/tests/weatherTest.php
+-----------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 3 ERRORS AND 1 WARNING AFFECTING 3 LINES
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ 1 | WARNING | A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute
+   |         | logic with side effects, but should not do both. The first symbol is defined on line 6 and the first side effect is on line 5.
+ 6 | ERROR   | Each class must be in a namespace of at least one level (a top-level vendor name)
+ 6 | ERROR   | Class name "weatherTest" is not in PascalCase format
+ 8 | ERROR   | Visibility must be declared on property "$CITYNAME"
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /var/www/html/tests/Admin_management_Test.php
+-----------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 2 ERRORS AND 1 WARNING AFFECTING 2 LINES
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ 1 | WARNING | A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute
+   |         | logic with side effects, but should not do both. The first symbol is defined on line 6 and the first side effect is on line 5.
+ 6 | ERROR   | Each class must be in a namespace of at least one level (a top-level vendor name)
+ 6 | ERROR   | Class name "Admin_management_Test" is not in PascalCase format
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /var/www/html/server/updateLastName.php
+-------------------------------------------------------------------------
+FOUND 2 ERRORS AFFECTING 2 LINES
+-------------------------------------------------------------------------
+  1 | ERROR | [x] Header blocks must be separated by a single blank line
+ 11 | ERROR | [x] No space found after comma in argument list
+-------------------------------------------------------------------------
+PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+-------------------------------------------------------------------------
+
+
+FILE: /var/www/html/server/updateFirstName.php
+-------------------------------------------------------------------------
+FOUND 2 ERRORS AFFECTING 2 LINES
+-------------------------------------------------------------------------
+  1 | ERROR | [x] Header blocks must be separated by a single blank line
+ 12 | ERROR | [x] No space found after comma in argument list
+-------------------------------------------------------------------------
+PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+-------------------------------------------------------------------------
+
+
+FILE: /var/www/html/server/functions/user_management.php
+-----------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 16 ERRORS AND 1 WARNING AFFECTING 16 LINES
+-----------------------------------------------------------------------------------------------------------------------------------------------
+   1 | WARNING | A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute
+     |         | logic with side effects, but should not do both. The first symbol is defined on line 5 and the first side effect is on line
+     |         | 3.
+   5 | ERROR   | Each class must be in a namespace of at least one level (a top-level vendor name)
+   5 | ERROR   | Class name "User_management" is not in PascalCase format
+  13 | ERROR   | Visibility must be declared on method "validateUserLogin"
+  49 | ERROR   | Visibility must be declared on method "createUser"
+  85 | ERROR   | Visibility must be declared on method "createUser_WithImage"
+ 114 | ERROR   | Visibility must be declared on method "userExists"
+ 149 | ERROR   | Visibility must be declared on method "userUpdatePassword"
+ 182 | ERROR   | Visibility must be declared on method "editUserFirstName"
+ 214 | ERROR   | Visibility must be declared on method "editUserLastName"
+ 240 | ERROR   | Visibility must be declared on method "getBanStatus"
+ 280 | ERROR   | Visibility must be declared on method "deleteUser"
+ 299 | ERROR   | Visibility must be declared on method "getUser_First_Last_Name"
+ 326 | ERROR   | Visibility must be declared on method "getAllUserData"
+ 353 | ERROR   | Visibility must be declared on method "getUserID"
+ 374 | ERROR   | Visibility must be declared on method "validateUserID"
+ 402 | ERROR   | Visibility must be declared on method "getAllUserComments"
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /var/www/html/server/functions/comments.php
+-----------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 6 ERRORS AND 1 WARNING AFFECTING 7 LINES
+-----------------------------------------------------------------------------------------------------------------------------------------------
+   1 | WARNING | A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute
+     |         | logic with side effects, but should not do both. The first symbol is defined on line 6 and the first side effect is on line
+     |         | 3.
+   6 | ERROR   | Each class must be in a namespace of at least one level (a top-level vendor name)
+  21 | ERROR   | Visibility must be declared on method "addComment"
+  63 | ERROR   | Visibility must be declared on method "commentExists"
+  94 | ERROR   | Visibility must be declared on method "deleteComment"
+ 124 | ERROR   | Visibility must be declared on method "getAllCommentsForItem"
+ 155 | ERROR   | Visibility must be declared on method "getAllCommentsForItemDescending"
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /var/www/html/server/functions/weather.php
+-----------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 6 ERRORS AND 1 WARNING AFFECTING 6 LINES
+-----------------------------------------------------------------------------------------------------------------------------------------------
+   1 | WARNING | A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute
+     |         | logic with side effects, but should not do both. The first symbol is defined on line 6 and the first side effect is on line
+     |         | 3.
+   6 | ERROR   | Each class must be in a namespace of at least one level (a top-level vendor name)
+   6 | ERROR   | Class name "weather" is not in PascalCase format
+  14 | ERROR   | Visibility must be declared on method "updateWeatherForAllCities"
+  26 | ERROR   | Visibility must be declared on method "weatherUpdatedInThePastNMins"
+  81 | ERROR   | Visibility must be declared on method "updateWeather"
+ 118 | ERROR   | Visibility must be declared on method "parseURL"
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /var/www/html/server/functions/item_info.php
+-----------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 15 ERRORS AND 1 WARNING AFFECTING 15 LINES
+-----------------------------------------------------------------------------------------------------------------------------------------------
+   1 | WARNING | A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute
+     |         | logic with side effects, but should not do both. The first symbol is defined on line 6 and the first side effect is on line
+     |         | 3.
+   6 | ERROR   | Each class must be in a namespace of at least one level (a top-level vendor name)
+   6 | ERROR   | Class name "Item_info" is not in PascalCase format
+  19 | ERROR   | Visibility must be declared on method "itemExists"
+  50 | ERROR   | Visibility must be declared on method "getAllItems_IDS_AtStore"
+  85 | ERROR   | Visibility must be declared on method "getItemInfo"
+ 110 | ERROR   | Visibility must be declared on method "getAllStoreList"
+ 138 | ERROR   | Visibility must be declared on method "ValidateStoreId"
+ 163 | ERROR   | Visibility must be declared on method "getAllItemsAtStore"
+ 229 | ERROR   | Visibility must be declared on method "getHomePageItems"
+ 277 | ERROR   | Visibility must be declared on method "getAllItemData"
+ 313 | ERROR   | Visibility must be declared on method "getAllPrices_Latest_To_Oldest"
+ 351 | ERROR   | Visibility must be declared on method "parsed_GetAllPrices"
+ 373 | ERROR   | Visibility must be declared on method "getCurrentPrice"
+ 395 | ERROR   | Visibility must be declared on method "getStoreName"
+ 421 | ERROR   | Visibility must be declared on method "getAllCategories"
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /var/www/html/server/functions/login_tracking.php
+-----------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 5 ERRORS AND 1 WARNING AFFECTING 5 LINES
+-----------------------------------------------------------------------------------------------------------------------------------------------
+  1 | WARNING | A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute
+    |         | logic with side effects, but should not do both. The first symbol is defined on line 6 and the first side effect is on line 3.
+  6 | ERROR   | Each class must be in a namespace of at least one level (a top-level vendor name)
+  6 | ERROR   | Class name "Login_tracking" is not in PascalCase format
+ 14 | ERROR   | Visibility must be declared on method "incrementLoginCount"
+ 36 | ERROR   | Visibility must be declared on method "getCountForCurrentMonth"
+ 60 | ERROR   | Visibility must be declared on method "AddDefaultForCurrentMonth"
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /var/www/html/server/functions/db_connection.php
+-----------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ 1 | WARNING | A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute
+   |         | logic with side effects, but should not do both. The first symbol is defined on line 3 and the first side effect is on line 25.
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /var/www/html/server/functions/addImages.php
+-----------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ 1 | WARNING | A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute
+   |         | logic with side effects, but should not do both. The first symbol is defined on line 5 and the first side effect is on line 3.
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /var/www/html/server/functions/admin_management.php
+-----------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 12 ERRORS AND 1 WARNING AFFECTING 12 LINES
+-----------------------------------------------------------------------------------------------------------------------------------------------
+   1 | WARNING | A file should declare new symbols (classes, functions, constants, etc.) and cause no other side effects, or it should execute
+     |         | logic with side effects, but should not do both. The first symbol is defined on line 6 and the first side effect is on line
+     |         | 3.
+   6 | ERROR   | Each class must be in a namespace of at least one level (a top-level vendor name)
+   6 | ERROR   | Class name "Admin_management" is not in PascalCase format
+  15 | ERROR   | Visibility must be declared on method "validateAdminLogin"
+  47 | ERROR   | Visibility must be declared on method "getUserID"
+  76 | ERROR   | Visibility must be declared on method "toggleBanUserAccount"
+ 100 | ERROR   | Visibility must be declared on method "getAllUsers"
+ 130 | ERROR   | Visibility must be declared on method "checkAdminExists"
+ 156 | ERROR   | Visibility must be declared on method "createAdmin"
+ 178 | ERROR   | Visibility must be declared on method "displayName"
+ 202 | ERROR   | Visibility must be declared on method "getItemID"
+ 234 | ERROR   | Visibility must be declared on method "itemExistsInStore"
+ 271 | ERROR   | Visibility must be declared on method "addItem"
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /var/www/html/server/GLOBAL_VARS.php
+-----------------------------------------------------------------------------------------------
+FOUND 2 ERRORS AFFECTING 1 LINE
+-----------------------------------------------------------------------------------------------
+ 3 | ERROR | Each class must be in a namespace of at least one level (a top-level vendor name)
+ 3 | ERROR | Class name "GLOBAL_VARS" is not in PascalCase format
+-----------------------------------------------------------------------------------------------
+
+
+FILE: /var/www/html/client/jquery-library/jquery-3.1.1.min.js
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 1 | WARNING | File appears to be minified and cannot be processed
+----------------------------------------------------------------------
+
+

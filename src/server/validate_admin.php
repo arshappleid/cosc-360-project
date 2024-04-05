@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require_once './functions/admin_management.php';
 $email = $_POST['email'];

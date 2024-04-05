@@ -1,23 +1,24 @@
 <?php
+
 function parseIniFileBasedOnEnvironment()
 {
-  $env = getenv('SERVER_ENV'); // Get the environment variable
-  $filename = '';
+    $env = getenv('SERVER_ENV'); // Get the environment variable
+    $filename = '';
 
-  switch ($env) {
-    case 'LOCAL':
-      $filename = '/var/www/html/local.env';
-      break;
-    default:
-      $filename = '/var/www/html/server.env';
-      break;
-  }
+    switch ($env) {
+        case 'LOCAL':
+            $filename = '/var/www/html/local.env';
+            break;
+        default:
+            $filename = '/var/www/html/server.env';
+            break;
+    }
 
-  if (file_exists($filename)) {
-    return parse_ini_file($filename);
-  } else {
-    return false; // File does not exist
-  }
+    if (file_exists($filename)) {
+        return parse_ini_file($filename);
+    } else {
+        return false; // File does not exist
+    }
 }
 
 // Usage
@@ -26,7 +27,7 @@ $connection = mysqli_connect($ENV_VAR['HOST'], $ENV_VAR['USER'], $ENV_VAR['PASSW
 
 // Check connection
 if ($connection->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
 /**
@@ -54,79 +55,79 @@ if ($connection->connect_error) {
  * @global mysqli $connection The global mysqli connection object used for database operations.
  * [0] = If the query was executed
  * [1] = If 1 record returned [record1]
- * [1] = If more than one record returned : [[record1],[record2]] 
+ * [1] = If more than one record returned : [[record1],[record2]]
  *
  */
 function executePreparedQuery($query, $params)
 {
-  error_reporting(E_ALL & ~E_WARNING);
-  $isSelect = false;
-  try {
-    // allows access to the global variable $connection
-    global $connection;
-
-    if (isset($query)) {
-      if (stripos($query, "SELECT") !== false) {
-        // Query Contains the word Select
-        $isSelect = true;
-      }
-    }
-
-    if (mysqli_connect_errno()) {
-      echo "Failed to connect to MySQL: " . mysqli_connect_error() . "<br>";
-      return;
-    }
-    $stmt = $connection->prepare($query);
-    if ($stmt === false) {
-      die("Failed to prepare statement: " . $connection->error);
-    }
+    error_reporting(E_ALL & ~E_WARNING);
+    $isSelect = false;
     try {
-      if (count($params) > 0) {
-        $stmt->bind_param(...$params);
-      }
-    } catch (Exception $e) {
-      return array(false, "Error occured , preparing the sql statement.<br>");
-    }
-    if ($stmt->execute()) {
-      if ($isSelect) {
-        // If it a select query, return the result set
-        // Read statements need to pass the results to the client
-        $result = $stmt->get_result();
-        $data = array();
-        $row = array();
-        while ($row = $result->fetch_assoc()) {
-          $data[] = $row;
-        }
-        if (count($data) == 0) {
-          // No response record
-          return array(true, "NO_DATA_RETURNED");
+      // allows access to the global variable $connection
+        global $connection;
+
+        if (isset($query)) {
+            if (stripos($query, "SELECT") !== false) {
+                // Query Contains the word Select
+                $isSelect = true;
+            }
         }
 
-        if (count($data) == 1) {
-          // Only One response record
-          return array(true, $data[0]);
+        if (mysqli_connect_errno()) {
+            echo "Failed to connect to MySQL: " . mysqli_connect_error() . "<br>";
+            return;
         }
-        // More than one response record
-        return array(true, $data);
-      } else {
-        // Possible scenarios are insert, update, delete
-        // Return True that the statement go executed.
-        return array(true, "STATMENT_EXECUTED");
-      }
-    } else {
-      return array(false, "STATEMENT_DID_NOT_EXECUTE , Message : " . $stmt->error);
+        $stmt = $connection->prepare($query);
+        if ($stmt === false) {
+            die("Failed to prepare statement: " . $connection->error);
+        }
+        try {
+            if (count($params) > 0) {
+                $stmt->bind_param(...$params);
+            }
+        } catch (Exception $e) {
+            return array(false, "Error occured , preparing the sql statement.<br>");
+        }
+        if ($stmt->execute()) {
+            if ($isSelect) {
+              // If it a select query, return the result set
+              // Read statements need to pass the results to the client
+                $result = $stmt->get_result();
+                $data = array();
+                $row = array();
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+                if (count($data) == 0) {
+                  // No response record
+                    return array(true, "NO_DATA_RETURNED");
+                }
+
+                if (count($data) == 1) {
+                  // Only One response record
+                    return array(true, $data[0]);
+                }
+              // More than one response record
+                return array(true, $data);
+            } else {
+              // Possible scenarios are insert, update, delete
+              // Return True that the statement go executed.
+                return array(true, "STATMENT_EXECUTED");
+            }
+        } else {
+            return array(false, "STATEMENT_DID_NOT_EXECUTE , Message : " . $stmt->error);
+        }
+    } catch (Exception $e) {
+        echo "Error occured , when using executePreparedQuery function.<br>";
+        echo $e->getMessage();
     }
-  } catch (Exception $e) {
-    echo "Error occured , when using executePreparedQuery function.<br>";
-    echo $e->getMessage();
-  }
-  error_reporting(E_ALL);
+    error_reporting(E_ALL);
 }
 
 /**
  * Uploads an image to a specified table in the database.
  * Sample Update Query : UPDATE #table DISPLAY_IMAGE  = IMAGEBLOB $whereCol = $whereValue
- * 
+ *
  * @param string $table The name of the database table to insert the image into.
  * @param string $whereCol The column name that will be used in the WHERE clause for identifying the record.
  * @param mixed $whereValue The value of the column specified in $whereCol to identify the record.
@@ -135,91 +136,91 @@ function executePreparedQuery($query, $params)
  */
 function updateImage($table, $whereCol, $whereValue, $uploadDir = "images/temp")
 {
-  global $connection;
-  $tempName = $_FILES['image']['tmp_name'];
-  $fileExtension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-  $newName = $whereValue . "." . $fileExtension;
+    global $connection;
+    $tempName = $_FILES['image']['tmp_name'];
+    $fileExtension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+    $newName = $whereValue . "." . $fileExtension;
 
-  if (!is_dir($uploadDir)) {
-    mkdir($uploadDir, 0777, true);
-  }
-
-  $destinationPath = $uploadDir . '/' . $newName;
-  if (!move_uploaded_file($tempName, $destinationPath)) {
-    return "UNABLE_TO_MOVE_FILE";
-  }
-
-  $check = getimagesize($destinationPath);
-  if ($check !== false) {
-    // Assuming you want to store the image's content in the database,
-    // It's more common to store just a reference to the file location.
-    $imgContent = addslashes(file_get_contents($destinationPath));
-
-    // Make sure to protect against SQL injection
-    $query = "UPDATE $table SET DISPLAY_IMAGE = ? WHERE $whereCol = ?";
-
-    if ($stmt = $connection->prepare($query)) {
-      // Bind the parameters
-      $stmt->bind_param("bs", $imgContent, $whereValue);
-
-      // Execute the prepared statement
-      if ($stmt->execute()) {
-        $stmt->close();
-        return "IMAGE_UPLOADED_SUCCESSFULLY";
-      } else {
-        $stmt->close();
-        return "UNABLE_TO_UPLOAD_IMAGE";
-      }
-    } else {
-      return "COULD_NOT_PREPARE_STATEMENT";
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
     }
-  } else {
-    return "COULD_NOT_LOAD_IMAGE";
-  }
+
+    $destinationPath = $uploadDir . '/' . $newName;
+    if (!move_uploaded_file($tempName, $destinationPath)) {
+        return "UNABLE_TO_MOVE_FILE";
+    }
+
+    $check = getimagesize($destinationPath);
+    if ($check !== false) {
+      // Assuming you want to store the image's content in the database,
+      // It's more common to store just a reference to the file location.
+        $imgContent = addslashes(file_get_contents($destinationPath));
+
+      // Make sure to protect against SQL injection
+        $query = "UPDATE $table SET DISPLAY_IMAGE = ? WHERE $whereCol = ?";
+
+        if ($stmt = $connection->prepare($query)) {
+          // Bind the parameters
+            $stmt->bind_param("bs", $imgContent, $whereValue);
+
+          // Execute the prepared statement
+            if ($stmt->execute()) {
+                $stmt->close();
+                return "IMAGE_UPLOADED_SUCCESSFULLY";
+            } else {
+                $stmt->close();
+                return "UNABLE_TO_UPLOAD_IMAGE";
+            }
+        } else {
+            return "COULD_NOT_PREPARE_STATEMENT";
+        }
+    } else {
+        return "COULD_NOT_LOAD_IMAGE";
+    }
 }
 function updateImage2($table, $whereCol, $whereValue, $uploadDir = "images/temp")
 {
-  global $connection;
-  $tempName = $_FILES['image']['tmp_name'];
-  $fileExtension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-  $newName = $whereValue . "." . $fileExtension;
+    global $connection;
+    $tempName = $_FILES['image']['tmp_name'];
+    $fileExtension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+    $newName = $whereValue . "." . $fileExtension;
 
-  if (!is_dir($uploadDir)) {
-    mkdir($uploadDir, 0777, true);
-  }
-
-  $destinationPath = $uploadDir . '/' . $newName;
-  if (!move_uploaded_file($tempName, $destinationPath)) {
-    return "UNABLE_TO_MOVE_FILE";
-  }
-
-  $check = getimagesize($destinationPath);
-  if ($check !== false) {
-    // Assuming you want to store the image's content in the database,
-    // It's more common to store just a reference to the file location.
-    $imgContent = addslashes(file_get_contents($_FILES['image']['name']));
-
-    // Make sure to protect against SQL injection
-    $query = "UPDATE $table SET DISPLAY_IMAGE = ? WHERE $whereCol = ?";
-
-    if ($stmt = $connection->prepare($query)) {
-      // Bind the parameters
-      $stmt->bind_param("bs", $imgContent, $whereValue);
-
-      // Execute the prepared statement
-      if ($stmt->execute()) {
-        $stmt->close();
-        return "IMAGE_UPLOADED_SUCCESSFULLY";
-      } else {
-        $stmt->close();
-        return "UNABLE_TO_UPLOAD_IMAGE";
-      }
-    } else {
-      return "COULD_NOT_PREPARE_STATEMENT";
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
     }
-  } else {
-    return "COULD_NOT_LOAD_IMAGE";
-  }
+
+    $destinationPath = $uploadDir . '/' . $newName;
+    if (!move_uploaded_file($tempName, $destinationPath)) {
+        return "UNABLE_TO_MOVE_FILE";
+    }
+
+    $check = getimagesize($destinationPath);
+    if ($check !== false) {
+      // Assuming you want to store the image's content in the database,
+      // It's more common to store just a reference to the file location.
+        $imgContent = addslashes(file_get_contents($_FILES['image']['name']));
+
+      // Make sure to protect against SQL injection
+        $query = "UPDATE $table SET DISPLAY_IMAGE = ? WHERE $whereCol = ?";
+
+        if ($stmt = $connection->prepare($query)) {
+          // Bind the parameters
+            $stmt->bind_param("bs", $imgContent, $whereValue);
+
+          // Execute the prepared statement
+            if ($stmt->execute()) {
+                $stmt->close();
+                return "IMAGE_UPLOADED_SUCCESSFULLY";
+            } else {
+                $stmt->close();
+                return "UNABLE_TO_UPLOAD_IMAGE";
+            }
+        } else {
+            return "COULD_NOT_PREPARE_STATEMENT";
+        }
+    } else {
+        return "COULD_NOT_LOAD_IMAGE";
+    }
 }
 
 
@@ -233,38 +234,38 @@ function updateImage2($table, $whereCol, $whereValue, $uploadDir = "images/temp"
  */
 function getImage($table, $whereCol, $whereValue)
 {
-  global $connection;
-  $query = "SELECT DISPLAY_IMAGE FROM $table WHERE $whereCol = ?";
+    global $connection;
+    $query = "SELECT DISPLAY_IMAGE FROM $table WHERE $whereCol = ?";
 
-  $response = [
+    $response = [
     'status' => 'ERROR',
     'mime' => 'image/jpeg', // Default MIME type; adjust as needed based on your actual image types
     'data' => ''
-  ];
+    ];
 
-  if ($stmt = $connection->prepare($query)) {
-    $stmt->bind_param("s", $whereValue);
+    if ($stmt = $connection->prepare($query)) {
+        $stmt->bind_param("s", $whereValue);
 
-    if ($stmt->execute()) {
-      $result = $stmt->get_result();
-      if ($row = $result->fetch_assoc()) {
-        if (empty($row["DISPLAY_IMAGE"])) {
-          $response['status'] = "NO IMAGE";
+        if ($stmt->execute()) {
+            $result = $stmt->get_result();
+            if ($row = $result->fetch_assoc()) {
+                if (empty($row["DISPLAY_IMAGE"])) {
+                    $response['status'] = "NO IMAGE";
+                } else {
+                    $response['status'] = "SUCCESS";
+                    $response['data'] = $row["DISPLAY_IMAGE"];
+                }
+            } else {
+                $response['status'] = "NO_IMAGE_FOUND";
+            }
         } else {
-          $response['status'] = "SUCCESS";
-          $response['data'] = $row["DISPLAY_IMAGE"];
+            $response['status'] = "COULD_NOT_EXECUTE_QUERY";
         }
-      } else {
-        $response['status'] = "NO_IMAGE_FOUND";
-      }
+
+        $stmt->close();
     } else {
-      $response['status'] = "COULD_NOT_EXECUTE_QUERY";
+        $response['status'] = "COULD_NOT_PREPARE_STATEMENT";
     }
 
-    $stmt->close();
-  } else {
-    $response['status'] = "COULD_NOT_PREPARE_STATEMENT";
-  }
-
-  return $response;
+    return $response;
 }
