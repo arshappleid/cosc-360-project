@@ -1,10 +1,10 @@
 <!--Find Documentation at : https://www.chartjs.org/docs/2.9.4/charts/line.html -->
 <?php
-echo "<p> " . $item_id['ITEM_NAME'] . " Chart</p>";
-echo "<canvas id=\"chart-" . $item_id['ITEM_ID'] . "\" style=\"width:100%;max-width:600px\"></canvas>";
+echo "<p> " . $item_ID['ITEM_NAME'] . " Chart</p>";
+echo "<canvas id=\"chart-" . $item_ID['ITEM_ID'] . "\" style=\"width:100%;max-width:600px\"></canvas>";
 ?>
 <script>
-	<?php $chartData = Item_info::parsed_GetAllPrices($item_id['ITEM_ID'], $item_id) ?>;
+	<?php $chartData = Item_info::parsed_GetAllPrices($item_ID['ITEM_ID'], $item_id) ?>;
 	var xValues = <?php echo json_encode($chartData[0]); ?>;
 	var yValues = <?php echo json_encode($chartData[1]); ?>;
     console.log(xValues);

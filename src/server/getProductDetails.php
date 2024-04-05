@@ -17,12 +17,10 @@ $testUserImage = "../../server/images/userImages/admin/test@gmail.com.jpeg";
 $chartImage = "../server/images/chart.jpg";
 $show_button = (isset($_SESSION['USER_EMAIL']) & !isset($_SESSION['ADMIN_EMAIL']));
 $show_chart = true;
+$userEmail = $_SESSION['USER_EMAIL'];
+$userID = User_management::getAllUserData($userEmail)['USER_ID'];
 
-//getting user id and user emai
-if ($show_button) {
-    $userEmail = $_SESSION['USER_EMAIL'];
-    $userID = User_management::getAllUserData($userEmail)['USER_ID'];
-}
+
 
 foreach ($item_IDS as $item_ID) {
     $store_name = Item_info::getStoreName($item_ID['STORE_ID']);
@@ -32,14 +30,15 @@ foreach ($item_IDS as $item_ID) {
 
     echo "<div class = \"first\">";
         echo "<div class = \"left\">";
-            echo "<img src = \"./../server/getItemImage.php?ITEM_ID=" . urlencode($item_ID['ITEM_ID']) . "\" alt=\"NO IMAGE IN DATABASE\">";
+            echo "<img id=\"item-image\" src = \"./../server/getItemImage.php?ITEM_ID=" . urlencode($item_ID['ITEM_ID']) . "\" alt=\"NO IMAGE IN DATABASE\">";
             echo "<div id=\"item-name\">" . ($item_ID['ITEM_NAME']) . "</div>";
             echo "<div id=\"item-price\">" . ($item_ID['Item_Price']) . "$</div>";
             echo "<h1>" . $store_name . "</h1>";
             //echo "<button id=\"comment-button\">Add Comment</button>";
         echo "</div>";
         echo "<div class = \"right\">";
-            echo "<img src =\"" . $chartImage . "\" class='chart' alt='Price Chart'></div>";
+            //echo "<img src =\"" . $chartImage . "\" class='chart' alt='Price Chart'></div>";
+            include "./priceChart.php"; // Bug
         echo "</div>";
     echo "</div>";
 

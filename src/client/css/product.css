@@ -4,8 +4,9 @@
     padding: 2.5% 2.5% 2.5% 2.5%;
 }
 
-#item_list > * {
+#item_list {
     margin-bottom: 0.5em;
+    width: 100%;
 }
 #avatar_img {
     height: 15%;
@@ -13,19 +14,24 @@
 .first{
     display: flex;
     flex-direction: row;
-    width: 80%;
+    width: 100%;
     height: 22em;
     align-items: center;
 }
+
 .left{
-    width: 50%;
-    display: inline-block;
-    height: fit-content;
+    width: 60%;
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Stack child elements vertically */
+    justify-content: center; /* Center content vertically in the container */
+    align-items: center; /* Center content horizontally, if needed */
+    height: 100%;
     margin-right: 0.25em;
     background-color: white;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 10px;
 }
+
 h1 {
     /* Override default font size */
     font-size: 1.5em; /* Adjust the font size to your preference */
@@ -41,12 +47,15 @@ h1 {
 
     font-weight: bold;
 }
+
 #item-image{
-    height: 18em; /* Adjusted height of the image, subtracting the total height of the other elements */
-    width: 100%;
+    height: 14em; 
+    width: 14em; 
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    object-fit: contain; 
 }
+
 #item-name,#item-price{
     height: 1.1em;
     width: 100%;
@@ -64,7 +73,7 @@ h1 {
 }
 
 .right{
-    width: 50%;
+    width: 100%;
     height: 100%;
     margin-left: 0.25em;
     background-color: white;
@@ -81,14 +90,15 @@ h1 {
     flex-direction: column;
 }
 
-.overlay > * {
+.overlay{
     margin-bottom: 2em; /* Adjust margin as needed for space between items */
+    box-sizing: border-box;
 }
 
 #form-container{
     display: flex;
     flex-direction: row;
-    width: 80%;
+    width: 100%;
 }
 #add-comment-form {
     float: right;
@@ -132,6 +142,7 @@ h1 {
     justify-content: center;
     width: 70%;
     margin-right: 0.5em;
+    margin-top: 2em;
 }
 
 .comment-container{
@@ -152,7 +163,9 @@ h1 {
 .second{
     display: flex;
     flex-direction: row;
-    width: 80%;
+    width: 100%;
     height: auto;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 

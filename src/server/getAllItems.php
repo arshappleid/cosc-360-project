@@ -45,7 +45,7 @@ foreach ($items as $item) {
     echo "</aside>";
     // Price chart within the Article Tags
     echo "<article>";
-    include "./priceChart.php"; // Bug
+    //include "./priceChart.php"; // Bug
     echo "</article>";
     echo "</section>";
     echo "</aside>";
