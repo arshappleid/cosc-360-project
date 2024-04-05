@@ -58,14 +58,16 @@ require_once("./../server/functions/comments.php");
 			?>
 		</div>
 
-		<div class="headeryellow">
+		<header class="headeryellow">
 			<div class="search-container">
+				<label for="search-input" class="visually-hidden">Enter keywords to search:</label> 
 				<input type="text" id="search-input" placeholder="Search...">
 				<?php
 				$stores = Item_info::getAllStoreList();
 				if (count($stores) == 0) {
 					echo $stores;
 				} else {
+					echo "<label for =\"store_select\" class=\"visually-hidden\">Filter by store:</label>";
 					echo "<select id = \"store_select\" class=\"select_dropdown\">";
 					echo "<option value=\"all\">All Stores</option>";
 					foreach ($stores as $key => $store) {
@@ -76,7 +78,7 @@ require_once("./../server/functions/comments.php");
 				?>
 				<button type="button" id="search-button">Search</button>
 			</div>
-		</div>
+		</header>
 
 		<?php include_once './../server/breadcrumbs.php' ?>
 		<?php include_once './../server/weather.php' ?>
@@ -113,5 +115,4 @@ require_once("./../server/functions/comments.php");
 	<?php
 	echo "<script type=\"text/javascript\" src=\"./scripts/home.js\"></script>";
 	?>
-
 </body>

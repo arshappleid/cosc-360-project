@@ -31,7 +31,7 @@ foreach ($item_IDS as $item_ID) {
     echo "<h3>" . htmlspecialchars($item['ITEM_NAME']) . "</h3>";
     echo "<h2>" . $item_price . "$" . "</h2>";
     echo "<h1>" . $store_name . "</h1>";
-    echo "<button><a href=\"product.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\">See Product Details</a></button>";
+    echo "<a href=\"product.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\">See Product Details</a>";
     echo "</aside>";
     echo "<article>";
 
@@ -42,6 +42,8 @@ foreach ($item_IDS as $item_ID) {
             echo "<h4>No Comments Yet.</h4>";
         } else {
             echo "<table id=\"comment_table\">";
+            echo "<caption class=\"visually-hidden\">All Comments For Item</caption>";   //added caption for table, and headers for table
+            echo "<tr><th scope=\"col\">Username</th><th scope=\"col\">User Comment</th><th scope=\"col\">Date Added</th></tr>"; //added date added column header
             foreach ($comments as $comment) {
                 echo "<tr>";
                 echo "<td>" . htmlspecialchars(User_management::getUser_First_Last_Name($comment['USER_ID'])) . "</td>";

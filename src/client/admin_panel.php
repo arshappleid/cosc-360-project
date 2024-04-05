@@ -42,27 +42,27 @@ require_once("./../server/GLOBAL_VARS.php");
 			</a>
 		</div>
 
-		<div class="headeryellow">
+		<header class="headeryellow">
 			<div class="search-container">
-                <label>
-                    Search For Item:
-                    <input type="text" placeholder="Search...">
-                </label>
-                <?php
+				<label for="search-input" class="visually-hidden">Enter keywords to search</label> 
+				<input type="text" id="search-input" placeholder="Search...">
+				<?php
 				$stores = Item_info::getAllStoreList();
 				if (count($stores) == 0) {
 					echo $stores;
 				} else {
+					echo "<label for =\"store_select\" class=\"visually-hidden\">Filter by store:</label>";
 					echo "<select id = \"store_select\" class=\"select_dropdown\">";
+					echo "<option value=\"all\">All Stores</option>";
 					foreach ($stores as $key => $store) {
 						echo "<option value=\"" . $store['STORE_ID'] . "\" >" . $store['STORE_NAME'] . "</option>";
 					}
 					echo "</select>";
 				}
 				?>
-				<button type="submit">Search</button>
+				<button type="button" id="search-button">Search</button>
 			</div>
-		</div>
+		</header>
 		<div class="underheadercontainer">
 			<div class="overlay">
 
@@ -73,7 +73,7 @@ require_once("./../server/GLOBAL_VARS.php");
 				<input type="radio" name="upload-type" id="individual-upload" checked value="0">
 
 				<form id="fileUploadForm" style="display:none;" method="POST" action="./../server/addItemToStore.php">
-					<label for="PRODUCT_IMAGE">Upload Product Info</label>
+					<label for="PRODUCT_INFO">Upload Product Info</label>
 					<input type="file" id="PRODUCT_INFO" name="PRODUCT_INFO">
 					<?php
 					$stores = Item_info::getAllStoreList();
@@ -99,11 +99,14 @@ require_once("./../server/GLOBAL_VARS.php");
 						<legend>Add New Item</legend>
 						<div class="row">
 							<div class="col">
-								<input type="text" name="ITEM_NAME" placeholder="Item Name">
-								<input type="text" name="ITEM_EXTERNAL_LINK" placeholder="External Link">
+								<label for="ITEM_NAME" class="visually-hidden">Item Name</label>
+								<input type="text" name="ITEM_NAME" id="ITEM_NAME" placeholder="Item Name">
+								<label for="ITEM_EXTERNAL_LINK" class="visually-hidden">Item External Link</label>
+								<input type="text" name="ITEM_EXTERNAL_LINK" id="ITEM_EXTERNAL_LINK" placeholder="External Link">
 								<?php
 								$stores = Item_info::getAllStoreList();
 								if (is_array($stores)) {
+									echo "<label for=\"store_select\">Select Store</label><br>";
 									echo "<select id=\"store_select\" name=\"STORE_ID\" class=\"select_dropdown\">";
 									foreach ($stores as $key => $store) {
 										echo "<option value=\"" . $store['STORE_ID'] . "\">" . $store['STORE_NAME'] . "</option>";
@@ -113,6 +116,7 @@ require_once("./../server/GLOBAL_VARS.php");
                                 $categories = Item_info::getAllCategories();
                                 if (is_array($categories)) {
                                     echo "<br>";
+									echo "<label for=\"category_select\">Select Category</label><br>";
                                     echo "<select id=\"category_select\" name=\"ITEM_CATEGORY\" class=\"select_dropdown\">";
                                     foreach ($categories as $category) {
                                         echo "<option value=\"" . $category . "\">" . $category  . "</option>";
@@ -123,9 +127,10 @@ require_once("./../server/GLOBAL_VARS.php");
 								?>
 							</div>
 							<div class="col">
-								<textarea name="ITEM_DESCRIPTION" placeholder="Description..."></textarea><br>
-								<label for="PRODUCT_IMAGE">Product Image : </label>
-								<input type="file" name="PRODUCT_IMAGE">
+								<label for="ITEM_DESCRIPTION" class="visually-hidden">Item Description </label>
+								<textarea name="ITEM_DESCRIPTION" id = "ITEM_DESCRIPTION" placeholder="Item Description..."></textarea><br>
+								<label for="PRODUCT_IMAGE">Product Image</label>
+								<input type="file" name="PRODUCT_IMAGE" id="PRODUCT_IMAGE">
 							</div>
 						</div>
 						<button type="submit">Add Item</button>

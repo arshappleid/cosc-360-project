@@ -68,48 +68,59 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			?>
 		</div>
 
-		<div class="headeryellow">
+		<header class="headeryellow">
 			<div class="search-container">
-				<input type="text"
-					placeholder="Search...">
+				<label for="search-input" class="visually-hidden">Enter keywords to search:</label> 
+				<input type="text" id="search-input" placeholder="Search...">
 				<?php
 				$stores = Item_info::getAllStoreList();
 				if (count($stores) == 0) {
 					echo $stores;
 				} else {
+					echo "<label for =\"store_select\" class=\"visually-hidden\">Filter by store:</label>";
 					echo "<select id = \"store_select\" class=\"select_dropdown\">";
+					echo "<option value=\"all\">All Stores</option>";
 					foreach ($stores as $key => $store) {
 						echo "<option value=\"" . $store['STORE_ID'] . "\" >" . $store['STORE_NAME'] . "</option>";
 					}
 					echo "</select>";
 				}
 				?>
-				<button type="submit">Search</button>
+				<button type="button" id="search-button">Search</button>
 			</div>
-		</div>
+		</header>
 		<?php include_once './../server/breadcrumbs.php' ?>
 		<div class="underheadercontainer">
 			<div class="overlay">
 				<?php include_once './../server/displaySingleUser.php' ?>
 
 				<form id="updateFirstNameForm" method="POST" action="../server/updateFirstName.php">
+					<label for="firstName" class="visually-hidden">First Name:</label>
 					<input type="text" id="firstName" name="firstName" placeholder="First Name" required>
 					<button type="submit">Update First Name</button>
 				</form>
 
 				<form id="updateLastNameForm" method="POST" action="../server/updateLastName.php">
+					<label for="lastName" class="visually-hidden">Last Name:</label>
 					<input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
 					<button type="submit">Update Last Name</button>
 				</form>
 
 				<form id="updatePasswordForm" method="POST" action="../server/updateUserPassword.php">
+					<label for="oldpassword" class="visually-hidden">Old Password:</label>
 					<input type="password" id="oldpassword" name="oldpassword" placeholder="Old Password" required>
+
+					<label for="password" class="visually-hidden">New Password:</label>
 					<input type="password" id="password" name="password" placeholder="New Password" required>
+
+					<label for="password2" class="visually-hidden">Re-enter New Password:</label>
 					<input type="password" id="password2" name="password2" placeholder="Re-enter New Password" required>
+
 					<button type="submit">Update Password</button>
 				</form>
 
 				<form id="updatePfpForm" method="POST" action="../server/updateUser.php">
+					<label for="profilePicture" class="visually-hidden">Upload Profile Picture:</label>
 					<input type="file" id="profilePicture" name="profilePicture" placeholder="Upload Profile Picture" accept="image/*">
 					<button type="submit">Update Profile Picture</button>
 				</form>

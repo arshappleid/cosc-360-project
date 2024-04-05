@@ -283,3 +283,23 @@ ul.breadcrumb li a:hover {
     color: #01447e;
     text-decoration: underline;
 }
+
+/* makes certyain elements visually hiddne that are intended for screen readers */
+.visually-hidden{
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+}
+/* for the weather display */
+dl dt, dl dd {
+    display: inline;
+}
+dl dd{
+    margin-left: 0;
+    margin-right: 3em;
+    min-width: auto;
+}
+

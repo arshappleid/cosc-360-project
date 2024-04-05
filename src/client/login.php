@@ -28,29 +28,34 @@ require_once("./../server/GLOBAL_VARS.php");
 			<a href="home.php" class="home-button">Home</a>
 		</div>
 
-		<div class="headeryellow">
+		<header class="headeryellow">
 			<div class="search-container">
-				<input type="text" placeholder="Search...">
+				<label for="search-input" class="visually-hidden">Enter keywords to search:</label> 
+				<input type="text" id="search-input" placeholder="Search...">
 				<?php
 				$stores = Item_info::getAllStoreList();
 				if (count($stores) == 0) {
 					echo $stores;
 				} else {
+					echo "<label for =\"store_select\" class=\"visually-hidden\">Filter by store:</label>";
 					echo "<select id = \"store_select\" class=\"select_dropdown\">";
+					echo "<option value=\"all\">All Stores</option>";
 					foreach ($stores as $key => $store) {
 						echo "<option value=\"" . $store['STORE_ID'] . "\" >" . $store['STORE_NAME'] . "</option>";
 					}
 					echo "</select>";
 				}
 				?>
-				<button type="submit">Search</button>
+				<button type="button" id="search-button">Search</button>
 			</div>
-		</div>
+		</header>
 		<?php include_once './../server/breadcrumbs.php' ?>
 		<div class="underheadercontainer">
 			<div class="overlay">
 				<form id="loginForm" method="POST" action="./../server/validate_user.php">
+					<label for = "email" class="visually-hidden">Email</label>
 					<input type="email" id="email" name="email" placeholder="E-mail">
+					<label for="password" class="visually-hidden">Password</label>
 					<input type="password" id="password" name="password" placeholder="Password">
 					<div class="button-container">
 						<button type="submit">Login</button>
