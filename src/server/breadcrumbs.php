@@ -1,4 +1,5 @@
 <?php
+
 echo "<div class = \"breadcrumb_box\">";
 // Get the current path
 $currentPath = $_SERVER["PHP_SELF"];

@@ -1,4 +1,5 @@
 <?php
+
 global $COMMENT_DATE_TIME_FORMAT;
 session_start();
 require_once("./../server/functions/item_info.php");
@@ -14,7 +15,9 @@ foreach ($items as $item) {
     $item_id = Item_info::getItemInfo($item['ITEM_ID']);
     //$item_price = Item_info::getCurrentPrice($item['ITEM_ID']);
     $store_name = Item_info::getStoreName($item['STORE_ID']);
-    if ($item_id == "NO_ITEM_FOUND") continue;
+    if ($item_id == "NO_ITEM_FOUND") {
+        continue;
+    }
 
     echo "<section>";
     echo "<aside>";

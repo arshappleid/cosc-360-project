@@ -15,7 +15,9 @@ $weather = weather::getWeather($selectedCity);
     <label for="city">Choose a city:</label>
     <select name="city" id="city" onchange="this.form.submit()">
         <?php foreach ($cities as $city) : ?>
-            <option value="<?= htmlspecialchars($city) ?>" <?php if ($city == $selectedCity) echo 'selected'; ?>>
+            <option value="<?= htmlspecialchars($city) ?>" <?php if ($city == $selectedCity) {
+                echo 'selected';
+                           } ?>>
                 <?= htmlspecialchars($city) ?>
             </option>
         <?php endforeach; ?>

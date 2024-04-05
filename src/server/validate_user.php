@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require_once './functions/user_management.php';
 require_once './functions/login_tracking.php';

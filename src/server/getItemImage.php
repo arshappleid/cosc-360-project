@@ -1,4 +1,5 @@
 <?php
+
 require_once './functions/db_connection.php';
 
 if (isset($_GET['ITEM_ID'])) {

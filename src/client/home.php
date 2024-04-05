@@ -98,7 +98,6 @@ require_once("./../server/functions/comments.php");
 					<li><a href="home.php">Home</a></li>
 					<?php
 					if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
-
 						echo "<li><a href=\"account_page.php\">Account</a></li>";
 					} else {
 						echo "<li><a href=\"create_account.php\">Create Account</a></li>

@@ -45,10 +45,10 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 				class="home-button">Home</a>
 			<?php
 			if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
-				if(isset($_SESSION['ADMIN_EMAIL'])){
+				if (isset($_SESSION['ADMIN_EMAIL'])) {
 					echo "<a href=\"admin_panel.php\" class=\"admin-login-button\">";
 					echo "Admin Panel</a>";
-				}	
+				}
 				echo "<a href=\"../server/logout.php\" class=\"login-button\">";
 				//echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";
 				echo "Logout</a>";
@@ -129,7 +129,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 					<?php
 					if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
 						echo "<li><a href=\"account_page.php\">Account</a></li>";
-					}else{
+					} else {
 						echo "<li><a href=\"create_account.php\">Create Account</a></li>
 						<li><a href=\"login.php\">Login</a></li>
 						<li><a href=\"admin_login.php\">Admin Login</a></li>";

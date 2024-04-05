@@ -3,7 +3,8 @@ $(document).ready(function () {
 
     updateFilteredItemList(selectedStoreId, "");
 
-    function updateFilteredItemList(storeId, searchTerm) {
+    function updateFilteredItemList(storeId, searchTerm)
+    {
         var url =
             storeId === "all" ? "./../server/getAllItems.php" : "./../server/getStoreItems.php";
         if (storeId !== "all") {
@@ -35,7 +36,8 @@ $(document).ready(function () {
     });
 
     // Filters items in the item list based on the search term
-    function filterStoreItems(searchTerm) {
+    function filterStoreItems(searchTerm)
+    {
         var searchTermLower = searchTerm.toLowerCase();
 
         $("#item_list section").each(function () {

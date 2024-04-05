@@ -16,7 +16,7 @@ body {
     height: 2033px;
     width: 100%;
     position: relative;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .headeryellow {
@@ -44,13 +44,13 @@ body {
 
 .overlay {
     position: absolute;
-    top: 0; 
-    left: 50%; 
-    transform: translateX(-50%); 
-    width: 90%;  
-    height: auto; 
-    background-color: rgba(255, 255, 255, 0.5); 
-    z-index: 3; 
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 3;
 }
 
 .triangleextendblack {
@@ -239,16 +239,16 @@ footer p{
     text-align: center;
   }
 footer div ul li:not(:last-child)::after{
-    content:""; 
+    content:"";
     border:1px solid #e2e2e2;
     border-width: 0.1em 0.1em 0 0;
-    position:absolute; 
-    right:-0.2em; 
-    top:0; 
+    position:absolute;
+    right:-0.2em;
+    top:0;
     height:100%;
     border-color: var(--third-color);
   }
-  
+
 
 /* Style the list */
 ul.breadcrumb {

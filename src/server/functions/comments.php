@@ -69,7 +69,7 @@ class Comments
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "COMMENT_NOT_EXISTS";
-				} else if (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
+				} elseif (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
 					return "COMMENT_EXISTS";
 				}
 			}
@@ -93,8 +93,9 @@ class Comments
 	 */
 	static function deleteComment($Comment_Id)
 	{
-		if (Comments::commentExists($Comment_Id) == "COMMENT_NOT_EXISTS")
+		if (Comments::commentExists($Comment_Id) == "COMMENT_NOT_EXISTS") {
 			return "COMMENT_NOT_EXISTS";
+        }
 
 		$query = "DELETE FROM Comments WHERE COMMENT_ID = ?";
 
@@ -113,7 +114,7 @@ class Comments
 	 * Summary of getAllCommentsForItem
 	 * @param int $Item_Id
 	 * @return mixed - Return an associate array of all the comments , associated with an ID.
-	 * 
+	 *
 	 * Return Values:
 	 * - Array - of all the comments
 	 * 		- Only 1 comment : [comment1]
@@ -122,8 +123,9 @@ class Comments
 	 */
 	static function getAllCommentsForItem($Item_Id)
 	{
-		if (Item_info::itemExists($Item_Id) == "ITEM_NOT_EXISTS")
+		if (Item_info::itemExists($Item_Id) == "ITEM_NOT_EXISTS") {
 			return "ITEM_NOT_EXISTS";
+        }
 
 		$query = "SELECT * FROM Comments WHERE ITEM_ID = ?";
 		try {
@@ -152,8 +154,9 @@ class Comments
 	}
 	static function getAllCommentsForItemDescending($Item_Id)
 	{
-		if (Item_info::itemExists($Item_Id) == "ITEM_NOT_EXISTS")
+		if (Item_info::itemExists($Item_Id) == "ITEM_NOT_EXISTS") {
 			return "ITEM_NOT_EXISTS";
+        }
 
 		$query = "SELECT * FROM Comments WHERE ITEM_ID = ? ORDER BY DATE_TIME_ADDED DESC";
 		try {
@@ -162,10 +165,11 @@ class Comments
 			if ($response[0] === true) {
 				if (is_array($response[1])) {
 					// Valid Response
-					if (count($response[1]) == 0)
+					if (count($response[1]) == 0) {
 						return "NO_COMMENTS_ADDED_YET";
-					elseif (!is_array($response[1][0])) // if the first element is not an array
+					} elseif (!is_array($response[1][0])) { // if the first element is not an array
 						return array($response[1]);
+                    }
 
 					return $response[1];
 				} else {

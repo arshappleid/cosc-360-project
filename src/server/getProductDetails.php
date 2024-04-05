@@ -19,14 +19,16 @@ $show_button = (isset($_SESSION['USER_EMAIL']) & !isset($_SESSION['ADMIN_EMAIL']
 $show_chart = true;
 
 //getting user id and user emai
-if ($show_button){
+if ($show_button) {
     $userEmail = $_SESSION['USER_EMAIL'];
     $userID = User_management::getAllUserData($userEmail)['USER_ID'];
 }
 
 foreach ($item_IDS as $item_ID) {
     $store_name = Item_info::getStoreName($item_ID['STORE_ID']);
-    if ($item_ID == "NO_ITEM_FOUND") continue;
+    if ($item_ID == "NO_ITEM_FOUND") {
+        continue;
+    }
 
     echo "<div class = \"first\">";
         echo "<div class = \"left\">";
@@ -45,33 +47,32 @@ foreach ($item_IDS as $item_ID) {
             
                 <button id=\"comment-button\">Show Comment Form</button>";
                 echo '<form id="add-comment-form" action="../server/addcomment.php" method="post">' .
-                '<input type="hidden" id="item-id" name="ITEM_ID" value="'. $_GET['ITEM_ID'] . '"/>'.
-                '<input type="hidden" id="user-email" name="USER_EMAIL" value="'. $userEmail . '"/>'.
+                '<input type="hidden" id="item-id" name="ITEM_ID" value="' . $_GET['ITEM_ID'] . '"/>' .
+                '<input type="hidden" id="user-email" name="USER_EMAIL" value="' . $userEmail . '"/>' .
                 '<textarea id="add-comment-text" name="COMMENT_TEXT"></textarea>' .
                 '<button type="submit">Add Comment</button>' .
                 '</form>                
             </div>';
 
     echo "<div class = \"second\">";
-        echo "<div class = \"all-comments\">"; 
-        
+        echo "<div class = \"all-comments\">";
+
 
             // Display comments
             $comments = Comments::getAllCommentsForItemDescending($item_ID['ITEM_ID']);
-            if (is_array($comments)) {
-                if (count($comments) == 0) {
-                    echo "<h4>No Comments Yet.</h4>";
-                } else {
-                    foreach ($comments as $comment) {
-                        echo "<div class=\"comment-container\">";
-                        echo "<div class=\"user-info\"><div class=\"user-id\">" . User_management::getUser_First_Last_Name($comment['USER_ID']) . "</div>";
-                        echo "<img src =\"" .$testUserImage . "\" class='user-image'></div>";
-                        echo "<p class=\"comment-text\">" . $comment['COMMENT_TEXT'] . "</p>";
-                        echo "</div>";
-
-                    }
-                }
+    if (is_array($comments)) {
+        if (count($comments) == 0) {
+            echo "<h4>No Comments Yet.</h4>";
+        } else {
+            foreach ($comments as $comment) {
+                echo "<div class=\"comment-container\">";
+                echo "<div class=\"user-info\"><div class=\"user-id\">" . User_management::getUser_First_Last_Name($comment['USER_ID']) . "</div>";
+                echo "<img src =\"" . $testUserImage . "\" class='user-image'></div>";
+                echo "<p class=\"comment-text\">" . $comment['COMMENT_TEXT'] . "</p>";
+                echo "</div>";
             }
+        }
+    }
 
         echo "</div>";
     echo "</div>";

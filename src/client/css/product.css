@@ -37,7 +37,7 @@ h1 {
 
     /* Override default margins */
     margin: 0; /* Remove default margins */
-    
+
     /* Override default font weight */
     font-weight: normal; /* Change the font weight to normal or other value */
 
@@ -149,7 +149,7 @@ h1 {
 
 .comment-text{
     margin-left: 1em;
-    
+
 }
 
 .second{

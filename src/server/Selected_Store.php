@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_POST['SELECTED_STORE'])) {
 	session_start(); // Start the session if you are using sessions to store the global variable
 	$_SESSION['SELECTED_STORE'] = $_POST['SELECTED_STORE']; // Update the global variable

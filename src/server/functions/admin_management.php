@@ -5,14 +5,12 @@ include_once 'user_management.php';
 
 class Admin_management
 {
-
-
 	/**
 	 * Summary of validateAdminLogin
 	 * @param mixed $email
 	 * @param mixed $hashed_password
 	 * @return string if the given hashed password , matches the hashed password in the database
-	 * 
+	 *
 	 */
 	static function validateAdminLogin($email, $hashed_password)
 	{
@@ -22,11 +20,11 @@ class Admin_management
 			$response = executePreparedQuery($query, array('s', $email));
 			if ($response[0] === true) {
 				if (is_array($response[1])) {
-
-					if ($response[1]['MD5_Password'] === $hashed_password)
+					if ($response[1]['MD5_Password'] === $hashed_password) {
 						return "VALID_LOGIN";
-					else
-						return "INVALID_LOGIN";
+					} else {
+                        return "INVALID_LOGIN";
+                    }
 				} else {
 					return "ADMIN_NOT_FOUND";
 				}
@@ -41,7 +39,7 @@ class Admin_management
 	/**
 	 * Given the USER EMAIL , Returns the USER_ID
 	 * If the User Exists in USERS.
-	 * 
+	 *
 	 * Possible Return Values
 	 * - USER_NOT_EXISTS
 	 * - USER_ID
@@ -58,7 +56,7 @@ class Admin_management
 			if ($response[0] == true) { // Single Record
 				if (isset($response[1]['USER_ID'])) {
 					return $response[1]['USER_ID'];
-				} elseif (isset($response[1][0]['USER_ID'])) { // Multiple Records 
+				} elseif (isset($response[1][0]['USER_ID'])) { // Multiple Records
 					return isset($response[1][0]['USER_ID']);
 				}
 			}
@@ -72,7 +70,7 @@ class Admin_management
 	 * Summary of toggleBanUserAccount
 	 * @param mixed $userEmail
 	 * @return bool|string - Account Updated or not
-	 * 
+	 *
 	 * Toggles between the banned status for a UserEmail provided.
 	 */
 	static function toggleBanUserAccount($userEmail)
@@ -95,7 +93,7 @@ class Admin_management
 	/**
 	 * Summary of getAllUsers
 	 * @return mixed
-	 * 
+	 *
 	 * Returns NO_USERS_FOUND , if no users found.
 	 * Else Returns an Asssociative Array of all the users.
 	 */
@@ -124,7 +122,7 @@ class Admin_management
 	 * Returns String if an Admin is already registered or not
 	 * @param mixed $email
 	 * @return string
-	 * 
+	 *
 	 * Posible return Values
 	 * - ADMIN_EXISTS
 	 * - ADMIN_NOT_EXIST
@@ -144,14 +142,14 @@ class Admin_management
 
 	/**
 	 * Creates an admin user in the database.
-	 * 
+	 *
 	 * @param string $firstName The first name of the admin.
 	 * @param string $lastName The last name of the admin.
 	 * @param string $email The email address of the admin.
 	 * @param string $md5password The MD5 hashed password of the admin.
 	 * @param string|null $userImage An optional path or identifier for the user's image.
 	 * @return string A message indicating the result of the operation.
-	 * 
+	 *
 	 * Possible Return Values:
 	 * - ADMIN_ALREADY_REGISTERED
 	 */
@@ -198,7 +196,7 @@ class Admin_management
 	 * - ITEM_ID as String
 	 * - ITEM_NOT_FOUND
 	 * - COULD_NOT_EXECUTE_QUERY
-	 * 
+	 *
 	 * If multiple items with the same name exist , will return the ID of the first record.
 	 */
 	static function getItemID($ITEM_NAME, $STORE_ID)
@@ -263,12 +261,12 @@ class Admin_management
 	 * @param mixed $ITEM_PRICE
 	 * @param mixed $EXTERNAL_LINK
 	 * @return string
-	 * 
+	 *
 	 * Possible Return Values :
 	 * - ITEM_NOT_ADDED
 	 * - ITEM_ADDED
 	 * - ITEM_WITH_NAME_ALREADY_EXISTS
-	 * 
+	 *
 	 */
 	static function addItem($ITEM_NAME, $ITEM_DESCRIPTION, $STORE_ID, $ITEM_PRICE, $EXTERNAL_LINK, $CATEGORY)
 	{
@@ -302,11 +300,10 @@ class Admin_management
 				if ($stmt2->execute()) {
                     $stmt3 = $connection->prepare($query3);
                     $stmt2->bind_param('ss', $ITEM_ID, $CATEGORY);
-                    if($stmt3->execute()){
+                    if ($stmt3->execute()) {
                         $connection->commit();
                         $resp =  "ITEM_ADDED";
-                    }
-					else{
+                    } else {
                         $connection->rollback();
                         return $resp;
                     }

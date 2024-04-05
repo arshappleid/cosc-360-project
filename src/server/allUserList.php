@@ -1,4 +1,5 @@
 <?php
+
 include './functions/admin_management.php';
 include './functions/user_management.php';
 include './functions/login_tracking.php';
@@ -39,4 +40,3 @@ if (is_array($users)) {
 } else {
     echo "<h4>Error Retrieving Users</h4>";
 }
-?>

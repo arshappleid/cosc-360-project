@@ -1,4 +1,5 @@
 <?php
+
 include_once './functions/comments.php';
 try {
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {

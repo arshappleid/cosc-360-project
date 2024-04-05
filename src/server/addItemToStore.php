@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 include_once "./functions/admin_management.php";
 // Input validation and sanitization

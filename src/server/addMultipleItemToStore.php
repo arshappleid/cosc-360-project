@@ -1,4 +1,5 @@
 <?php
+
 include_once "./functions/admin_management.php";
 
 // Get JSON as a string

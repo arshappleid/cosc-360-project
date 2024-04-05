@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 include '../server/functions/item_info.php';
 require_once("./../server/functions/item_info.php");
@@ -20,7 +21,9 @@ foreach ($item_IDS as $item_ID) {
     $item_price = Item_info::getCurrentPrice($item_ID, $storeId);
     //print_r($item_price);
     $store_name = Item_info::getStoreName($storeId);
-    if ($item == "NO_ITEM_FOUND") continue;
+    if ($item == "NO_ITEM_FOUND") {
+        continue;
+    }
 
     echo "<section>";
     echo "<aside>";

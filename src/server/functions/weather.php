@@ -1,4 +1,5 @@
 <?php
+
 include_once 'db_connection.php';
 include_once './../GLOBAL_VARS.php';
 
