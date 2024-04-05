@@ -76,8 +76,10 @@ require_once("./../server/GLOBAL_VARS.php");
 			<div class="overlay">
 				<?php
 
-				//$test = Admin_management::displayName("dfgsdfgtest@gmail.com");
+				//$test = Item_info::getAllItemsAtStore(1);
 				//print_r($test);
+
+
 
 				include_once './../server/allUserList.php';
 

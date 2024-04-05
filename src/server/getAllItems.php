@@ -19,35 +19,31 @@ foreach ($items as $item) {
         continue;
     }
 
-    echo "<section>";
-    echo "<aside>";
     // Left Bar
     echo "<section>"; // Left Section
     echo "<aside>";
     echo "<img class =\"display-image\" src = \"./../server/getItemImage.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\" alt=\"Product Image\">";
     echo "<h3>" . htmlspecialchars($item['ITEM_NAME']) . "</h3>";
-    echo "<h2>" . htmlspecialchars($item['Item_Price']) . "$" . "</h2>";
+    echo "<h1>" . htmlspecialchars($item['Item_Price']) . "$ at " .  $store_name . "</h1>";
     echo "<h4><b>" . "Upvotes :</b> " . htmlspecialchars($item['UPVOTES']) . "</h4>";
-    echo "<h1>" . $store_name . "</h1>";
-    echo "<a href=\"product.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\">See Product Details</a>";
-
-
+    
+    // Button container
+    echo "<div class=\"button-container\">";
+    
+    echo "<a href=\"product.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "&STORE_ID=" . urlencode($item['STORE_ID']) . "\" class=\"details-button\">See Product Details</a>";
+  
     if (isset($_SESSION['USER_EMAIL'])) {
         try {
-            echo "<form action=\"./../server/upvoteItem.php\" method=\"POST\">";
+            echo "<form action=\"./../server/upvoteItem.php\" method=\"POST\" class=\"upvote-form\">";
             echo "<input type=\"hidden\" name=\"ITEM_ID\" value=\"" . $item['ITEM_ID'] . "\">";
-            echo "<input type=\"submit\" value=\"Upvote\">";
+            echo "<input type=\"submit\" value=\"Upvote\" class=\"upvote-button\">";
             echo "</form>";
         } catch (Exception $e) {
             echo "Error occurred while rendering upvote ID: " . $e;
         }
     }
-    echo "</aside>";
-    // Price chart within the Article Tags
-    echo "<article>";
-    //include "./priceChart.php"; // Bug
-    echo "</article>";
-    echo "</section>";
+    
+    echo "</div>"; // Close button container
     echo "</aside>";
 
     // Right Bar
@@ -71,7 +67,7 @@ foreach ($items as $item) {
             echo "<td>" . htmlspecialchars(User_management::getUser_First_Last_Name($comment['USER_ID'])) . "</td>";
             echo "<td>" . htmlspecialchars($comment['COMMENT_TEXT']) . "</td>";
             try {
-                echo "<td>" . (new DateTime($comment['DATE_TIME_ADDED']))->format($COMMENT_DATE_TIME_FORMAT) . "</td>";
+                echo "<td>" . (new DateTime($comment['DATE_TIME_ADDED']))->format('d, M Y') . "</td>";
             } catch (Exception $e) {
                 echo "<td>Could Not Parse Date</td>";
             }

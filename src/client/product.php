@@ -15,6 +15,7 @@ require_once("./../server/GLOBAL_VARS.php");
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
 	<script type="text/javascript" src="./scripts/home.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="css/product.css" />
@@ -71,7 +72,7 @@ require_once("./../server/GLOBAL_VARS.php");
 		<?php include_once './../server/breadcrumbs.php' ?>
 		<div class="underheadercontainer">
 			<div class="overlay">
-				<?php echo "<div id = \"item_list\"></div>"; ?>
+				<?php echo "<div id = \"product_list\"></div>"; ?>
 			</div>
 			<div class="triangleextendblack"></div>
 			<div class="triangle-element"></div>
@@ -97,8 +98,8 @@ require_once("./../server/GLOBAL_VARS.php");
 		</div>
 	</footer>
 	<script>
-		/*var showChart = <?php echo json_encode($show_chart); ?>;*/
+		/*var showChart = <?php// echo json_encode($show_chart); ?>;*/
 		var showButton = <?php echo json_encode($show_button); ?>;
 	</script>
-	<script src="scripts/product.js"></script>";
+	<script src="scripts/product.js"></script>
 </body>

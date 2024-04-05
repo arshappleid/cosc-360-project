@@ -18,7 +18,6 @@ class Item_info
 	 */
 	public static function itemExists($ITEM_ID)
 	{
-		// Corrected the SQL query to use the proper placeholder syntax
 		$query = "SELECT * FROM ITEMS WHERE ITEM_ID = ?;";
 		try {
 			$response = executePreparedQuery($query, array('i', $ITEM_ID)); // Adjusted parameter structure
@@ -166,48 +165,44 @@ class Item_info
 			return "INVALID_STORE_ID";
 		}
 
-		$query = "SELECT 
-			ITEMS.ITEM_ID, 
-			ITEMS.ITEM_NAME,
-			ITEM_CATEGORY.CATEGORY_NAME, 
-			Latest_Price_Entry.Item_Price, 
-			ITEMS.ITEM_DESCRIPTION, 
-			ITEMS.EXTERNAL_LINK, 
-			Latest_Price_Entry.STORE_ID, 
-			Latest_Price_Entry.Time_Updated
-		FROM 
-			ITEMS 
-		LEFT JOIN 
-			ITEM_CATEGORY ON ITEMS.ITEM_ID = ITEM_CATEGORY.ITEM_ID
-		LEFT JOIN (
-			SELECT 
-				ITEM_ID, 
-				STORE_ID, 
-				Item_Price, 
-				Time_Updated
-			FROM 
-				Item_Price_Entry
-			WHERE 
-				(ITEM_ID, Time_Updated) IN (
+		$query = "
+		SELECT 
+				ITEMS.ITEM_ID, 
+				ITEM_NAME, 
+				ITEMS.UPVOTES,
+				LatestPriceEntry.STORE_ID, 
+				LatestPriceEntry.Item_Price,
+				LatestPriceEntry.Item_Entry
+			FROM ITEMS
+			JOIN (
+				SELECT 
+					Item_Price_Entry.ITEM_ID, 
+					Item_Price_Entry.STORE_ID, 
+					Item_Price_Entry.Item_Price,
+					Item_Price_Entry.Item_Entry
+				FROM Item_Price_Entry
+				INNER JOIN (
 					SELECT 
 						ITEM_ID, 
-						MAX(Time_Updated)
-					FROM 
-						Item_Price_Entry
-					WHERE 
-						STORE_ID = ?
-					GROUP BY 
-						ITEM_ID
-				)
-		) AS Latest_Price_Entry ON ITEMS.ITEM_ID = Latest_Price_Entry.ITEM_ID
-		WHERE 
-			Latest_Price_Entry.STORE_ID = ?";
+						STORE_ID, 
+						MAX(Item_Entry) AS MaxItemEntry
+					FROM Item_Price_Entry
+					WHERE STORE_ID = ?
+					GROUP BY ITEM_ID, STORE_ID
+				) AS MaxEntries ON Item_Price_Entry.ITEM_ID = MaxEntries.ITEM_ID 
+					AND Item_Price_Entry.STORE_ID = MaxEntries.STORE_ID 
+					AND Item_Price_Entry.Item_Entry = MaxEntries.MaxItemEntry
+			) AS LatestPriceEntry ON ITEMS.ITEM_ID = LatestPriceEntry.ITEM_ID
+			WHERE LatestPriceEntry.STORE_ID = ?
+			ORDER BY ITEMS.UPVOTES DESC, LatestPriceEntry.STORE_ID;
+		";
+
 		try {
-			$response = executePreparedQuery($query, array('ss', $STORE_ID, $STORE_ID)); // Adjusted parameter structure
+			$response = executePreparedQuery($query, array('ss', $STORE_ID, $STORE_ID)); 
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_ITEMS_IN_DATABASE";
-				} elseif (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
+				} elseif (is_array($response[1]) && count($response[1]) >= 1) { 
 					return $response[1];
 				}
 			}
@@ -260,7 +255,7 @@ class Item_info
     ";
 
 		try {
-			$response = executePreparedQuery($query, array()); // Assuming executePreparedQuery is a custom function
+			$response = executePreparedQuery($query, array()); 
 			if ($response[0]) { // Check if query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_ITEMS_IN_DATABASE";
@@ -275,16 +270,18 @@ class Item_info
 	}
 
 
-	public static function getAllItemData($ITEM_ID)
+	public static function getAllItemData($ITEM_ID, $STORE_ID)
 	{
-		$query = "SELECT * FROM ITEMS RIGHT JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID  LEFT JOIN ITEM_CATEGORY ON ITEMS.ITEM_ID = ITEM_CATEGORY.ITEM_ID
-				  	WHERE ITEMS.ITEM_ID = ?";
+		$query = "SELECT ITEMS.ITEM_ID, ITEMS.ITEM_NAME, ITEMS.ITEM_DESCRIPTION, ITEMS.UPVOTES, Item_Price_Entry.Item_Entry, Item_Price_Entry.STORE_ID, Item_Price_Entry.Item_Price
+		   			FROM ITEMS JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID
+				  	WHERE ITEMS.ITEM_ID = ? AND Item_Price_Entry.STORE_ID = ?
+					ORDER BY Item_Price_Entry.Item_Entry DESC LIMIT 1;";
 		try {
-			$response = executePreparedQuery($query, array('i', $ITEM_ID)); // Adjusted parameter structure
+			$response = executePreparedQuery($query, array('ii', $ITEM_ID, $STORE_ID)); // Adjusted parameter structure
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_ITEMS_IN_DATABASE";
-				} elseif (is_array($response[1]) && count($response[1]) >= 1) { // Corrected condition to check for an array with at least one result
+				} elseif (is_array($response[1]) && count($response[1]) >= 1) { 
 					return $response[1];
 				}
 			}

@@ -4,19 +4,22 @@ nav a {
     color: var(--main-button-foreground-color);
 }
 
-body {
+body, html {
     width: 100%;
+    height: auto;
     margin: 0;
+    overflow-y: visible;
     padding: 0;
     font-family: 'Poppins' , sans-serif;
   }
 
 .container {
     background: var(--third-color);
-    height: 2033px;
     width: 100%;
+    height: auto;
+    padding-bottom: 0.5em;
+    overflow-y: visible;
     position: relative;
-    overflow: hidden;
 }
 
 .headeryellow {
@@ -49,7 +52,7 @@ body {
     transform: translateX(-50%);
     width: 90%;
     height: auto;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: grey;
     z-index: 3;
 }
 

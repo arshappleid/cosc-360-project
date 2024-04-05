@@ -4,9 +4,10 @@
     padding: 2.5% 2.5% 2.5% 2.5%;
 }
 
-#item_list {
+#product_list {
     margin-bottom: 0.5em;
     width: 100%;
+    max-width: 1400px;
 }
 #avatar_img {
     height: 15%;
@@ -77,6 +78,7 @@ h1 {
     height: 100%;
     margin-left: 0.25em;
     background-color: white;
+    border-radius: 10px;
 }
 .right img{
     width: 100%;
@@ -167,5 +169,15 @@ h1 {
     height: auto;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+}
+
+canvas{
+    width: 100% !important; 
+    height: auto !important; 
+    aspect-ratio: 16 / 9; 
+}
+
+#tracker-name{
+    text-align: center;
 }
 
