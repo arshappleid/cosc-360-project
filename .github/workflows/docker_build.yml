@@ -54,4 +54,4 @@ jobs:
             
             - name: Code Formatting
               if: always()
-              run: docker exec web-server sh -c "phpcs --standard=PSR12 --exclude=PSR1.Methods.CamelCapsMethodName,Generic.Files.LineLength,Generic.WhiteSpace.DisallowTabIndent --error-severity=1 --report-full=./logs/phpcs.log ./"
+              run: docker exec web-server sh -c "phpcs --standard=PSR12 --exclude=PSR1.Methods.CamelCapsMethodName,Generic.Files.LineLength,Generic.WhiteSpace.DisallowTabIndent --error-severity=1 ./"
