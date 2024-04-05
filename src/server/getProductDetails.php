@@ -37,7 +37,7 @@ foreach ($item_IDS as $item_ID) {
             //echo "<button id=\"comment-button\">Add Comment</button>";
         echo "</div>";
         echo "<div class = \"right\">";
-            echo "<img src =\"" . $chartImage . "\" class='chart'></div>";
+            echo "<img src =\"" . $chartImage . "\" class='chart' alt='Price Chart'></div>";
         echo "</div>";
     echo "</div>";
 
@@ -64,8 +64,8 @@ foreach ($item_IDS as $item_ID) {
                 } else {
                     foreach ($comments as $comment) {
                         echo "<div class=\"comment-container\">";
-                        echo "<div class=\"user-info\"><div class=\"user-id\">" . User_management::getUser_First_Last_Name($comment['USER_ID']) . "</div>";
-                        echo "<img src =\"" .$testUserImage . "\" class='user-image'></div>";
+                        echo "<div class=\"user-info\"><div class=\"username\">" . User_management::getUser_First_Last_Name($comment['USER_ID']) . "</div>";
+                        echo "<img src =\"" .$testUserImage . "\" class='user-image' alt='User Image' ></div>";
                         echo "<p class=\"comment-text\">" . $comment['COMMENT_TEXT'] . "</p>";
                         echo "</div>";
 

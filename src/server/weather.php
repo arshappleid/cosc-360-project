@@ -23,8 +23,16 @@ $weather = weather::getWeather($selectedCity);
 </form>
 
 <!-- Weather Information Display -->
+<!-- Used semantic html for accessibility -->
 <div id="weather_block">
-    <p>Current Weather: <?= htmlspecialchars($weather['CURRENT_WEATHER_CELCIUS']) ?> Celcius</p>
-    <p>Wind Speed: <?= htmlspecialchars($weather['WINDSPEED_KMH']) ?> Km/H</p>
-    <p>Wind Direction: <?= htmlspecialchars($weather['WIND_DIRECTION']) ?></p>
+    <dl>
+        <dt>Temperature:</dt>
+        <dd><?= htmlspecialchars($weather['CURRENT_WEATHER_CELCIUS']) ?> Celcius</dd>
+        
+        <dt>Wind Speed:</dt>
+        <dd><?= htmlspecialchars($weather['WINDSPEED_KMH']) ?> Km/H</dd>
+        
+        <dt>Wind Direction:</dt>
+        <dd><?= htmlspecialchars($weather['WIND_DIRECTION']) ?></dd>
+    </dl>
 </div>

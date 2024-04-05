@@ -21,7 +21,9 @@ if (is_array($users)) {
         echo "<h4>No Users Found</h4>";
     } else {
         echo "<table id=\"user_table\">";
-        echo "<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Login's This Month</th><th>Ban Status</th></tr>";
+        echo "<caption> All Users Information </caption>";
+        echo "<tr><th scope=\"col\">First Name</th><th scope=\"col\">Last Name</th><th scope=\"col\">Email</th><th scope=\"col\">Login's This Month</th>";
+        echo "<th scope=\"col\">Ban Status</th><th scope=\"col\">Toggle Ban</th><th scope=\"col\">User Info</th></tr>";
         foreach ($users as $user) {
             $user_id = User_management::getUserID($user['Email']);
             echo "<tr>";

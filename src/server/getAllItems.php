@@ -21,11 +21,16 @@ foreach ($items as $item) {
     // Left Bar
     echo "<section>"; // Left Section
     echo "<aside>";
-    echo "<img class =\"display-image\" src = \"./../server/getItemImage.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\" alt=\"NO IMAGE IN DATABASE\">";
+    echo "<img class =\"display-image\" src = \"./../server/getItemImage.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\" alt=\"Product Image\">";
     echo "<h3>" . htmlspecialchars($item['ITEM_NAME']) . "</h3>";
     echo "<h2>" . htmlspecialchars($item['Item_Price']) . "$" . "</h2>";
     echo "<h1>" . $store_name . "</h1>";
-    echo "<button><a href=\"product.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\">See Product Details</a></button>";
+    /*I removed the button because apparently putting an <a> inside a button is bad accessibility practice.
+    i then struggled trying to get a button to do what the <a> was doing, so I just left the <a> instead*/
+    echo "<a href=\"product.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\">See Product Details</a>";
+    //echo "<button id=\"productButton-" . $item['ITEM_ID'] . "\">See Product Details</button>";
+
+
     echo "</aside>";
     // Price chart within the Article Tags
     echo "<article>";
@@ -43,10 +48,13 @@ foreach ($items as $item) {
         echo "<h3>No Comments yet.</h3>";
     } elseif (is_array($comments)) {
         echo "<table id=\"comment_table\">";
+        echo "<caption class=\"visually-hidden\">All Comments For Item</caption>";
         // Ensure $comments is always treated as an array.
         if (isset($comments['USER_ID'])) {
             $comments = [$comments]; // Wrap single comment in an array
         }
+        //added table headings, including adding another column for date time added. However, they are not showing up .  
+        echo "<tr><th scope=\"col\">Username</th><th scope=\"col\">User Comment</th><th scope=\"col\">Date Added</th></tr>";
         foreach ($comments as $comment) {
             echo "<tr>";
             echo "<td>" . htmlspecialchars(User_management::getUser_First_Last_Name($comment['USER_ID'])) . "</td>";
@@ -71,6 +79,7 @@ foreach ($items as $item) {
     if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
         $email = $_SESSION['USER_EMAIL'] ?? $_SESSION['ADMIN_EMAIL'];
         echo "<form class =\"Comment_Form\" action=\"./../server/addcomment.php\" method=\"post\">";
+        echo "<label for=\"Comment_input\" class=\"visually-hidden\">Add Comment Text</label>";
         echo "<input class=\"Comment_Input\" id = \"Comment\" type=\"text\" placeholder=\"Add new Comment...\" name=\"COMMENT_TEXT\">";
         echo "<input type=\"hidden\" name=\"ITEM_ID\" value=\" " . htmlspecialchars($item['ITEM_ID']) . "\" >";
         echo "<input type=\"hidden\" name=\"USER_EMAIL\" value=\" " . htmlspecialchars($email) . " \" >";

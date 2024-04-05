@@ -26,39 +26,48 @@ require_once("./../server/GLOBAL_VARS.php");
       <a href="home.php" class="home-button">Home</a>
     </div>
 
-    <div class="headeryellow">
-      <div class="search-container">
-        <input type="text" placeholder="Search...">
-        <?php
-        $stores = Item_info::getAllStoreList();
-        if (count($stores) == 0) {
-          echo $stores;
-        } else {
-          echo "<select id = \"store_select\" class=\"select_dropdown\">";
-          foreach ($stores as $key => $store) {
-            echo "<option value=\"" . $store['STORE_ID'] . "\" >" . $store['STORE_NAME'] . "</option>";
-          }
-          echo "</select>";
-        }
-        ?>
-        <button type="submit">Search</button>
-      </div>
-    </div>
+    <header class="headeryellow">
+			<div class="search-container">
+				<label for="search-input" class="visually-hidden">Enter keywords to search:</label> 
+				<input type="text" id="search-input" placeholder="Search...">
+				<?php
+				$stores = Item_info::getAllStoreList();
+				if (count($stores) == 0) {
+					echo $stores;
+				} else {
+					echo "<label for =\"store_select\" class=\"visually-hidden\">Filter by store:</label>";
+					echo "<select id = \"store_select\" class=\"select_dropdown\">";
+					echo "<option value=\"all\">All Stores</option>";
+					foreach ($stores as $key => $store) {
+						echo "<option value=\"" . $store['STORE_ID'] . "\" >" . $store['STORE_NAME'] . "</option>";
+					}
+					echo "</select>";
+				}
+				?>
+				<button type="button" id="search-button">Search</button>
+			</div>
+		</header>
     <?php include_once './../server/breadcrumbs.php' ?>
     <div class="underheadercontainer">
       <div class="overlay">
         <form id="createAccountForm" method="POST" action="../server/create_user.php">
 
+          <label for="email" class="visually-hidden">Email</label>
           <input type="email" id="email" name="email" placeholder="E-mail" required>
 
+          <label for="password" class="visually-hidden">Password</label>
           <input type="password" id="password" name="password" placeholder="Password" required>
 
+          <label for="password2" class="visually-hidden">Re-enter Password</label>
           <input type="password" id="password2" name="password2" placeholder="Re-enter Password" required>
 
+          <label for="firstName" class="visually-hidden">First Name</label>
           <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
 
+          <label for="lastName" class="visually-hidden">Last Name</label>
           <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
 
+          <label for="profilePiture" class="visually-hidden">Upload Profile Picture</label>
           <input type="file" id="profilePicture" name="profilePicture" placeholder="Upload Profile Picture" accept="image/*">
 
           <div class="button-container">
