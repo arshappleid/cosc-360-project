@@ -44,7 +44,7 @@ jobs:
               if: always()
               run: docker exec web-server sh -c "phpunit --testdox tests/Item_info_Test.php"
 
-            - name: Execute UserManagement tests
+            - name: Execute Weather tests
               if: always()
               run: docker exec web-server sh -c "phpunit --testdox tests/weatherTest.php"
 

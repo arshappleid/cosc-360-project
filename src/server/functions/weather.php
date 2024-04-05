@@ -38,7 +38,7 @@ class weather
 			$resp = executePreparedQuery($query, array('ss', weather::$UPDATE_WEATHER_EVERY_N_MINUTES, $CITY_NAME));
 			if ($resp[0] == true) {
 				if ($resp[1] == "NO_DATA_RETURNED") {
-					return "COULD_NOT_FETCH_UPDATE_STATUS";
+					return "NOT_UPDATED";
 				}
 				return $resp[1]['UpdatedInLastNMinutes'];
 			}
@@ -56,6 +56,7 @@ class weather
 	 */
 	public static function getWeather($CITY_NAME)
 	{
+		$CITY_NAME = trim($CITY_NAME);
 		if (self::weatherUpdatedInThePastNMins($CITY_NAME) === "NOT_UPDATED") {
 			self::updateWeather($CITY_NAME);
 		}
