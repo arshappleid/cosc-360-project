@@ -11,7 +11,7 @@ class Login_tracking
      * - USER_DOES_NOT_EXIST
      * - NOT_UPDATED
      */
-    static function incrementLoginCount($USER_ID)
+    public static function incrementLoginCount($USER_ID)
     {
         if (user_management::validateUserID($USER_ID) == "USER_DOES_NOT_EXIST") {
             return "USER_DOES_NOT_EXIST";
@@ -20,7 +20,7 @@ class Login_tracking
         $query = "UPDATE LOGIN_COUNT SET LOGIN_COUNT = LOGIN_COUNT + 1 WHERE USER_ID = ? AND MONTH = ? AND YEAR = ?";
         $currentMonth = (int)date('m'); // Current month as integer
         $currentYear = (int)date('Y'); // Current year as integer
-        $resp  = executePreparedQuery($query, array('sss',$USER_ID, $currentMonth, $currentYear));
+        $resp  = executePreparedQuery($query, array('sss', $USER_ID, $currentMonth, $currentYear));
         if ($resp[0]) {
             return "UPDATED";
         }
@@ -33,12 +33,12 @@ class Login_tracking
      * - LOGIN_COUNT
      * - COULD_NOT_FIND_RECORD
      */
-    static function getCountForCurrentMonth($USER_ID)
+    public static function getCountForCurrentMonth($USER_ID)
     {
         $query = "SELECT LOGIN_COUNT FROM LOGIN_COUNT WHERE USER_ID = ? AND MONTH = ? AND YEAR = ?";
         $currentMonth = (int)date('m'); // Current month as integer
         $currentYear = (int)date('Y'); // Current year as integer
-        $resp  = executePreparedQuery($query, array('iii',$USER_ID, $currentMonth, $currentYear));
+        $resp  = executePreparedQuery($query, array('iii', $USER_ID, $currentMonth, $currentYear));
         if ($resp[0]) {
             try {
                 return (int) $resp[1]['LOGIN_COUNT'];
@@ -57,7 +57,7 @@ class Login_tracking
      * - ADDED
      * - NOT_ADDED
      */
-    static function AddDefaultForCurrentMonth($USER_ID)
+    public static function AddDefaultForCurrentMonth($USER_ID)
     {
         if (user_management::validateUserID($USER_ID) == "USER_DOES_NOT_EXIST") {
             return "USER_DOES_NOT_EXIST";
@@ -65,7 +65,7 @@ class Login_tracking
         $query = "INSERT INTO LOGIN_COUNT (USER_ID,LOGIN_COUNT,MONTH,YEAR) VALUES (?,0,?,?)";
         $currentMonth = (int)date('m'); // Current month as integer
         $currentYear = (int)date('Y'); // Current year as integer
-        $resp  = executePreparedQuery($query, array('iii',$USER_ID, $currentMonth, $currentYear));
+        $resp  = executePreparedQuery($query, array('iii', $USER_ID, $currentMonth, $currentYear));
         if ($resp[0]) {
             return "ADDED";
         } else {

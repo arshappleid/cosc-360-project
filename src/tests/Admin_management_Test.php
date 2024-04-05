@@ -21,17 +21,17 @@ class Admin_management_Test extends TestCase
     /** @test */
     public function validateAdminLogin_ValidLogin()
     {
-   //email and password match
+        //email and password match
         $this->assertEquals("VALID_LOGIN", Admin_management::validateAdminLogin("test@gmail.com", md5("password")));
     }
     public function validateAdminLogin_InvalidPassword()
     {
-   //email matches entry in db, but not password
+        //email matches entry in db, but not password
         $this->assertEquals("INVALID_LOGIN", Admin_management::validateAdminLogin("test@gmail.com", md5("IncorrectPassword")));
     }
     public function validateUserLogin_EmailNotFound()
     {
-   //email not found in table
+        //email not found in table
         $this->assertEquals("ADMIN_NOT_FOUND", Admin_management::validateAdminLogin("invalidemail@gmail.com", md5("password")));
     }
 
@@ -110,11 +110,11 @@ class Admin_management_Test extends TestCase
     /** @test */
     public function AddItem_ItemAdded()
     {
-        $this->assertEquals("ITEM_ADDED", Admin_management::addItem("NEW ITEM", "NEW DESCRIPTION", 1, 100.99, "abc.com"));
+        $this->assertEquals("ITEM_ADDED", Admin_management::addItem("NEW ITEM", "NEW DESCRIPTION", 1, 100.99, "abc.com", "Food"));
     }
     /** @test */
     public function AddItem_ItemWithNameAlreadyExists()
     {
-        $this->assertEquals("ITEM_WITH_NAME_ALREADY_EXISTS", Admin_management::addItem("Smartphone", "NEW DESCRIPTION", 1, 100.99, "abc.com"));
+        $this->assertEquals("ITEM_WITH_NAME_ALREADY_EXISTS", Admin_management::addItem("Smartphone", "NEW DESCRIPTION", 1, 100.99, "abc.com", "Food"));
     }
 }

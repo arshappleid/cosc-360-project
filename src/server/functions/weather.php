@@ -11,7 +11,7 @@ class weather
 	private static $API_URL_3 = "&current_weather=true&timezone=auto";
 	public static array $WEATHER_CITIES = ['Kelowna', 'Vancouver', 'Winnipeg', 'Toronto', 'Quebec City', 'Ottawa', 'Montreal', 'Hamilton', 'Edmonton', 'Calgary'];
 
-	static function updateWeatherForAllCities()
+	public static function updateWeatherForAllCities()
 	{
 		foreach (self::$WEATHER_CITIES as $city) {
 			self::updateWeather($city);
@@ -23,7 +23,7 @@ class weather
 	 * @param string $CITY_NAME The name of the city.
 	 * @return string 'UPDATED' if the weather has been updated in the last 15 minutes, otherwise 'NOT_UPDATED'.
 	 */
-	static function weatherUpdatedInThePastNMins($CITY_NAME)
+	public static function weatherUpdatedInThePastNMins($CITY_NAME)
 	{
 
 		$query = "SELECT CITY_NAME,
@@ -78,7 +78,7 @@ class weather
 	 * @param string $CITY_NAME The name of the city.
 	 * @return string 'WEATHER_UPDATED' if the update was successful, otherwise 'WEATHER_NOT_UPDATED'.
 	 */
-	static function updateWeather($CITY_NAME)
+	public static function updateWeather($CITY_NAME)
 	{
 
 		$query = "SELECT LATITUDE, LONGITUDE FROM WEATHER WHERE CITY_NAME = ?";
@@ -115,7 +115,7 @@ class weather
 	}
 
 
-	static function parseURL($LATITUDE, $LONGITUDE)
+	public static function parseURL($LATITUDE, $LONGITUDE)
 	{
 		return weather::$API_URL_1 . $LATITUDE . weather::$API_URL_2 . $LONGITUDE . weather::$API_URL_3;
 	}

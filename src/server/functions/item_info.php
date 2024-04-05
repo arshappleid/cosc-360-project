@@ -16,7 +16,7 @@ class Item_info
 	 * - ITEM_EXISTS
 	 * - ITEM_NOT_EXISTS
 	 */
-	static function itemExists($ITEM_ID)
+	public static function itemExists($ITEM_ID)
 	{
 		// Corrected the SQL query to use the proper placeholder syntax
 		$query = "SELECT * FROM ITEMS WHERE ITEM_ID = ?;";
@@ -47,7 +47,7 @@ class Item_info
 	 * 		- ['ITEM_1_ID']
 	 * 		- ['ITEM_1_ID','ITEM_2_ID']
 	 */
-	static function getAllItems_IDS_AtStore($STORE_ID)
+	public static function getAllItems_IDS_AtStore($STORE_ID)
 	{
 		$query = "SELECT * FROM Item_Price_Entry where STORE_ID = ?;";
 		try {
@@ -82,7 +82,7 @@ class Item_info
 	 * - INVALID_ITEM_ID
 	 * - [[ITEM_ID,ITEM_NAME,ITEM_DESCRIPTION,EXTERNAL_LINK,ITEM_IMAGE,CATEGORY_NAME],[ITEM_ID,ITEM_NAME,ITEM_DESCRIPTION,EXTERNAL_LINK,ITEM_IMAGE,CATEGORY_NAME]]
 	 */
-	static function getItemInfo($ITEM_ID)
+	public static function getItemInfo($ITEM_ID)
 	{
 		if (Item_info::itemExists($ITEM_ID) == "ITEM_NOT_EXISTS") {
 			return "INVALID_ITEM_ID";
@@ -107,7 +107,7 @@ class Item_info
 	/**
 	 * Returns a list of all the stores from the STORE table in the database.
 	 */
-	static function getAllStoreList()
+	public static function getAllStoreList()
 	{
 		$query = "SELECT * FROM STORE;";
 		try {
@@ -135,7 +135,7 @@ class Item_info
 	 * - STORE_EXISTS
 	 * - INVALID_STORE_ID
 	 */
-	static function ValidateStoreId($STORE_ID)
+	public static function ValidateStoreId($STORE_ID)
 	{
 		$query = "SELECT STORE_ID FROM STORE WHERE STORE_ID = ?";
 		try {
@@ -160,7 +160,7 @@ class Item_info
 	 * - [ITEM_ID,ITEM_NAME,CATEGORY_NAME,ITEM_PRICE,ITEM_DESCRIPTION,EXTERNAL_LINK,STORE_ID,Time_Updated]
 	 * - [[ITEM_ID,ITEM_NAME,CATEGORY_NAME,ITEM_PRICE,ITEM_DESCRIPTION,EXTERNAL_LINK,STORE_ID,Time_Updated],[ITEM_ID,ITEM_NAME,CATEGORY_NAME,ITEM_PRICE,ITEM_DESCRIPTION,EXTERNAL_LINK,STORE_ID,Time_Updated]]
 	 */
-	static function getAllItemsAtStore($STORE_ID)
+	public static function getAllItemsAtStore($STORE_ID)
 	{
 		if (Item_info::ValidateStoreId($STORE_ID) == "INVALID_STORE_ID") {
 			return "INVALID_STORE_ID";
@@ -226,7 +226,7 @@ class Item_info
 	 * - [[ITEM_ID,ITEM_NAME,STORE_ID,Item_Price,Item_Entry],[ITEM_ID,ITEM_NAME,STORE_ID,Item_Price,Item_Entry]]
 	 *
 	 */
-	static function getHomePageItems()
+	public static function getHomePageItems()
 	{
 		$query = "
         SELECT 
@@ -274,7 +274,7 @@ class Item_info
 	}
 
 
-	static function getAllItemData($ITEM_ID)
+	public static function getAllItemData($ITEM_ID)
 	{
 		$query = "SELECT * FROM ITEMS RIGHT JOIN Item_Price_Entry ON ITEMS.ITEM_ID = Item_Price_Entry.ITEM_ID  LEFT JOIN ITEM_CATEGORY ON ITEMS.ITEM_ID = ITEM_CATEGORY.ITEM_ID
 				  	WHERE ITEMS.ITEM_ID = ?";
@@ -310,7 +310,7 @@ class Item_info
 	 * 	-  [[Time_Updated_1,Item_Price_1],[Time_Updated_2,Item_Price_2]]
 	 *
 	 */
-	static function getAllPrices_Latest_To_Oldest($ITEM_ID, $STORE_ID, $LIMIT_BY = 30)
+	public static function getAllPrices_Latest_To_Oldest($ITEM_ID, $STORE_ID, $LIMIT_BY = 30)
 	{
 		if (Item_info::itemExists($ITEM_ID) == "ITEM_NOT_EXISTS") {
 			return "INVALID_ITEM_ID";
@@ -348,7 +348,7 @@ class Item_info
 	 * Utilized Item::getAllPrices_Latest_To_Oldest() to return the parsed Array Values , for ChartJS Api To Consume
 	 * - [[Date1,Date2],[Price1,Price2]]
 	 */
-	static function parsed_GetAllPrices($ITEM_ID, $STORE_ID, $LIMIT_BY = 30)
+	public static function parsed_GetAllPrices($ITEM_ID, $STORE_ID, $LIMIT_BY = 30)
 	{
 		$records = Item_info::getAllPrices_Latest_To_Oldest($ITEM_ID, $STORE_ID, $LIMIT_BY);
 		if (!is_array($records)) {
@@ -370,9 +370,9 @@ class Item_info
 		return array($dates, $prices);
 	}
 
-	static function getCurrentPrice($ITEM_ID, $STORE_ID)
+	public static function getCurrentPrice($ITEM_ID, $STORE_ID)
 	{
- //print_r($ITEM_ID); print_r($STORE_ID);
+		//print_r($ITEM_ID); print_r($STORE_ID);
 		if (Item_info::getItemInfo($ITEM_ID) == "NO_ITEM_FOUND") {
 			return "INVALID_ITEM_ID";
 		}
@@ -392,7 +392,7 @@ class Item_info
 		}
 	}
 
-	static function getStoreName($STORE_ID)
+	public static function getStoreName($STORE_ID)
 	{
 		$query = "SELECT STORE_NAME FROM STORE WHERE STORE_ID = ?";
 		try {
@@ -418,7 +418,7 @@ class Item_info
 	 * 		- ['CATEGORY_1']
 	 * 		- ['CATEGORY_1','CATEGORY_2']
 	 */
-	static function getAllCategories()
+	public static function getAllCategories()
 	{
 		return GLOBAL_VARS::$CATEGORIES;
 	}
