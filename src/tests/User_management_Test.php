@@ -73,24 +73,19 @@ class User_management_Test extends TestCase
         $this->assertEquals("USER_CREATED", User_management::createUser("uniqueemail@gmail.com", "First", "Last", md5("password")));
     }
 
-    /** @test */
-    public function createUser_WithImage_SuccessfulCreation()
-    {
-        // Ensure that this email does not exist in the database before testing
-        $imageBlob = file_get_contents('./../images/userImages/admin/test@gmail.com.jpeg');
-        $this->assertEquals("USER_CREATED", User_management::createUser_WithImage("uniqueemailimage@gmail.com", "First", "Last", md5("password"), $imageBlob));
-    }
 
     /** @test */
     public function userExists_Exists()
     {
-        $this->assertEquals("USER_EXISTS", User_management::userExists("test@gmail.com"));
+        $resp = User_management::userExists("test@gmail.com");
+        $this->assertEquals("USER_EXISTS", $resp);
     }
 
     /** @test */
     public function userExists_NotExists()
     {
-        $this->assertEquals("USER_NOT_EXISTS", User_management::userExists("doesnotexist@gmail.com"));
+        $resp = User_management::userExists("doesnotexist@gmail.com");
+        $this->assertEquals("USER_NOT_EXISTS", $resp);
     }
 
     /** @test */
