@@ -49,11 +49,7 @@ class weather
 		}
 	}
 
-	/**
-	 * Fetches the current weather for a given city.
-	 * @param string $CITY_NAME The name of the city.
-	 * @return mixed An array containing 'CURRENT_WEATHER_CELCIUS', 'WINDSPEED_KMH', and 'WIND_DIRECTION' if data could be retrieved, otherwise 'COULD_NOT_GET_DATA'.
-	 */
+
 	public static function getWeather($CITY_NAME)
 	{
 		$CITY_NAME = trim($CITY_NAME);
