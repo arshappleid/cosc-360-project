@@ -27,13 +27,21 @@ foreach ($items as $item) {
     echo "<img class =\"display-image\" src = \"./../server/getItemImage.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\" alt=\"Product Image\">";
     echo "<h3>" . htmlspecialchars($item['ITEM_NAME']) . "</h3>";
     echo "<h2>" . htmlspecialchars($item['Item_Price']) . "$" . "</h2>";
+    echo "<h4><b>" . "Upvotes :</b> " . htmlspecialchars($item['UPVOTES']) . "</h4>";
     echo "<h1>" . $store_name . "</h1>";
-    /*I removed the button because apparently putting an <a> inside a button is bad accessibility practice.
-    i then struggled trying to get a button to do what the <a> was doing, so I just left the <a> instead*/
     echo "<a href=\"product.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\">See Product Details</a>";
-    //echo "<button id=\"productButton-" . $item['ITEM_ID'] . "\">See Product Details</button>";
 
 
+    if (isset($_SESSION['USER_EMAIL'])) {
+        try {
+            echo "<form action=\"./../server/upvoteItem.php\" method=\"POST\">";
+            echo "<input type=\"hidden\" name=\"ITEM_ID\" value=\"" . $item['ITEM_ID'] . "\">";
+            echo "<input type=\"submit\" value=\"Upvote\">";
+            echo "</form>";
+        } catch (Exception $e) {
+            echo "Error occurred while rendering upvote ID: " . $e;
+        }
+    }
     echo "</aside>";
     // Price chart within the Article Tags
     echo "<article>";

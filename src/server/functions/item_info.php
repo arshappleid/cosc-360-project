@@ -232,6 +232,7 @@ class Item_info
         SELECT 
             ITEMS.ITEM_ID, 
             ITEM_NAME, 
+			ITEMS.UPVOTES,
             LatestPriceEntry.STORE_ID, 
             LatestPriceEntry.Item_Price,
             LatestPriceEntry.Item_Entry
@@ -255,7 +256,7 @@ class Item_info
                 AND Item_Price_Entry.Item_Entry = MaxEntries.MaxItemEntry
         ) AS LatestPriceEntry ON ITEMS.ITEM_ID = LatestPriceEntry.ITEM_ID
         LEFT JOIN ITEM_CATEGORY ON ITEMS.ITEM_ID = ITEM_CATEGORY.ITEM_ID
-        ORDER BY ITEMS.ITEM_ID, LatestPriceEntry.STORE_ID;
+        ORDER BY ITEMS.UPVOTES DESC, LatestPriceEntry.STORE_ID;
     ";
 
 		try {
@@ -421,5 +422,27 @@ class Item_info
 	public static function getAllCategories()
 	{
 		return GLOBAL_VARS::$CATEGORIES;
+	}
+
+	/**
+	 * Summary of upvoteItem
+	 * @param mixed $ITEM_ID
+	 * @return bool|string
+	 * 
+	 * Returns UPDATED or NOT_UPDATED, if was able to increment the upvote Counter
+	 */
+	public static function upvoteItem($ITEM_ID)
+	{
+
+		try {
+			$query = "UPDATE ITEMS SET UPVOTES = UPVOTES + 1 WHERE ITEM_ID = ?";
+			$resp =  executePreparedQuery($query, array('i', intval($ITEM_ID)));
+			if ($resp[0]) {
+				return "UPDATED";
+			}
+			return "NOT_UPDATED";
+		} catch (Exception $e) {
+			return false;
+		}
 	}
 }

@@ -135,7 +135,13 @@ class Item_info_Test extends TestCase
     public function getAllCategories_RecordsExist()
     {
         $resp = Item_info::getAllCategories();
-        print_r($resp);
         $this->assertIsArray($resp);
+    }
+
+    /** @test */
+    public function upvoteItem_Test()
+    {
+        $resp = Item_info::upvoteItem(1);
+        $this->assertEquals("UPDATED", $resp);
     }
 }
