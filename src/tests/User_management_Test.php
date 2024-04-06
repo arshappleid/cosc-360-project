@@ -3,8 +3,28 @@
 use PHPUnit\Framework\TestCase;
 
 require_once __DIR__ . '/../server/functions/user_management.php';
+require_once __DIR__ . '/../server/functions/admin_management.php';
+
 class User_management_Test extends TestCase
 {
+    /** @test */
+    public function getUser_First_Last_Name_Found()
+    {
+        $this->assertEquals("Test User", User_management::getUser_First_Last_Name(1));
+    }
+
+    /** @test */
+    public function validateUserLogin_ValidLogin()
+    {
+        $this->assertEquals("VALID_LOGIN", User_management::validateUserLogin("test@gmail.com", md5("password")));
+    }
+
+    /** @test */
+    public function validateUserLogin_InvalidLogin()
+    {
+        $this->assertEquals("INVALID_LOGIN", User_management::validateUserLogin("test2@gmail.com", md5("wrongpassword")));
+    }
+
     /** @test */
     public function validateUserID_VALIDID()
     {
@@ -16,17 +36,12 @@ class User_management_Test extends TestCase
         $this->assertEquals("USER_DOES_NOT_EXIST", User_management::validateUserID("99"));
     }
 
-    /** @test */
-    public function getAllUserComments_NoComments()
-    {
-        $resp =  User_management::getAllUserComments("3");
-        $this->assertEquals("NO_COMMENTS_FOUND", $resp);
-    }
+
 
     /** @test */
     public function getAllUserComments_1Comment()
     {
-        $resp = User_management::getAllUserComments("2");
+        $resp = User_management::getAllUserComments("3");
         $this->assertIsArray($resp);
         $this->assertNotEmpty($resp);
         $this->assertArrayHasKey('COMMENT_TEXT', $resp);
@@ -48,17 +63,7 @@ class User_management_Test extends TestCase
             $this->assertIsString($comment['ITEM_NAME']);
         }
     }
-    /** @test */
-    public function validateUserLogin_ValidLogin()
-    {
-        $this->assertEquals("VALID_LOGIN", User_management::validateUserLogin("test@gmail.com", md5("password")));
-    }
 
-    /** @test */
-    public function validateUserLogin_InvalidLogin()
-    {
-        $this->assertEquals("INVALID_LOGIN", User_management::validateUserLogin("test2@gmail.com", md5("wrongpassword")));
-    }
 
     /** @test */
     public function createUser_AlreadyExists()
@@ -91,7 +96,7 @@ class User_management_Test extends TestCase
     /** @test */
     public function userUpdatePassword_SuccessfulUpdate()
     {
-        $this->assertEquals("PASSWORD_UPDATED", User_management::userUpdatePassword("test@gmail.com", md5("password"), md5("newpassword")));
+        $this->assertEquals("PASSWORD_UPDATED", User_management::userUpdatePassword("test2@gmail.com", md5("password"), md5("newpassword")));
     }
 
     /** @test */
@@ -113,16 +118,26 @@ class User_management_Test extends TestCase
     }
 
     /** @test */
-    public function deleteUser_SuccessfulDeletion()
+    public function getBanStatus_Banned()
     {
-        $this->assertEquals("USER_DELETED", User_management::deleteUser("deletableuser@gmail.com"));
+        Admin_management::toggleBanUserAccount("test3@gmail.com");
+        $this->assertEquals("BANNED", User_management::getBanStatus("test3@gmail.com"));
     }
 
-    /** @test */
-    public function getUser_First_Last_Name_Found()
+    /** @test @depends getBanStatus_Banned*/
+    public function validateUserID_Banned_Account()
     {
-        $this->assertEquals("Test User", User_management::getUser_First_Last_Name(1));
+        $this->assertEquals("USER_BANNED_FROM_LOGGING_IN", User_management::validateUserLogin("test3@gmail.com", md5("password")));
     }
+
+
+    /** @test @depends validateUserID_Banned_Account*/
+    public function deleteUser_SuccessfulDeletion()
+    {
+        $this->assertEquals("USER_DELETED", User_management::deleteUser("test3@gmail.com"));
+    }
+
+
 
     /** @test */
     public function getAllUserData_Found()
@@ -147,5 +162,11 @@ class User_management_Test extends TestCase
     public function getUserID_EMPTY_VALUE()
     {
         $this->assertEquals("USER_NOT_EXISTS", User_management::getUserID(""));
+    }
+    /** @test */
+    public function getAllUserComments_NoComments()
+    {
+        $resp =  User_management::getAllUserComments("4");
+        $this->assertEquals("NO_COMMENTS_FOUND", $resp);
     }
 }

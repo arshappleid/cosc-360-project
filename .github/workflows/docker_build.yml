@@ -36,6 +36,10 @@ jobs:
               if: always()
               run: docker exec web-server sh -c "phpunit --testdox tests/Admin_management_Test.php"
 
+            - name: Execute UserManagement tests
+              if: always()
+              run: docker exec web-server sh -c "phpunit --testdox tests/User_management_Test.php"
+
             - name: Execute Comments tests
               if: always()
               run: docker exec web-server sh -c "phpunit --testdox tests/CommentsTest.php"
