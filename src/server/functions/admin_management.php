@@ -189,7 +189,7 @@ class Admin_management
 		return "USER_NOT_FOUND"; //added for testing
 	}
 	/**
-	 * Returs the ITEM_ID of an given ITEM_NAME, if it exists in ITEMS Database
+	 * Returs the ITEM_ID of an given ITEM_NAME, If it exists in that Store
 	 * @param mixed $ITEM_NAME
 	 * @return mixed
 	 * Possible Return Values:
@@ -271,7 +271,7 @@ class Admin_management
 	public static function addItem($ITEM_NAME, $ITEM_DESCRIPTION, $STORE_ID, $ITEM_PRICE, $EXTERNAL_LINK, $CATEGORY_NAME)
 	{
 		$ITEM_ID = Admin_management::getItemID($ITEM_NAME, $STORE_ID);
-		if (Admin_management::itemExistsInStore($ITEM_ID, $ITEM_ID) != "ITEM_DOES_NOT_EXIST_IN_STORE") {
+		if (Admin_management::itemExistsInStore($ITEM_ID, $STORE_ID) != "ITEM_DOES_NOT_EXIST_IN_STORE") {
 			return "ITEM_WITH_NAME_ALREADY_EXISTS";
 		}
 		global $connection;
@@ -284,7 +284,7 @@ class Admin_management
 		try {
 			$stmt1 = $connection->prepare($query1);
 			if (!$stmt1) {
-				return "ITEM_NOT_ADDED";
+				return $resp;
 			}
 			$stmt1->bind_param('sss', $ITEM_NAME, $ITEM_DESCRIPTION, $EXTERNAL_LINK);
 			if ($stmt1->execute()) {
@@ -299,7 +299,7 @@ class Admin_management
 				$stmt2->bind_param('iii', $STORE_ID, $ITEM_ID, $ITEM_PRICE);
 				if ($stmt2->execute()) {
 					$stmt3 = $connection->prepare($query3);
-					$stmt2->bind_param('ss', $ITEM_ID, $CATEGORY_NAME);
+					$stmt3->bind_param('ss', $ITEM_ID, $CATEGORY_NAME);
 					if ($stmt3->execute()) {
 						$connection->commit();
 						$resp =  "ITEM_ADDED";
