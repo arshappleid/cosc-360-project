@@ -622,7 +622,7 @@ INSERT INTO Item_Price_Entry (STORE_ID, ITEM_ID, Item_Price, Time_Updated) VALUE
 INSERT INTO Item_Price_Entry (STORE_ID, ITEM_ID, Item_Price, Time_Updated) VALUES (3, 10, 4833.00, '2024-03-28 17:15:19');
 INSERT INTO Item_Price_Entry (STORE_ID, ITEM_ID, Item_Price, Time_Updated) VALUES (3, 10, 5019.00, '2024-03-27 17:15:19');
 
-
+INSERT INTO STORE (STORE_NAME) VALUES ("Walmart");
 
 
 

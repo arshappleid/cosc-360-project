@@ -113,7 +113,7 @@ class Item_info_Test extends TestCase
     /** @test */
     public function getAllPrices_NoRecordsFound()
     {
-        $resp = Item_info::getAllPrices_Latest_To_Oldest("2", "2");
+        $resp = Item_info::getAllPrices_Latest_To_Oldest("2", "4");
         $this->assertEquals($resp, "NO_ENTRIES_FOUND");
     }
 
