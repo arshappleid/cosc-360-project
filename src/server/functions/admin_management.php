@@ -268,7 +268,7 @@ class Admin_management
 	 * - ITEM_WITH_NAME_ALREADY_EXISTS
 	 *
 	 */
-	public static function addItem($ITEM_NAME, $ITEM_DESCRIPTION, $STORE_ID, $ITEM_PRICE, $EXTERNAL_LINK, $CATEGORY)
+	public static function addItem($ITEM_NAME, $ITEM_DESCRIPTION, $STORE_ID, $ITEM_PRICE, $EXTERNAL_LINK, $CATEGORY_NAME)
 	{
 		$ITEM_ID = Admin_management::getItemID($ITEM_NAME, $STORE_ID);
 		if (Admin_management::itemExistsInStore($ITEM_ID, $ITEM_ID) != "ITEM_DOES_NOT_EXIST_IN_STORE") {
@@ -299,7 +299,7 @@ class Admin_management
 				$stmt2->bind_param('iii', $STORE_ID, $ITEM_ID, $ITEM_PRICE);
 				if ($stmt2->execute()) {
 					$stmt3 = $connection->prepare($query3);
-					$stmt2->bind_param('ss', $ITEM_ID, $CATEGORY);
+					$stmt2->bind_param('ss', $ITEM_ID, $CATEGORY_NAME);
 					if ($stmt3->execute()) {
 						$connection->commit();
 						$resp =  "ITEM_ADDED";

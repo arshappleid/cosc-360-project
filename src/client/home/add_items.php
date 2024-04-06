@@ -241,10 +241,11 @@ require_once("./../../server/GLOBAL_VARS.php");
 						DESCRIPTION: record[1],
 						ITEM_PRICE: record[2],
 						EXTERNAL_LINK: record[3],
+						CATEGORY_NAME: record[4],
 						STORE_ID: storeID
 					};
 
-					return fetch('./../server/addMultipleItemToStore.php', {
+					return fetch('./../../server/addMultipleItemToStore.php', {
 							method: 'POST',
 							headers: {
 								'Content-Type': 'application/json',

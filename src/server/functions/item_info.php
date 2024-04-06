@@ -466,6 +466,30 @@ class Item_info
 	}
 
 	/**
+	 * Summary of checkCategoryExists
+	 * @param mixed $CATEGORY_NAME
+	 * @return bool|string
+	 * 
+	 * Returns Category ID
+	 */
+	public static function checkCategoryExists($CATEGORY_NAME)
+	{
+		try {
+			$query = "SELECT CATEGORY_ID FROM CATEGORY_INFO WHERE CATEGORY_NAME = ?";
+			$resp =  executePreparedQuery($query, array('s', $CATEGORY_NAME));
+			if ($resp[0]) {
+				if ($resp[1] == "NO_DATA_RETURNED") {
+					return "NOT_EXISTS";
+				}
+				return $resp[1]['CA']
+			}
+			return "NOT_UPDATED";
+		} catch (Exception $e) {
+			return false;
+		}
+	}
+
+	/**
 	 * Summary of upvoteItem
 	 * @param mixed $ITEM_ID
 	 * @return bool|string
