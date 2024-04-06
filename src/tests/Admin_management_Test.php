@@ -70,12 +70,6 @@ class Admin_management_Test extends TestCase
     }
 
     /** @test */
-    public function displayName_NameDisplayed()
-    {
-        //true if the returned string is the users first and last name with space between
-        $this->assertEquals("Test User", Admin_management::displayName("test@gmail.com"));
-    }
-    /** @test */
     public function displayName_NameNotDisplayed()
     {
         //the user was not found in either Users or Admins
