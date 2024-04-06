@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once("./../server/functions/item_info.php");
-require_once("./../server/functions/comments.php");
-require_once("./../server/GLOBAL_VARS.php");
+require_once("./../../server/functions/item_info.php");
+require_once("./../../server/functions/comments.php");
+require_once("./../../server/GLOBAL_VARS.php");
 
 ?>
 
@@ -16,34 +16,32 @@ require_once("./../server/GLOBAL_VARS.php");
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
-	<script type="text/javascript" src="./scripts/home.js"></script>
+	<script type="text/javascript" src="../scripts/home.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="css/product.css" />
-	<link rel="stylesheet" href="css/global.css" />
+	<link rel="stylesheet" href="../css/product.css" />
+	<link rel="stylesheet" href="../css/global.css" />
 </head>
 
 <body>
 
 	<div class="container">
 		<div class="headerblack">
-			<a href="home.php" class="home-button">Home</a>
+			<a href="../home.php" class="home-button">Home</a>
 			<?php
 			if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
-				echo "<a href=\"login.php\" class=\"login-button\">";
+				echo ">";
 				//echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";
 				echo "Logout</a>";
 			} else {
-				echo "<a href=\"login.php\" class=\"login-button\">";
+				echo ">";
 				echo "Login</a>";
 			}
 			?>
 			</a>
 			<?php
 			if (!isset($_SESSION['USER_EMAIL']) & !isset($_SESSION['ADMIN_EMAIL'])) {
-				echo "<a href=\"admin_login.php\"
-				class=\"admin-login-button\">Admin Login</a>";
-				echo "<a href=\"create_account.php\"
-				class=\"create-account-button\">Create Account</a>";
+				echo ">Admin Login</a>\"";
+				echo ">Create Account</a>\"";
 			}
 			?>
 		</div>
@@ -69,7 +67,7 @@ require_once("./../server/GLOBAL_VARS.php");
 				<button type="button" id="search-button">Search</button>
 			</div>
 		</header>
-		<?php include_once './../server/breadcrumbs.php' ?>
+		<?php include_once './../../server/breadcrumbs.php' ?>
 		<div class="underheadercontainer">
 			<div class="overlay">
 				<?php echo "<div id = \"product_list\"></div>"; ?>
@@ -82,14 +80,12 @@ require_once("./../server/GLOBAL_VARS.php");
 		<div>
 			<nav>
 				<ul>
-					<li><a href="home.php">Home</a></li>
+					<li><a href="../home.php">Home</a></li>
 					<?php
 					if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
-						echo "<li><a href=\"account_page.php\">Account</a></li>";
+						echo ">Account</a></li>";
 					} else {
-						echo "<li><a href=\"create_account.php\">Create Account</a></li>
-						<li><a href=\"login.php\">Login</a></li>
-						<li><a href=\"admin_login.php\">Admin Login</a></li>";
+						echo ">Admin Login</a></li>\"";
 					}
 					?>
 				</ul>
@@ -101,5 +97,5 @@ require_once("./../server/GLOBAL_VARS.php");
 		/*var showChart = <?php// echo json_encode($show_chart); ?>;*/
 		var showButton = <?php echo json_encode($show_button); ?>;
 	</script>
-	<script src="scripts/product.js"></script>
+	<script src="../scripts/product.js"></script>
 </body>

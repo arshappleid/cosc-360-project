@@ -30,7 +30,7 @@ foreach ($items as $item) {
     // Button container
     echo "<div class=\"button-container\">";
     
-    echo "<a href=\"product.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "&STORE_ID=" . urlencode($item['STORE_ID']) . "\" class=\"details-button\">See Product Details</a>";
+    echo "<a href=\"./home/product.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "&STORE_ID=" . urlencode($item['STORE_ID']) . "\" class=\"details-button\">See Product Details</a>";
   
     if (isset($_SESSION['USER_EMAIL'])) {
         try {
