@@ -40,6 +40,10 @@ jobs:
               if: always()
               run: docker exec web-server sh -c "phpunit --testdox tests/User_management_Test.php"
 
+            - name: Execute UserManagement Ban User tests
+              if: always()
+              run: docker exec web-server sh -c "phpunit --testdox tests/User_Ban_Test.php"
+
             - name: Execute Comments tests
               if: always()
               run: docker exec web-server sh -c "phpunit --testdox tests/CommentsTest.php"
