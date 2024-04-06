@@ -10,15 +10,16 @@ try {
 		$email = $_POST['email'];
 		$hashedPassword = $_POST['password'];
 		if (isset($email) && isset($hashedPassword)) {
-			if (User_management::validateUserLogin($email, $hashedPassword) == "VALID_LOGIN") {
+			$resp = User_management::validateUserLogin($email, $hashedPassword);
+			if ($resp == "VALID_LOGIN") {
 				//print_r("shit not broken");
 				$_SESSION['USER_EMAIL'] = $email;
-                $user_id = User_management::getUserID($email);
-                Login_tracking::incrementLoginCount($user_id);
+				$user_id = User_management::getUserID($email);
+				Login_tracking::incrementLoginCount($user_id);
 				header('Location: ../client/home.php');
 				exit();
 			} else {
-				$_SESSION['MESSAGE'] = 'INVALID LOGIN';
+				$_SESSION['MESSAGE'] = $resp;
 				header('Location: ../client/login.php');
 				exit();
 			}
