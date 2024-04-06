@@ -445,7 +445,7 @@ class Item_info
 	 * Summary of checkCategoryExists
 	 * @param mixed $CATEGORY_NAME
 	 * @return bool|string
-	 * 
+	 *
 	 * Returns EXISTS or NOT_EXIST , if a CATEGORY_NAME with the provied name exists in the CATEGORY_INFO Table
 	 */
 	public static function checkCategoryExists($CATEGORY_NAME)
@@ -471,7 +471,7 @@ class Item_info
 	 * Summary of upvoteItem
 	 * @param mixed $ITEM_ID
 	 * @return bool|string
-	 * 
+	 *
 	 * Returns UPDATED or NOT_UPDATED, if was able to increment the upvote Counter
 	 */
 	public static function upvoteItem($ITEM_ID)
@@ -493,7 +493,7 @@ class Item_info
 	 * @param mixed $CATEGORY_NAME
 	 * @param mixed $CATEGORY_DESCRIPTION
 	 * @return bool|string
-	 * 
+	 *
 	 * Possible Return Values :
 	 * - CATEGORY_WITH_NAME_ALREADY_EXISTS
 	 * - ADDED

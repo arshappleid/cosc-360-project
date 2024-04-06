@@ -11,16 +11,17 @@ $(document).ready(function () {
         return null;
     }
 
-    function updateItemList() {
-        var itemID = getQueryParam('ITEM_ID'); 
-        var storeID = getQueryParam('STORE_ID'); 
+    function updateItemList()
+    {
+        var itemID = getQueryParam('ITEM_ID');
+        var storeID = getQueryParam('STORE_ID');
         console.log(itemID, storeID); // Debugging to see if IDs are retrieved correctly
-        
+
         if (itemID && storeID) {
             // Encode the parameters and append both to the request URL
             $.get("./../server/getProductDetails.php?ITEM_ID=" + encodeURIComponent(itemID) + "&STORE_ID=" + encodeURIComponent(storeID), function (data) {
                 $("#product_list").html(data);
-    
+
                 var overlayHeight = $('.overlay').outerHeight();
                 $('.underheadercontainer').height(overlayHeight);
             });
@@ -28,14 +29,15 @@ $(document).ready(function () {
             $("#product_list").html('<p>No product details available.</p>');
         }
     }
-    
+
     // Assuming getQueryParam is defined and can correctly parse query parameters from the URL
     // If not, here's a simple implementation:
-    function getQueryParam(param) {
+    function getQueryParam(param)
+    {
         var urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(param);
     }
-    
+
     // Call updateItemList to update the item list on page load
     updateItemList();
 

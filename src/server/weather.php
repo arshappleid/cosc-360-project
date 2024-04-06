@@ -16,7 +16,7 @@ $weather = weather::getWeather($selectedCity);
         <?php foreach ($cities as $city) : ?>
             <option value="<?= htmlspecialchars($city) ?>" <?php if ($city == $selectedCity) {
                                                                 echo 'selected';
-                                                            } ?>>
+                           } ?>>
                 <?= htmlspecialchars($city) ?>
             </option>
         <?php endforeach; ?>

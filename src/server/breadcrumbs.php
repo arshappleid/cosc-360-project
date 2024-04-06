@@ -1,6 +1,7 @@
 <?php
 
-function buildBreadcrumbs($baseLabel = 'login', $baseUrl = '/client') {
+function buildBreadcrumbs($baseLabel = 'login', $baseUrl = '/client')
+{
     // Get the REQUEST_URI, and strip the query string if present
     $uri = strtok($_SERVER['REQUEST_URI'], '?');
 
@@ -8,12 +9,12 @@ function buildBreadcrumbs($baseLabel = 'login', $baseUrl = '/client') {
     $parts = explode('/', $uri);
 
     // Filter out empty values and the base directory
-    $parts = array_filter($parts, function($value) use ($baseUrl) {
+    $parts = array_filter($parts, function ($value) use ($baseUrl) {
         return $value !== '' && $value !== ltrim($baseUrl, '/');
     });
 
     // Initialize breadcrumbs
-    $startUrl = $baseLabel.".php";
+    $startUrl = $baseLabel . ".php";
     $breadcrumbs = "<a href=\"$startUrl\">$baseLabel</a>";
     $path = $baseUrl;
 
@@ -21,7 +22,7 @@ function buildBreadcrumbs($baseLabel = 'login', $baseUrl = '/client') {
         // Decode URL-encoded string to normal string
         $partName = urldecode($part);
         // Construct the path for the breadcrumb link
-        $path .= '/' . $partName .".php";
+        $path .= '/' . $partName . ".php";
 
         // Check if we are at the last part to avoid making the current page a link
         if ($part !== end($parts)) {
@@ -38,4 +39,3 @@ function buildBreadcrumbs($baseLabel = 'login', $baseUrl = '/client') {
 
 // Example usage
 echo buildBreadcrumbs();
-?>

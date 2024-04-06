@@ -5,8 +5,8 @@ require_once "./../server/functions/comments.php";
 require_once "./../server/GLOBAL_VARS.php";
 
 $item_id = $_GET['ITEM_ID'] ?? null;
-//print_r($item_id); 
-$store_id = $_GET['STORE_ID'] ?? null; 
+//print_r($item_id);
+$store_id = $_GET['STORE_ID'] ?? null;
 //print_r($store_id);
 
 if ($item_id === null || $store_id === null) {
@@ -14,7 +14,7 @@ if ($item_id === null || $store_id === null) {
     exit;
 }
 
-$item_data = Item_info::getAllItemData($item_id, $store_id); 
+$item_data = Item_info::getAllItemData($item_id, $store_id);
 //print_r($item_data);
 
 if ($item_data === "NO_ITEMS_IN_DATABASE" || $item_data === "INVALID_STORE_ID") {
@@ -61,17 +61,17 @@ foreach ($item_data as $item) {
     echo "<div class=\"second\">";
         echo "<div class=\"all-comments\">";
             $comments = Comments::getAllCommentsForItemDescending($item['ITEM_ID']);
-            if (is_array($comments) && count($comments) > 0) {
-                foreach ($comments as $comment) {
-                    echo "<div class=\"comment-container\">";
-                        echo "<div class=\"user-info\"><div class=\"user-id\">" . User_management::getUser_First_Last_Name($comment['USER_ID']) . "</div>";
-                        echo "<img src=\"" . $testUserImage . "\" class='user-image'></div>";
-                        echo "<p class=\"comment-text\">" . htmlspecialchars($comment['COMMENT_TEXT']) . "</p>";
-                    echo "</div>";
-                }
-            } else {
-                echo "<h4>No Comments Yet.</h4>";
-            }
+    if (is_array($comments) && count($comments) > 0) {
+        foreach ($comments as $comment) {
+            echo "<div class=\"comment-container\">";
+                echo "<div class=\"user-info\"><div class=\"user-id\">" . User_management::getUser_First_Last_Name($comment['USER_ID']) . "</div>";
+                echo "<img src=\"" . $testUserImage . "\" class='user-image'></div>";
+                echo "<p class=\"comment-text\">" . htmlspecialchars($comment['COMMENT_TEXT']) . "</p>";
+            echo "</div>";
+        }
+    } else {
+        echo "<h4>No Comments Yet.</h4>";
+    }
         echo "</div>"; // Close all-comments
     echo "</div>"; // Close second
 }

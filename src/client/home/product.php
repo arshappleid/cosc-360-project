@@ -94,7 +94,7 @@ require_once("./../../server/GLOBAL_VARS.php");
 		</div>
 	</footer>
 	<script>
-		/*var showChart = <?php// echo json_encode($show_chart); ?>;*/
+		/*var showChart = <?php php// echo json_encode($show_chart); ?>;*/
 		var showButton = <?php echo json_encode($show_button); ?>;
 	</script>
 	<script src="../scripts/product.js"></script>

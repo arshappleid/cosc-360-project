@@ -62,11 +62,11 @@ article {
 }
 
 .display-image {
-    height: 14em; 
-    width: 14em; 
+    height: 14em;
+    width: 14em;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    object-fit: contain; 
+    object-fit: contain;
 }
 
 #item_list {
