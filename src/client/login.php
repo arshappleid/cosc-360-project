@@ -25,12 +25,13 @@ require_once("./../server/GLOBAL_VARS.php");
 
 	<div class="container">
 		<div class="headerblack">
-			<a href="home.php" class="home-button">Home</a>
+			<a href="home.php" class="home-button">Home</a><br>
+			<a href="admin_login.php" class="home-button">Admin Login</a>
 		</div>
 
 		<header class="headeryellow">
 			<div class="search-container">
-				<label for="search-input" class="visually-hidden">Enter keywords to search:</label> 
+				<label for="search-input" class="visually-hidden">Enter keywords to search:</label>
 				<input type="text" id="search-input" placeholder="Search...">
 				<?php
 				$stores = Item_info::getAllStoreList();
@@ -53,7 +54,7 @@ require_once("./../server/GLOBAL_VARS.php");
 		<div class="underheadercontainer">
 			<div class="overlay">
 				<form id="loginForm" method="POST" action="./../server/validate_user.php">
-					<label for = "email" class="visually-hidden">Email</label>
+					<label for="email" class="visually-hidden">Email</label>
 					<input type="email" id="email" name="email" placeholder="E-mail">
 					<label for="password" class="visually-hidden">Password</label>
 					<input type="password" id="password" name="password" placeholder="Password">

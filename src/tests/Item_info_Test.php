@@ -144,4 +144,38 @@ class Item_info_Test extends TestCase
         $resp = Item_info::upvoteItem(1);
         $this->assertEquals("UPDATED", $resp);
     }
+
+    /** @test */
+    public function addCategory_Test()
+    {
+        $resp = Item_info::addCategory("NEW CATEGORY", "Something that will make your life better");
+        $this->assertEquals("ADDED", $resp);
+    }
+
+    /** @test @depends addCategory_Test*/
+    public function addCategory_Test_AGAIN()
+    {
+        $resp = Item_info::addCategory("NEW CATEGORY", "Something that will make your life better");
+        $this->assertEquals("CATEGORY_WITH_NAME_ALREADY_EXISTS", $resp);
+    }
+    /** @test  @depends addCategory_Test */
+    public function getAllCategories_Test()
+    {
+        $resp = Item_info::getAllCategories();
+        $this->assertIsArray($resp);
+    }
+
+    /** @test  @depends addCategory_Test */
+    public function checkCategoryExists_Record_Exists()
+    {
+        $resp = Item_info::checkCategoryExists("NEW CATEGORY");
+        $this->assertEquals("EXISTS", $resp);
+    }
+
+    /** @test  @depends addCategory_Test */
+    public function checkCategoryExists_Record_Does_Not_Exists()
+    {
+        $resp = Item_info::checkCategoryExists("NOT_EXISTS");
+        $this->assertEquals("NOT_EXISTS", $resp);
+    }
 }

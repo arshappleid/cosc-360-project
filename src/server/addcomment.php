@@ -12,5 +12,10 @@ try {
 } catch (Exception $e) {
 	echo "<script>console.error(" . json_encode($e->getMessage()) . ");</script>";
 }
-header('Location: ./../client/home.php');
-exit;
+if (isset($_SERVER['HTTP_REFERER'])) {
+	header('Location: ' . $_SERVER['HTTP_REFERER']);
+	exit;
+} else {
+	header('Location: ../client/home.php');
+	exit;
+}
