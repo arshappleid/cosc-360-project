@@ -32,13 +32,13 @@ jobs:
                   docker run --network my_network -d --env "SERVER_ENV=LOCAL" -v ./src/:/var/www/html/ --name web-server web-server
 
             ### Commands to Execute out the tests
-            - name: Execute AdminManagement tests
-              if: always()
-              run: docker exec web-server sh -c "phpunit --testdox tests/Admin_management_Test.php"
-
             - name: Execute UserManagement tests
               if: always()
               run: docker exec web-server sh -c "phpunit --testdox tests/User_management_Test.php"
+
+            - name: Execute AdminManagement tests
+              if: always()
+              run: docker exec web-server sh -c "phpunit --testdox tests/Admin_management_Test.php"
 
             - name: Execute UserManagement Ban User tests
               if: always()
