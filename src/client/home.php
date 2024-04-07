@@ -43,7 +43,7 @@ require_once("./../server/functions/comments.php");
 				}
 				echo "<a href=\"account_page.php\" class=\"login-button\">";
 				echo "Account</a>";
-				echo "<a href=\"login.php\" class=\"login-button\" > Logout</a>";
+				echo "<a href=\"logout.php\" class=\"login-button\" > Logout</a>";
 				echo "</div>";
 			} else {
 				echo "<a href=\"login.php\" class=\"login-button\">";

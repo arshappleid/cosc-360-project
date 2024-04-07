@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['ADMIN_EMAIL'])) {
+	header('Location: ./bad_navigation.php');
+}
+
 require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/admin_management.php");
 require_once("./../server/functions/login_tracking.php");
@@ -50,7 +54,7 @@ require_once("./../server/GLOBAL_VARS.php");
 
 		<header class="headeryellow">
 			<div class="search-container">
-				<label for="search-input" class="visually-hidden">Enter keywords to search:</label> 
+				<label for="search-input" class="visually-hidden">Enter keywords to search:</label>
 				<input type="text" id="search-input" placeholder="Search...">
 				<?php
 				$stores = Item_info::getAllStoreList();
