@@ -207,6 +207,19 @@ body, html {
     align-items: center;
 }
 
+.weather_box {
+    background-color: var(--primary-color);
+    padding: 0;
+    display: inline-flex;
+    height: 1.5em;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-bottom: 0.5em;
+}
+
+
+
 footer div{
     background: var(--secondary-color);
     width: 100%;

@@ -1,7 +1,7 @@
 const startDate = new Date('2024-04-05T17:15:19');
 const basePrice = 20;
 const fluctuation = 3;
-const itemIds = [12]; // Assuming you're still generating for ITEM_ID 2
+const itemIds = [12]; 
 const storeIds = [1, 2, 3]; // The three store IDs
 
 function formatDate(date)

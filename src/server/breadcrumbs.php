@@ -13,9 +13,8 @@ function buildBreadcrumbs($baseLabel = 'login', $baseUrl = '/client')
         return $value !== '' && $value !== ltrim($baseUrl, '/');
     });
 
-    // Initialize breadcrumbs
     $startUrl = $baseLabel . ".php";
-    $breadcrumbs = "<a href=\"$startUrl\">$baseLabel</a>";
+    $breadcrumbs = "<div class=\"breadcrumb_box\"><a href=\"$startUrl\">$baseLabel</a>";
     $path = $baseUrl;
 
     foreach ($parts as $part) {
@@ -33,6 +32,8 @@ function buildBreadcrumbs($baseLabel = 'login', $baseUrl = '/client')
             $breadcrumbs .= " / $partName";
         }
     }
+
+    $breadcrumbs .= "</div>";
 
     return $breadcrumbs;
 }

@@ -8,6 +8,7 @@ $cities = ['Kelowna', 'Vancouver', 'Winnipeg', 'Toronto', 'Quebec City', 'Ottawa
 $selectedCity = isset($_POST['city']) ? $_POST['city'] : $cities[0];
 $weather = weather::getWeather($selectedCity);
 ?>
+<div class = "weather_box">
 <h3>Latest Weather</h3>
 <!-- City Selection Form -->
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
@@ -17,7 +18,7 @@ $weather = weather::getWeather($selectedCity);
             <option value="<?= htmlspecialchars($city) ?>" <?php if ($city == $selectedCity) {
                                                                 echo 'selected';
                            } ?>>
-                <?= htmlspecialchars($city) ?>
+                <?= htmlspecialchars($city) . " " ?>
             </option>
         <?php endforeach; ?>
     </select>
@@ -42,4 +43,5 @@ $weather = weather::getWeather($selectedCity);
         <dt>Wind Direction:</dt>
         <dd><?= htmlspecialchars($weather['WIND_DIRECTION']) ?></dd>
     </dl>
+</div>
 </div>
