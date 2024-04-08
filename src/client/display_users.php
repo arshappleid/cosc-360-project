@@ -96,7 +96,10 @@ require_once("./../server/GLOBAL_VARS.php");
 
 		</div>
 	</div>
-	<footer>
+
+
+</body>
+<footer>
 		<div class="footerblack">
 			<nav>
 				<ul>
@@ -115,5 +118,3 @@ require_once("./../server/GLOBAL_VARS.php");
 			</nav>
 		</div>
 	</footer>
-
-</body>
