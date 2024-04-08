@@ -52,10 +52,7 @@ require_once("./../server/GLOBAL_VARS.php");
 		</div>
 
 		<?php //include_once './../server/breadcrumbs.php' ?>
-
-		<div class="underheadercontainer">
-			<div class="overlay">
-					<div class="user-search-container">
+		<div class="user-search-container">
 							<label for="user-search-input" class="visually-hidden">Enter keywords to search</label> 
 							<input type="text" id="user-search-input" placeholder="Search by first name, last name or email...">
 							<select id = "user_select" name="user_select" class="user_select_dropdown">
@@ -65,6 +62,9 @@ require_once("./../server/GLOBAL_VARS.php");
 							</select>
 							<button type="button" id="user-search-button">Search</button>
 					</div>
+
+		<div class="underheadercontainer">
+			<div class="overlay">
 					<div class = "table-container">
 						<?php
 						echo "<table id=\"user_table\"></table>";

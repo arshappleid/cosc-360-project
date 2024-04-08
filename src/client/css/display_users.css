@@ -38,9 +38,45 @@ article {
     height: 15%;
 }
 
+.table-container{
+    margin-top: 1em;
+    background-color: white;
+    border-radius: 10px;
+
+}
+
+.detail-button{
+    background-color: var(--primary-color);
+    border: 0px;
+    padding: 0.75em;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.detail-button:hover{
+    background-color: var(--hover-color);
+}
+
+#user_table th{
+    text-align: center;
+    border-radius: 5px;
+}
+
+#user_table td{
+    text-align: center;
+    border-radius: 5px;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+#user_table tr:nth-child(even) {
+    background-color: var(--third-color);
+    border-radius: 5px;
+}
 
 .user-search-container {
     display: flex;
+    background-color: var(--primary-color);
     justify-content: center;
     padding: 1em;
 }
@@ -80,8 +116,5 @@ article {
 .table-container{
     display: flex;
     justify-content: center;
-}
-#user_table td{
-    padding-right: 5em;
-
+    
 }

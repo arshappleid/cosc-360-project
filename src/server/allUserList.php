@@ -33,13 +33,9 @@ if (is_array($users)) {
             echo "<td>" . ($user['BANNED_STATUS'] == 1 ? "Banned" : "Active") . "</td>";
             echo "<td>" . $numComments;
 
-            if ($numComments>0){
-                echo "  <a href=\"./track_user_comments.php?user_id=" . $user_id . "\">Track</a>";
-            }
-
             echo "</td>";
-	        echo "<td>" . "<a href=\"./display_users.php?ban_user=" . $user['Email'] . "\">Toggle Ban</a></td>";
-            echo "<td><button>User Details</button>";
+	        echo "<td>" . "<button class = \"detail-button\"><a href=\"./display_users.php?ban_user=" . $user['Email'] . "\">Toggle Ban</a></button></td>";
+            echo "<td><button class = \"detail-button\"><a href=\"./track_user_comments.php?user_id=" . $user_id . "\">User Details</a></button></td>";
             echo "</tr>";
         }
         echo "</table>";

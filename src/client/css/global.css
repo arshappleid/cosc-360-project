@@ -16,6 +16,7 @@ body, html {
 .container {
     background: var(--third-color);
     width: 100%;
+    min-height: 90vh;
     height: auto;
     padding-bottom: 0.5em;
     overflow-y: visible;
@@ -52,7 +53,7 @@ body, html {
     transform: translateX(-50%);
     width: 90%;
     height: auto;
-    background-color: burlywood;
+    background-color: transparent;
     z-index: 3;
 }
 

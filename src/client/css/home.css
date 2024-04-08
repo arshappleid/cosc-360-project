@@ -104,3 +104,30 @@ article {
 .details-button:hover, .upvote-button:hover {
     background-color: var(--hover-color)
 }
+
+.admin-login-button {
+    width: 10em;
+}
+
+.add-comment-button{
+    background-color: var(--primary-color);
+    padding: 1em;
+    border-radius: 5px;
+    margin-left: 1em;
+    border: 0px;
+}
+
+.add-comment-button:hover{
+    background-color: var(--hover-color);
+
+}
+
+.Comment_Input{
+    padding: 1em;
+    border-radius: 5px;
+}
+
+#comment_table tr:nth-child(even) {
+    background-color: var(--third-color);
+    border-radius: 5px;
+}

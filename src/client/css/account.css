@@ -31,9 +31,7 @@ article {
     align-items: center;
     grid-template-columns: 1fr auto 1fr; /* Match the container columns */
 }
-#item_list {
-    margin-bottom: 30%;
-}
+
 #avatar_img {
     height: 15%;
 }
@@ -86,5 +84,9 @@ label {
 
   .accounttext:hover{
     color: var(--hover-color);
+  }
+
+  #updateFirstNameForm{
+    margin-top: 1em;
   }
   

@@ -35,7 +35,7 @@ $userID = User_management::getAllUserData($userEmail)['USER_ID'] ?? 0;
 foreach ($item_data as $item) {
     echo "<div class=\"first\">";
         echo "<div class=\"left\">";
-            echo "<img id=\"item-image\" src=\"./../server/getItemImage.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\" alt=\"Item Image\">";
+            echo "<img id=\"item-image\" src=\"./../../server/getItemImage.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "\" alt=\"Item Image\">";
             echo "<div id=\"item-name\">" . htmlspecialchars($item['ITEM_NAME']) . "</div>";
             echo "<div id=\"item-price\">" . htmlspecialchars($item['Item_Price']) . "$</div>";
             echo "<h1>" . htmlspecialchars(Item_info::getStoreName($item['STORE_ID'])) . "</h1>";

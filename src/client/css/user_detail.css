@@ -43,8 +43,6 @@ article {
     flex-direction: row;
     width: 100%;
     align-items: center;
-    padding-top: 2em;
-    padding-bottom: 2em;
     justify-content: center;
     align-items: center;
 }
@@ -70,7 +68,6 @@ article {
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-top: 1em;
 
 }
 
@@ -90,4 +87,10 @@ article {
 }
 .date_time_comment_added{
     margin-left: auto; /* Push the element to the right */
+}
+
+#user_table {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1em;
 }
