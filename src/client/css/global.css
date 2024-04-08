@@ -52,7 +52,7 @@ body, html {
     transform: translateX(-50%);
     width: 90%;
     height: auto;
-    background-color: grey;
+    background-color: burlywood;
     z-index: 3;
 }
 

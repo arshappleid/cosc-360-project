@@ -12,7 +12,7 @@ require_once("./../../server/GLOBAL_VARS.php");
 	<title>Admin Panel</title>
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<script type="text/javascript" src="./jquery-library/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="./../jquery-library/jquery-3.1.1.min.js"></script>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="./../css/global.css" />
@@ -21,13 +21,12 @@ require_once("./../../server/GLOBAL_VARS.php");
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 </head>
-<!-- Refer to https://www.w3schools.com/html/html_layout.asp for Layout Design -->
 
 <body>
 
 	<div class="container">
 		<div class="headerblack">
-			<a href="home.php" class="home-button">Home</a>
+			<a href="../home.php" class="home-button">Home</a>
 			<?php
 			echo "<a href=\"login.php\" class=\"login-button\">";
 			if (isset($_SESSION['ADMIN_EMAIL'])) {
@@ -202,10 +201,10 @@ require_once("./../../server/GLOBAL_VARS.php");
 				$('#new-category-form').hide();
 			});
 
-			$('#individual-upload').click(function() {
+			$('#new-category').click(function() {
 				$('#bulk-upload-form').hide();
-				$('#individual-upload-form').show();
-				$('#new-category-form').hide();
+				$('#individual-upload-form').hide();
+				$('#new-category-form').show();
 			});
 		});
 
