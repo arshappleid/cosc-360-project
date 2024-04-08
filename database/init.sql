@@ -123,6 +123,11 @@ VALUES
     ('test3@gmail.com', 'Test', 'User', '5f4dcc3b5aa765d61d8327deb882cf99');
 
 INSERT INTO
+    USERS (EMAIL, FIRST_NAME, LAST_NAME, MD5_PASSWORD)
+VALUES
+    ('test4@gmail.com', 'Test', 'User', '5f4dcc3b5aa765d61d8327deb882cf99');
+
+INSERT INTO
     Admins (EMAIL, FIRST_NAME, LAST_NAME, MD5_PASSWORD)
 VALUES
     ('test@gmail.com', 'Test', 'User', '5f4dcc3b5aa765d61d8327deb882cf99');
@@ -1815,3 +1820,8 @@ INSERT INTO
     Comments (COMMENT_TEXT, ITEM_ID, USER_ID, DATE_TIME_ADDED)
 VALUES
     ("Only 1 comment for this item", 4, 3, CURRENT_TIMESTAMP);
+
+INSERT INTO
+    Comments (COMMENT_TEXT, ITEM_ID, USER_ID, DATE_TIME_ADDED)
+VALUES
+    ("Only 1 comment for this user", 5, 4, CURRENT_TIMESTAMP);

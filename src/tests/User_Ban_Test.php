@@ -7,8 +7,14 @@ require_once __DIR__ . '/../server/functions/admin_management.php';
 
 class User_Ban_Test extends TestCase
 {
-	/** @test 
-	 * */
+	/** @test */
+	public function toggleBanUserAccount_Test_Valid_User()
+	{
+		$resp = Admin_management::toggleBanUserAccount("test3@gmail.com");
+		$this->assertEquals("STATUS_UPDATED", $resp);
+	}
+
+	/** @test */
 	public function getBanStatus_Banned()
 	{
 		Admin_management::toggleBanUserAccount("test3@gmail.com");
