@@ -111,4 +111,19 @@ class Admin_management_Test extends TestCase
     {
         $this->assertEquals("ITEM_WITH_NAME_ALREADY_EXISTS", Admin_management::addItem("Smartphone", "NEW DESCRIPTION", 1, 100.99, "abc.com", "Food"));
     }
+
+    //these tests assume there is at least 1 active and 1 inactive user in the DB.
+    /** @test */
+    public function getActiveUsers_gotActiveUsers(){
+        $result = Admin_management::getActiveUsers();
+        $this->assertIsArray($result);
+        $this->assertNotEmpty($result);
+
+    }
+    /** @test */
+    public function getInactiveUsers_gotInactiveUsers(){
+        $result = Admin_management::getInactiveUsers();
+        $this->assertIsArray($result);
+        $this->assertNotEmpty($result);    
+    }
 }
