@@ -41,11 +41,9 @@ This document testifies, all the important tasks / milestones completed by all t
 - Login Page Functionality
 - Account Creation Page Functionality
 - Account Page Functionality
-
-  - Edit user information
+  - Ability to edit your own users information
 - Front End Framework for the entire site
 - Contributed to the ``src/server/functions/*``
-
   - wrote more detailed functions as requirements became more apperent
   - added functions as needed
   - fixed functions as needed
@@ -54,7 +52,6 @@ This document testifies, all the important tasks / milestones completed by all t
 - Logout Functionality
 - Hosted Site
 - Contributed to the search bar functionality
-
   - Wrote the js script that loads the items initially and enabled all stores to be searched
   - Contributed to the ability to be able to search items accurately
 - Backend of product page.
@@ -69,8 +66,10 @@ This document testifies, all the important tasks / milestones completed by all t
 - contributed to home.js
 - added a ton of test data
 - A lot of detail work, getting things to work how they actually should
-
   * This one is quite important to me as it takes a lot of time and attention *
+- about 80% of the css
+- table styling
+- The whole sites top navigation
 
 #### Max Bigwood
 
@@ -82,7 +81,6 @@ This document testifies, all the important tasks / milestones completed by all t
 - fixed JS on product.js to hide buttons properly
 - redid css on product.js, also altered getQUeryParam to be case insensitive
 - altered some ddl to stop causing an error
-<<<<<<< HEAD
 - altered getUserID function as it had an error 
 - fixed the addcomment functionality  
 - added a new function to order comments by most recent (for product page) 
@@ -90,8 +88,3 @@ This document testifies, all the important tasks / milestones completed by all t
 - admin management page with search filters for name, email and activity 
 - track_user_comments page displaying users comment history 
 - modifed login tracking methods so they accurately track logins made 
-=======
-- altered getUserID function as it had an error
-- fixed the addcomment functionality
-- added a new function to order comments by most recent (for product page)
->>>>>>> 380b8f7 (Updated Tasks Completed)
