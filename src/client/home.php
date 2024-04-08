@@ -30,14 +30,11 @@ require_once("./../server/functions/comments.php");
 
 			if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
 				echo "<div style = \"display:flex;\">";
-				if (isset($_SESSION['USER_EMAIL'])) {
-					echo "<a href=\"home/track_user_comments.php\" class=\"admin-login-button\" >History</a>";
-				}
 
 				if (isset($_SESSION['ADMIN_EMAIL'])) {
 					echo "<a href=\"home/add_items.php\" class=\"add-items-button\" >Add Items</a>";
 
-					echo "<a href=\"display_users.php\" class=\"admin-management-button\" >Manage Users</a>";
+					echo "<a href=\"display_users.php\" class=\"admin-login-button\" >Manage Users</a>";
 
 				}
 				echo "<a href=\"account_page.php\" class=\"login-button\">";
@@ -48,7 +45,6 @@ require_once("./../server/functions/comments.php");
 				echo "Login</a>";
 			}
 			?>
-			</a>
 			<?php
 			if (!isset($_SESSION['USER_EMAIL']) & !isset($_SESSION['ADMIN_EMAIL'])) {
 				echo "<a href=\"admin_login.php\"

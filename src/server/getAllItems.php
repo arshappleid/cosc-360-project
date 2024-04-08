@@ -91,7 +91,7 @@ foreach ($items as $item) {
         echo "<input type=\"hidden\" name=\"ITEM_ID\" value=\" " . htmlspecialchars($item['ITEM_ID']) . "\" >";
         echo "<input type=\"hidden\" name=\"USER_EMAIL\" value=\" " . htmlspecialchars($email) . " \" >";
         echo "<p class = \"Comment_Msg\" style = \"display:none;color:red;\">Comment Text Cannot be Empty</p>";
-        echo "<button type=\"submit\">Add Comment</button>";
+        echo "<button class=\"add-comment-button\" type=\"submit\">Add Comment</button>";
         echo "</form>";
     }
 

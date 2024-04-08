@@ -64,7 +64,8 @@ require_once("./../../server/GLOBAL_VARS.php");
 		</header>
 		<div class="underheadercontainer">
 			<div class="overlay">
-
+				<div class = "form-container">
+				<div class="radio-container">
 				<label for="bulk-upload">Bulk Upload</label>
 				<input type="radio" name="upload-type" id="bulk-upload" value="1">
 
@@ -73,7 +74,7 @@ require_once("./../../server/GLOBAL_VARS.php");
 
 				<label for="new-category">Add New Category</label>
 				<input type="radio" name="upload-type" id="new-category" value="0">
-
+				</div>
 				<form id="bulk-upload-form" style="display:none;" method="POST" action="./../../server/addItemToStore.php">
 					<label for="PRODUCT_INFO">Upload Product Info</label>
 					<input type="file" id="PRODUCT_INFO" name="PRODUCT_INFO">
@@ -158,6 +159,7 @@ require_once("./../../server/GLOBAL_VARS.php");
 					unset($_SESSION["message"]);
 				}
 				?>
+			</div>
 			</div>
 			<div class="triangleextendblack"></div>
 			<div class="triangle-element"></div>

@@ -11,6 +11,16 @@ form {
     text-align: center;
   }
 
+  .form-container{
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 1em;
+  }
+
+  .radio-container{
+    text-align: center;
+  }
+
   form input {
     width: 20em;
     padding: 10px;
