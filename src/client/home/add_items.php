@@ -75,7 +75,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 					if (count($stores) == 0) {
 						echo $stores;
 					} else {
-						echo "<select id = \"store_select\" class=\"select_dropdown\">";
+						echo "<select id = \"store_select\">";
 						foreach ($stores as $key => $store) {
 							echo "<option value=\"" . $store['STORE_ID'] . "\" >" . $store['STORE_NAME'] . "</option>";
 						}
@@ -102,7 +102,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 								$stores = Item_info::getAllStoreList();
 								if (is_array($stores)) {
 									echo "<label for=\"store_select\">Select Store</label><br>";
-									echo "<select id=\"store_select\" name=\"STORE_ID\" class=\"select_dropdown\">";
+									echo "<select id=\"store_select\" name=\"STORE_ID\">";
 									foreach ($stores as $key => $store) {
 										echo "<option value=\"" . $store['STORE_ID'] . "\">" . $store['STORE_NAME'] . "</option>";
 									}
@@ -112,7 +112,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 								if (is_array($categories)) {
 									echo "<br>";
 									echo "<label for=\"category_select\">Select Category</label><br>";
-									echo "<select id=\"category_select\" name=\"ITEM_CATEGORY\" class=\"select_dropdown\">";
+									echo "<select id=\"category_select\" name=\"ITEM_CATEGORY\">";
 									foreach ($categories as $category) {
 										echo "<option value=\"" . $category . "\">" . $category  . "</option>";
 									}
