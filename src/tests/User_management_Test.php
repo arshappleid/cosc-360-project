@@ -148,4 +148,73 @@ class User_management_Test extends TestCase
     {
         $this->assertEquals("USER_NOT_EXISTS", User_management::getUserID(""));
     }
+
+    /** @test */
+    public function getCommentCount_gotCommentCount()
+    {
+        //with test@gmail.com having 4 comments 
+        $this->assertEquals(4, User_management::getCommentCount(1));
+    }
+    /** @test */
+    public function getCommentCount_INVALID_USER_ID()
+    {
+        $this->assertEquals("INVALID_USER_ID", User_management::getCommentCount(999));
+    }
+    /** @test */
+    public function getCommentCount_EMPTY_VALUE()
+    {
+        $this->assertEquals("INVALID_USER_ID", User_management::getCommentCount(""));
+    }
+
+    /** @test */
+    public function getAllUserDataFromID_Found()
+    {
+        // Assuming data exists for "test@gmail.com"
+        $data = User_management::getAllUserData(1);
+        $this->assertIsArray($data);
+        $this->assertEquals("test@gmail.com", $data['Email']); // Basic check to ensure some data matches
+    }
+
+    /** @test */
+    public function getAllUserDataFromID_gotUserData()
+    {
+        // Assuming data exists for "test@gmail.com"
+        $data = User_management::getAllUserDataFromID(1);
+        $this->assertIsArray($data);
+        $this->assertEquals("test@gmail.com", $data['USER_ID']); // Basic check to ensure some data matches
+    }
+
+    //used same tests as for the regular function
+    /** @test */
+    public function getAllUserCommentsDescending_NoComments()
+    {
+        $resp =  User_management::getAllUserCommentsDescending("3");
+        $this->assertEquals("NO_COMMENTS_FOUND", $resp);
+    }
+
+    /** @test */
+    public function getAllUserCommentsDescending_1Comment()
+    {
+        $resp = User_management::getAllUserCommentsDescending("2");
+        $this->assertIsArray($resp);
+        $this->assertNotEmpty($resp);
+        $this->assertArrayHasKey('COMMENT_TEXT', $resp);
+        $this->assertArrayHasKey('COMMENT_ID', $resp);
+        $this->assertIsString($resp['COMMENT_TEXT']);
+        $this->assertIsString($resp['ITEM_NAME']);
+    }
+
+    /** @test */
+    public function getAllUserCommentsDescending_MoreThan1Comments()
+    {
+        $resp = User_management::getAllUserCommentsDescending("1");
+        $this->assertIsArray($resp);
+        $this->assertNotEmpty($resp);
+        foreach ($resp as $comment) {
+            $this->assertIsArray($comment);
+            $this->assertArrayHasKey('COMMENT_ID', $comment);
+            $this->assertIsString($comment['COMMENT_TEXT']);
+            $this->assertIsString($comment['ITEM_NAME']);
+        }
+    }
 }
