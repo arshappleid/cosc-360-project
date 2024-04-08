@@ -40,7 +40,7 @@ class User_management_Test extends TestCase
     /** @test */
     public function getAllUserComments_1Comment()
     {
-        $resp = User_management::getAllUserComments("3");
+        $resp = User_management::getAllUserComments("4");
         $this->assertIsArray($resp);
         $this->assertNotEmpty($resp);
         $this->assertArrayHasKey('COMMENT_TEXT', $resp);
