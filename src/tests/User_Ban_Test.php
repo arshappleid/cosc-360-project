@@ -17,7 +17,6 @@ class User_Ban_Test extends TestCase
 	/** @test */
 	public function getBanStatus_Banned()
 	{
-		Admin_management::toggleBanUserAccount("test3@gmail.com");
 		$this->assertEquals("BANNED", User_management::getBanStatus("test3@gmail.com"));
 	}
 
