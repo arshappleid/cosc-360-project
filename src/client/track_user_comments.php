@@ -3,6 +3,19 @@ session_start();
 require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
 require_once("./../server/GLOBAL_VARS.php");
+
+if (!isset($_SESSION['BREADCRUMBS'])) {
+	$_SESSION['BREADCRUMBS'] = array();
+}
+
+$current_page = ["user comments", "./track_user_comments.php"];
+$last_item_index = count($_SESSION['BREADCRUMBS']) - 1;
+
+// Add the current page only if it's not the last one already in the breadcrumb trail
+if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $current_page[0] && (!in_array($current_page, $_SESSION['BREADCRUMBS']))) {
+	array_push($_SESSION['BREADCRUMBS'], $current_page);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -48,27 +61,6 @@ require_once("./../server/GLOBAL_VARS.php");
 			?>
 		</div>
 
-		<header class="headeryellow">
-			<div class="search-container">
-				<label for="search-input" class="visually-hidden">Enter keywords to search:</label> 
-				<input type="text" id="search-input" placeholder="Search...">
-				<?php
-				$stores = Item_info::getAllStoreList();
-				if (count($stores) == 0) {
-					echo $stores;
-				} else {
-					echo "<label for =\"store_select\" class=\"visually-hidden\">Filter by store:</label>";
-					echo "<select id = \"store_select\" class=\"select_dropdown\">";
-					echo "<option value=\"all\">All Stores</option>";
-					foreach ($stores as $key => $store) {
-						echo "<option value=\"" . $store['STORE_ID'] . "\" >" . $store['STORE_NAME'] . "</option>";
-					}
-					echo "</select>";
-				}
-				?>
-				<button type="button" id="search-button">Search</button>
-			</div>
-		</header>
 		<?php include_once './../server/breadcrumbs.php' ?>
 		<div class="underheadercontainer">
 			<div class="overlay">

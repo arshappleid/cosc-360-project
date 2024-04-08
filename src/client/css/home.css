@@ -131,3 +131,8 @@ article {
     background-color: var(--third-color);
     border-radius: 5px;
 }
+
+.noitems{
+    color: white;
+    text-align: center;
+}

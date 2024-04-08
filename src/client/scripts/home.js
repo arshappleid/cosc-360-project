@@ -23,7 +23,7 @@ $(document).ready(function () {
             }
 
             if ($("#item_list section:visible").length === 0) {
-                $("#item_list").html("<h1>No products found.</h1>");
+                $("#item_list").html("<h1 class = \"noitems\">No products found.</h1>");
             }
         }).fail(function () {
             $("#item_list").html("<p>Error fetching products. Please try again.</p>");

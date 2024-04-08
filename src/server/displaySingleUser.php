@@ -1,6 +1,6 @@
 <?php
 
-include './functions/user_management.php';
+require_once('./../server/functions/user_management.php');
 
 if (!isset($_SESSION['USER_EMAIL'])) {
     //die("User email is not set in the session.");

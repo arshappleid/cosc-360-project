@@ -9,6 +9,19 @@ require_once("./../server/functions/admin_management.php");
 require_once("./../server/functions/login_tracking.php");
 require_once("./../server/GLOBAL_VARS.php");
 
+if (!isset($_SESSION['BREADCRUMBS'])) {
+	$_SESSION['BREADCRUMBS'] = array();
+}
+
+$current_page = ["display users", "./display_users.php"];
+$last_item_index = count($_SESSION['BREADCRUMBS']) - 1;
+
+// Add the current page only if it's not the last one already in the breadcrumb trail
+if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $current_page[0] && (!in_array($current_page, $_SESSION['BREADCRUMBS']))) {
+	array_push($_SESSION['BREADCRUMBS'], $current_page);
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +64,7 @@ require_once("./../server/GLOBAL_VARS.php");
 			?>
 		</div>
 
-		<?php //include_once './../server/breadcrumbs.php' ?>
+
 		<div class="user-search-container">
 							<label for="user-search-input" class="visually-hidden">Enter keywords to search</label> 
 							<input type="text" id="user-search-input" placeholder="Search by first name, last name or email...">
@@ -62,7 +75,7 @@ require_once("./../server/GLOBAL_VARS.php");
 							</select>
 							<button type="button" id="user-search-button">Search</button>
 					</div>
-
+					<?php include_once './../server/breadcrumbs.php' ?>
 		<div class="underheadercontainer">
 			<div class="overlay">
 					<div class = "table-container">
