@@ -32,7 +32,7 @@ require_once("./../../server/GLOBAL_VARS.php");
 			if (isset($_SESSION['ADMIN_EMAIL'])) {
 				//echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";
 				echo "Logout</a>";
-				echo "<a href=\"display_users.php\"
+				echo "<a href=\"../display_users.php\"
 				class=\"admin-login-button\">Users</a>";
 			} else {
 				echo "Login</a>";
