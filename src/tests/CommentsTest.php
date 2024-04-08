@@ -42,7 +42,7 @@ class CommentsTest extends TestCase
 	/** @test */
 	public function getAllCommentsForItem_NOCOMMENTSEXIST()
 	{
-		$resp = Comments::getAllCommentsForItem("6");
+		$resp = Comments::getAllCommentsForItem("12");
 		$this->assertEquals("NO_COMMENTS_ADDED_YET", $resp);
 	}
 
