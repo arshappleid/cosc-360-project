@@ -20,7 +20,6 @@ require_once("./../server/GLOBAL_VARS.php");
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-	<script type="text/javascript" src="./scripts/home.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="css/display_users.css" />
 	<link rel="stylesheet" href="css/global.css" />
@@ -52,52 +51,33 @@ require_once("./../server/GLOBAL_VARS.php");
 			?>
 		</div>
 
-		<header class="headeryellow">
-			<div class="search-container">
-				<label for="search-input" class="visually-hidden">Enter keywords to search:</label>
-				<input type="text" id="search-input" placeholder="Search...">
-				<?php
-				$stores = Item_info::getAllStoreList();
-				if (count($stores) == 0) {
-					echo $stores;
-				} else {
-					echo "<label for =\"store_select\" class=\"visually-hidden\">Filter by store:</label>";
-					echo "<select id = \"store_select\" class=\"select_dropdown\">";
-					echo "<option value=\"all\">All Stores</option>";
-					foreach ($stores as $key => $store) {
-						echo "<option value=\"" . $store['STORE_ID'] . "\" >" . $store['STORE_NAME'] . "</option>";
-					}
-					echo "</select>";
-				}
-				?>
-				<button type="button" id="search-button">Search</button>
-			</div>
-		</header>
-
-		<?php include_once './../server/breadcrumbs.php' ?>
+		<?php //include_once './../server/breadcrumbs.php' ?>
 
 		<div class="underheadercontainer">
 			<div class="overlay">
-				<?php
-
-				//$test = Item_info::getAllItemsAtStore(1);
-				//print_r($test);
-
-
-
-				include_once './../server/allUserList.php';
-
-				?>
-
+					<div class="user-search-container">
+							<label for="user-search-input" class="visually-hidden">Enter keywords to search</label> 
+							<input type="text" id="user-search-input" placeholder="Search by first name, last name or email...">
+							<select id = "user_select" name="user_select" class="user_select_dropdown">
+								<option value="all_users">All Users </option>
+								<option value= "active_users">Active Users</option>
+								<option value= "inactive_users">Inactive Users</option>
+							</select>
+							<button type="button" id="user-search-button">Search</button>
+					</div>
+					<div class = "table-container">
+						<?php
+						echo "<table id=\"user_table\"></table>";
+						//Table rows will be populated dynamically
+						?>
+					</div>
 			</div>
 			<div class="triangleextendblack"></div>
 			<div class="triangle-element"></div>
-
-
 		</div>
 	</div>
 	<footer>
-		<div class="footerblack">
+		<div>
 			<nav>
 				<ul>
 					<li><a href="home.php">Home</a></li>
@@ -115,5 +95,5 @@ require_once("./../server/GLOBAL_VARS.php");
 			</nav>
 		</div>
 	</footer>
-
+	<script type="text/javascript" src="./scripts/display_users.js"></script>
 </body>

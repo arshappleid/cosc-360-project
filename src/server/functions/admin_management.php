@@ -322,4 +322,53 @@ class Admin_management
 			echo $e->getMessage();
 		}
 	}
+	//returns an array of all users who have a login in the last month 
+	public static function getActiveUsers(){
+    $users = self::getAllUsers();
+	
+    
+    // Array to store active users
+    $activeUsers = [];
+
+    // Iterate through each user
+    foreach ($users as $user) {
+        // Get user ID
+        $userId = $user['USER_ID'];
+        
+        // Get login count for current month
+        $loginCount = login_tracking::getCountForCurrentMonth($userId);
+        
+        // Check if login count is greater than 0
+        if ($loginCount > 0) {
+            // User is active, add user information to active users array
+            $activeUsers[] = $user;
+        }
+    }
+    return $activeUsers;
+}
+//returns array of all users who had not registered a login within the month
+public static function getInactiveUsers(){
+    // Get all users
+    $users = self::getAllUsers();
+    
+    // Array to store inactive users
+    $inactiveUsers = [];
+
+    // Iterate through each user
+    foreach ($users as $user) {
+        // Get user ID
+        $userId = $user['USER_ID'];
+        
+        // Get login count for current month
+        $loginCount = login_tracking::getCountForCurrentMonth($userId);
+        
+        // Check if login count is 0
+        if ($loginCount === 0) {
+            // User is inactive, add user information to inactive users array
+            $inactiveUsers[] = $user;
+        }
+    }
+    return $inactiveUsers;
+}
+
 }

@@ -424,8 +424,79 @@ class User_management
 			}
 			return "COULD_NOT_EXECUTE_QUERY";
 		} catch (Exception $e) {
-			echo "Error occurred, when using Database public static function to try to validate User.<br>";
+			echo "Error occurred when trying to get all comments for a user";
 			echo $e->getMessage();
 		}
 	}
+	
+	/**
+	 * Summary of getCommentCount
+	 * Returns total number of commments a user has made
+	 */
+	public static function getCommentCount($USER_ID){
+		$query = "SELECT COUNT(*) AS comment_count FROM Comments WHERE USER_ID = ?";
+		try {
+			if (User_management::validateUserID($USER_ID) == "USER_DOES_NOT_EXIST") {
+				return "INVALID_USER_ID";
+			}
+			$resp = executePreparedQuery($query, array('s', $USER_ID));
+			if ($resp[0]) {
+				if (is_array($resp[1])) {
+					return $resp[1]["comment_count"];
+				}
+			}
+			return "COULD_NOT_EXECUTE_QUERY";
+		} catch (Exception $e) {
+			echo "Error occurred, when querying for number of comments for a user id";
+			echo $e->getMessage();
+		}
+}
+	//returns all user data for a user by using user ID 
+	public static function getAllUserDataFromID($USER_ID){
+		$query = "SELECT * FROM USERS WHERE USER_ID = ?;";
+		try {
+			$response = executePreparedQuery($query, array('i', $USER_ID));
+			if ($response[0]) { // Query executed properly
+				if ($response[1] == "NO_DATA_RETURNED") {
+					return "NO_USER_FOUND";
+				}
+				return $response[1];
+			}
+			return "COULD_NOT_EXECUTE_QUERY";
+		} catch (Exception $e) {
+			echo "Error occurred when querying USERS for a USER_ID";
+			echo $e->getMessage();
+		}
+	}
+	/**
+	 * Summary of getAllUserCommentsDescending
+	 * @param mixed $USER_ID
+	 * @return void
+	 * Returns all the Comments By a User , on all items, in descending order according to date time added
+	 * - INVALID_USER_ID
+	 * - NO_COMMENTS_FOUND
+	 * - [COMMENT_ID,COMMENT_TEXT,DATE_TIME_ADDED,ITEM_NAME]
+	 * - [[COMMENT_ID,COMMENT_TEXT,DATE_TIME_ADDED,ITEM_NAME],[COMMENT_TEXT,DATE_TIME_ADDED,ITEM_NAME]]
+	 */
+	public static function getAllUserCommentsDescending($USER_ID)
+	{
+		$query = "SELECT Comments.COMMENT_ID, Comments.COMMENT_TEXT,Comments.DATE_TIME_ADDED, Comments.ITEM_ID,ITEMS.ITEM_NAME FROM Comments NATURAL JOIN ITEMS WHERE Comments.USER_ID = ? ORDER BY Comments.DATE_TIME_ADDED DESC;";
+		try {
+			if (User_management::validateUserID($USER_ID) == "USER_DOES_NOT_EXIST") {
+				return "INVALID_USER_ID";
+			}
+			$resp = executePreparedQuery($query, array('s', $USER_ID));
+			if ($resp[0]) {
+				if (is_array($resp[1]) && count($resp[1]) >= 1) {
+					return $resp[1];
+				}
+				return "NO_COMMENTS_FOUND";
+			}
+			return "COULD_NOT_EXECUTE_QUERY";
+		} catch (Exception $e) {
+			echo "Error occurred when trying to get all comments for a user desc";
+			echo $e->getMessage();
+		}
+	}
+
 }
