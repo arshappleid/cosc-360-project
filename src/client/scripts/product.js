@@ -19,7 +19,7 @@ $(document).ready(function () {
 
         if (itemID && storeID) {
             // Encode the parameters and append both to the request URL
-            $.get("./../server/getProductDetails.php?ITEM_ID=" + encodeURIComponent(itemID) + "&STORE_ID=" + encodeURIComponent(storeID), function (data) {
+            $.get("./../../server/getProductDetails.php?ITEM_ID=" + encodeURIComponent(itemID) + "&STORE_ID=" + encodeURIComponent(storeID), function (data) {
                 $("#product_list").html(data);
 
                 var overlayHeight = $('.overlay').outerHeight();
