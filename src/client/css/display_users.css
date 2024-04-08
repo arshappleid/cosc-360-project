@@ -37,3 +37,51 @@ article {
 #avatar_img {
     height: 15%;
 }
+
+
+.user-search-container {
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+}
+
+.user-search-container input[type="text"],
+.user-search-container select {
+    width: 30vw;
+    margin-right: 10px;
+    padding: 2vh 2vw;
+    border: 0;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.user-search-container button {
+    width: 20vw;
+    padding: 1vh 1vw;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.user-search-container button:hover {
+    color: var(--hover-color);
+}
+
+.user-search-container .select_dropdown {
+    width: 20%;
+    padding: 2vh 2vw;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.table-container{
+    display: flex;
+    justify-content: center;
+}
+#user_table td{
+    padding-right: 5em;
+
+}

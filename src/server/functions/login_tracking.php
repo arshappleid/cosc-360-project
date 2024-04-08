@@ -18,9 +18,9 @@ class Login_tracking
         }
         self::getCountForCurrentMonth($USER_ID); // If no Count Record Exists , adds Default 0.
         $query = "UPDATE LOGIN_COUNT SET LOGIN_COUNT = LOGIN_COUNT + 1 WHERE USER_ID = ? AND MONTH = ? AND YEAR = ?";
-        $currentMonth = (int)date('m'); // Current month as integer
+        $currentMonth = (int)date('n'); // Current month as integer
         $currentYear = (int)date('Y'); // Current year as integer
-        $resp  = executePreparedQuery($query, array('sss', $USER_ID, $currentMonth, $currentYear));
+        $resp  = executePreparedQuery($query, array('iii', $USER_ID, $currentMonth, $currentYear));
         if ($resp[0]) {
             return "UPDATED";
         }
@@ -33,6 +33,7 @@ class Login_tracking
      * - LOGIN_COUNT
      * - COULD_NOT_FIND_RECORD
      */
+    /*
     public static function getCountForCurrentMonth($USER_ID)
     {
         $query = "SELECT LOGIN_COUNT FROM LOGIN_COUNT WHERE USER_ID = ? AND MONTH = ? AND YEAR = ?";
@@ -48,6 +49,33 @@ class Login_tracking
             }
         }
         return "COULD_NOT_FIND_RECORD";
+    }
+    */
+
+    public static function getCountForCurrentMonth($USER_ID)
+    {
+        $query = "SELECT LOGIN_COUNT FROM LOGIN_COUNT WHERE USER_ID = ? AND MONTH = ? AND YEAR = ?";
+        $currentMonth = (int)date('m'); // Current month as integer
+        $currentYear = (int)date('Y'); // Current year as integer
+        try{
+            $resp  = executePreparedQuery($query, array('iii', $USER_ID, $currentMonth, $currentYear));
+            if ($resp[0]){
+                //if the query was successful - the user already has data in the login_count table 
+                if ($resp[1]=="NO_DATA_RETURNED"){
+                    //if the query went off, but there were no results: ie, user ID is NOT in login_count table
+                    $addedDefault = self::AddDefaultForCurrentMonth($USER_ID);
+                    return $addedDefault;
+                }
+                //return the number of logins this month
+                return $resp[1]['LOGIN_COUNT'];
+            }
+            else{
+                return "STATEMENT_DID_NOT_EXECUTE";
+            }
+        } catch (Exception $e) {
+            echo "Error occurred querying database for login count";
+            echo $e->getMessage();
+        }
     }
 
 

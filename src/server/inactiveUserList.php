@@ -9,8 +9,7 @@ if (isset($_GET["ban_user"])) {
 	unset($_GET["ban_user"]);
 }
 
-
-$users = Admin_management::getAllUsers();
+$users = Admin_management::getInactiveUsers();
 
 if (is_array($users)) {
     if (count($users) == 0) {
@@ -39,7 +38,8 @@ if (is_array($users)) {
 
             echo "</td>";
 	        echo "<td>" . "<a href=\"./display_users.php?ban_user=" . $user['Email'] . "\">Toggle Ban</a></td>";
-            echo "<td><button>User Details</button>";
+            echo "<td><a href=\"./track_user_comments.php?user_id=" . $user_id . "\">User Details</a></td>";
+            //echo "<td><button>User Details</button>";
             echo "</tr>";
         }
         echo "</table>";
@@ -47,3 +47,4 @@ if (is_array($users)) {
 } else {
     echo "<h4>Error Retrieving Users</h4>";
 }
+
