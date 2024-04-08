@@ -35,11 +35,10 @@ require_once("./../server/functions/comments.php");
 				}
 
 				if (isset($_SESSION['ADMIN_EMAIL'])) {
-					echo "<a href=\"home/add_items.php\" class=\"admin-management-button\" >Add Items</a>";
+					echo "<a href=\"home/add_items.php\" class=\"add-items-button\" >Add Items</a>";
 
 					echo "<a href=\"display_users.php\" class=\"admin-management-button\" >Manage Users</a>";
 
-					echo "<a href=\"home/admin_management.php\" class=\"login-button\" >Add Items</a>";
 				}
 				echo "<a href=\"account_page.php\" class=\"login-button\">";
 				echo "Account</a>";
