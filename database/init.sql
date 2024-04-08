@@ -1810,3 +1810,8 @@ INSERT INTO
     Comments (COMMENT_TEXT, ITEM_ID, USER_ID, DATE_TIME_ADDED)
 VALUES
     ("What a great product", 3, 3, CURRENT_TIMESTAMP);
+
+INSERT INTO
+    Comments (COMMENT_TEXT, ITEM_ID, USER_ID, DATE_TIME_ADDED)
+VALUES
+    ("Only 1 comment for this item", 4, 3, CURRENT_TIMESTAMP);

@@ -26,7 +26,7 @@ class CommentsTest extends TestCase
 	/** @test */
 	public function getAllCommentsForItem_ONLY1COMMENTSEXIST()
 	{
-		$resp = Comments::getAllCommentsForItem("3");
+		$resp = Comments::getAllCommentsForItem("4");
 		$this->assertIsArray($resp);
 		$this->assertArrayHasKey('COMMENT_ID', $resp);
 	}
@@ -42,7 +42,7 @@ class CommentsTest extends TestCase
 	/** @test */
 	public function getAllCommentsForItem_NOCOMMENTSEXIST()
 	{
-		$resp = Comments::getAllCommentsForItem("4");
+		$resp = Comments::getAllCommentsForItem("5");
 		$this->assertEquals("NO_COMMENTS_ADDED_YET", $resp);
 	}
 
