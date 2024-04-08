@@ -9,11 +9,19 @@ class User_management
 	 * @param mixed $email
 	 * @param mixed $hashed_password
 	 * @return string if the given hashed password , matches the hashed password in the database
+	 * 
+	 * Possible Return Values
+	 * - VALID_LOGIN
+	 * - INVALID_LOGIN
+	 * - USER_NOT_FOUND
+	 * - USER_BANNED_FROM_LOGGING_IN
 	 */
 	public static function validateUserLogin($email, $hashed_password)
 	{
-
-		$query = "SELECT * FROM USERS WHERE Email = ?";
+		if (User_management::getBanStatus($email) == "BANNED") {
+			return "USER_BANNED_FROM_LOGGING_IN";
+		}
+		$query = "SELECT MD5_Password FROM USERS WHERE Email = ?";
 		try {
 			$response = executePreparedQuery($query, array('s', $email));
 			if ($response[0] === true) {
@@ -114,7 +122,7 @@ class User_management
 	public static function userExists($EMAIL)
 	{
 		// Corrected the SQL query to use the proper placeholder syntax
-		$query = "SELECT * FROM USERS WHERE Email = ?;";
+		$query = "SELECT USER_ID FROM USERS WHERE Email = ?;";
 		try {
 			$response = executePreparedQuery($query, array('s', $EMAIL)); // Adjusted parameter structure
 			if ($response[0]) { // Query executed properly
@@ -213,6 +221,7 @@ class User_management
 	 */
 	public static function editUserLastName($EMAIL, $NEW_NAME)
 	{
+
 		if (User_management::userExists($EMAIL) == "USER_NOT_EXISTS") {
 			return "USER_NOT_EXISTS";
 		}
@@ -243,7 +252,7 @@ class User_management
 			return "USER_NOT_EXISTS";
 		}
 
-		$query = "SELECT * FROM USERS WHERE Email = ?";
+		$query = "SELECT BANNED_STATUS FROM USERS WHERE Email = ?";
 		try {
 			$response = executePreparedQuery($query, array('s', $USER_EMAIL));
 			if ($response[0] === true) {
@@ -357,7 +366,7 @@ class User_management
 				return "USER_NOT_EXISTS";
 			}
 			///fixed this here to specify that its a stirng and not integer
-			$user_ID = executePreparedQuery("SELECT * FROM USERS WHERE Email = ?;", array('s', $USER_EMAIL))[1]["USER_ID"];
+			$user_ID = executePreparedQuery("SELECT USER_ID FROM USERS WHERE Email = ?;", array('s', $USER_EMAIL))[1]["USER_ID"];
 			return $user_ID;
 		} catch (Exception $e) {
 			echo "Error occurred, when using Database public static function to try to validate User.<br>";

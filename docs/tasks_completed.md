@@ -38,8 +38,10 @@ This document testifies, all the important tasks / milestones completed by all t
 - Account Creation Page Functionality
 - Account Page Functionality
     - Edit user information
+
 - Front End Framework for the entire site
 - Contributed to the ```src/server/functions/*```
+    - wrote more detailed functions as requirements became more apperent
     - added functions as needed
     - fixed functions as needed
 - Header HTML and CSS , implemented breadcrubs into the header
@@ -49,13 +51,20 @@ This document testifies, all the important tasks / milestones completed by all t
 - Contributed to the search bar functionality
     - Wrote the js script that loads the items initially and enabled all stores to be searched
     - Contributed to the ability to be able to search items accurately
-- Programmed the dynamic loading of the product.php page
+- Backend of product page.
 - Programmed the User list page
 - Admin Panel Front end
 - Home page frontend.
+- Contributed to a lot of product.php frontend
 - Most of the general styling of the website
 - The HTML and CSS framework that is used on every page
+- Implemented the charts in product.php
+- wrote product.js
+- contributed to home.js
+- added a ton of test data
+
 - A lot of detail work, getting things to work how they actually should
+    * This one is quite important to me as it takes a lot of time and attention *
 
 #### Max Bigwood
 - Changed appearance of admin_login.php to match rest of pages

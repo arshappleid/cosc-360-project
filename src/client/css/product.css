@@ -50,11 +50,11 @@ h1 {
 }
 
 #item-image{
-    height: 14em; 
-    width: 14em; 
+    height: 14em;
+    width: 14em;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    object-fit: contain; 
+    object-fit: contain;
 }
 
 #item-name,#item-price{
@@ -172,9 +172,9 @@ h1 {
 }
 
 canvas{
-    width: 100% !important; 
-    height: auto !important; 
-    aspect-ratio: 16 / 9; 
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9;
 }
 
 #tracker-name{

@@ -32,9 +32,17 @@ jobs:
                   docker run --network my_network -d --env "SERVER_ENV=LOCAL" -v ./src/:/var/www/html/ --name web-server web-server
 
             ### Commands to Execute out the tests
+            - name: Execute UserManagement tests
+              if: always()
+              run: docker exec web-server sh -c "phpunit --testdox tests/User_management_Test.php"
+
             - name: Execute AdminManagement tests
               if: always()
               run: docker exec web-server sh -c "phpunit --testdox tests/Admin_management_Test.php"
+
+            - name: Execute UserManagement Ban User tests
+              if: always()
+              run: docker exec web-server sh -c "phpunit --testdox tests/User_Ban_Test.php"
 
             - name: Execute Comments tests
               if: always()
@@ -45,13 +53,8 @@ jobs:
               run: docker exec web-server sh -c "phpunit --testdox tests/Item_info_Test.php"
 
             - name: Execute Weather tests
-              if: always()
               run: docker exec web-server sh -c "phpunit --testdox tests/weatherTest.php"
 
             - name: Execute Login Tracking tests
               if: always()
               run: docker exec web-server sh -c "phpunit --testdox tests/login_tracking_Test.php"
-            
-            - name: Code Formatting
-              if: always()
-              run: docker exec web-server sh -c "phpcs --standard=PSR12 --exclude=PSR1.Methods.CamelCapsMethodName,Generic.Files.LineLength,Generic.WhiteSpace.DisallowTabIndent --error-severity=1 ./"

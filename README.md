@@ -44,10 +44,10 @@ In the Docker Shell , run ``phpunit tests/*`` , Which will run all the tests in 
    class Class_Name{
    	static function functionName($param){}
    }
-   
+
    ```
 3. Import the class in a test File , that has the same name for the testClass
-4. Write the tests in the `<u>`same exact notation given below`</u>`, sample test given for file ``User_management_Test.php``
+4. Write the tests in the `<u>`same exact notation given below `</u>`, sample test given for file ``User_management_Test.php``
 
    ```php
    <?php
@@ -58,7 +58,7 @@ In the Docker Shell , run ``phpunit tests/*`` , Which will run all the tests in 
    	public function validateUserLogin_ValidLogin(){
    		$this->assertEquals(User_management::validateUserLogin("test@gmail.com", MD5("password")), "VALID_LOGIN");
    	}
-   
+
    	/** @test */
    	public function validateUserLogin_InValidLogin(){
    		$this->assertEquals(User_management::validateUserLogin("test2@gmail.com", MD5("password1")), "INVALID_LOGIN");
@@ -72,21 +72,18 @@ In the Docker Shell , run ``phpunit tests/*`` , Which will run all the tests in 
 1. Select a sample file from ``docs/sample_item_records.txt``
 2. Click on Submit
 
-
-
 ### Some Automated Code Formatting
 
 #### Auto Fixing Sytax mistakes : indenting , white spaces
 
 ```bash
-phpcbf --standard=PSR12 --exclude=PSR1.Methods.CamelCapsMethodName,Generic.Files.LineLength,Generic.WhiteSpace.DisallowTabIndent
+phpcbf --standard=PSR12 --exclude=PSR1.Methods.CamelCapsMethodName,Generic.Files.LineLength,Generic.WhiteSpace.DisallowTabIndent ./
 ```
 
-#### Generating Logs: 
+#### Generating Logs:
 
 ```bash
 phpcs --standard=PSR12 --exclude=PSR1.Methods.CamelCapsMethodName,Generic.Files.LineLength,Generic.WhiteSpace.DisallowTabIndent --error-severity=1 --report-full=./logs/phpcs.log ./
 ```
 
 This will store all the logs in ``src/logs`` folder, and also a folder like this already exists.
-

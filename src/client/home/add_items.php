@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once("./../server/functions/item_info.php");
-require_once("./../server/functions/comments.php");
-require_once("./../server/GLOBAL_VARS.php");
+require_once("./../../server/functions/item_info.php");
+require_once("./../../server/functions/comments.php");
+require_once("./../../server/GLOBAL_VARS.php");
 
 ?>
 <!DOCTYPE html>
@@ -15,8 +15,8 @@ require_once("./../server/GLOBAL_VARS.php");
 	<script type="text/javascript" src="./jquery-library/jquery-3.1.1.min.js"></script>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="./css/global.css" />
-	<link rel="stylesheet" href="./css/admin_panel.css" />
+	<link rel="stylesheet" href="./../css/global.css" />
+	<link rel="stylesheet" href="./../css/admin_panel.css" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -29,14 +29,14 @@ require_once("./../server/GLOBAL_VARS.php");
 		<div class="headerblack">
 			<a href="home.php" class="home-button">Home</a>
 			<?php
-            echo "<a href=\"login.php\" class=\"login-button\">";
-            if (isset($_SESSION['ADMIN_EMAIL'])) {
-                //echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";
+			echo "<a href=\"login.php\" class=\"login-button\">";
+			if (isset($_SESSION['ADMIN_EMAIL'])) {
+				//echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";
 				echo "Logout</a>";
 				echo "<a href=\"display_users.php\"
 				class=\"admin-login-button\">Users</a>";
 			} else {
-                echo "Login</a>";
+				echo "Login</a>";
 			}
 			?>
 			</a>
@@ -44,7 +44,7 @@ require_once("./../server/GLOBAL_VARS.php");
 
 		<header class="headeryellow">
 			<div class="search-container">
-				<label for="search-input" class="visually-hidden">Enter keywords to search</label> 
+				<label for="search-input" class="visually-hidden">Enter keywords to search</label>
 				<input type="text" id="search-input" placeholder="Search...">
 				<?php
 				$stores = Item_info::getAllStoreList();
@@ -72,7 +72,10 @@ require_once("./../server/GLOBAL_VARS.php");
 				<label for="individual-upload">Individual Upload</label>
 				<input type="radio" name="upload-type" id="individual-upload" checked value="0">
 
-				<form id="fileUploadForm" style="display:none;" method="POST" action="./../server/addItemToStore.php">
+				<label for="new-category">Add New Category</label>
+				<input type="radio" name="upload-type" id="new-category" value="0">
+
+				<form id="bulk-upload-form" style="display:none;" method="POST" action="./../../server/addItemToStore.php">
 					<label for="PRODUCT_INFO">Upload Product Info</label>
 					<input type="file" id="PRODUCT_INFO" name="PRODUCT_INFO">
 					<?php
@@ -94,7 +97,7 @@ require_once("./../server/GLOBAL_VARS.php");
 				</form>
 
 
-				<form id="Input_Form" method="POST">
+				<form id="individual-upload-form" method="POST">
 					<fieldset>
 						<legend>Add New Item</legend>
 						<div class="row">
@@ -113,22 +116,22 @@ require_once("./../server/GLOBAL_VARS.php");
 									}
 									echo "</select>";
 								}
-                                $categories = Item_info::getAllCategories();
-                                if (is_array($categories)) {
-                                    echo "<br>";
+								$categories = Item_info::getAllCategories();
+								if (is_array($categories)) {
+									echo "<br>";
 									echo "<label for=\"category_select\">Select Category</label><br>";
-                                    echo "<select id=\"category_select\" name=\"ITEM_CATEGORY\" class=\"select_dropdown\">";
-                                    foreach ($categories as $category) {
-                                        echo "<option value=\"" . $category . "\">" . $category  . "</option>";
-                                    }
-                                    echo "</select>";
-                                }
+									echo "<select id=\"category_select\" name=\"ITEM_CATEGORY\" class=\"select_dropdown\">";
+									foreach ($categories as $category) {
+										echo "<option value=\"" . $category . "\">" . $category  . "</option>";
+									}
+									echo "</select>";
+								}
 
 								?>
 							</div>
 							<div class="col">
 								<label for="ITEM_DESCRIPTION" class="visually-hidden">Item Description </label>
-								<textarea name="ITEM_DESCRIPTION" id = "ITEM_DESCRIPTION" placeholder="Item Description..."></textarea><br>
+								<textarea name="ITEM_DESCRIPTION" id="ITEM_DESCRIPTION" placeholder="Item Description..."></textarea><br>
 								<label for="PRODUCT_IMAGE">Product Image</label>
 								<input type="file" name="PRODUCT_IMAGE" id="PRODUCT_IMAGE">
 							</div>
@@ -137,6 +140,25 @@ require_once("./../server/GLOBAL_VARS.php");
 						<button type="reset">Reset</button>
 					</fieldset>
 				</form>
+
+				<form id="new-category-form" action="./../../server/addCategory.php" style="display:none;" method="GET">
+					<fieldset>
+						<legend>Add New Category</legend>
+						<input type="text" placeholder="Category Name" name="CATEGORY_NAME">
+
+
+						<textarea type="text" placeholder="Description " name="CATEGORY_DESCRIPTION"></textarea>
+						<br>
+
+						<button type="submit">Add Category</button>
+					</fieldset>
+				</form>
+				<?php
+				if (isset($_SESSION["message"])) {
+					echo "<p style = \"color:red;\">" . $_SESSION["message"] . "</p>";
+					unset($_SESSION["message"]);
+				}
+				?>
 			</div>
 			<div class="triangleextendblack"></div>
 			<div class="triangle-element"></div>
@@ -168,14 +190,22 @@ require_once("./../server/GLOBAL_VARS.php");
 		$(document).ready(function() {
 			// When 'Bulk Upload' is clicked
 			$('#bulk-upload').click(function() {
-				$('#fileUploadForm').show();
-				$('#Input_Form').hide();
+				$('#bulk-upload-form').show();
+				$('#individual-upload-form').hide();
+				$('#new-category-form').hide();
 			});
 
 			// When 'Individual Upload' is clicked
 			$('#individual-upload').click(function() {
-				$('#Input_Form').show();
-				$('#fileUploadForm').hide();
+				$('#bulk-upload-form').hide();
+				$('#individual-upload-form').show();
+				$('#new-category-form').hide();
+			});
+
+			$('#individual-upload').click(function() {
+				$('#bulk-upload-form').hide();
+				$('#individual-upload-form').show();
+				$('#new-category-form').hide();
 			});
 		});
 
@@ -211,10 +241,11 @@ require_once("./../server/GLOBAL_VARS.php");
 						DESCRIPTION: record[1],
 						ITEM_PRICE: record[2],
 						EXTERNAL_LINK: record[3],
+						CATEGORY_NAME: record[4],
 						STORE_ID: storeID
 					};
 
-					return fetch('./../server/addMultipleItemToStore.php', {
+					return fetch('./../../server/addMultipleItemToStore.php', {
 							method: 'POST',
 							headers: {
 								'Content-Type': 'application/json',

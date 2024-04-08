@@ -13,8 +13,8 @@ class weatherTest extends TestCase
 		$this->assertEquals("NOT_UPDATED", $resp);
 	}
 
-	/** 
-	 * @test 
+	/**
+	 * @test
 	 * @depends weatherUpdatedInThePastNMins_Test
 	 * */
 	public function updateWeather_Test()
@@ -23,7 +23,7 @@ class weatherTest extends TestCase
 		$this->assertEquals("WEATHER_UPDATED", $resp);
 	}
 
-	/** @test 
+	/** @test
 	 * @depends updateWeather_Test
 	 */
 	public function getWeather_Test()

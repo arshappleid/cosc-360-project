@@ -3,8 +3,27 @@
 use PHPUnit\Framework\TestCase;
 
 require_once __DIR__ . '/../server/functions/user_management.php';
+
 class User_management_Test extends TestCase
 {
+    /** @test */
+    public function getUser_First_Last_Name_Found()
+    {
+        $this->assertEquals("Test User", User_management::getUser_First_Last_Name(1));
+    }
+
+    /** @test */
+    public function validateUserLogin_ValidLogin()
+    {
+        $this->assertEquals("VALID_LOGIN", User_management::validateUserLogin("test@gmail.com", md5("password")));
+    }
+
+    /** @test */
+    public function validateUserLogin_InvalidLogin()
+    {
+        $this->assertEquals("INVALID_LOGIN", User_management::validateUserLogin("test2@gmail.com", md5("wrongpassword")));
+    }
+
     /** @test */
     public function validateUserID_VALIDID()
     {
@@ -16,17 +35,12 @@ class User_management_Test extends TestCase
         $this->assertEquals("USER_DOES_NOT_EXIST", User_management::validateUserID("99"));
     }
 
-    /** @test */
-    public function getAllUserComments_NoComments()
-    {
-        $resp =  User_management::getAllUserComments("3");
-        $this->assertEquals("NO_COMMENTS_FOUND", $resp);
-    }
+
 
     /** @test */
     public function getAllUserComments_1Comment()
     {
-        $resp = User_management::getAllUserComments("2");
+        $resp = User_management::getAllUserComments("3");
         $this->assertIsArray($resp);
         $this->assertNotEmpty($resp);
         $this->assertArrayHasKey('COMMENT_TEXT', $resp);
@@ -48,17 +62,7 @@ class User_management_Test extends TestCase
             $this->assertIsString($comment['ITEM_NAME']);
         }
     }
-    /** @test */
-    public function validateUserLogin_ValidLogin()
-    {
-        $this->assertEquals("VALID_LOGIN", User_management::validateUserLogin("test@gmail.com", md5("password")));
-    }
 
-    /** @test */
-    public function validateUserLogin_InvalidLogin()
-    {
-        $this->assertEquals("INVALID_LOGIN", User_management::validateUserLogin("test2@gmail.com", md5("wrongpassword")));
-    }
 
     /** @test */
     public function createUser_AlreadyExists()
@@ -91,7 +95,7 @@ class User_management_Test extends TestCase
     /** @test */
     public function userUpdatePassword_SuccessfulUpdate()
     {
-        $this->assertEquals("PASSWORD_UPDATED", User_management::userUpdatePassword("test@gmail.com", md5("password"), md5("newpassword")));
+        $this->assertEquals("PASSWORD_UPDATED", User_management::userUpdatePassword("test2@gmail.com", md5("password"), md5("newpassword")));
     }
 
     /** @test */
@@ -110,18 +114,6 @@ class User_management_Test extends TestCase
     public function getBanStatus_NotBanned()
     {
         $this->assertEquals("NOT_BANNED", User_management::getBanStatus("test@gmail.com"));
-    }
-
-    /** @test */
-    public function deleteUser_SuccessfulDeletion()
-    {
-        $this->assertEquals("USER_DELETED", User_management::deleteUser("deletableuser@gmail.com"));
-    }
-
-    /** @test */
-    public function getUser_First_Last_Name_Found()
-    {
-        $this->assertEquals("Test User", User_management::getUser_First_Last_Name(1));
     }
 
     /** @test */

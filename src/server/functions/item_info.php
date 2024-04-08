@@ -198,11 +198,11 @@ class Item_info
 		";
 
 		try {
-			$response = executePreparedQuery($query, array('ss', $STORE_ID, $STORE_ID)); 
+			$response = executePreparedQuery($query, array('ss', $STORE_ID, $STORE_ID));
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_ITEMS_IN_DATABASE";
-				} elseif (is_array($response[1]) && count($response[1]) >= 1) { 
+				} elseif (is_array($response[1]) && count($response[1]) >= 1) {
 					return $response[1];
 				}
 			}
@@ -255,7 +255,7 @@ class Item_info
     ";
 
 		try {
-			$response = executePreparedQuery($query, array()); 
+			$response = executePreparedQuery($query, array());
 			if ($response[0]) { // Check if query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_ITEMS_IN_DATABASE";
@@ -281,7 +281,7 @@ class Item_info
 			if ($response[0]) { // Query executed properly
 				if ($response[1] === "NO_DATA_RETURNED") {
 					return "NO_ITEMS_IN_DATABASE";
-				} elseif (is_array($response[1]) && count($response[1]) >= 1) { 
+				} elseif (is_array($response[1]) && count($response[1]) >= 1) {
 					return $response[1];
 				}
 			}
@@ -418,14 +418,60 @@ class Item_info
 	 */
 	public static function getAllCategories()
 	{
-		return GLOBAL_VARS::$CATEGORIES;
+		$query = "SELECT CATEGORY_NAME FROM CATEGORY_INFO;";
+		try {
+			$response = executePreparedQuery($query, array(''));
+			if ($response[0]) { // Query executed properly
+				// Just One Category , or multiple categories
+				if (is_array($response[1]) & array_key_exists("CATEGORY_NAME", $response[1])) {
+					return array($response[1]["CATEGORY_NAME"]);
+				}
+
+				if (is_array($response[1]) & is_array($response[1][0])) {
+					$categories = array();
+					foreach ($response[1] as $category) {
+						$categories[] = $category["CATEGORY_NAME"];
+					}
+					return $categories;
+				}
+				return $response[1];
+			}
+		} catch (Exception $e) {
+			echo "Error occurred, when using Database function to try to validate User.<br>";
+			echo $e->getMessage();
+		}
 	}
+	/**
+	 * Summary of checkCategoryExists
+	 * @param mixed $CATEGORY_NAME
+	 * @return bool|string
+	 *
+	 * Returns EXISTS or NOT_EXIST , if a CATEGORY_NAME with the provied name exists in the CATEGORY_INFO Table
+	 */
+	public static function checkCategoryExists($CATEGORY_NAME)
+	{
+		try {
+			$query = "SELECT CATEGORY_NAME FROM CATEGORY_INFO WHERE CATEGORY_NAME = ?";
+			$resp =  executePreparedQuery($query, array('s', $CATEGORY_NAME));
+			if ($resp[0]) {
+				if ($resp[1] == "NO_DATA_RETURNED") {
+					return "NOT_EXISTS";
+				}
+				return "EXISTS";
+			}
+			return "NOT_UPDATED";
+		} catch (Exception $e) {
+			return false;
+		}
+	}
+
+
 
 	/**
 	 * Summary of upvoteItem
 	 * @param mixed $ITEM_ID
 	 * @return bool|string
-	 * 
+	 *
 	 * Returns UPDATED or NOT_UPDATED, if was able to increment the upvote Counter
 	 */
 	public static function upvoteItem($ITEM_ID)
@@ -438,6 +484,33 @@ class Item_info
 				return "UPDATED";
 			}
 			return "NOT_UPDATED";
+		} catch (Exception $e) {
+			return false;
+		}
+	}
+	/**
+	 * Summary of addCategory
+	 * @param mixed $CATEGORY_NAME
+	 * @param mixed $CATEGORY_DESCRIPTION
+	 * @return bool|string
+	 *
+	 * Possible Return Values :
+	 * - CATEGORY_WITH_NAME_ALREADY_EXISTS
+	 * - ADDED
+	 * - NOT_ADDED
+	 */
+	public static function addCategory($CATEGORY_NAME, $CATEGORY_DESCRIPTION)
+	{
+		try {
+			if (self::checkCategoryExists($CATEGORY_NAME) == "EXISTS") {
+				return "CATEGORY_WITH_NAME_ALREADY_EXISTS";
+			}
+			$query = "INSERT INTO CATEGORY_INFO VALUES(?,?)";
+			$resp =  executePreparedQuery($query, array('ss', $CATEGORY_NAME, $CATEGORY_DESCRIPTION));
+			if ($resp[0]) {
+				return "ADDED";
+			}
+			return "NOT_ADDED";
 		} catch (Exception $e) {
 			return false;
 		}

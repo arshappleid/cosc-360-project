@@ -33,12 +33,12 @@ foreach ($items as $item) {
     echo "<h3>" . htmlspecialchars($item['ITEM_NAME']) . "</h3>";
     echo "<h1>" . htmlspecialchars($item['Item_Price']) . "$ at " .  $store_name . "</h1>";
     echo "<h4><b>" . "Upvotes :</b> " . htmlspecialchars($item['UPVOTES']) . "</h4>";
-    
+
     // Button container
     echo "<div class=\"button-container\">";
-    
+
     echo "<a href=\"product.php?ITEM_ID=" . urlencode($item['ITEM_ID']) . "&STORE_ID=" . urlencode($item['STORE_ID']) . "\" class=\"details-button\">See Product Details</a>";
-    
+
     if (isset($_SESSION['USER_EMAIL'])) {
         try {
             echo "<form action=\"./../server/upvoteItem.php\" method=\"POST\" class=\"upvote-form\">";
@@ -49,7 +49,7 @@ foreach ($items as $item) {
             echo "Error occurred while rendering upvote ID: " . $e;
         }
     }
-    
+
     echo "</div>"; // Close button container
     echo "</aside>";
 
@@ -67,7 +67,7 @@ foreach ($items as $item) {
         if (isset($comments['USER_ID'])) {
             $comments = [$comments]; // Wrap single comment in an array
         }
-        //added table headings, including adding another column for date time added. However, they are not showing up .  
+        //added table headings, including adding another column for date time added. However, they are not showing up .
         echo "<tr><th scope=\"col\">Username</th><th scope=\"col\">User Comment</th><th scope=\"col\">Date Added</th></tr>";
         foreach ($comments as $comment) {
             echo "<tr>";

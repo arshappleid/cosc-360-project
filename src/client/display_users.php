@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['ADMIN_EMAIL'])) {
+	header('Location: ./bad_navigation.php');
+}
+
 require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/admin_management.php");
 require_once("./../server/functions/login_tracking.php");

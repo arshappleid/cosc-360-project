@@ -1,27 +1,41 @@
 <?php
 
-echo "<div class = \"breadcrumb_box\">";
-// Get the current path
-$currentPath = $_SERVER["PHP_SELF"];
+function buildBreadcrumbs($baseLabel = 'login', $baseUrl = '/client')
+{
+    // Get the REQUEST_URI, and strip the query string if present
+    $uri = strtok($_SERVER['REQUEST_URI'], '?');
 
-// Split the path into parts
-$pathParts = explode('/', $currentPath);
+    // Split the URI into components
+    $parts = explode('/', $uri);
 
-unset($pathParts[0]); // Remove Src
-unset($pathParts[1]); // Remove Client
+    // Filter out empty values and the base directory
+    $parts = array_filter($parts, function ($value) use ($baseUrl) {
+        return $value !== '' && $value !== ltrim($baseUrl, '/');
+    });
 
-$breadcrumbs = [];
+    // Initialize breadcrumbs
+    $startUrl = $baseLabel . ".php";
+    $breadcrumbs = "<a href=\"$startUrl\">$baseLabel</a>";
+    $path = $baseUrl;
 
-// Build breadcrumbs
-foreach ($pathParts as $key => $part) {
-    // Build URL up to the current part
-    $part = str_replace('.php', '', $part); // remove .php file extension
-    $url = "client/" . implode('/', array_slice($pathParts, 0, $key + 1));
-    // Add to breadcrumbs
-    $breadcrumbs[] = "<a href='/$url'>$part</a>";
+    foreach ($parts as $part) {
+        // Decode URL-encoded string to normal string
+        $partName = urldecode($part);
+        // Construct the path for the breadcrumb link
+        $path .= '/' . $partName . ".php";
+
+        // Check if we are at the last part to avoid making the current page a link
+        if ($part !== end($parts)) {
+            $showName = ucfirst($partName);
+            $breadcrumbs .= " / <a href=\"$path\">$showName</a>";
+        } else {
+            // Display the current page name without a link
+            $breadcrumbs .= " / $partName";
+        }
+    }
+
+    return $breadcrumbs;
 }
 
-// Display breadcrumbs, separating them by " > "
-echo implode(" / ", $breadcrumbs);
-echo "</ul>";
-echo "</div>";
+// Example usage
+echo buildBreadcrumbs();

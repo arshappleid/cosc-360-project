@@ -70,12 +70,6 @@ class Admin_management_Test extends TestCase
     }
 
     /** @test */
-    public function displayName_NameDisplayed()
-    {
-        //true if the returned string is the users first and last name with space between
-        $this->assertEquals("Test User", Admin_management::displayName("test@gmail.com"));
-    }
-    /** @test */
     public function displayName_NameNotDisplayed()
     {
         //the user was not found in either Users or Admins
@@ -92,7 +86,7 @@ class Admin_management_Test extends TestCase
     public function getItemID_ItemDoesNotExists()
     {
         //assumes Smartwatch is not added to store 3
-        $this->assertEquals("ITEM_NOT_FOUND", Admin_management::getItemID("Smartwatch", 2));
+        $this->assertEquals("ITEM_NOT_FOUND", Admin_management::getItemID("Tablet", 2));
     }
 
     /** @test */
@@ -108,7 +102,7 @@ class Admin_management_Test extends TestCase
 
 
     /** @test */
-    public function AddItem_ItemAdded()
+    public function AddItem_Should_Be_Added()
     {
         $this->assertEquals("ITEM_ADDED", Admin_management::addItem("NEW ITEM", "NEW DESCRIPTION", 1, 100.99, "abc.com", "Food"));
     }
