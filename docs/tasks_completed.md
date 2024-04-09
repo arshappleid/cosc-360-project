@@ -42,6 +42,7 @@ This document testifies, all the important tasks / milestones completed by all t
 - Account Creation Page Functionality
 - Account Page Functionality
   - Ability to edit your own users information
+  - Ability to edit profile picture
 - Front End Framework for the entire site
 - Contributed to the ``src/server/functions/*``
   - wrote more detailed functions as requirements became more apperent
@@ -58,6 +59,7 @@ This document testifies, all the important tasks / milestones completed by all t
 - Programmed the User list page
 - Admin Panel Front end
 - Home page frontend.
+  - tweaked home page backend to actually work as intended
 - Contributed to a lot of product.php frontend
 - Most of the general styling of the website
 - The HTML and CSS framework that is used on every page
@@ -70,6 +72,7 @@ This document testifies, all the important tasks / milestones completed by all t
 - about 80% of the css
 - table styling
 - The whole sites top navigation
+- dynamic loading of profile pictures over the entire site
 
 #### Max Bigwood
 
