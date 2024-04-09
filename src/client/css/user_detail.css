@@ -99,3 +99,14 @@ article {
     border-radius: 10px;
     padding: 1em;
 }
+
+.go-to-item-button{
+    background-color: var(--primary-color);
+    margin-left: 1em;
+    border: 0px;
+    border-radius: 5px;
+}
+
+.go-to-item-button:hover{
+    background-color: var(--hover-color);
+}

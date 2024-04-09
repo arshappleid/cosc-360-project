@@ -46,8 +46,6 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			<?php
 			if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
 				if (isset($_SESSION['ADMIN_EMAIL'])) {
-					echo "<a href=\"./home/add_items.php\" class=\"admin-login-button\">";
-					echo "Admin Panel</a>";
 				}
 				echo "<a href=\"../server/logout.php\" class=\"login-button\">";
 				//echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";

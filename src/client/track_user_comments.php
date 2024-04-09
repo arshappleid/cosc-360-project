@@ -101,7 +101,6 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 							//code for generating a store ID for the item 
 							$ITEM_ID = $user_comment['ITEM_ID'];
 							$storeIDForItem = item_info::getStoreId_forItem($ITEM_ID);
-							echo "<a href=home/product.php?ITEM_ID=" . $ITEM_ID . "&STORE_ID=" . $storeIDForItem . ">Go to item</a>";
 																
 							echo "<img src=\"" . $testUserImage . "\" class='user-image'></div>";
 							echo "<p class=\"comment-text\">" . $user_comment['COMMENT_TEXT'] . "</p>";
@@ -111,6 +110,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 							$formatted_time = $datetime->format('g:ia');
 							$formatted_datetime = $formatted_date . "<br>at " . $formatted_time;
 							echo "<div class=\"date_time_comment_added\">" . $formatted_datetime . "</div>";
+							echo "<button class=\"go-to-item-button\"><a href=home/product.php?ITEM_ID=" . $ITEM_ID . "&STORE_ID=" . $storeIDForItem . ">Go to item</a></button>";
 						echo "</div>";
 						}
 					} else {

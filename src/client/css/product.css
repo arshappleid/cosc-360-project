@@ -68,10 +68,17 @@ h1 {
     padding-bottom: 0.125em;
 }
 #comment-button{
-    height: 2em;
+    height: 4em;
+    width: 12em;
+    border-radius: 10px;
     background-color: var(--primary-color);
     color: var(--secondary-color);
     border: none;
+}
+
+#comment-button:hover{
+    background-color: var(--hover-color);
+
 }
 
 .right{
@@ -120,10 +127,19 @@ h1 {
 }
 #add-comment-text{
     width: 100%;
+    height: 4em;
+    border-radius: 10px;
 }
 #add-comment-form button{
     color: var(--secondary-color);
     background-color: var(--primary-color);
+    height: 4em;
+    width: 12em;
+    border-radius: 10px;
+}
+
+#add-comment-form button:hover{
+    background-color: var(--hover-color);
 }
 
 
@@ -188,4 +204,5 @@ canvas{
 #tracker-name{
     text-align: center;
 }
+
 

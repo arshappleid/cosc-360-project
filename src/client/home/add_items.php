@@ -44,8 +44,6 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			if (isset($_SESSION['ADMIN_EMAIL'])) {
 				//echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";
 				echo "Logout</a>";
-				echo "<a href=\"../display_users.php\"
-				class=\"admin-login-button\">Users</a>";
 			} else {
 				echo "Login</a>";
 			}

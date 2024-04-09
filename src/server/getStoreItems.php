@@ -5,6 +5,7 @@ global $COMMENT_DATE_TIME_FORMAT;
 include '../server/functions/item_info.php';
 require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
+require_once("./../server/functions/admin_management.php");
 require_once("./GLOBAL_VARS.php");
 $storeId = $_GET['SELECTED_STORE'];
 //print_r($storeId);
