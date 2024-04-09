@@ -49,10 +49,10 @@ foreach ($item_data as $item) {
     // Comment form and display section
     echo "<div id=\"form-container\">";
         echo "<button id=\"comment-button\">Show Comment Form</button>";
-        echo '<form id="add-comment-form" action="../server/addcomment.php" method="post">' .
+        echo '<form id="add-comment-form" action="./../../server/addcomment.php" method="post">' .
             '<input type="hidden" id="item-id" name="ITEM_ID" value="' . $item_id . '"/>' .
             '<input type="hidden" id="user-email" name="USER_EMAIL" value="' . $userEmail . '"/>' .
-            '<textarea id="add-comment-text" name="COMMENT_TEXT"></textarea>' .
+            '<textarea id="add-comment-text" name="COMMENT_TEXT" placeholder="Add new comment..."></textarea>' .
             '<button type="submit">Add Comment</button>' .
             '</form>';
     echo "</div>";
@@ -67,8 +67,17 @@ foreach ($item_data as $item) {
                 echo "<div class=\"user-info\"><div class=\"user-id\">" . User_management::getUser_First_Last_Name($comment['USER_ID']) . "</div>";
                 echo "<img src=\"" . $testUserImage . "\" class='user-image'></div>";
                 echo "<p class=\"comment-text\">" . htmlspecialchars($comment['COMMENT_TEXT']) . "</p>";
+
+
+                $datetime = new DateTime($comment['DATE_TIME_ADDED']);
+				// Format the date and time separately
+			    $formatted_date = $datetime->format('F j Y');
+				$formatted_time = $datetime->format('g:ia');
+				$formatted_datetime = $formatted_date . "<br>at " . $formatted_time;
+				echo "<div class=\"date_time_comment_added\">" . $formatted_datetime . "</div>";
             echo "</div>";
-        }
+        }//a
+
     } else {
         echo "<h4>No Comments Yet.</h4>";
     }

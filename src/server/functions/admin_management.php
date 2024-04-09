@@ -1,7 +1,7 @@
 <?php
 
 include_once 'db_connection.php';
-include_once 'user_management.php';
+include_once 'login_tracking.php';
 
 class Admin_management
 {
@@ -336,7 +336,7 @@ class Admin_management
         $userId = $user['USER_ID'];
         
         // Get login count for current month
-        $loginCount = login_tracking::getCountForCurrentMonth($userId);
+        $loginCount = Login_tracking::getCountForCurrentMonth($userId);
         
         // Check if login count is greater than 0
         if ($loginCount > 0) {
@@ -360,7 +360,7 @@ public static function getInactiveUsers(){
         $userId = $user['USER_ID'];
         
         // Get login count for current month
-        $loginCount = login_tracking::getCountForCurrentMonth($userId);
+        $loginCount = Login_tracking::getCountForCurrentMonth($userId);
         
         // Check if login count is 0
         if ($loginCount === 0) {

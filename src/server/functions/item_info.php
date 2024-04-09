@@ -515,4 +515,33 @@ class Item_info
 			return false;
 		}
 	}
+
+	//iterates over all stores STORE_IDs, checking if there is a price input for an $ITEM_ID. It returns the first STORE_ID found. 
+	//returns "ITEM_NOT_EXISTS" if item not found in db
+	//returns "ITEM_NOT_FOUND_IN_STORES" if the item exists, but is not in any store 
+	public static function getStoreID_forItem($ITEM_ID){
+		try{
+			if (self::itemExists($ITEM_ID)=="ITEM_NOT_EXISTS"){
+				return "ITEM_NOT_EXISTS";
+			}
+			$stores = item_info::getAllStoreList();
+			if (is_array($stores) && count($stores) >= 1){
+				forEach($stores as $store){
+					$STORE_ID = $store['STORE_ID'];
+					$itemPriceAtStore = item_info::getCurrentPrice($ITEM_ID,$STORE_ID);
+					//checks if there is a valid input for getCurrentPrice for the item id and store id - ie, if the item exists at store 
+					if ($itemPriceAtStore != "INVALID_ITEM_ID" && $itemPriceAtStore != "NO_PRICE_FOUND" ){
+							//returns the first  store ID that item is found at
+							return $STORE_ID;
+					}
+				}
+			}
+			//returns message if not found in any store
+			return "ITEM_NOT_FOUND_IN_STORES";
+		}catch(Exception $e){
+			error_log("Error occurred finding StoreIDs for an Item: " . $e->getMessage());
+			echo "Error occurred finding StoreIDs for an Item <br>";
+			echo $e->getMessage();
+		}	
+	}
 }

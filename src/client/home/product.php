@@ -59,12 +59,14 @@ require_once("./../../server/GLOBAL_VARS.php");
 		<div>
 			<nav>
 				<ul>
-					<li><a href="../home.php">Home</a></li>
+					<li><a href="home.php">Home</a></li>
 					<?php
 					if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
-						echo ">Account</a></li>";
+						echo "<li><a href=\"account_page.php\">Account</a></li>";
 					} else {
-						echo ">Admin Login</a></li>\"";
+						echo "<li><a href=\"create_account.php\">Create Account</a></li>
+						<li><a href=\"login.php\">Login</a></li>
+						<li><a href=\"admin_login.php\">Admin Login</a></li>";
 					}
 					?>
 				</ul>

@@ -90,18 +90,49 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 				$user_comments = User_management::getAllUserCommentsDescending($user_id);
 				if (is_array($user_comments)){
 
-					echo "<div class=\"all-comments\">";
+					echo "<div class=\"all-user-comments\">";
 					echo "All Comments by " . $user['Email'];
-
-					foreach($user_comments as $user_comment){
+					//checking if $user_comments is multidimensional - ie if there is more than 1 comment 
+					if (isset($user_comments[0]) && is_array($user_comments[0])) {
+						foreach($user_comments as $user_comment){
+							echo "<div class=\"comment-container\">";
+							echo "<div class=\"user-info\"><div class=\"user-id\">" . User_management::getUser_First_Last_Name($user_id) . "</div>";
+							
+							//code for generating a store ID for the item 
+							$ITEM_ID = $user_comment['ITEM_ID'];
+							$storeIDForItem = item_info::getStoreId_forItem($ITEM_ID);
+							echo "<a href=home/product.php?ITEM_ID=" . $ITEM_ID . "&STORE_ID=" . $storeIDForItem . ">Go to item</a>";
+																
+							echo "<img src=\"" . $testUserImage . "\" class='user-image'></div>";
+							echo "<p class=\"comment-text\">" . $user_comment['COMMENT_TEXT'] . "</p>";
+							$datetime = new DateTime($user_comment['DATE_TIME_ADDED']);
+							// Format the date and time separately
+							$formatted_date = $datetime->format('F j Y');
+							$formatted_time = $datetime->format('g:ia');
+							$formatted_datetime = $formatted_date . "<br>at " . $formatted_time;
+							echo "<div class=\"date_time_comment_added\">" . $formatted_datetime . "</div>";
+						echo "</div>";
+						}
+					} else {
+						// Directly use the single comment for users with only one comment
+						$user_comment = $user_comments;
 						echo "<div class=\"comment-container\">";
-                        echo "<div class=\"user-info\"><div class=\"user-id\">" . User_management::getUser_First_Last_Name($user_id) . "</div>";
-						echo "<a href=product.php?ITEM_ID=" . $user_comment["ITEM_ID"] . ">Go to item</a>";
+						echo "<div class=\"user-info\"><div class=\"user-id\">" . User_management::getUser_First_Last_Name($user_id) . "</div>";
+						$ITEM_ID = $user_comment['ITEM_ID'];
+						$storeIDForItem = item_info::getStoreId_forItem($ITEM_ID);
+						echo "<a href=home/product.php?ITEM_ID=" . $ITEM_ID . "&STORE_ID=" . $storeIDForItem . ">Go to item</a>";
 						echo "<img src=\"" . $testUserImage . "\" class='user-image'></div>";
-                        echo "<p class=\"comment-text\">" . $user_comment['COMMENT_TEXT'] . "</p>";
-						echo "<div class=\"date_time_comment_added\">" . $user_comment['DATE_TIME_ADDED'] . "</div>";
-                    echo "</div>";
+						echo "<p class=\"comment-text\">" . $user_comment['COMMENT_TEXT'] . "</p>";
 
+						$datetime = new DateTime($user_comment['DATE_TIME_ADDED']);
+						// Format the date and time separately
+						$formatted_date = $datetime->format('F j Y');
+						$formatted_time = $datetime->format('g:ia');
+						$formatted_datetime = $formatted_date . "<br>at " . $formatted_time;
+						echo "<div class=\"date_time_comment_added\">" . $formatted_datetime . "</div>";
+
+			
+						echo "</div>";
 					}
 				}
 				else{

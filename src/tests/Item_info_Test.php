@@ -178,4 +178,27 @@ class Item_info_Test extends TestCase
         $resp = Item_info::checkCategoryExists("NOT_EXISTS");
         $this->assertEquals("NOT_EXISTS", $resp);
     }
+
+    /** @test  */
+    public function getStoreID_forItem_itemFoundInStores()
+    {
+        $resp = Item_info::getStoreID_forItem("1");
+        $this->assertEquals("1", $resp);
+    }
+    /** @test  */
+    public function getStoreID_forItem_itemNotFoundInStores()
+    {   
+
+        //assuming item 12 has not had any entries put in 
+        //this will break if every item ID in the store is given a price entry 
+        $resp = Item_info::getStoreID_forItem("12");
+        $this->assertEquals("ITEM_NOT_FOUND_IN_STORES", $resp);
+    }
+    /** @test  */
+    public function getStoreID_forItem_itemNotExists()
+    {
+        $resp = Item_info::getStoreID_forItem("99");
+        $this->assertEquals("ITEM_NOT_EXISTS", $resp);
+    }
 }
+
