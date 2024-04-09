@@ -187,8 +187,11 @@ class Item_info_Test extends TestCase
     }
     /** @test  */
     public function getStoreID_forItem_itemNotFoundInStores()
-    {
-        $resp = Item_info::getStoreID_forItem("99");
+    {   
+
+        //assuming item 12 has not had any entries put in 
+        //this will break if every item ID in the store is given a price entry 
+        $resp = Item_info::getStoreID_forItem("12");
         $this->assertEquals("ITEM_NOT_FOUND_IN_STORES", $resp);
     }
     /** @test  */

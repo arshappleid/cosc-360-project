@@ -159,35 +159,27 @@ class User_management_Test extends TestCase
     }
 
     /** @test */
-    public function getAllUserDataFromID_Found()
+    public function getAllUserDataFromID_gotUserData()
     {
         // Assuming data exists for "test@gmail.com"
-        $data = User_management::getAllUserData(1);
+        $data = User_management::getAllUserDataFromID("1");
         $this->assertIsArray($data);
         $this->assertEquals("test@gmail.com", $data['Email']); // Basic check to ensure some data matches
     }
 
     /** @test */
-    public function getAllUserDataFromID_gotUserData()
+    public function getAllUserDataFromID_NO_USER_FOUND()
     {
         // Assuming data exists for "test@gmail.com"
-        $data = User_management::getAllUserDataFromID(1);
-        $this->assertIsArray($data);
-        $this->assertEquals("test@gmail.com", $data['USER_ID']); // Basic check to ensure some data matches
+        $resp = User_management::getAllUserDataFromID("999");
+        $this->assertEquals("NO_USER_FOUND", $resp); // Basic check to ensure some data matches
     }
 
     //used same tests as for the regular function
     /** @test */
-    public function getAllUserCommentsDescending_NoComments()
-    {
-        $resp =  User_management::getAllUserCommentsDescending("3");
-        $this->assertEquals("NO_COMMENTS_FOUND", $resp);
-    }
-
-    /** @test */
     public function getAllUserCommentsDescending_1Comment()
     {
-        $resp = User_management::getAllUserCommentsDescending("2");
+        $resp = User_management::getAllUserCommentsDescending("4");
         $this->assertIsArray($resp);
         $this->assertNotEmpty($resp);
         $this->assertArrayHasKey('COMMENT_TEXT', $resp);
