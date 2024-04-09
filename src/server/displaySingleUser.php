@@ -37,7 +37,7 @@ if (is_array($users)) {
     <button class="yellowbutton" type="submit">Update Password</button>
 </form>
 
-<form id="updatePfpForm" method="POST" action="../server/updateUser.php" enctype="multipart/form-data">
+<form id="updatePfpForm" method="POST" action="../server/updateUserPicture.php" enctype="multipart/form-data">
     <?php
         echo "<div class=\"image-container\">";
         echo "<a class=\"pfp-text\">Profile Picture: </a>";
@@ -45,7 +45,7 @@ if (is_array($users)) {
         echo "</div>";
     ?>
     <label for="profilePicture" class="visually-hidden">Upload Profile Picture:</label>
-    <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+    <input type="file" id="profilePicture" name="image" accept="image/*">
     <button class="yellowbutton" type="submit">Update Profile Picture</button>
 </form>
 <?php

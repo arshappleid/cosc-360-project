@@ -154,14 +154,14 @@ function updateImage($table, $whereCol, $whereValue, $uploadDir = "images/temp")
     if ($check !== false) {
       // Assuming you want to store the image's content in the database,
       // It's more common to store just a reference to the file location.
-        $imgContent = addslashes(file_get_contents($destinationPath));
+        $imgContent = file_get_contents($destinationPath);
 
       // Make sure to protect against SQL injection
         $query = "UPDATE $table SET DISPLAY_IMAGE = ? WHERE $whereCol = ?";
 
         if ($stmt = $connection->prepare($query)) {
           // Bind the parameters
-            $stmt->bind_param("bs", $imgContent, $whereValue);
+            $stmt->bind_param("ss", $imgContent, $whereValue);
 
           // Execute the prepared statement
             if ($stmt->execute()) {
@@ -198,14 +198,14 @@ function updateImage2($table, $whereCol, $whereValue, $uploadDir = "images/temp"
     if ($check !== false) {
       // Assuming you want to store the image's content in the database,
       // It's more common to store just a reference to the file location.
-        $imgContent = addslashes(file_get_contents($_FILES['image']['name']));
+        $imgContent = file_get_contents($_FILES['image']['name']);
 
       // Make sure to protect against SQL injection
         $query = "UPDATE $table SET DISPLAY_IMAGE = ? WHERE $whereCol = ?";
 
         if ($stmt = $connection->prepare($query)) {
           // Bind the parameters
-            $stmt->bind_param("bs", $imgContent, $whereValue);
+            $stmt->bind_param("ss", $imgContent, $whereValue);
 
           // Execute the prepared statement
             if ($stmt->execute()) {
