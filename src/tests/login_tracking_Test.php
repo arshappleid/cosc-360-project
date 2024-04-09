@@ -6,10 +6,10 @@ require_once __DIR__ . '/../server/functions/login_tracking.php';
 class login_tracking_Test extends TestCase
 {
     /** @test */
-    public function AddDefaultForCurrentMonth_ValidUser()
+    public function AddDefaultForCurrentMonth_ValidUserWithLoginCountSet()
     {
         $resp = Login_tracking::AddDefaultForCurrentMonth("1");
-        $this->assertEquals($resp, 'ADDED');
+        $this->assertEquals($resp, 'NOT_ADDED');
     }
 
     /** @test */
