@@ -45,9 +45,6 @@ require_once("./../server/GLOBAL_VARS.php");
           <label for="lastName" class="visually-hidden">Last Name</label>
           <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
 
-          <label for="profilePiture" class="visually-hidden">Upload Profile Picture</label>
-          <input type="file" id="profilePicture" name="profilePicture" placeholder="Upload Profile Picture" accept="image/*">
-
           <div class="button-container">
             <?php
             if (isset($_SESSION['MESSAGE'])) {
@@ -93,7 +90,6 @@ require_once("./../server/GLOBAL_VARS.php");
       var password2 = document.getElementById("password2").value;
       var firstName = document.getElementById("firstName").value;
       var lastName = document.getElementById("lastName").value;
-      var profilePicture = document.getElementById("profilePicture").value;
 
       if (password !== password2) {
         alert("Passwords Don't Match");

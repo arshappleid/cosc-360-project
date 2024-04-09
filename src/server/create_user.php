@@ -1,6 +1,7 @@
 <?php
 
 require_once './functions/user_management.php';
+require_once './functions/db_connection.php';
 session_start();
 try {
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -12,7 +13,7 @@ try {
 		if (isset($firstName) && isset($lastName) && isset($email) && isset($hashedPassword)) {
 			if (User_management::createUser($email, $firstName, $lastName, $hashedPassword) == "USER_CREATED") {
 				$_SESSION['EMAIL'] = $email;
-				header('Location: ../client/home.php');
+				header('Location: ../client/login.php');
 				exit();
 			} else {
 				$_SESSION['MESSAGE'] = 'error on user creation';
