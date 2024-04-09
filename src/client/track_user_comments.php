@@ -96,7 +96,12 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 					foreach($user_comments as $user_comment){
 						echo "<div class=\"comment-container\">";
                         echo "<div class=\"user-info\"><div class=\"user-id\">" . User_management::getUser_First_Last_Name($user_id) . "</div>";
-						echo "<a href=product.php?ITEM_ID=" . $user_comment["ITEM_ID"] . ">Go to item</a>";
+						
+						//code for generating a store ID for the item 
+						$ITEM_ID = $user_comment['ITEM_ID'];
+						$storeIDForItem = item_info::getStoreId_forItem($ITEM_ID);
+						echo "<a href=home/product.php?ITEM_ID=" . $ITEM_ID . "&STORE_ID=" . $storeIDForItem . ">Go to item</a>";
+															
 						echo "<img src=\"" . $testUserImage . "\" class='user-image'></div>";
                         echo "<p class=\"comment-text\">" . $user_comment['COMMENT_TEXT'] . "</p>";
 						echo "<div class=\"date_time_comment_added\">" . $user_comment['DATE_TIME_ADDED'] . "</div>";
