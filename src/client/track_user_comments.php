@@ -90,7 +90,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 				$user_comments = User_management::getAllUserCommentsDescending($user_id);
 				if (is_array($user_comments)){
 
-					echo "<div class=\"all-comments\">";
+					echo "<div class=\"all-user-comments\">";
 					echo "All Comments by " . $user['Email'];
 					//checking if $user_comments is multidimensional - ie if there is more than 1 comment 
 					if (isset($user_comments[0]) && is_array($user_comments[0])) {
@@ -105,7 +105,12 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 																
 							echo "<img src=\"" . $testUserImage . "\" class='user-image'></div>";
 							echo "<p class=\"comment-text\">" . $user_comment['COMMENT_TEXT'] . "</p>";
-							echo "<div class=\"date_time_comment_added\">" . $user_comment['DATE_TIME_ADDED'] . "</div>";
+							$datetime = new DateTime($user_comment['DATE_TIME_ADDED']);
+							// Format the date and time separately
+							$formatted_date = $datetime->format('F j Y');
+							$formatted_time = $datetime->format('g:ia');
+							$formatted_datetime = $formatted_date . "<br>at " . $formatted_time;
+							echo "<div class=\"date_time_comment_added\">" . $formatted_datetime . "</div>";
 						echo "</div>";
 						}
 					} else {
@@ -118,7 +123,15 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 						echo "<a href=home/product.php?ITEM_ID=" . $ITEM_ID . "&STORE_ID=" . $storeIDForItem . ">Go to item</a>";
 						echo "<img src=\"" . $testUserImage . "\" class='user-image'></div>";
 						echo "<p class=\"comment-text\">" . $user_comment['COMMENT_TEXT'] . "</p>";
-						echo "<div class=\"date_time_comment_added\">" . $user_comment['DATE_TIME_ADDED'] . "</div>";
+
+						$datetime = new DateTime($user_comment['DATE_TIME_ADDED']);
+						// Format the date and time separately
+						$formatted_date = $datetime->format('F j Y');
+						$formatted_time = $datetime->format('g:ia');
+						$formatted_datetime = $formatted_date . "<br>at " . $formatted_time;
+						echo "<div class=\"date_time_comment_added\">" . $formatted_datetime . "</div>";
+
+			
 						echo "</div>";
 					}
 				}
