@@ -110,3 +110,10 @@ article {
 .go-to-item-button:hover{
     background-color: var(--hover-color);
 }
+
+.pfp-image{
+    object-fit: contain;
+    height: 10em;
+    width: 10em;
+    border-radius: 50%;
+}

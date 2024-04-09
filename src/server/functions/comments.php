@@ -153,34 +153,37 @@ class Comments
 		return !empty($data);
 	}
 	public static function getAllCommentsForItemDescending($Item_Id)
-	{
-		if (Item_info::itemExists($Item_Id) == "ITEM_NOT_EXISTS") {
-			return "ITEM_NOT_EXISTS";
-		}
+{
+    if (Item_info::itemExists($Item_Id) == "ITEM_NOT_EXISTS") {
+        return "ITEM_NOT_EXISTS";
+    }
 
-		$query = "SELECT * FROM Comments WHERE ITEM_ID = ? ORDER BY DATE_TIME_ADDED DESC";
-		try {
-			$response = executePreparedQuery($query, array('s', $Item_Id));
+    $query = "SELECT * FROM Comments WHERE ITEM_ID = ? ORDER BY DATE_TIME_ADDED DESC";
+    try {
+        $response = executePreparedQuery($query, array('s', $Item_Id));
 
-			if ($response[0] === true) {
-				if (is_array($response[1])) {
-					// Valid Response
-					if (count($response[1]) == 0) {
-						return "NO_COMMENTS_ADDED_YET";
-					} elseif (!is_array($response[1][0])) { // if the first element is not an array
-						return array($response[1]);
-					}
+        if ($response[0] === true) {
+            if (is_array($response[1])) {
+                // Valid Response
+                if (count($response[1]) == 0) {
+                    return "NO_COMMENTS_ADDED_YET";
+                } 
+                
+                if (!is_array($response[1][0])) { 
+                    return array($response[1]); 
+                }
 
-					return $response[1];
-				} else {
-					return "NO_COMMENTS_ADDED_YET";
-				}
-			}
-		} catch (Exception $e) {
-			echo "Error occurred when using Database public static function to try to validate User.<br>";
-			echo $e->getMessage();
-		}
+                return $response[1];
+            } else {
+                return "NO_COMMENTS_ADDED_YET";
+            }
+        }
+    } catch (Exception $e) {
+        echo "Error occurred when using Database public static function to try to validate User.<br>";
+        echo $e->getMessage();
+    }
 
-		return !empty($data);
-	}
+    return "UNEXPECTED_ERROR";
+}
+
 }

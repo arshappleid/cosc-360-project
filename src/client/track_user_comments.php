@@ -78,7 +78,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 					echo "<tr><th scope=\"row\">First Name</th><td>" . $user['First_Name'] . "</td></tr>";
 					echo "<tr><th scope=\"row\">Last Name</th><td>" . $user['Last_Name'] . "</td></tr>";
 					echo "<tr><th scope=\"row\">Email</th><td>" . $user['Email'] . "</td></tr>";
-					echo "<tr><th scope=\"row\">Profile Picture</th><td><img src=\"./../server/getUserImages.php?USER_ID=" . urlencode($user['USER_ID']) . "\" alt=\"NO IMAGE IN DATABASE\"></td></tr>";
+					echo "<tr><th scope=\"row\">Profile Picture</th><td><img  class= \"pfp-image\" src=\"./../server/getUserImages.php?USER_ID=" . urlencode($user['USER_ID']) . "\" alt=\"NO IMAGE IN DATABASE\"></td></tr>";
 					echo "<tr><th scope=\"row\">Banned Status</th><td>" . $user['BANNED_STATUS'] . "</td></tr>";
 
 					echo "</table></div>";
@@ -102,7 +102,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 							$ITEM_ID = $user_comment['ITEM_ID'];
 							$storeIDForItem = item_info::getStoreId_forItem($ITEM_ID);
 																
-							echo "<img src=\"" . $testUserImage . "\" class='user-image'></div>";
+							echo "<img src=\"./../server/getUserImages.php?USER_ID=" . $user_id . "\" class='user-image'></div>";
 							echo "<p class=\"comment-text\">" . $user_comment['COMMENT_TEXT'] . "</p>";
 							$datetime = new DateTime($user_comment['DATE_TIME_ADDED']);
 							// Format the date and time separately

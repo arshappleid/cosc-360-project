@@ -60,12 +60,15 @@ foreach ($item_data as $item) {
     // Comments display
     echo "<div class=\"second\">";
         echo "<div class=\"all-comments\">";
-            $comments = Comments::getAllCommentsForItemDescending($item['ITEM_ID']);
+            $comments = Comments::getAllCommentsForItem($item['ITEM_ID']);
     if (is_array($comments) && count($comments) > 0) {
+        if (isset($comments['USER_ID'])) {
+            $comments = [$comments]; // Wrap single comment in an array
+        }
         foreach ($comments as $comment) {
             echo "<div class=\"comment-container\">";
                 echo "<div class=\"user-info\"><div class=\"user-id\">" . User_management::getUser_First_Last_Name($comment['USER_ID']) . "</div>";
-                echo "<img src=\"" . $testUserImage . "\" class='user-image'></div>";
+                echo "<img src=\"./../../server/getUserImages.php?USER_ID=" . $comment['USER_ID'] . "\" class='user-image'></div>";;
                 echo "<p class=\"comment-text\">" . htmlspecialchars($comment['COMMENT_TEXT']) . "</p>";
 
 

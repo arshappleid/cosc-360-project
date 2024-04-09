@@ -89,4 +89,21 @@ label {
   #updateFirstNameForm{
     margin-top: 1em;
   }
+
+  .image-container {
+    display: flex;
+    align-items: center; /* This vertically centers the content */
+    height: 100%; /* Ensure the container has a defined height */
+  }
   
+  .user-image{
+    margin-left: 1em;
+    object-fit: contain;
+    height: 4em;
+    width: 4em;
+    border-radius: 50%;
+}
+
+.pfp-text{
+  margin-left: 20%;
+}

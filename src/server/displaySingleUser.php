@@ -38,6 +38,12 @@ if (is_array($users)) {
 </form>
 
 <form id="updatePfpForm" method="POST" action="../server/updateUser.php" enctype="multipart/form-data">
+    <?php
+        echo "<div class=\"image-container\">";
+        echo "<a class=\"pfp-text\">Profile Picture: </a>";
+        echo "<img src=\"./../server/getUserImages.php?USER_ID=" . $users['USER_ID'] . "\" class='user-image'>";
+        echo "</div>";
+    ?>
     <label for="profilePicture" class="visually-hidden">Upload Profile Picture:</label>
     <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
     <button class="yellowbutton" type="submit">Update Profile Picture</button>

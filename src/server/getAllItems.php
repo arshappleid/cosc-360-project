@@ -61,10 +61,12 @@ foreach ($items as $item) {
             $comments = [$comments]; // Wrap single comment in an array
         }
         //added table headings, including adding another column for date time added. However, they are not showing up .
-        echo "<tr><th scope=\"col\">Username</th><th scope=\"col\">User Comment</th><th scope=\"col\">Date Added</th></tr>";
         foreach ($comments as $comment) {
             echo "<tr>";
-            echo "<td>" . htmlspecialchars(User_management::getUser_First_Last_Name($comment['USER_ID'])) . "</td>";
+            echo "<td>";
+            echo htmlspecialchars(User_management::getUser_First_Last_Name($comment['USER_ID']));
+            echo "<br><img src=\"./../server/getUserImages.php?USER_ID=" . $comment['USER_ID'] . "\" class='user-image'>";
+            echo "</td>";
             echo "<td>" . htmlspecialchars($comment['COMMENT_TEXT']) . "</td>";
             try {
                 echo "<td>" . (new DateTime($comment['DATE_TIME_ADDED']))->format('d, M Y') . "</td>";
