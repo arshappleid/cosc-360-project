@@ -335,3 +335,8 @@ dl dd{
     min-width: auto;
 }
 
+.greeting-text{
+    color: white;
+    margin-top: 2em;
+    margin-left: 45%;
+}
