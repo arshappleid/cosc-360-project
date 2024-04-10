@@ -98,7 +98,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 									<label for="ITEM_EXTERNAL_LINK" class="visually-hidden">Item External Link</label>
 									<input type="text" name="ITEM_EXTERNAL_LINK" id="ITEM_EXTERNAL_LINK" placeholder="External Link">
 									<label for="ITEM_PRICE">Item Price $</label>
-									<input type="number" name="ITEM_PRICE" placeholder="10.99" step="1">
+									<input type="number" name="ITEM_PRICE" placeholder="10.99" step="0.01">
 									<?php
 									$stores = Item_info::getAllStoreList();
 									if (is_array($stores)) {
