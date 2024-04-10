@@ -1,13 +1,19 @@
 <?php
 session_start();
+require_once("./../server/functions/item_info.php");
+require_once("./../server/functions/admin_management.php");
+require_once("./../server/GLOBAL_VARS.php");
+
 if (!isset($_SESSION['ADMIN_EMAIL'])) {
 	header('Location: ./bad_navigation.php');
 }
-
-require_once("./../server/functions/item_info.php");
-require_once("./../server/functions/admin_management.php");
-require_once("./../server/functions/login_tracking.php");
-require_once("./../server/GLOBAL_VARS.php");
+//getting the user email from teh user ID via the get request, so the email doesnt have to be passed through the get request 
+if (isset($_GET["toggle_ban_userID"])) {
+	$bannedUserID = $_GET["toggle_ban_userID"];
+	$bannedUserEmail = User_management::getAllUserDataFromID($bannedUserID)['Email'];
+	Admin_management::toggleBanUserAccount($bannedUserEmail);
+    unset($_GET["toggle_ban_userID"]);
+}
 
 if (!isset($_SESSION['BREADCRUMBS'])) {
 	$_SESSION['BREADCRUMBS'] = array();
