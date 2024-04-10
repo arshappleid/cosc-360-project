@@ -7,4 +7,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$result = Item_info::upvoteItem(intval($ITEM_ID));
 }
 
-header("Location: ./../../client/home.php");
+header("Location: ./../client/home.php");
