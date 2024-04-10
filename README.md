@@ -1,3 +1,7 @@
+# COSC 360 Webserver Link
+
+https://cosc360.ok.ubc.ca/qfinocch/index.php
+
 # Project Overview and Requirements
 
 The **GroceryPriceTracker** website will allow registered users to engage in online tracking of item prices at different stores by entering and tracking items for given times and locations. Unregistered users will be able to view general price trends in real time. The goal is to produce a service that will allow users to track item prices in real time, set alerts and comment on items.  Functionality must exist for searching/categorizing items.  Additionally, unregistered users must be able to search and view item prices but not see the details of items. Registered users should be able to leave comments/feedback. Functionality must exist for searching/categorizing items.
