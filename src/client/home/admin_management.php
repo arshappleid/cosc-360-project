@@ -40,10 +40,11 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		<div class="headerblack">
 			<a href="home.php" class="home-button">Home</a>
 			<?php
+			$name = User_management::getUser_First_Last_Name(User_management::getUserID($_SESSION['USER_EMAIL']));
+			echo "<p class=\"greeting-text\"> Hello Admin :) , " . $name  . " </p>";
 			if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
 				echo "<div style = \"display:flex;\">";
 				echo "<a href=\"account_page.php\" class=\"login-button\">";
-				//echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";
 				echo "Account</a>";
 				echo "</div>";
 			} else {
