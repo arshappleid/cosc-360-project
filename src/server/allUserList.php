@@ -30,7 +30,11 @@ if (is_array($users)) {
             echo "<td>" . ($user['BANNED_STATUS'] == 1 ? "Banned" : "Active") . "</td>";
             echo "<td>" . $numComments;
             echo "</td>";
-	        echo "<td>" . "<button class = \"detail-button\"><a href=\"./display_users.php?ban_user=" . $user['Email'] . "\">Toggle Ban</a></button></td>";
+	        echo "<td>" ;
+            echo '<form action="../server/ban_user.php" method="post">' . 
+                    '<input type="hidden" name="userEmail" value="' . $user['Email'] . '">' .
+                    '<button type="submit" class="detail-button">Toggle Ban</button>' 
+                    .'</form></td>';
             echo "<td><button class = \"detail-button\"><a href=\"./track_user_comments.php?user_id=" . $user_id . "\">User Details</a></button></td>";
             echo "</tr>";
         }

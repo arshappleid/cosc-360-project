@@ -26,7 +26,6 @@ require_once("./../server/GLOBAL_VARS.php");
 	<div class="container">
 		<div class="headerblack">
 			<a href="home.php" class="home-button">Home</a><br>
-			<a href="admin_login.php" class="home-button">Admin Login</a>
 		</div>
 
 		<header class="headeryellow">
