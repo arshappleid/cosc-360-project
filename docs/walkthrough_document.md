@@ -10,17 +10,24 @@
       - You can also upvote a product, and by default, the product with the highest upvotes will show at the top. And if two products have the same votes, then the item that was added the latest will be shown at the top.
       - Since you are logged in as an admin, you can also add new comments or delete other users' comments.
       - Click on the `Manage Users` button to manage all the users that can access the website. Here once a user has been banned, he will not be allowed to access the website.
-        - Ban `test@gmail.com` user, and then go to `login.php` page and try logging in using `test@gmail.com` and `password` to test this functionality out.
+        - Ban `user@gmail.com` user, and then go to `login.php` page and try logging in using `user@gmail.com` and `password` to test this functionality out.
         - Over here you can also track how many times each user has logged in this month. This statistic will reset at the start of every month.
+        - You can click the `User Details` button to view all the selected users information and all the comments they have made.
+          - From the User Detail page you can go to the item they made the comment on's page.
         - At this point, you can also test out the breadcrumbs functionality to navigate back to previous pages.
+
 
    #### User Account Walkthrough
 
-   1. Navigate to `localhost/client/login.php`, and log in using `test@gmail.com` and `password` for the password.
+   1. Navigate to `localhost/client/login.php`, and log in using `user@gmail.com` and `password` for the password.
    2. The user primarily only has access to deleting their own comments and adding new ones. They can also upvote an item.
-   3. You can also try navigating to `localhost/client/display_users.php` from the URL search bar which is an admin website, and a user should not have access to. This will take you to the <u>bad navigation page</u>.
+   3. Users can also navigate to their account page once logged in.
+      - From there they can edit their own first and last name, password, and profile picture in the database.
+   4. You can also try navigating to `localhost/client/display_users.php` from the URL search bar which is an admin website, and a user should not have access to. This will take you to the <u>bad navigation page</u>.
 
    #### Guest User Walkthrough
 
    1. Guest users are allowed to view the Homepage, that gives them access to view all the prices, comments, and view all hot items at a store.
    2. At this point, you can click on the `Login` button and navigate to create a new User account.
+   3. Guests can then submit their name, email, and password to create an account.
+      - on succesful account creation they will be redirected to the log in page, or if an error message occurs they will be routed back to the create account page with an error.
