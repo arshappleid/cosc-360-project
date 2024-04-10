@@ -22,8 +22,16 @@ function parseIniFileBasedOnEnvironment()
 }
 
 // Usage
-$ENV_VAR = parseIniFileBasedOnEnvironment();
-$connection = mysqli_connect($ENV_VAR['HOST'], $ENV_VAR['USER'], $ENV_VAR['PASSWORD'], $ENV_VAR['DATABASE']);
+//$ENV_VAR = parseIniFileBasedOnEnvironment();
+//$connection = mysqli_connect($ENV_VAR['HOST'], $ENV_VAR['USER'], $ENV_VAR['PASSWORD'], $ENV_VAR['DATABASE']);
+
+$servername = "localhost";
+$username = "68424464";
+$password = "68424464";
+$dbname = "db_68424464";
+
+// Create connection
+$connection = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($connection->connect_error) {
