@@ -1,3 +1,3 @@
-Iphone 11, The New Iphone 11 , 100.99 , www.apple.com
-Iphone 12, The New Iphone 12 , 100.99 , www.apple.com
-Iphone 13, The New Iphone 13 , 1100.99 , www.apple.com
+NEW ITEM 1, Description of the ITEM , 10.99, apple.com,Electronics
+NEW ITEM 2, Description of the ITEM , 100.99, apple.com,Electronics
+NEW ITEM 3, Description of the ITEM , 5.99, apple.com,Electronics
