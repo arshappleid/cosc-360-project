@@ -7,9 +7,11 @@ try {
 		if (isset($_GET['CATEGORY_NAME'])) {
 			if ($_GET['CATEGORY_NAME'] != "" && $_GET['CATEGORY_DESCRIPTION'] != "") {
 				$resp = Item_info::addCategory(trim(($_GET['CATEGORY_NAME'])), trim($_GET['CATEGORY_DESCRIPTION']));
-				$_SESSION["message"] = $resp;
+				$_SESSION["message"] = str_replace("_", " ", $resp);
+				header('Location: ../client/home.php');
+			} else {
+				$_SESSION["message"] = "Cannot Add Empty Category Names";
 			}
-			$_SESSION["message"] = "Cannot Add Empty Category Names";
 		}
 	}
 } catch (Exception $e) {
