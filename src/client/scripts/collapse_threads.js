@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    $(".collapsible").each(function () {
-        $(this).on("click", function () {
+    function initializeCollapsibles() {
+        $(".collapsible").off("click").on("click", function () { // Turn off any existing click handlers to prevent duplicates
             var sibling = $(this).prev().children().first().next().children().first();
             var siblings = [];
             while (sibling.length !== 0) {
@@ -11,7 +11,7 @@ $(document).ready(function () {
             }
             if (siblings.length === 0) return;
             siblings.forEach((content) => {
-                if ($(content).hasClass("hidden_comments")) { // Correctly check for the class
+                if ($(content).hasClass("hidden_comments")) {
                     $(content).toggle(); // This will handle showing and hiding
                 }
             });
@@ -21,9 +21,19 @@ $(document).ready(function () {
                 this.innerHTML = "Show All Comments";
             }
         });
+    }
+
+    initializeCollapsibles();
+
+    $(window).on("pageshow", function(event) {
+        if (event.originalEvent.persisted) {
+            initializeCollapsibles(); 
+        }
     });
+
     console.log("Script executed");
 });
+
 
 
 
