@@ -4,6 +4,10 @@ require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
 require_once("./../server/GLOBAL_VARS.php");
 
+if (!isset($_SESSION['ADMIN_EMAIL'])) {
+	header('Location: ./bad_navigation.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
