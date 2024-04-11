@@ -7,10 +7,10 @@ function parseIniFileBasedOnEnvironment()
 
     switch ($env) {
         case 'LOCAL':
-            $filename = '/var/www/html/local.env';
+            $filename = '../../local.env';
             break;
         default:
-            $filename = '/var/www/html/server.env';
+            $filename = '../../server.env';
             break;
     }
 
