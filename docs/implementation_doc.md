@@ -48,3 +48,34 @@ public static function itemExists($ITEM_ID){
 
 ### Mobile User Requirements
 
+
+
+### Search and Hot Threads
+
+This feature primarly works by Loading all the results from the server, then filtering them on client side to filter results by search text. The filtering happens in the ```scripts/home.js``` file which filters all the results using the ```filterStoreItems()``` function. The Only time the Client Side requests new data from the server side is when the client switches between different stores. 
+
+
+
+### Switching Between Different forms when Adding items
+
+The add Items page gives the admin option to add items in bulk , add items one by one , and also add a new category. The way we switch between these forms is by Hiding and Showing the appropriate forms by using jQuery Show and hide functions , upon selection of the appropriate radio buttons.
+
+### Upvote Item
+
+Since every time a user / admin upvotes an item , it submits a GET request which updates the new upvote count in the database. And Since the ```home.php``` is setup in a way that it always displays records in Descending order as per the SQL query , upon reloading of the page the items with the highest upvote will bubble upto to the top.
+
+### Price Chart
+
+To generate the price chart we utilized ChartJs in ```server/priceChart.js``` which expects a 3D array of prices and charts which is returned by the ```parsed_GetAllPrices($itemID)``` function. Then with additional formatting we generate the chart in ```server/priceChart.php``` .
+
+Documentation for the version of chart JS we used can be found [here](https://www.chartjs.org/docs/2.9.4/charts/line.html) . 
+
+### Weather API
+
+The ```server/weather.php``` utilizes the functions written in ```server/functions/weather.php``` file, to display the weather on ```home.php``` page. Everytime ```getWeather($cityName)``` is called, it checks if the weather has been updated in the weather table , in the past 15 mins (which can be changed from ```server/weather.php``` file). If the weather for the request city has not been updated in the past 15 mins, then we update it in the database and then return the updated weather. This ensures that we do not make too many API calls , since we get limited number of free API requests per day , and ensures we still display the latest weather.
+
+
+
+## Page Security
+
+ 

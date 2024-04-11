@@ -1,5 +1,3 @@
- < script src = "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" > < / script > ;
-
 document.getElementById("myForm").addEventListener("submit", function (e) {
     e.preventDefault(); // Prevent the form from submitting
 
