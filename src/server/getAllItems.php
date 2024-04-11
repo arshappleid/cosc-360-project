@@ -50,19 +50,24 @@ foreach ($items as $item) {
     echo "<article>";
 
     // Display comments
-    $comments = Comments::getAllCommentsForItem($item['ITEM_ID']); // Handle 1 comment and more than 1
+    $comments = Comments::getAllCommentsForItem($item['ITEM_ID']);
     if ($comments == "NO_COMMENTS_ADDED_YET") {
         echo "<h3>No Comments yet.</h3>";
     } elseif (is_array($comments)) {
         echo "<table id=\"comment_table\">";
         echo "<caption class=\"visually-hidden\">All Comments For Item</caption>";
-        // Ensure $comments is always treated as an array.
         if (isset($comments['USER_ID'])) {
-            $comments = [$comments]; // Wrap single comment in an array
+            $comments = [$comments];
         }
-        //added table headings, including adding another column for date time added. However, they are not showing up .
-        foreach ($comments as $comment) {
-            echo "<tr>";
+
+        for ($i = 0; $i < count($comments); $i++) {
+            $comment = $comments[$i];
+
+            if ($i > 1) {
+                echo "<tr id = \"hidden_comments\">";
+            } else {
+                echo "<tr>";
+            }
             echo "<td>";
             echo htmlspecialchars(User_management::getUser_First_Last_Name($comment['USER_ID']));
             echo "<br><img src=\"./../server/getUserImages.php?USER_ID=" . $comment['USER_ID'] . "\" class='user-image'>";
@@ -82,6 +87,9 @@ foreach ($items as $item) {
         }
 
         echo "</table>";
+        if (count($comments) > 2) {
+            echo "<button class = \"collapsible\">Show All Comments</button>";
+        }
     }
 
     // Render the add comment form inside the article for each item.
@@ -123,3 +131,4 @@ foreach ($items as $item) {
     });
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="./scripts/collapse_threads.js" defer></script>

@@ -1,29 +1,26 @@
 $(document).ready(function () {
-
     var selectedStoreId = "all";
 
     updateFilteredItemList(selectedStoreId, "");
 
-    function updateFilteredItemList(storeId, searchTerm)
-    {
+    function updateFilteredItemList(storeId, searchTerm) {
         var url =
             storeId === "all" ? "./../server/getAllItems.php" : "./../server/getStoreItems.php";
         if (storeId !== "all") {
             url += "?SELECTED_STORE=" + encodeURIComponent(storeId);
         }
-        console.log(url);
         $.get(url, function (data) {
             $("#item_list").empty().html(data);
 
-            var overlayHeight = $('.overlay').outerHeight();
-            $('.underheadercontainer').height(overlayHeight);
+            var overlayHeight = $(".overlay").outerHeight();
+            $(".underheadercontainer").height(overlayHeight);
 
             if (searchTerm) {
                 filterStoreItems(searchTerm); // Apply text filter if there's a search term
             }
 
             if ($("#item_list section:visible").length === 0) {
-                $("#item_list").html("<h1 class = \"noitems\">No products found.</h1>");
+                $("#item_list").html('<h1 class = "noitems">No products found.</h1>');
             }
         }).fail(function () {
             $("#item_list").html("<p>Error fetching products. Please try again.</p>");
@@ -40,8 +37,7 @@ $(document).ready(function () {
     });
 
     // Filters items in the item list based on the search term
-    function filterStoreItems(searchTerm)
-    {
+    function filterStoreItems(searchTerm) {
         var searchTermLower = searchTerm.toLowerCase();
 
         $("#item_list section").each(function () {
