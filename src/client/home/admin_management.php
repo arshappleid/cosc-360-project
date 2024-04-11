@@ -32,6 +32,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="css/global.css" />
 	<link rel="stylesheet" href="css/admin_management.css" />
+	<link rel="stylesheet" href="css/mobile/global.css"  media="screen and (max-width: 650px)" />
 
 </head>
 

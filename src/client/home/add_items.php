@@ -29,7 +29,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="./../css/global.css" />
 	<link rel="stylesheet" href="./../css/admin_panel.css" />
-	<link rel="stylesheet" href="../css/mobile/global.css"  media="screen and (max-width: 480px)" /> 
+	<link rel="stylesheet" href="../css/mobile/global.css"  media="screen and (max-width: 650px)" /> 
 
 	<script type="text/javascript" src="./../scripts/add_items.js" defer></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />

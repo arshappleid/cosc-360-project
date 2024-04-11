@@ -19,7 +19,7 @@ require_once("./../server/GLOBAL_VARS.php");
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="css/login.css" />
 	<link rel="stylesheet" href="css/global.css" />
-	<link rel="stylesheet" href="css/mobile/global.css"  media="screen and (max-width: 480px)" /> 
+	<link rel="stylesheet" href="css/mobile/global.css"  media="screen and (max-width: 650px)" /> 
 </head>
 
 <body>

@@ -21,7 +21,7 @@ if (!isset($_SESSION['ADMIN_EMAIL'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="css/createaccount.css" />
   <link rel="stylesheet" href="css/global.css" />
-	<link rel="stylesheet" href="css/mobile/global.css"  media="screen and (max-width: 480px)" /> 
+	<link rel="stylesheet" href="css/mobile/global.css"  media="screen and (max-width: 650px)" /> 
 
 </head>
 
