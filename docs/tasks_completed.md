@@ -73,6 +73,12 @@ This document testifies, all the important tasks / milestones completed by all t
 - table styling
 - The whole sites top navigation
 - dynamic loading of profile pictures over the entire site
+- fixed banning functionality
+- hosted the server everytime
+- update profile picture
+- wrote some tests
+- basically involved in literally every page in some way or another whether it was making it, styling it, or fixing it
+
 
 #### Max Bigwood
 

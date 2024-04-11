@@ -35,6 +35,8 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		href="css/account.css" />
 	<link rel="stylesheet"
 		href="css/global.css" />
+	<link rel="stylesheet" href="css/mobile/global.css"  media="screen and (max-width: 480px)" /> 
+
 </head>
 
 <body>
@@ -45,10 +47,13 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 				class="home-button">Home</a>
 			<?php
 			if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
+				$name = User_management::getUser_First_Last_Name(User_management::getUserID($_SESSION['USER_EMAIL']));
 				if (isset($_SESSION['ADMIN_EMAIL'])) {
+					echo "<p class=\"greeting-text\"> Hello Admin :) , " . $name  . " </p>";
+				} else {
+					echo "<p class=\"greeting-text\"> Hello User :) , " . $name  . " </p>";
 				}
 				echo "<a href=\"../server/logout.php\" class=\"login-button\">";
-				//echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";
 				echo "Logout</a>";
 			} else {
 				echo "<a href=\"login.php\" class=\"login-button\">";
@@ -93,8 +98,8 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 					}
 					?>
 				</ul>
-				<p>&copy; Banana Hammock 2024</p>
 			</nav>
+			<p>&copy; Banana Hammock 2024</p>
 		</div>
 	</footer>
 

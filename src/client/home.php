@@ -2,6 +2,7 @@
 session_start();
 require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
+require_once("./../server/functions/user_management.php");
 
 ?>
 
@@ -18,6 +19,9 @@ require_once("./../server/functions/comments.php");
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="css/global.css" />
 	<link rel="stylesheet" href="css/home.css" />
+	<link rel="stylesheet" href="css/mobile/global.css"  media="screen and (max-width: 480px)" /> 
+
+
 	</script>
 </head>
 
@@ -30,12 +34,16 @@ require_once("./../server/functions/comments.php");
 
 			if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
 				echo "<div style = \"display:flex;\">";
+				$name = User_management::getUser_First_Last_Name(User_management::getUserID($_SESSION['USER_EMAIL']));
 
 				if (isset($_SESSION['ADMIN_EMAIL'])) {
 					echo "<a href=\"home/add_items.php\" class=\"add-items-button\" >Add Items</a>";
 
 					echo "<a href=\"display_users.php\" class=\"admin-login-button\" >Manage Users</a>";
+					echo "<p class=\"greeting-text\"> Hello Admin :) , " . $name  . " </p>";
 
+				} else {
+					echo "<p class=\"greeting-text\"> Hello User :) , " . $name  . " </p>";
 				}
 				echo "<a href=\"account_page.php\" class=\"login-button\">";
 				echo "Account</a>";
@@ -105,8 +113,8 @@ require_once("./../server/functions/comments.php");
 					}
 					?>
 				</ul>
-				<p>&copy; Banana Hammock 2024</p>
 			</nav>
+			<p>&copy; Banana Hammock 2024</p>
 		</div>
 	</footer>
 	<?php

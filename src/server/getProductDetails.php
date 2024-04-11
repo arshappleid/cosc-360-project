@@ -28,7 +28,7 @@ if (isset($item_data['ITEM_ID'])) {
 }
 
 $testUserImage = "../../server/images/userImages/admin/test@gmail.com.jpeg";
-$show_button = isset($_SESSION['USER_EMAIL']) && !isset($_SESSION['ADMIN_EMAIL']);
+$show_button = isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL']);
 $userEmail = $_SESSION['USER_EMAIL'] ?? '';
 $userID = User_management::getAllUserData($userEmail)['USER_ID'] ?? 0;
 
@@ -82,7 +82,7 @@ foreach ($item_data as $item) {
         }//a
 
     } else {
-        echo "<h4>No Comments Yet.</h4>";
+        echo "<h4 class=\"no-comment-text\">No Comments Yet.</h4>";
     }
         echo "</div>"; // Close all-comments
     echo "</div>"; // Close second

@@ -1,3 +1,0 @@
-NEW ITEM 1, Description of the ITEM , 10.99, apple.com,Electronics
-NEW ITEM 2, Description of the ITEM , 100.99, apple.com,Electronics
-NEW ITEM 3, Description of the ITEM , 5.99, apple.com,Electronics

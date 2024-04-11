@@ -19,7 +19,7 @@ $category_name = $data['CATEGORY_NAME'] ?? null;
 // Error handling and message display
 if (!empty($itemName) && !empty($description) && !empty($storeId) && !empty($itemPrice) && !empty($externalLink)) {
     $resp = Admin_management::addItem($itemName, $description, $storeId, $itemPrice, $externalLink, $category_name);
-    $response = ["status" => $resp];
+    $response = ["status" => str_replace("_", " ", $resp)];
 } else {
     $response = ["status" => "Not All Values Provided"];
 }

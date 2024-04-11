@@ -42,13 +42,13 @@ article {
     margin-top: 1em;
     background-color: white;
     border-radius: 10px;
+    width: 100%;
 
 }
 
 .detail-button{
     background-color: var(--primary-color);
     border: 0px;
-    padding: 0.75em;
     border-radius: 5px;
     width: 100%;
 }
@@ -56,17 +56,28 @@ article {
 .detail-button:hover{
     background-color: var(--hover-color);
 }
+#user_table{
+    width: 100%;
+    table-layout:fixed;
+}
+#user_table tr{
+    width: 100%;
+}
 
 #user_table th{
     text-align: center;
     border-radius: 5px;
+    width: auto;
+    white-space: normal;
+    overflow-wrap: break-word;
 }
 
 #user_table td{
     text-align: center;
     border-radius: 5px;
-    padding-left: 1em;
-    padding-right: 1em;
+    width: 100%;
+    white-space: normal; /* Allow text to wrap */
+    overflow-wrap: break-word; /* Break words that exceed cell width */
 }
 
 #user_table tr:nth-child(even) {

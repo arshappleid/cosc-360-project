@@ -42,6 +42,8 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="css/display_users.css" />
 	<link rel="stylesheet" href="css/global.css" />
+	<link rel="stylesheet" href="css/mobile/global.css"  media="screen and (max-width: 480px)" /> 
+
 </head>
 
 <body>
@@ -50,9 +52,10 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		<div class="headerblack">
 			<a href="home.php" class="home-button">Home</a>
 			<?php
+			$name = User_management::getUser_First_Last_Name(User_management::getUserID($_SESSION['USER_EMAIL']));
+			echo "<p class=\"greeting-text\"> Hello Admin :) , " . $name  . " </p>";
 			if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
 				echo "<a href=\"login.php\" class=\"login-button\">";
-				//echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";
 				echo "Logout</a>";
 			} else {
 				echo "<a href=\"login.php\" class=\"login-button\">";
@@ -110,8 +113,9 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 					}
 					?>
 				</ul>
-				<p>&copy; Banana Hammock 2024</p>
 			</nav>
+			<p>&copy; Banana Hammock 2024</p>
+
 		</div>
 	</footer>
 	<script type="text/javascript" src="./scripts/display_users.js"></script>

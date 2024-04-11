@@ -274,6 +274,7 @@ class Admin_management
 		if (Admin_management::itemExistsInStore($ITEM_ID, $STORE_ID) != "ITEM_DOES_NOT_EXIST_IN_STORE") {
 			return "ITEM_WITH_NAME_ALREADY_EXISTS";
 		}
+		$ITEM_PRICE = intval($ITEM_PRICE);
 		global $connection;
 		$query1 = "INSERT INTO ITEMS (ITEM_NAME, ITEM_DESCRIPTION, EXTERNAL_LINK) VALUES (?, ?, ?);";
 		$query2 = "INSERT INTO Item_Price_Entry (STORE_ID, ITEM_ID, ITEM_PRICE) VALUES (?, ?, ?);";
@@ -296,7 +297,7 @@ class Admin_management
 					throw new Exception($connection->error);
 				}
 				// Corrected parameter types 'sii' if STORE_ID and ITEM_ID are integers
-				$stmt2->bind_param('iii', $STORE_ID, $ITEM_ID, $ITEM_PRICE);
+				$stmt2->bind_param('ssi', $STORE_ID, $ITEM_ID, $ITEM_PRICE);
 				if ($stmt2->execute()) {
 					$stmt3 = $connection->prepare($query3);
 					$stmt3->bind_param('ss', $ITEM_ID, $CATEGORY_NAME);
@@ -323,52 +324,53 @@ class Admin_management
 		}
 	}
 	//returns an array of all users who have a login in the last month 
-	public static function getActiveUsers(){
-    $users = self::getAllUsers();
-	
-    
-    // Array to store active users
-    $activeUsers = [];
+	public static function getActiveUsers()
+	{
+		$users = self::getAllUsers();
 
-    // Iterate through each user
-    foreach ($users as $user) {
-        // Get user ID
-        $userId = $user['USER_ID'];
-        
-        // Get login count for current month
-        $loginCount = Login_tracking::getCountForCurrentMonth($userId);
-        
-        // Check if login count is greater than 0
-        if ($loginCount > 0) {
-            // User is active, add user information to active users array
-            $activeUsers[] = $user;
-        }
-    }
-    return $activeUsers;
-}
-//returns array of all users who had not registered a login within the month
-public static function getInactiveUsers(){
-    // Get all users
-    $users = self::getAllUsers();
-    
-    // Array to store inactive users
-    $inactiveUsers = [];
 
-    // Iterate through each user
-    foreach ($users as $user) {
-        // Get user ID
-        $userId = $user['USER_ID'];
-        
-        // Get login count for current month
-        $loginCount = Login_tracking::getCountForCurrentMonth($userId);
-        
-        // Check if login count is 0
-        if ($loginCount === 0) {
-            // User is inactive, add user information to inactive users array
-            $inactiveUsers[] = $user;
-        }
-    }
-    return $inactiveUsers;
-}
+		// Array to store active users
+		$activeUsers = [];
 
+		// Iterate through each user
+		foreach ($users as $user) {
+			// Get user ID
+			$userId = $user['USER_ID'];
+
+			// Get login count for current month
+			$loginCount = Login_tracking::getCountForCurrentMonth($userId);
+
+			// Check if login count is greater than 0
+			if ($loginCount > 0) {
+				// User is active, add user information to active users array
+				$activeUsers[] = $user;
+			}
+		}
+		return $activeUsers;
+	}
+	//returns array of all users who had not registered a login within the month
+	public static function getInactiveUsers()
+	{
+		// Get all users
+		$users = self::getAllUsers();
+
+		// Array to store inactive users
+		$inactiveUsers = [];
+
+		// Iterate through each user
+		foreach ($users as $user) {
+			// Get user ID
+			$userId = $user['USER_ID'];
+
+			// Get login count for current month
+			$loginCount = Login_tracking::getCountForCurrentMonth($userId);
+
+			// Check if login count is 0
+			if ($loginCount === 0 || $loginCount=="ADDED") {
+				// User is inactive, add user information to inactive users array
+				$inactiveUsers[] = $user;
+			}
+		}
+		return $inactiveUsers;
+	}
 }

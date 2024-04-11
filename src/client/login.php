@@ -19,6 +19,7 @@ require_once("./../server/GLOBAL_VARS.php");
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="css/login.css" />
 	<link rel="stylesheet" href="css/global.css" />
+	<link rel="stylesheet" href="css/mobile/global.css"  media="screen and (max-width: 480px)" /> 
 </head>
 
 <body>
@@ -26,7 +27,6 @@ require_once("./../server/GLOBAL_VARS.php");
 	<div class="container">
 		<div class="headerblack">
 			<a href="home.php" class="home-button">Home</a><br>
-			<a href="admin_login.php" class="home-button">Admin Login</a>
 		</div>
 
 		<header class="headeryellow">
@@ -94,8 +94,8 @@ require_once("./../server/GLOBAL_VARS.php");
 					}
 					?>
 				</ul>
-				<p>&copy; Banana Hammock 2024</p>
 			</nav>
+			<p>&copy; Banana Hammock 2024</p>
 		</div>
 	</footer>
 	<script>

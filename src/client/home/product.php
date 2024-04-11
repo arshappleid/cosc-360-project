@@ -20,6 +20,9 @@ require_once("./../../server/GLOBAL_VARS.php");
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="../css/product.css" />
 	<link rel="stylesheet" href="../css/global.css" />
+	<link rel="stylesheet" href="../css/mobile/global.css"  media="screen and (max-width: 480px)" /> 
+
+
 </head>
 
 <body>
@@ -27,7 +30,9 @@ require_once("./../../server/GLOBAL_VARS.php");
 	<div class="container">
 		<div class="headerblack">
 			<a href="../home.php" class="home-button">Home</a>
+			
 			<?php
+			$name = User_management::getUser_First_Last_Name(User_management::getUserID($_SESSION['USER_EMAIL']));
 			if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
 				echo ">";
 				//echo "<img id = \"avatar_img\" src = \"./../server/getUserImages.php>";
@@ -35,6 +40,12 @@ require_once("./../../server/GLOBAL_VARS.php");
 			} else {
 				echo ">";
 				echo "Login</a>";
+			}
+			if (isset($_SESSION['ADMIN_EMAIL'])) {
+				echo "<p class=\"greeting-text\"> Hello Admin :) , " . $name  . " </p>";
+
+			} else {
+				echo "<p class=\"greeting-text\"> Hello User :) , " . $name  . " </p>";
 			}
 			?>
 			</a>
@@ -70,8 +81,8 @@ require_once("./../../server/GLOBAL_VARS.php");
 					}
 					?>
 				</ul>
-				<p>&copy; Banana Hammock 2024</p>
 			</nav>
+			<p>&copy; Banana Hammock 2024</p>
 		</div>
 	</footer>
 	<script>

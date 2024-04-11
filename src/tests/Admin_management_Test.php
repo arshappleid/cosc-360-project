@@ -102,9 +102,15 @@ class Admin_management_Test extends TestCase
 
 
     /** @test */
-    public function AddItem_Should_Be_Added()
+    public function AddItem_Should_Be_Added_1()
     {
         $this->assertEquals("ITEM_ADDED", Admin_management::addItem("NEW ITEM", "NEW DESCRIPTION", 1, 100.99, "abc.com", "Food"));
+    }
+
+    /** @test */
+    public function AddItem_Should_Be_Added_2()
+    {
+        $this->assertEquals("ITEM_ADDED", Admin_management::addItem("Iphone 13", "The New Iphone 13", 1, "1100.99", "abc.com", "Food"));
     }
     /** @test */
     public function AddItem_ItemWithNameAlreadyExists()
@@ -125,9 +131,10 @@ class Admin_management_Test extends TestCase
 
     */
     /** @test */
-    public function getInactiveUsers_gotInactiveUsers(){
+    public function getInactiveUsers_gotInactiveUsers()
+    {
         $result = Admin_management::getInactiveUsers();
         $this->assertIsArray($result);
-        $this->assertNotEmpty($result);    
+        $this->assertNotEmpty($result);
     }
 }
