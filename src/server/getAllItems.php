@@ -64,7 +64,7 @@ foreach ($items as $item) {
             $comment = $comments[$i];
 
             if ($i > 1) {
-                echo "<tr id = \"hidden_comments\">";
+                echo "<tr class = \"hidden_comments\">";
             } else {
                 echo "<tr>";
             }

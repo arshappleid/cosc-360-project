@@ -1,6 +1,5 @@
 $(document).ready(function () {
-    var buttons = $(".collapsible");
-    buttons.each(function () {
+    $(".collapsible").each(function () {
         $(this).on("click", function () {
             var sibling = $(this).prev().children().first().next().children().first();
             var siblings = [];
@@ -12,7 +11,7 @@ $(document).ready(function () {
             }
             if (siblings.length === 0) return;
             siblings.forEach((content) => {
-                if (content.id === "hidden_comments") {
+                if ($(content).hasClass("hidden_comments")) { // Correctly check for the class
                     $(content).toggle(); // This will handle showing and hiding
                 }
             });
@@ -22,9 +21,8 @@ $(document).ready(function () {
                 this.innerHTML = "Show All Comments";
             }
         });
-        console.log("Script executed");
     });
-
+    console.log("Script executed");
 });
 
 

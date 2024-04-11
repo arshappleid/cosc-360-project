@@ -160,7 +160,7 @@ article {
 .collapsible:hover {
     background-color: #555;
 }
-#hidden_comments {
+.hidden_comments {
     display: none;
 }
 
