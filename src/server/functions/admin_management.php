@@ -366,7 +366,7 @@ class Admin_management
 			$loginCount = Login_tracking::getCountForCurrentMonth($userId);
 
 			// Check if login count is 0
-			if ($loginCount === 0) {
+			if ($loginCount === 0 || $loginCount=="ADDED") {
 				// User is inactive, add user information to inactive users array
 				$inactiveUsers[] = $user;
 			}
