@@ -32,7 +32,9 @@ This document testifies, all the important tasks / milestones completed by all t
 - User Login Tracking , For Each Month. Implemented in Admin Management .
 - Upvoting Items , and showing the hottest items at the top.
 - Bad Navigation Functionality.
-- 
+- Maintained the Repo README.md
+- Walkthrough_Document.md
+- Implementation_doc.md
 
 #### Quin Finocchio
 
@@ -79,7 +81,6 @@ This document testifies, all the important tasks / milestones completed by all t
 - wrote some tests
 - basically involved in literally every page in some way or another whether it was making it, styling it, or fixing it
 
-
 #### Max Bigwood
 
 - made all forms and tables accessible via captions, labels, alt-texts for imgs, table header colspans. Includes the visually hidden class to hide labels when other contextual cues were sufficient 
@@ -95,3 +96,18 @@ This document testifies, all the important tasks / milestones completed by all t
 - added methods to all files when necessary 
 - test cases for new functions 
 - debugging DDL, functions, and other aspects of project when causing errors 
+- Changed appearance of admin_login.php to match rest of pages
+- added footer NAV and text to all pages
+- product.php front end - displays data for items name and price
+- also displays a placeholder image for the product and a chart
+- comments for the item should populate with proper css
+- fixed JS on product.js to hide buttons properly
+- redid css on product.js, also altered getQUeryParam to be case insensitive
+- altered some ddl to stop causing an error
+- altered getUserID function as it had an error
+- fixed the addcomment functionality
+- added a new function to order comments by most recent (for product page)
+- made all forms and tablews accessible via captions, labels, table header colspans,
+- admin management page with search filters for name, email and activity
+- track_user_comments page displaying users comment history
+- modifed login tracking methods so they accurately track logins made
