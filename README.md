@@ -1,6 +1,6 @@
 # COSC 360 Webserver Link
 
-Currently the website is hosted at https://cosc360.ok.ubc.ca/qfinocch/index.php , and requires access to 
+Currently the website is hosted [here](https://cosc360.ok.ubc.ca/qfinocch/index.php) , and requires access to 
 
 # Project Overview and Requirements
 
@@ -68,7 +68,7 @@ In the Docker Shell , run ``phpunit tests/*`` , Which will run all the tests in 
    class Class_Name{
    	static function functionName($param){}
    }
-
+   
    ```
 3. Import the class in a test File , that has the same name for the testClass
 4. Write the tests in the `<u>`same exact notation given below `</u>`, sample test given for file ``User_management_Test.php``
@@ -82,7 +82,7 @@ In the Docker Shell , run ``phpunit tests/*`` , Which will run all the tests in 
    	public function validateUserLogin_ValidLogin(){
    		$this->assertEquals(User_management::validateUserLogin("test@gmail.com", MD5("password")), "VALID_LOGIN");
    	}
-
+   
    	/** @test */
    	public function validateUserLogin_InValidLogin(){
    		$this->assertEquals(User_management::validateUserLogin("test2@gmail.com", MD5("password1")), "INVALID_LOGIN");

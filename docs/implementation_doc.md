@@ -44,7 +44,9 @@ public static function itemExists($ITEM_ID){
 	}
 ```
 
+We also utilized Environment variables stored in ```local.env``` and ```server.env``` files. The idea was that on the server we would delete the ```local.env``` file and it would automatically pick up the environment variables from .
 
+This did not actually end up working , so we ended up manually hardcoding the credentials.
 
 ### Mobile User Requirements
 
@@ -78,4 +80,11 @@ The ```server/weather.php``` utilizes the functions written in ```server/functio
 
 ## Page Security
 
- 
+To ensure that normal users cannot simply change the url to access admin based informaiton. We added these lines of code to the top of every page to ensure that if an Admin was not logged in, it will redirect the person to the Bad navigation page.
+
+```php
+if (!isset($_SESSION['ADMIN_EMAIL'])) {
+	header('Location: ./bad_navigation.php');
+}
+```
+
