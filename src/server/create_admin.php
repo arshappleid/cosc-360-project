@@ -12,17 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	try {
 		if (isset($firstName) && isset($lastName) && isset($email) && isset($hashedPassword)) {
 			$response = Admin_management::createAdmin($firstName, $lastName, $email, $hashedPassword);
+			$response2 = User_management::createUser($email, $firstName, $lastName, $hashedPassword);
 			//echo $response;
 			if ($response == "USER_CREATED") {
-				// Upload The Image
-				if (isset($_FILES["image"])) {
-					updateImage2("Admins", "Email", $email, "./images/userImages/admin/");
-				} else {
-					echo "Could not trace file";
-					exit();
-				}
-
-				header('Location: ../client/admin_login.php');
+				header('Location: ../client/account_page.php');
 			} elseif ($response == "ADMIN_ALREADY_REGISTERED") {
 				$_SESSION['MESSAGE'] = "ADMIN ALREADY REGISTERED";
 				header('Location: ../client/create_admin.php');
