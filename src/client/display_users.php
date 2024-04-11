@@ -36,6 +36,8 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="css/display_users.css" />
 	<link rel="stylesheet" href="css/global.css" />
+	<link rel="stylesheet" href="css/mobile/global.css"  media="screen and (max-width: 480px)" /> 
+
 </head>
 
 <body>
@@ -105,8 +107,9 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 					}
 					?>
 				</ul>
-				<p>&copy; Banana Hammock 2024</p>
 			</nav>
+			<p>&copy; Banana Hammock 2024</p>
+
 		</div>
 	</footer>
 	<script type="text/javascript" src="./scripts/display_users.js"></script>

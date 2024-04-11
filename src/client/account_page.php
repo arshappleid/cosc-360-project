@@ -35,6 +35,8 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		href="css/account.css" />
 	<link rel="stylesheet"
 		href="css/global.css" />
+	<link rel="stylesheet" href="css/mobile/global.css"  media="screen and (max-width: 480px)" /> 
+
 </head>
 
 <body>
@@ -96,8 +98,8 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 					}
 					?>
 				</ul>
-				<p>&copy; Banana Hammock 2024</p>
 			</nav>
+			<p>&copy; Banana Hammock 2024</p>
 		</div>
 	</footer>
 

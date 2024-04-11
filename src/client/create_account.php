@@ -17,6 +17,8 @@ require_once("./../server/GLOBAL_VARS.php");
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="css/createaccount.css" />
   <link rel="stylesheet" href="css/global.css" />
+	<link rel="stylesheet" href="css/mobile/global.css"  media="screen and (max-width: 480px)" /> 
+
 </head>
 
 <body>
@@ -63,24 +65,23 @@ require_once("./../server/GLOBAL_VARS.php");
   </div>
   </div>
   <footer>
-    <div>
-      <nav>
-        <ul>
-          <li><a href="home.php">Home</a></li>
-          <?php
-            if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
-                echo "<li><a href=\"account_page.php\">Account</a></li>";
-            } else {
-                echo "<li><a href=\"create_account.php\">Create Account</a></li>
-            <li><a href=\"login.php\">Login</a></li>
-            <li><a href=\"admin_login.php\">Admin Login</a></li>";
-            }
-            ?>
-        </ul>
-        <p>&copy; Banana Hammock 2024</p>
-      </nav>
-    </div>
-  </footer>
+		<div>
+			<nav>
+				<ul>
+					<li><a href="home.php">Home</a></li>
+					<?php
+					if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
+						echo "<li><a href=\"account_page.php\">Account</a></li>";
+					} else {
+						echo "<li><a href=\"create_account.php\">Create Account</a></li>
+						<li><a href=\"login.php\">Login</a></li>
+						<li><a href=\"admin_login.php\">Admin Login</a></li>";
+					}
+					?>
+				</ul>
+			</nav>
+			<p>&copy; Banana Hammock 2024</p>
+		</div>
 
   <script>
     document.getElementById("createAccountForm").addEventListener("submit", function(e) {
