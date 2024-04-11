@@ -13,6 +13,7 @@ if (is_array($users)) {
         foreach ($users as $user) {
             $user_id = User_management::getUserID($user['Email']);
 
+
             $numComments = User_management::getCommentCount($user_id);
             
             echo "<tr>";
@@ -23,8 +24,12 @@ if (is_array($users)) {
             echo "<td>" . ($user['BANNED_STATUS'] == 1 ? "Banned" : "Active") . "</td>";
             echo "<td>" . $numComments;
             echo "</td>";
-
-	        echo "<td>" . "<button class = \"detail-button\" id=\"toggle_ban_user\"><a href=\"./display_users.php?toggle_ban_userID=" . $user_id . "\" >Toggle Ban</a></button></td>";
+            if (Admin_management::checkAdminExists($user['Email']) == 'ADMIN_NOT_EXIST') {
+                echo "<td>" . "<button class = \"detail-button\" id=\"toggle_ban_user\"><a href=\"./display_users.php?toggle_ban_userID=" . $user_id . "\" >Toggle Ban</a></button></td>";
+            } else {
+                echo "<td> Admin </td>";
+            }
+	        
             echo "<td><button class = \"detail-button\" id=\"user_details\"><a href=\"./track_user_comments.php?user_id=" . $user_id . "\">User Details</a></button></td>";
 
             echo "</tr>";

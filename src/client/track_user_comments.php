@@ -73,6 +73,11 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 			if (isset($user_id)){
 				$user = User_management::getAllUserDataFromID($user_id);
 				if (is_array($user)) {
+					if ($user['BANNED_STATUS'] == 0) {
+						$banstatus = 'Active';
+					} else {
+						$banstatus = 'Banned';
+					}
 					//table with user details 
 					echo "<div class=\"user-info-container\">";
 					echo "<table id=\"user_table\">";
@@ -82,7 +87,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 					echo "<tr><th scope=\"row\">Last Name</th><td>" . $user['Last_Name'] . "</td></tr>";
 					echo "<tr><th scope=\"row\">Email</th><td>" . $user['Email'] . "</td></tr>";
 					echo "<tr><th scope=\"row\">Profile Picture</th><td><img  class= \"pfp-image\" src=\"./../server/getUserImages.php?USER_ID=" . urlencode($user['USER_ID']) . "\" alt=\"NO IMAGE IN DATABASE\"></td></tr>";
-					echo "<tr><th scope=\"row\">Banned Status</th><td>" . $user['BANNED_STATUS'] . "</td></tr>";
+					echo "<tr><th scope=\"row\">Banned Status</th><td>" . $banstatus . "</td></tr>";
 
 					echo "</table></div>";
 				} else {
@@ -123,7 +128,6 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 						echo "<div class=\"user-info\"><div class=\"user-id\">" . User_management::getUser_First_Last_Name($user_id) . "</div>";
 						$ITEM_ID = $user_comment['ITEM_ID'];
 						$storeIDForItem = item_info::getStoreId_forItem($ITEM_ID);
-						echo "<a href=home/product.php?ITEM_ID=" . $ITEM_ID . "&STORE_ID=" . $storeIDForItem . ">Go to item</a>";
 						echo "<img src=\"./../server/getUserImages.php?USER_ID=" . $user_id . "\" class='user-image'></div>";
 						echo "<p class=\"comment-text\">" . $user_comment['COMMENT_TEXT'] . "</p>";
 
@@ -133,8 +137,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 						$formatted_time = $datetime->format('g:ia');
 						$formatted_datetime = $formatted_date . "<br>at " . $formatted_time;
 						echo "<div class=\"date_time_comment_added\">" . $formatted_datetime . "</div>";
-
-			
+						echo "<button class=\"go-to-item-button\"><a href=home/product.php?ITEM_ID=" . $ITEM_ID . "&STORE_ID=" . $storeIDForItem . ">Go to item</a></button>";
 						echo "</div>";
 					}
 				}
