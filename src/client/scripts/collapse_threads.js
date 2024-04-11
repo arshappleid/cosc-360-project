@@ -30,8 +30,6 @@ $(document).ready(function () {
             initializeCollapsibles(); 
         }
     });
-
-    console.log("Script executed");
 });
 
 
