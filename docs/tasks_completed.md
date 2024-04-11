@@ -82,18 +82,16 @@ This document testifies, all the important tasks / milestones completed by all t
 
 #### Max Bigwood
 
-- Changed appearance of admin_login.php to match rest of pages
-- added footer NAV and text to all pages
-- product.php front end - displays data for items name and price
-- also displays a placeholder image for the product and a chart
-- comments for the item should populate with proper css
-- fixed JS on product.js to hide buttons properly
-- redid css on product.js, also altered getQUeryParam to be case insensitive
-- altered some ddl to stop causing an error
-- altered getUserID function as it had an error 
-- fixed the addcomment functionality  
-- added a new function to order comments by most recent (for product page) 
-- made all forms and tablews accessible via captions, labels, table header colspans,
-- admin management page with search filters for name, email and activity 
-- track_user_comments page displaying users comment history 
-- modifed login tracking methods so they accurately track logins made 
+- made all forms and tables accessible via captions, labels, alt-texts for imgs, table header colspans. Includes the visually hidden class to hide labels when other contextual cues were sufficient 
+- admin management page with user search bar and dropdown filter menu to filter by activity
+- admin toggle ban funtionality
+- Used ajax so the above changes in the  admin management page immediately reflect the changes on screen 
+- user details pag showing user details and all comments made (if any) 
+- logic to send you to a valid storeID when going to item page where comment was made 
+- date time conversion into recognizable format on comment containers 
+- footer styling w/ hyperlinks 
+- product.php front end
+- comments/comment-container structure
+- added methods to all files when necessary 
+- test cases for new functions 
+- debugging DDL, functions, and other aspects of project when causing errors 

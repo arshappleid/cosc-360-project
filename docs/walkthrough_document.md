@@ -15,6 +15,11 @@
         - You can click the `User Details` button to view all the selected users information and all the comments they have made.
           - From the User Detail page you can go to the item they made the comment on's page.
         - At this point, you can also test out the breadcrumbs functionality to navigate back to previous pages.
+        - Enter queries into the search bar to search for the first name, last name, or email of users 
+        - you can also filter the users by selecting All Users, Active Users, or Inactive users from the dropdown menu and pressing Search. This filter works   along with the search bar.
+        - When you press Toggle Ban it will ban or unban the user, and the User Information table on the sccreen will reflect that immediately
+        - The User Details button brings up page dedicated to each user with their information and all comments they've made, with the most recent at the top 
+        - by clicking the "go to item" button, it will take you to the page for the item that the comment was made on 
 
 
    #### User Account Walkthrough
