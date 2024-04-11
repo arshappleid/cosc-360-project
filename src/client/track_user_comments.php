@@ -123,7 +123,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 						$ITEM_ID = $user_comment['ITEM_ID'];
 						$storeIDForItem = item_info::getStoreId_forItem($ITEM_ID);
 						echo "<a href=home/product.php?ITEM_ID=" . $ITEM_ID . "&STORE_ID=" . $storeIDForItem . ">Go to item</a>";
-						echo "<img src=\"" . $testUserImage . "\" class='user-image'></div>";
+						echo "<img src=\"./../server/getUserImages.php?USER_ID=" . $user_id . "\" class='user-image'></div>";
 						echo "<p class=\"comment-text\">" . $user_comment['COMMENT_TEXT'] . "</p>";
 
 						$datetime = new DateTime($user_comment['DATE_TIME_ADDED']);
