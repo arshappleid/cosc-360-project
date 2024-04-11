@@ -218,6 +218,47 @@ aside{
 
 }
 
+.login-button{
+  width: 3em;
+  font-size: 0.5em;
+}
+
+.admin-login-button{
+  width: 7em;
+  margin-right: 2em;
+  font-size: 0.5em;
+}
+
+.add-items-button{
+  margin-left: 2em;
+  width: 5em;
+  font-size: 0.5em;
+}
+
+.home-button{
+  width: 3em;
+  font-size: 0.5em;
+}
+
+.greeting-text{
+  font-size: 0.5em;
+}
+
+.display-image{
+  height: 7em;
+  width: 7em;
+}
+
+.create-account-button{
+  font-size: 0.5em;
+  margin-left: 2em;
+  width: 7em;
+}
+
+.select-dropdown{
+  font-size: 0.5em;
+}
+
 
 
 

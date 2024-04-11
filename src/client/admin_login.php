@@ -27,27 +27,7 @@ require_once("./../server/GLOBAL_VARS.php");
 		<div class="headerblack">
 			<a href="home.php" class="home-button">Home</a>
 		</div>
-		<header class="headeryellow">
-			<div class="search-container">
-				<label for="search-input" class="visually-hidden">Enter Search Term</label> 
-				<input type="text" id="search-input" placeholder="Search...">
-				<?php
-				$stores = Item_info::getAllStoreList();
-				if (count($stores) == 0) {
-					echo $stores;
-				} else {
-					echo "<label for =\"store_select\" class=\"visually-hidden\">Filter By Store</label>";
-					echo "<select id = \"store_select\" class=\"select_dropdown\">";
-					echo "<option value=\"all\">All Stores</option>";
-					foreach ($stores as $key => $store) {
-						echo "<option value=\"" . $store['STORE_ID'] . "\" >" . $store['STORE_NAME'] . "</option>";
-					}
-					echo "</select>";
-				}
-				?>
-				<button type="button" id="search-button">Search</button>
-			</div>
-		</header>
+
 		<?php include_once './../server/breadcrumbs.php' ?>
 		<div class="underheadercontainer">
 			<div class="overlay">
