@@ -1,4 +1,5 @@
 <?php
+
 function buildBreadcrumbs($baseLabel = 'login', $baseUrl = 'qfinooch/src/client')
 {
     // Get the REQUEST_URI, and strip the query string if present
@@ -16,7 +17,7 @@ function buildBreadcrumbs($baseLabel = 'login', $baseUrl = 'qfinooch/src/client'
     $breadcrumbs = "<div class=\"breadcrumb_box\"><a href=\"$startUrl\">$baseLabel</a>";
     $path = $baseUrl;
 
-    if (count($parts) == 1 && $parts[0] == "login.php") {
+    if (count($parts) == 1 && end($parts) == "login.php") {
         // If we just have one element in the array at the login page
         $breadcrumbs = "<a href=\"./login.php\">Login</a>";
     } else {
