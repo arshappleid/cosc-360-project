@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once("./../server/functions/item_info.php");
-require_once("./../server/functions/comments.php");
-require_once("./../server/GLOBAL_VARS.php");
+require_once("./../../server/functions/item_info.php");
+require_once("./../../server/functions/comments.php");
+require_once("./../../server/GLOBAL_VARS.php");
 
 if (!isset($_SESSION['BREADCRUMBS'])) {
 	$_SESSION['BREADCRUMBS'] = array();
@@ -27,15 +27,12 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		content="IE=edge" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-	<script type="text/javascript"
-		src="./scripts/home.js"></script>
+	<script type="text/javascript" src="./../scripts/home.js"></script>
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet"
-		href="css/account.css" />
-	<link rel="stylesheet"
-		href="css/global.css" />
-	<link rel="stylesheet" href="css/mobile/global.css"  media="screen and (max-width: 650px)" /> 
+	<link rel="stylesheet" href="../css/account.css" />
+	<link rel="stylesheet" href="../css/global.css" />
+	<link rel="stylesheet" href="../css/mobile/global.css"  media="screen and (max-width: 650px)" /> 
 
 </head>
 
@@ -43,8 +40,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 
 	<div class="container">
 		<div class="headerblack">
-			<a href="home.php"
-				class="home-button">Home</a>
+			<a href="./../home.php" class="home-button">Home</a>
 			<?php
 			if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
 				$name = User_management::getUser_First_Last_Name(User_management::getUserID($_SESSION['USER_EMAIL']));
@@ -53,7 +49,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 				} else {
 					echo "<p class=\"greeting-text\"> Hello User :) , " . $name  . " </p>";
 				}
-				echo "<a href=\"../server/logout.php\" class=\"login-button\">";
+				echo "<a href=\"./../../server/logout.php\" class=\"login-button\">";
 				echo "Logout</a>";
 			} else {
 				echo "<a href=\"login.php\" class=\"login-button\">";
@@ -72,10 +68,10 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		</div>
 
 
-		<?php include_once './../server/breadcrumbs.php' ?>
+		<?php include_once './../../server/breadcrumbs.php' ?>
 		<div class="underheadercontainer">
 			<div class="overlay">
-				<?php include_once './../server/displaySingleUser.php' ?>
+				<?php include_once './../../server/displaySingleUser.php' ?>
 			</div>
 			<div class="triangleextendblack"></div>
 			<div class="triangle-element"></div>
@@ -87,14 +83,14 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 		<div>
 			<nav>
 				<ul>
-					<li><a href="home.php">Home</a></li>
+					<li><a href="../home.php">Home</a></li>
 					<?php
 					if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
 						echo "<li><a href=\"account_page.php\">Account</a></li>";
 					} else {
 						echo "<li><a href=\"create_account.php\">Create Account</a></li>
-						<li><a href=\"login.php\">Login</a></li>
-						<li><a href=\"admin_login.php\">Admin Login</a></li>";
+						<li><a href=\"../login.php\">Login</a></li>
+						<li><a href=\"../admin_login.php\">Admin Login</a></li>";
 					}
 					?>
 				</ul>

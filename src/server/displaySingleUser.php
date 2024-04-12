@@ -1,6 +1,6 @@
 <?php
 
-require_once('./../server/functions/user_management.php');
+require_once('./../../server/functions/user_management.php');
 
 if (!isset($_SESSION['USER_EMAIL'])) {
     //die("User email is not set in the session.");
@@ -12,19 +12,19 @@ $users = User_management::getAllUserData($_SESSION['USER_EMAIL']);
 
 if (is_array($users)) {
 ?>
-    <form id="updateFirstNameForm" method="POST" action="../server/updateFirstName.php">
+    <form id="updateFirstNameForm" method="POST" action="../../server/updateFirstName.php">
     <label for="firstName" class="visually-hidden">First Name:</label>
     <input type="text" id="firstName" name="firstName" placeholder="<?= htmlspecialchars($users['First_Name']) ?>" required>
     <button class="yellowbutton" type="submit">Update First Name</button>
 </form>
 
-<form id="updateLastNameForm" method="POST" action="../server/updateLastName.php">
+<form id="updateLastNameForm" method="POST" action="../../server/updateLastName.php">
     <label for="lastName" class="visually-hidden">Last Name:</label>
     <input type="text" id="lastName" name="lastName" placeholder="<?= htmlspecialchars($users['Last_Name']) ?>" required>
     <button class="yellowbutton" type="submit">Update Last Name</button>
 </form>
 
-<form id="updatePasswordForm" method="POST" action="../server/updateUserPassword.php">
+<form id="updatePasswordForm" method="POST" action="../../server/updateUserPassword.php">
     <label for="oldpassword" class="visually-hidden">Old Password:</label>
     <input type="password" id="oldpassword" name="oldpassword" placeholder="Old Password" required>
     
@@ -37,11 +37,11 @@ if (is_array($users)) {
     <button class="yellowbutton" type="submit">Update Password</button>
 </form>
 
-<form id="updatePfpForm" method="POST" action="../server/updateUserPicture.php" enctype="multipart/form-data">
+<form id="updatePfpForm" method="POST" action="./../../server/updateUserPicture.php" enctype="multipart/form-data">
     <?php
         echo "<div class=\"image-container\">";
         echo "<a class=\"pfp-text\">Profile Picture: </a>";
-        echo "<img src=\"./../server/getUserImages.php?USER_ID=" . $users['USER_ID'] . "\" class='user-image'>";
+        echo "<img src=\"./../../server/getUserImages.php?USER_ID=" . $users['USER_ID'] . "\" class='user-image'>";
         echo "</div>";
     ?>
     <label for="profilePicture" class="visually-hidden">Upload Profile Picture:</label>

@@ -10,13 +10,13 @@ try {
 
 		if (isset($firstName)) {
 			if (User_management::editUserFirstName($email, $firstName,) == "NAME_UPDATED") {
-				header('Location: ../client/account_page.php');
+				header('Location: ../client/home/account_page.php');
 				exit();
 			} else {
 				$_SESSION['MESSAGE'] = 'error on user creation';
-				header('Location: ../client/account_page.php');
+				header('Location: ../client/home/account_page.php');
 			}
-			header('Location: ../client/account_page.php');
+			header('Location: ../client/home/account_page.php');
 			exit();
 		}
 	}

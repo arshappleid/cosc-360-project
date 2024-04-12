@@ -16,8 +16,8 @@ $whereValue = $email;
 if (isset($_FILES['image']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
     $result = Image::upload($table, $whereCol, $whereValue, "image");
     //echo $result;
-    header('Location: ../client/account_page.php');
+    header('Location: ../client/home/account_page.php');
 	exit();
 } else {
-    header('Location: ../client/account_page.php');
+    header('Location: ../client/home/account_page.php');
 }

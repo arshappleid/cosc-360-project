@@ -45,7 +45,7 @@ require_once("./../server/functions/user_management.php");
 				} else {
 					echo "<p class=\"greeting-text\"> Hello User :) , " . $name  . " </p>";
 				}
-				echo "<a href=\"account_page.php\" class=\"login-button\">";
+				echo "<a href=\"home/account_page.php\" class=\"login-button\">";
 				echo "Account</a>";
 				echo "</div>";
 			} else {
