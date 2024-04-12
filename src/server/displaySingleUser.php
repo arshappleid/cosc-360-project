@@ -41,7 +41,7 @@ if (is_array($users)) {
     <?php
         echo "<div class=\"image-container\">";
         echo "<a class=\"pfp-text\">Profile Picture: </a>";
-        echo "<img src=\"./../server/getUserImages.php?USER_ID=" . $users['USER_ID'] . "\" class='user-image'>";
+        echo "<img src=\"./../server/getUserImages.php?USER_ID=" . $users['USER_ID'] . "\" class='user-image' alt='user image'>";
         echo "</div>";
     ?>
     <label for="profilePicture" class="visually-hidden">Upload Profile Picture:</label>

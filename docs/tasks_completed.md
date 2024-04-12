@@ -113,3 +113,4 @@ This document testifies, all the important tasks / milestones completed by all t
 - admin management page with search filters for name, email and activity
 - track_user_comments page displaying users comment history
 - modifed login tracking methods so they accurately track logins made
+- Wrote css/mobile/ mobile version for many of the site pages

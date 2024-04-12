@@ -110,7 +110,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 							$ITEM_ID = $user_comment['ITEM_ID'];
 							$storeIDForItem = item_info::getStoreId_forItem($ITEM_ID);
 																
-							echo "<img src=\"./../server/getUserImages.php?USER_ID=" . $user_id . "\" class='user-image'></div>";
+							echo "<img src=\"./../server/getUserImages.php?USER_ID=" . $user_id . "\" class='user-image' alt='User Image'></div>";
 							echo "<p class=\"comment-text\">" . $user_comment['COMMENT_TEXT'] . "</p>";
 							$datetime = new DateTime($user_comment['DATE_TIME_ADDED']);
 							// Format the date and time separately
@@ -128,7 +128,7 @@ if ($last_item_index < 0 || $_SESSION['BREADCRUMBS'][$last_item_index][0] != $cu
 						echo "<div class=\"user-info\"><div class=\"user-id\">" . User_management::getUser_First_Last_Name($user_id) . "</div>";
 						$ITEM_ID = $user_comment['ITEM_ID'];
 						$storeIDForItem = item_info::getStoreId_forItem($ITEM_ID);
-						echo "<img src=\"./../server/getUserImages.php?USER_ID=" . $user_id . "\" class='user-image'></div>";
+						echo "<img src=\"./../server/getUserImages.php?USER_ID=" . $user_id . "\" class='user-image' alt='user-image'></div>";
 						echo "<p class=\"comment-text\">" . $user_comment['COMMENT_TEXT'] . "</p>";
 
 						$datetime = new DateTime($user_comment['DATE_TIME_ADDED']);

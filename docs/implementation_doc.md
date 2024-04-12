@@ -50,7 +50,7 @@ This did not actually end up working , so we ended up manually hardcoding the cr
 
 ### Mobile User Requirements
 
-
+Mobile user requirements were achieved primarily using changes in font size. Each client side page included a CSS media query file called css/mobile/global.css which was loaded if the window resolution met a certain threshold (under 500px). This page was responsible for targeting elements with adjusted sizes. When possible, larger parent containers were initially targeted with a smaller font size (usually 50% of regular one) and their individual elements were then adjusted with em units. By doing this, the child elements would scale in accordance with their parent containers. 
 
 ### Search and Hot Threads
 

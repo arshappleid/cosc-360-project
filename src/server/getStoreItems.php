@@ -78,7 +78,7 @@ foreach ($items as $item) {
             }
             echo "<td>";
             echo htmlspecialchars(User_management::getUser_First_Last_Name($comment['USER_ID']));
-            echo "<br><img src=\"./../server/getUserImages.php?USER_ID=" . $comment['USER_ID'] . "\" class='user-image'>";
+            echo "<br><img src=\"./../server/getUserImages.php?USER_ID=" . $comment['USER_ID'] . "\" class='user-image' alt='user-image'>";
             echo "</td>";
             echo "<td>" . htmlspecialchars($comment['COMMENT_TEXT']) . "</td>";
             try {

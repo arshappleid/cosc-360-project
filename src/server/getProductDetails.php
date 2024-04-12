@@ -68,7 +68,7 @@ foreach ($item_data as $item) {
         foreach ($comments as $comment) {
             echo "<div class=\"comment-container\">";
                 echo "<div class=\"user-info\"><div class=\"user-id\">" . User_management::getUser_First_Last_Name($comment['USER_ID']) . "</div>";
-                echo "<img src=\"./../../server/getUserImages.php?USER_ID=" . $comment['USER_ID'] . "\" class='user-image'></div>";;
+                echo "<img src=\"./../../server/getUserImages.php?USER_ID=" . $comment['USER_ID'] . "\" class='user-image' alt='user image'></div>";;
                 echo "<p class=\"comment-text\">" . htmlspecialchars($comment['COMMENT_TEXT']) . "</p>";
 
 
