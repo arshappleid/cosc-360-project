@@ -81,6 +81,7 @@ This document testifies, all the important tasks / milestones completed by all t
 - wrote some tests
 - basically involved in literally every page in some way or another whether it was making it, styling it, or fixing it
 - contributed to hiding comments functionality.
+- Site Demo Video
 
 #### Max Bigwood
 

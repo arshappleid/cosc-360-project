@@ -1,3 +1,7 @@
+# Site Demo Video
+
+https://www.youtube.com/watch?v=LD0ByeLu8fU
+
 # COSC 360 Webserver Link
 
 Currently the website is hosted [here](https://cosc360.ok.ubc.ca/qfinocch/index.php) , and requires access to 
