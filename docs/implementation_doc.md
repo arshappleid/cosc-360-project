@@ -50,7 +50,18 @@ This did not actually end up working , so we ended up manually hardcoding the cr
 
 ### Mobile User Requirements
 
+<<<<<<< HEAD
 Mobile user requirements were achieved primarily using changes in font size. Each client side page included a CSS media query file called css/mobile/global.css which was loaded if the window resolution met a certain threshold (under 500px). This page was responsible for targeting elements with adjusted sizes. When possible, larger parent containers were initially targeted with a smaller font size (usually 50% of regular one) and their individual elements were then adjusted with em units. By doing this, the child elements would scale in accordance with their parent containers. 
+=======
+In order to ensure that the website renders appropriately on mobile websites, we created seperate <u>mobile class css stylesheets</u> that we imported into our home page , after we had imported the main stylesheet. Ensuring that the styles from the mobile stylesheet are applied on top of the main stylesheet . We imported the mobile stylesheet after the main stylesheet onto the html page. Also the tag ```media="screen and (max-width: 650px)"``` , will ensure that .Example given below :
+
+```html
+<link rel="stylesheet" href="css/home.css" />
+	<link rel="stylesheet" href="css/mobile/global.css" media="screen and (max-width: 650px)" />
+```
+
+
+>>>>>>> 1ab666c (Added more implementation documentation)
 
 ### Search and Hot Threads
 
@@ -90,5 +101,9 @@ if (!isset($_SESSION['ADMIN_EMAIL'])) {
 
 ## Breadcrumbs
 
-From the ```server/breadcrumbs.php``` we render the breadcrumbs on the client side. The Buildbreadcrumbs method , takes the current url from ```$_SERVER['REQUEST_URL']``` , then remove the ```baseURL = qfinooch/src/client``` from the URI array. Then we attach a *start breadcrumb* address , which we choose as the login page.
+From the ```server/breadcrumbs.php``` we render the breadcrumbs on the client side. The Buildbreadcrumbs method , takes the current url from ```$_SERVER['REQUEST_URL']``` , then remove the ```baseURL = qfinooch/src/client``` from the URI array. Then we attach a *start breadcrumb* address , which we choose as the login page, and then every single subdirectory is added as a breadcrumb unit with the right address.
+
+Therefore, we decided to put all the pages that extend from home in the directory ```client/home/``` so that all those pages have the parent breadcrumb home. And automatically every page will have the breadcrumb Login at the beginning of them.
+
+
 
