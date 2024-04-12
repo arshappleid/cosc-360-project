@@ -1,5 +1,5 @@
 <?php
-require_once("./../server/functions/admin_management.php");
+require_once("./../../server/functions/admin_management.php");
 $users = Admin_management::getAllUsers();
 
 if (is_array($users)) {
