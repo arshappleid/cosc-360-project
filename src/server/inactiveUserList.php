@@ -29,7 +29,7 @@ if (is_array($users)) {
                 echo "<td> Admin </td>";
             }
             
-            echo "<td><button class = \"detail-button\"><a href=\"./track_user_comments.php?user_id=" . $user_id . "\">User Details</a></button></td>";
+            echo "<td><button class = \"detail-button\"><a href=\"./../track_user_comments.php?user_id=" . $user_id . "\">User Details</a></button></td>";
             echo "</tr>";
         }
         echo "</table>";

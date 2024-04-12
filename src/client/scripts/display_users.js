@@ -19,12 +19,12 @@ $(document).ready(function () {
 
         var userSelectUrl;
 
-		userSelectUrl = "./../server/allUserList.php";
+		userSelectUrl = "./../../server/allUserList.php";
 		if (userSelectOptionKeyword == "active_users"){
-            userSelectUrl = "./../server/activeUserList.php"
+            userSelectUrl = "./../../server/activeUserList.php"
         }
         else if (userSelectOptionKeyword == "inactive_users"){
-            userSelectUrl = "./../server/inactiveUserList.php"
+            userSelectUrl = "./../../server/inactiveUserList.php"
         }
         $.get(userSelectUrl, function (data) {
            

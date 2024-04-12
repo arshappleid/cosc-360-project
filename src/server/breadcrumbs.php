@@ -1,6 +1,6 @@
 <?php
 
-function buildBreadcrumbs($baseLabel = 'login', $baseUrl = '/client')
+function buildBreadcrumbs($baseLabel = 'Login', $baseUrl = 'qfinocch/src/client')
 {
     // Get the REQUEST_URI, and strip the query string if present
     $uri = strtok($_SERVER['REQUEST_URI'], '?');
@@ -10,25 +10,30 @@ function buildBreadcrumbs($baseLabel = 'login', $baseUrl = '/client')
 
     // Filter out empty values and the base directory
     $parts = array_filter($parts, function ($value) use ($baseUrl) {
-        return $value !== '' && $value !== ltrim($baseUrl, '/');
+        return $value !== '' && !in_array($value, explode("/", $baseUrl));
     });
 
-    $startUrl = $baseLabel . ".php";
+    $startUrl = "/$baseUrl/" . strtolower($baseLabel) . ".php";
     $breadcrumbs = "<div class=\"breadcrumb_box\"><a href=\"$startUrl\">$baseLabel</a>";
+
     $path = $baseUrl;
 
     foreach ($parts as $part) {
         // Decode URL-encoded string to normal string
         $partName = urldecode($part);
-        // Construct the path for the breadcrumb link
-        $path .= '/' . $partName . ".php";
-
+        if ($baseLabel == str_replace(".php", "", ucfirst($partName))) {
+            continue;
+        }
         // Check if we are at the last part to avoid making the current page a link
         if ($part !== end($parts)) {
-            $showName = ucfirst($partName);
-            $breadcrumbs .= " / <a href=\"$path\">$showName</a>";
+            $path .= '/' . $part;
+            $showName = str_replace(".php", "", ucfirst($partName));
+            $showName = str_replace("_", " ", $showName);
+            $breadcrumbs .= " / <a href=\"/$path\">$showName</a>";
         } else {
             // Display the current page name without a link
+            $partName = str_replace(".php", "", ucfirst($partName));
+            $partName = str_replace("_", " ", $partName);
             $breadcrumbs .= " / $partName";
         }
     }

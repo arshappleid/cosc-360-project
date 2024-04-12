@@ -88,3 +88,7 @@ if (!isset($_SESSION['ADMIN_EMAIL'])) {
 }
 ```
 
+## Breadcrumbs
+
+From the ```server/breadcrumbs.php``` we render the breadcrumbs on the client side. The Buildbreadcrumbs method , takes the current url from ```$_SERVER['REQUEST_URL']``` , then remove the ```baseURL = qfinooch/src/client``` from the URI array. Then we attach a *start breadcrumb* address , which we choose as the login page.
+
