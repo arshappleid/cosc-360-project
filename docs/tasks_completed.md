@@ -80,6 +80,7 @@ This document testifies, all the important tasks / milestones completed by all t
 - update profile picture
 - wrote some tests
 - basically involved in literally every page in some way or another whether it was making it, styling it, or fixing it
+- contributed to hiding comments functionality.
 
 #### Max Bigwood
 
@@ -107,7 +108,7 @@ This document testifies, all the important tasks / milestones completed by all t
 - altered getUserID function as it had an error
 - fixed the addcomment functionality
 - added a new function to order comments by most recent (for product page)
-- made all forms and tablews accessible via captions, labels, table header colspans,
+- made all forms and tables accessible via captions, labels, table header colspans,
 - admin management page with search filters for name, email and activity
 - track_user_comments page displaying users comment history
 - modifed login tracking methods so they accurately track logins made
