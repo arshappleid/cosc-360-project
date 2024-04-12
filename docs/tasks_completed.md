@@ -7,6 +7,7 @@ This document testifies, all the important tasks / milestones completed by all t
   - Developed a Continuous Testing pipeline , to test all the unit tests on each push.
 - Database Schema Design, All the SQL , and Test Data.
 - Admin Login, Validation with MD5 hash Page Server Functionality and Frontend PHP , with form validation.
+- Implemented all the Security Features (Hashed Password, Bad Navigation).
 - Admin Account Creation Functionality.
 - Home Page -
 
@@ -29,12 +30,16 @@ This document testifies, all the important tasks / milestones completed by all t
 - Documentation for the whole project repo.
 - Functions to retrieve latest Weather Information , using `<u>`external Web Api `</u>` as per lecture provided instructions.
 - Comments - Add , Delete Functonality.
+- Implemented Hide and Show Comments, if we have too many comments , without the page reloading.
 - User Login Tracking , For Each Month. Implemented in Admin Management .
 - Upvoting Items , and showing the hottest items at the top.
+- Toggle Ban Functionality
 - Bad Navigation Functionality.
 - Maintained the Repo README.md
-- Walkthrough_Document.md
-- Implementation_doc.md
+- Completed Walkthrough_Document.md
+- Completed Implementation_doc.md
+- Asynchronous updates to the Main page , so that if a different user adds a comment to an item , it reflects on the other users site.
+- Final Deployment , and Quality Checks. Since many bugs were found this was an iterative process.
 
 #### Quin Finocchio
 
@@ -85,19 +90,19 @@ This document testifies, all the important tasks / milestones completed by all t
 
 #### Max Bigwood
 
-- made all forms and tables accessible via captions, labels, alt-texts for imgs, table header colspans. Includes the visually hidden class to hide labels when other contextual cues were sufficient 
+- made all forms and tables accessible via captions, labels, alt-texts for imgs, table header colspans. Includes the visually hidden class to hide labels when other contextual cues were sufficient
 - admin management page with user search bar and dropdown filter menu to filter by activity
 - admin toggle ban funtionality
-- Used ajax so the above changes in the  admin management page immediately reflect the changes on screen 
-- user details pag showing user details and all comments made (if any) 
-- logic to send you to a valid storeID when going to item page where comment was made 
-- date time conversion into recognizable format on comment containers 
-- footer styling w/ hyperlinks 
+- Used ajax so the above changes in the  admin management page immediately reflect the changes on screen
+- user details pag showing user details and all comments made (if any)
+- logic to send you to a valid storeID when going to item page where comment was made
+- date time conversion into recognizable format on comment containers
+- footer styling w/ hyperlinks
 - product.php front end
 - comments/comment-container structure
-- added methods to all files when necessary 
-- test cases for new functions 
-- debugging DDL, functions, and other aspects of project when causing errors 
+- added methods to all files when necessary
+- test cases for new functions
+- debugging DDL, functions, and other aspects of project when causing errors
 - Changed appearance of admin_login.php to match rest of pages
 - added footer NAV and text to all pages
 - product.php front end - displays data for items name and price

@@ -6,6 +6,12 @@ The code is mainly seperated into ```client``` and ```server``` side code. The c
 
 We also wrote out unit tests for almost all of our important functions in the ```src/tests/``` repo, which we automated them running through github actions as seen in ```~/.github/workflows/``` which ensured that the team was easily able to debug most of the problems if some functionality was not working. These tests can also be seen through the github actions tab.
 
+### Initial Home.php layout explained
+
+We wrapped each item in a  <section> tags , and then within that section used <aside> tag to create the image description , and then used the <article> tag to display the right half which consisted of all the comments. This idea was taken from this [W3 Schools Article](https://www.w3schools.com/html/html_layout.asp) . 
+
+On top we designed the Header and Footer Seperately , and included them on rest of our pages.
+
 ### Authentication
 
 For the authentication mechanism, the client side code sends MD5 hashed messages to the <u>server</u> side code. From the Client Side we made use of the [Crypto-js](https://www.npmjs.com/package/crypto-js) library , to convert the text string into Hashed Password. Which were then submitted through the form, to the server functions. 
@@ -105,7 +111,18 @@ Therefore, we decided to put all the pages that extend from home in the director
 
 To switch between Banned and Not Banned Functionality we implemented a GET API , that recieves the user_id of  the account it was intended to ban , and toggled between the banned status of that. Therefore Upon page reload of the display all users page , it simply toggled between the status , and then displayed the new status.
 
+### Asynchronous Updates
+
+To ensure that our site , checks for latest comments regularly. We enclosed our main get ```UpdateFilteredItemsList()``` function in an automatic timer that runs every 60 seconds , and also remember the last requested list. To ensure that our comments, and items are updated every 60 seconds. This will not only ensure that all item comments are updated every 60 seconds , incase a different user adds a new comment. But also will show refresh the items at the store , in case an admin adds a new item. 
+
+```javascript
+setInterval(function () {
+        updateFilteredItemList();
+    }, 60000);
+```
 
 
 
+### Final Remarks 
 
+We were also able to host the website on our server, ensured that all the functionality reflected the right information in our database. We also created an ER diagram for our database in ```~/database/er_diagram.png``` , for anyone to have a look at how we designed the database.
