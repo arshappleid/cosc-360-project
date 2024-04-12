@@ -45,10 +45,15 @@ article {
     border-spacing: 0 10px; /* Creates space between rows but not columns */
 }
 
-#comment-table tr {
+/* Making the comments on home page have extra padding */
+#comment_table tr {
     background-color: white; /* Background color for cells */
     border: solid 1px black; /* Black outline for cells */
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Shadow for cells */
+}
+#comment_table td{
+padding-top: 0.5em;
+padding-bottom: 0.5em;
 }
 
 #comment-table td:first-child {
