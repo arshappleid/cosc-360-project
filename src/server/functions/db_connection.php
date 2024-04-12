@@ -1,11 +1,11 @@
 <?php
-$connection = mysqli_connect("mysql-server", "root", "secret", "market_database");
+// $connection = mysqli_connect("mysql-server", "root", "secret", "market_database");
 
-// $servername = "localhost";
-// $username = "68424464";
-// $password = "68424464";
-// $dbname = "db_68424464";
-// $connection = new mysqli($servername, $username, $password, $dbname);
+$servername = "localhost";
+$username = "68424464";
+$password = "68424464";
+$dbname = "db_68424464";
+$connection = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($connection->connect_error) {

@@ -29,7 +29,8 @@ function buildBreadcrumbs($baseLabel = 'Login', $baseUrl = 'qfinocch/src/client'
             $path .= '/' . $part;
             $showName = str_replace(".php", "", ucfirst($partName));
             $showName = str_replace("_", " ", $showName);
-            $breadcrumbs .= " / <a href=\"/$path\">$showName</a>";
+            $finalPath = $path . ".php";
+            $breadcrumbs .= " / <a href=\"/$finalPath\">$showName</a>";
         } else {
             // Display the current page name without a link
             $partName = str_replace(".php", "", ucfirst($partName));

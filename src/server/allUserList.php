@@ -15,7 +15,7 @@ if (is_array($users)) {
 
 
             $numComments = User_management::getCommentCount($user_id);
-            
+
             echo "<tr>";
             echo "<td>" . $user['First_Name'] . "</td>";
             echo "<td>" . $user['Last_Name'] . "</td>";
@@ -29,8 +29,8 @@ if (is_array($users)) {
             } else {
                 echo "<td> Admin </td>";
             }
-	        
-            echo "<td><button class = \"detail-button\" id=\"user_details\"><a href=\"./../track_user_comments.php?user_id=" . $user_id . "\">User Details</a></button></td>";
+
+            echo "<td><button class = \"detail-button\" id=\"user_details\"><a href=\"./display_users/track_user_comments.php?user_id=" . $user_id . "\">User Details</a></button></td>";
 
             echo "</tr>";
         }
