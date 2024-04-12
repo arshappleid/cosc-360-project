@@ -21,7 +21,7 @@ function buildBreadcrumbs($baseLabel = 'Login', $baseUrl = 'qfinocch/src/client'
     foreach ($parts as $part) {
         // Decode URL-encoded string to normal string
         $partName = urldecode($part);
-        if ($baseLabel == ucfirst($partName)) {
+        if ($baseLabel == str_replace(".php", "", ucfirst($partName))) {
             continue;
         }
         // Check if we are at the last part to avoid making the current page a link
@@ -31,7 +31,7 @@ function buildBreadcrumbs($baseLabel = 'Login', $baseUrl = 'qfinocch/src/client'
             $breadcrumbs .= " / <a href=\"/$path\">$showName</a>";
         } else {
             // Display the current page name without a link
-            $partName = ucfirst($partName);
+            $partName = str_replace(".php", "", ucfirst($partName));
             $breadcrumbs .= " / $partName";
         }
     }
