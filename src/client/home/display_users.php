@@ -38,7 +38,7 @@ if (isset($_GET["toggle_ban_userID"])) {
 
 	<div class="container">
 		<div class="headerblack">
-			<a href="home.php" class="home-button">Home</a>
+			<a href="./../home.php" class="home-button">Home</a>
 			<?php
 			$name = User_management::getUser_First_Last_Name(User_management::getUserID($_SESSION['USER_EMAIL']));
 			echo "<p class=\"greeting-text\"> Hello Admin :) , " . $name  . " </p>";
