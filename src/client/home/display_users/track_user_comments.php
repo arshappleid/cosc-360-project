@@ -107,7 +107,7 @@ require_once("./../../../server/GLOBAL_VARS.php");
 								$formatted_time = $datetime->format('g:ia');
 								$formatted_datetime = $formatted_date . "<br>at " . $formatted_time;
 								echo "<div class=\"date_time_comment_added\">" . $formatted_datetime . "</div>";
-								echo "<button class=\"go-to-item-button\"><a href=home/product.php?ITEM_ID=" . $ITEM_ID . "&STORE_ID=" . $storeIDForItem . ">Go to item</a></button>";
+								echo "<button class=\"go-to-item-button\"><a href=./../product.php?ITEM_ID=" . $ITEM_ID . "&STORE_ID=" . $storeIDForItem . ">Go to item</a></button>";
 								echo "</div>";
 							}
 						} else {
