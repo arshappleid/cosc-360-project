@@ -1,10 +1,12 @@
 $(document).ready(function () {
+    var lastUsedStoreId = "all";
+    var lastUsedSearchTerm = "";
 
-    var selectedStoreId = "all";
-
-    updateFilteredItemList(selectedStoreId, "");
+    updateFilteredItemList(lastUsedStoreId, "");
 
     function updateFilteredItemList(storeId, searchTerm) {
+        storeId = storeId || lastUsedStoreId;
+        searchTerm = searchTerm || lastUsedSearchTerm;
         var url =
             storeId === "all" ? "./../server/getAllItems.php" : "./../server/getStoreItems.php";
         if (storeId !== "all") {
@@ -26,7 +28,13 @@ $(document).ready(function () {
         }).fail(function () {
             $("#item_list").html("<p>Error fetching products. Please try again.</p>");
         });
+        lastUsedStoreId = storeId;
+        lastUsedSearchTerm = searchTerm;
     }
+    // Run the UpdateFilteredItemList Function every 60 seconds
+    setInterval(function () {
+        updateFilteredItemList();
+    }, 60000);
 
     $("#search-button").on("click", function () {
         var searchTerm = $("#search-input").val();
@@ -50,5 +58,4 @@ $(document).ready(function () {
             }
         });
     }
-    
 });
