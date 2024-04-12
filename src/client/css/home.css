@@ -50,6 +50,7 @@ article {
     background-color: white; /* Background color for cells */
     border: solid 1px black; /* Black outline for cells */
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Shadow for cells */
+    border-radius: 10px;
 }
 #comment_table td{
 padding-top: 0.5em;
