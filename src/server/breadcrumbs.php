@@ -1,12 +1,14 @@
 <?php
 
-function buildBreadcrumbs($baseLabel = 'login', $baseUrl = 'qfinooch/src/client')
+function buildBreadcrumbs($baseLabel = 'login', $baseUrl = 'qfinocch/src/client')
 {
     // Get the REQUEST_URI, and strip the query string if present
     $uri = strtok($_SERVER['REQUEST_URI'], '?');
 
+    print_r($uri);
     // Split the URI into components
     $parts = explode('/', $uri);
+    print_r($parts);
 
     // Filter out empty values and the base directory
     $parts = array_filter($parts, function ($value) use ($baseUrl) {
