@@ -28,10 +28,12 @@ function buildBreadcrumbs($baseLabel = 'Login', $baseUrl = 'qfinocch/src/client'
         if ($part !== end($parts)) {
             $path .= '/' . $part;
             $showName = str_replace(".php", "", ucfirst($partName));
+            $showName = str_replace("_", " ", $showName);
             $breadcrumbs .= " / <a href=\"/$path\">$showName</a>";
         } else {
             // Display the current page name without a link
             $partName = str_replace(".php", "", ucfirst($partName));
+            $partName = str_replace("_", " ", $partName);
             $breadcrumbs .= " / $partName";
         }
     }
