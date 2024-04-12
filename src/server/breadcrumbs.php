@@ -1,6 +1,6 @@
 <?php
 
-function buildBreadcrumbs($baseLabel = 'login', $baseUrl = 'qfinooch/src/client')
+function buildBreadcrumbs($baseLabel = 'login', $baseUrl = 'qfinocch/src/client')
 {
     // Get the REQUEST_URI, and strip the query string if present
     $uri = strtok($_SERVER['REQUEST_URI'], '?');
