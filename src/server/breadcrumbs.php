@@ -20,9 +20,9 @@ function buildBreadcrumbs($baseLabel = 'login', $baseUrl = 'qfinocch/src/client'
 
     if (count($parts) == 1) {
         // If we just have one element in the array at the login page
-        $name = ucfirst(end($parts));
+        $name = ucfirst(str_replace(".php", "", end($parts)));
         $href = "./" . end($parts) . ".php";
-        $breadcrumbs = "<a href=\"$href\">$name</a>";
+        $breadcrumbs .= "<a href=\"$href\">$name</a>";
     } else {
         foreach ($parts as $part) {
             // Decode URL-encoded string to normal string
