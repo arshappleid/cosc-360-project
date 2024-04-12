@@ -142,16 +142,20 @@ h1 {
     background-color: var(--hover-color);
 }
 
-
+/* making comments look better on product page */
 .user-info{
-    display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     width: 8em;
+    flex-shrink: 0; 
 }
 .user-id{
     color: black;
+    word-wrap: break-word;
+    max-width: 100%;
+}
+.user-id span{
+    display: block;
 }
 
 .user-image{
@@ -187,8 +191,9 @@ h1 {
 }
 .date_time_comment_added{
     margin-left: auto; /* Push the element to the right */
-    width: 20%;
+    max-width: 4em;
     text-align: right;
+    padding-left: 1em;
 }
 
 .second{
