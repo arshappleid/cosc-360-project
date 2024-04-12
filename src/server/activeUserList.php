@@ -20,7 +20,7 @@ if (is_array($users)) {
             echo "<td>" . $user['Last_Name'] . "</td>";
             echo "<td>" . $user['Email'] . "</td>";
             echo "<td>" . Login_tracking::getCountForCurrentMonth($user_id) . "</td>";
-            echo "<td>" . ($user['BANNED_STATUS'] == 1 ? "Banned" : "Active") . "</td>";
+            echo "<td>" . ($user['BANNED_STATUS'] == 1 ? "Banned" : "Not Banned") . "</td>";
             echo "<td>" . $numComments;
             echo "</td>";
             if (Admin_management::checkAdminExists($user['Email']) == 'ADMIN_NOT_EXIST') {
