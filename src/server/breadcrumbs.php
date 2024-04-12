@@ -17,9 +17,12 @@ function buildBreadcrumbs($baseLabel = 'login', $baseUrl = 'qfinooch/src/client'
     $breadcrumbs = "<div class=\"breadcrumb_box\"><a href=\"$startUrl\">$baseLabel</a>";
     $path = $baseUrl;
 
-    if (count($parts) == 1 && end($parts) == "login.php") {
+
+    if (count($parts) == 1) {
         // If we just have one element in the array at the login page
-        $breadcrumbs = "<a href=\"./login.php\">Login</a>";
+        $name = ucfirst(end($parts));
+        $href = "./" . end($parts) . ".php";
+        $breadcrumbs = "<a href=\"$href\">$name</a>";
     } else {
         foreach ($parts as $part) {
             // Decode URL-encoded string to normal string
