@@ -19,7 +19,7 @@ require_once("./../server/functions/user_management.php");
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="css/global.css" />
 	<link rel="stylesheet" href="css/home.css" />
-	<link rel="stylesheet" href="css/mobile/global.css"  media="screen and (max-width: 650px)" /> 
+	<link rel="stylesheet" href="css/mobile/global.css" media="screen and (max-width: 650px)" />
 
 
 	</script>
@@ -39,9 +39,8 @@ require_once("./../server/functions/user_management.php");
 				if (isset($_SESSION['ADMIN_EMAIL'])) {
 					echo "<a href=\"home/add_items.php\" class=\"add-items-button\" >Add Items</a>";
 
-					echo "<a href=\"display_users.php\" class=\"admin-login-button\" >Manage Users</a>";
+					echo "<a href=\"./home/display_users.php\" class=\"admin-login-button\" >Manage Users</a>";
 					echo "<p class=\"greeting-text\"> Hello Admin :) , " . $name  . " </p>";
-
 				} else {
 					echo "<p class=\"greeting-text\"> Hello User :) , " . $name  . " </p>";
 				}
