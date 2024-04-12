@@ -1,6 +1,6 @@
 <?php
 
-function buildBreadcrumbs($baseLabel = 'Login', $baseUrl = 'Qfinocch/src/client')
+function buildBreadcrumbs($baseLabel = 'login', $baseUrl = 'qfinooch/src/client')
 {
     // Get the REQUEST_URI, and strip the query string if present
     $uri = strtok($_SERVER['REQUEST_URI'], '?');
@@ -18,9 +18,18 @@ function buildBreadcrumbs($baseLabel = 'Login', $baseUrl = 'Qfinocch/src/client'
 
     $path = $baseUrl;
 
-    foreach ($parts as $part) {
-        // Decode URL-encoded string to normal string
-        $partName = urldecode($part);
+
+    if (count($parts) == 1) {
+        // If we just have one element in the array at the login page
+        $name = ucfirst(end($parts));
+        $href = "./" . end($parts) . ".php";
+        $breadcrumbs = "<a href=\"$href\">$name</a>";
+    } else {
+        foreach ($parts as $part) {
+            // Decode URL-encoded string to normal string
+            $partName = urldecode($part);
+            // Construct the path for the breadcrumb link
+            $path .= '/' . $partName . ".php";
 
         // Check if we are at the last part to avoid making the current page a link
         if ($part !== end($parts)) {
