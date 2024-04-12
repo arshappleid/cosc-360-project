@@ -1,6 +1,6 @@
 <?php
 
-function buildBreadcrumbs($baseLabel = 'login', $baseUrl = 'qfinocch/src/client')
+function buildBreadcrumbs($baseLabel = 'Login', $baseUrl = 'qfinocch/src/client')
 {
     // Get the REQUEST_URI, and strip the query string if present
     $uri = strtok($_SERVER['REQUEST_URI'], '?');
@@ -13,33 +13,24 @@ function buildBreadcrumbs($baseLabel = 'login', $baseUrl = 'qfinocch/src/client'
         return $value !== '' && !in_array($value, explode("/", $baseUrl));
     });
 
-    $startUrl = $baseLabel . ".php";
+    $startUrl = "/$baseUrl/" . strtolower($baseLabel) . ".php";
     $breadcrumbs = "<div class=\"breadcrumb_box\"><a href=\"$startUrl\">$baseLabel</a>";
+
     $path = $baseUrl;
 
-    print_r($parts);
-    if (count($parts) == 1) {
-        // If we just have one element in the array at the login page
-        $breadcrumbs = "<div class=\"breadcrumb_box\">";
-        $name = ucfirst(str_replace(".php", "", end($parts)));
-        $href = "./" . end($parts);
-        $breadcrumbs .= "<a href=\"$href\">$name</a>";
-    } else {
-        foreach ($parts as $part) {
-            // Decode URL-encoded string to normal string
-            $partName = urldecode($part);
-            // Construct the path for the breadcrumb link
-            $path .= '/' . $partName . ".php";
+    foreach ($parts as $part) {
+        // Decode URL-encoded string to normal string
+        $partName = urldecode($part);
 
-            // Check if we are at the last part to avoid making the current page a link
-            if ($part !== end($parts)) {
-                $showName = ucfirst($partName);
-                $breadcrumbs .= " / <a href=\"$path\">$showName</a>";
-            } else {
-                // Display the current page name without a link
-                $partName = ucfirst(str_replace(".php", "", $partName));
-                $breadcrumbs .= " / $partName";
-            }
+        // Check if we are at the last part to avoid making the current page a link
+        if ($part !== end($parts)) {
+            $path .= '/' . $part;
+            $showName = ucfirst($partName);
+            $breadcrumbs .= " / <a href=\"/$path\">$showName</a>";
+        } else {
+            // Display the current page name without a link
+            $partName = ucfirst($partName);
+            $breadcrumbs .= " / $partName";
         }
     }
 
