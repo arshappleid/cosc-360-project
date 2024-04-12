@@ -5,15 +5,16 @@ function buildBreadcrumbs($baseLabel = 'login', $baseUrl = 'qfinocch/src/client'
     // Get the REQUEST_URI, and strip the query string if present
     $uri = strtok($_SERVER['REQUEST_URI'], '?');
 
-    print_r($uri);
+    //print_r($uri);
     // Split the URI into components
     $parts = explode('/', $uri);
-    print_r($parts);
+    //print_r($parts);
 
     // Filter out empty values and the base directory
     $parts = array_filter($parts, function ($value) use ($baseUrl) {
-        return $value !== '' && $value !== ltrim($baseUrl, '/');
+        return $value !== '' && !in_array($value, explode("/", $baseUrl));
     });
+    print_r($parts);
 
     $startUrl = $baseLabel . ".php";
     $breadcrumbs = "<div class=\"breadcrumb_box\"><a href=\"$startUrl\">$baseLabel</a>";
