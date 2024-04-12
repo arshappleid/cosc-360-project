@@ -1,4 +1,7 @@
 <?php
+if (isset($_SESSION['USER_EMAIL']) || isset($_SESSION['ADMIN_EMAIL'])) {
+	header('Location: ./logout.php');
+}
 session_start();
 require_once("./../server/functions/item_info.php");
 require_once("./../server/functions/comments.php");
@@ -19,7 +22,7 @@ require_once("./../server/GLOBAL_VARS.php");
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="css/login.css" />
 	<link rel="stylesheet" href="css/global.css" />
-	<link rel="stylesheet" href="css/mobile/global.css"  media="screen and (max-width: 650px)" /> 
+	<link rel="stylesheet" href="css/mobile/global.css" media="screen and (max-width: 650px)" />
 </head>
 
 <body>
