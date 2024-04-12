@@ -17,7 +17,7 @@ function buildBreadcrumbs($baseLabel = 'login', $baseUrl = 'qfinocch/src/client'
     $breadcrumbs = "<div class=\"breadcrumb_box\"><a href=\"$startUrl\">$baseLabel</a>";
     $path = $baseUrl;
 
-
+    print_r($parts);
     if (count($parts) == 1) {
         // If we just have one element in the array at the login page
         $breadcrumbs = "<div class=\"breadcrumb_box\">";
